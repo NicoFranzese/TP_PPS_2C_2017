@@ -12,41 +12,41 @@ export class LoginProvider {
   public usuarioLogueado = [];
   public usuarioLogueadoSubject = new Subject<any>();
 
-  constructor(public afAuth: AngularFireAuth) {
-    
+  constructor(public afAuth: AngularFireAuth) { 
   }
 
-  public loginGoogle(): any
+  public loginRedSocial(proveedor: string): any
   {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    this.lanzarObservable();
-  }
+    let provider;
 
-  public loginFacebook(): any
-  {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-    this.lanzarObservable();
+    switch(proveedor)
+    {
+      case 'google':
+        provider = new firebase.auth.GoogleAuthProvider();
+        break;
+      case 'facebook':
+        provider = new firebase.auth.FacebookAuthProvider();
+        break;
+    }
+
+    firebase.auth().signInWithRedirect(provider).then(()=>
+    {
+      firebase.auth().getRedirectResult().then((user)=>
+      {
+        console.log(user);
+        this.usuarioLogueado['nombre'] = user['user'].displayName;
+        this.usuarioLogueado['email'] = user['user'].email;
+        this.usuarioLogueadoSubject.next();
+      }).catch((error)=>
+      {
+        console.log(error)
+      });
+    });
   }
 
   public logOut()
   {
     this.afAuth.auth.signOut();
-  }
-
-  private lanzarObservable()
-  {
-    this.afAuth.authState.subscribe(
-      user=>
-      {
-        if(user != null)
-        {
-          this.usuarioLogueado['nombre'] = user.displayName;
-          this.usuarioLogueado['email'] = user.email;
-          console.log(user);
-          this.usuarioLogueadoSubject.next();
-        }
-      }
-    );
   }
   
 }

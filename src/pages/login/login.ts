@@ -14,8 +14,8 @@ export class LoginPage implements OnInit{
 
   constructor(private navCtrl: NavController,
               private loginProvider: LoginProvider,
-              private loadingCtrl: LoadingController) {
-
+              private loadingCtrl: LoadingController) 
+  {
   }
 
   ngOnInit()
@@ -25,20 +25,9 @@ export class LoginPage implements OnInit{
 
   private loginSocial(proveedor: string): any
   {
-    switch(proveedor)
-    {
-      case 'google':
-        this.mostrarLoading("Autentificando...");
-        this.loginProvider.loginGoogle();
-        this.navegarPrincipalPage();
-        break;
-
-      case 'facebook':
-      this.mostrarLoading("Autentificando...");
-        this.loginProvider.loginFacebook();
-        this.navegarPrincipalPage();
-        break;
-    }
+    this.mostrarLoading("Autentificando...");
+    this.loginProvider.loginRedSocial(proveedor);
+    this.navegarPrincipalPage();
   }
 
   private navegarPrincipalPage()
