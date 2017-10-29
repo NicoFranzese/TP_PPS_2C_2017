@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login/login';
+import { LoginPage } from '../login/login';
 
 
 @IonicPage()
@@ -19,6 +20,12 @@ export class PrincipalPage {
 
   ionViewDidLoad() {
     console.log(this.loginProvider.usuarioLogueado);
+  }
+
+  private logout()
+  {
+    this.loginProvider.logOut();
+    this.navCtrl.push(LoginPage);
   }
 
 }

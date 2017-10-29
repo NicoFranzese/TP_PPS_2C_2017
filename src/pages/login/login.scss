@@ -50,13 +50,16 @@ page-login {
 
     .btn.fb{
         background: color($colors, facebook);
+        box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
     }
 
     .btn.go{
         background: color($colors, google);
+        box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
     }
 
     .btn.ingreso{
         background: color($colors, greendark);
+        box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
     }
 }
