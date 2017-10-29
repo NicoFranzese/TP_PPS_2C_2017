@@ -1,0 +1,65 @@
+page-login {
+    #cuerpo{
+        background: color($colors, bg);
+        font-family: "Roboto", Helvetica, sans-serif; 
+    }
+
+    img{
+        display: block;
+        margin: auto;
+        width: 250px;
+    }
+
+    .input-group{
+        height: 40px;
+
+        .fa{
+            width: 20px;
+        }
+
+        .input-group-addon{
+            padding: 0 15px;
+            
+        }
+
+        input[type=text]{
+            font-size: 17px;
+        }
+    }
+
+    .btn{
+        width: 100%;
+        height: 40px;
+        color: #fff;
+        font-size: 17px;
+        line-height: 30px;
+        border-radius: 5px;
+
+        .fa.fa-facebook-square, .fa.fa-google-plus-square{
+            float: left;
+        }  
+
+    }
+
+    span#redes{
+        display: block;
+        margin:auto;
+        color: #bbb8b8;
+    }
+
+    .btn>span{
+        font-size: 19px !important;
+    }
+
+    .btn.fb{
+        background: color($colors, facebook);
+    }
+
+    .btn.go{
+        background: color($colors, google);
+    }
+
+    .btn.ingreso{
+        background: color($colors, greendark);
+    }
+}
