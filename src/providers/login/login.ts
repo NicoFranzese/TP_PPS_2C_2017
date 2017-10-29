@@ -42,7 +42,7 @@ export class LoginProvider {
         {
           this.usuarioLogueado['nombre'] = user.displayName;
           this.usuarioLogueado['email'] = user.email;
-          console.log(this.usuarioLogueado);
+          console.log(user);
           this.usuarioLogueadoSubject.next();
         }
       }

@@ -22,7 +22,19 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
+#cuerpo{
+  background-color: #02648b ;
+  font-family: "Roboto", Helvetica, sans-serif; 
+}
 
+.btn{
+  width: 100%;
+  height: 40px;
+  color: #fff;
+  font-size: 17px;
+  line-height: 30px;
+  border-radius: 5px;
+}
 
 
 // Named Color Variables
