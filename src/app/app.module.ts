@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { PrincipalPage } from '../pages/principal/principal';
+import { ControlAsistenciaPage } from '../pages/control-asistencia/control-asistencia';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,7 +20,8 @@ import { LoginProvider } from '../providers/login/login';
   declarations: [
     MyApp,
     LoginPage,
-    PrincipalPage
+    PrincipalPage,
+    ControlAsistenciaPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { LoginProvider } from '../providers/login/login';
   entryComponents: [
     MyApp,
     LoginPage,
-    PrincipalPage
+    PrincipalPage,
+    ControlAsistenciaPage
   ],
   providers: [
     StatusBar,
