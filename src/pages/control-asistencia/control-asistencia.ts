@@ -3,14 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { DataProvider } from '../../providers/data/data';
-
-
-/**
- * Generated class for the ControlAsistenciaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -20,10 +13,12 @@ import { DataProvider } from '../../providers/data/data';
 export class ControlAsistenciaPage {
   
   items: any[];
+  
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, db: AngularFireDatabase, public dataservice : DataProvider) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, db: AngularFireDatabase,
+     public dataservice : DataProvider,public loadingCtrl: LoadingController) {
+  
    this.getAlumnos();
   }
 
@@ -34,15 +29,18 @@ export class ControlAsistenciaPage {
 
   getAlumnos() {
     // configuro spinner para mientras se cargan los datos 
-    // const loading = this.loadingCtrl.create({
-    //   content: 'Espere por favor...'
-    // });
-    // loading.present();
+    const loading = this.loadingCtrl.create({
+      content: 'Espere por favor...'
+    });
+    loading.present();
 
+    //recupero los datos, mientras muestra spinner
     this.dataservice.getItems().subscribe(
       datos => {
         this.items = datos;
-        // loading.dismiss();
+        setTimeout(() => {
+          loading.dismiss();
+        }, 3000);
       },
       error => console.error(error),
       () => console.log("ok")
@@ -51,5 +49,13 @@ export class ControlAsistenciaPage {
 
 
 
+  addAbsence(parValue,legajo){
+    this.items.forEach(element => {
+      if (element.legajo==legajo) {
+       element.inasistencias =  Number.parseFloat(parValue);
+      }
+    });
+        
+  }
 
 }//class

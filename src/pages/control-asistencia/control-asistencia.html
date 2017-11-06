@@ -1,33 +1,55 @@
-<!--
-  Generated template for the ControlAsistenciaPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>control-asistencia</ion-title>
+    <ion-title>Control de asistencia</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content class="cuerpo" padding>
 
-<ion-content padding>
   <table class="table">
     <thead>
       <tr>
+        <th></th>
         <th scope="col">Legajo</th>
         <th scope="col">Alumno</th>
-        <th scope="col">Horario</th>
+        <th scope="col">Inasistencias</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of items">
-        <th scope="row">{{item.legajo}}</th>
+        <td>
+          <ion-checkbox color="dark"></ion-checkbox>
+        </td>
+        <td>{{item.legajo}}</td>
         <td>{{item.alumno}}</td>
-        <td>{{item.horario}}</td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle btn-size" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <ion-icon name="add"></ion-icon>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#" (click)="addAbsence('1',item.legajo)">Ausente</a>
+              <a class="dropdown-item" href="#" (click)="addAbsence('0.5',item.legajo)">Media falta</a>
+            </div>
+          </div>
+          &nbsp;{{item.inasistencias}}
+        </td>
       </tr>
+      <tr><br><br></tr>
     </tbody>
   </table>
+
+
+  <ion-fab left bottom>
+    <button ion-fab color="dark">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab><ion-icon name="camera"></ion-icon></button>
+      <button ion-fab><ion-icon name="trash"></ion-icon></button>
+      <button ion-fab><ion-icon name="send"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+
 </ion-content>

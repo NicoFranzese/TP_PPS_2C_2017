@@ -1,3 +1,22 @@
 page-control-asistencia {
+ .btn-size{
+     width : 90%;
+     height: 50%;
+ }
+ .padding{
+     padding: 16px;
+ }
+.col-size{
+    width : 20%;
+    height: 50%;
+}
+
+
+ion-select {
+    position: absolute;
+   .select-icon, .select-text {
+       display: none !important;  /* hidden triangle icon and selected text */
+   }
+}
 
 }
