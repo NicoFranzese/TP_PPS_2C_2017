@@ -11,12 +11,8 @@ page-control-asistencia {
     height: 50%;
 }
 
-
-ion-select {
-    position: absolute;
-   .select-icon, .select-text {
-       display: none !important;  /* hidden triangle icon and selected text */
-   }
+.caret{
+    display:none;
 }
 
 }

@@ -47,7 +47,9 @@ export class ControlAsistenciaPage {
     );
   }
 
-
+  test(){
+    alert("prueba");
+  }
 
   addAbsence(parValue,legajo){
     this.items.forEach(element => {

@@ -21,21 +21,23 @@
           <ion-checkbox color="dark"></ion-checkbox>
         </td>
         <td>{{item.legajo}}</td>
-        <td>{{item.alumno}}</td>
+        <td >{{item.alumno}}</td>
+        <td style="text-align: center">{{item.inasistencias}}&nbsp;&nbsp;</td>
         <td>
           <div class="btn-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle btn-size" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <ion-icon name="add"></ion-icon>
-            </button>
+            <ion-icon name="more" class="toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></ion-icon>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#" (click)="addAbsence('1',item.legajo)">Ausente</a>
+              <a class="dropdown-item" href="#" (click)="addAbsence('1.0',item.legajo)">Ausente</a>
               <a class="dropdown-item" href="#" (click)="addAbsence('0.5',item.legajo)">Media falta</a>
             </div>
           </div>
-          &nbsp;{{item.inasistencias}}
         </td>
       </tr>
-      <tr><br><br></tr>
+
+      <tr>
+        <br>
+        <br>
+      </tr>
     </tbody>
   </table>
 
@@ -45,9 +47,15 @@
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>
     <ion-fab-list side="top">
-      <button ion-fab><ion-icon name="camera"></ion-icon></button>
-      <button ion-fab><ion-icon name="trash"></ion-icon></button>
-      <button ion-fab><ion-icon name="send"></ion-icon></button>
+      <button ion-fab>
+        <ion-icon name="camera"></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="send"></ion-icon>
+      </button>
     </ion-fab-list>
   </ion-fab>
 
