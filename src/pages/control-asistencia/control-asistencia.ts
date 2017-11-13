@@ -13,7 +13,7 @@ import { LoadingController } from 'ionic-angular';
 export class ControlAsistenciaPage {
   
   items: any[];
-  
+  checkbox : boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, db: AngularFireDatabase,
@@ -26,6 +26,9 @@ export class ControlAsistenciaPage {
     // console.log('ionViewDidLoad ControlAsistenciaPage');
   }
 
+  cleanItems(){
+      this.checkbox = false;
+  }
 
   getAlumnos() {
     // configuro spinner para mientras se cargan los datos 
@@ -38,9 +41,10 @@ export class ControlAsistenciaPage {
     this.dataservice.getItems().subscribe(
       datos => {
         this.items = datos;
-        setTimeout(() => {
-          loading.dismiss();
-        }, 3000);
+        loading.dismiss();
+        // setTimeout(() => {
+        //   loading.dismiss();
+        // }, 3000);
       },
       error => console.error(error),
       () => console.log("ok")

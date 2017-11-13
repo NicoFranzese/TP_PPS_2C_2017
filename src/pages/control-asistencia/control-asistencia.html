@@ -5,42 +5,37 @@
 </ion-header>
 
 <ion-content class="cuerpo" padding>
+  <ion-grid>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th></th>
-        <th scope="col">Legajo</th>
-        <th scope="col">Alumno</th>
-        <th scope="col">Inasistencias</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of items">
-        <td>
-          <ion-checkbox color="dark"></ion-checkbox>
-        </td>
-        <td>{{item.legajo}}</td>
-        <td >{{item.alumno}}</td>
-        <td style="text-align: center">{{item.inasistencias}}&nbsp;&nbsp;</td>
-        <td>
+    <ion-row class="row row-header">
+      <ion-col class="col col-1"></ion-col>
+      <ion-col class="col col-3">Legajo</ion-col>
+      <ion-col class="col col-6">Alumno</ion-col>
+      <ion-col class="col col-2" text-center>Inasist.</ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let item of items" align-items-center>
+      <ion-col class="col col-1">
+        <ion-checkbox style="padding-top:5px" color="dark"></ion-checkbox>
+      </ion-col>
+      <ion-col class="col col-3">{{item.legajo}}</ion-col>
+      <ion-col class="col col-6 cortar">{{item.alumno}}</ion-col>
+      <ion-col class="col col-1" text-center>{{item.inasistencias}}</ion-col>
+      <ion-col class="col col-1">
           <div class="btn-group">
-            <ion-icon name="more" class="toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></ion-icon>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#" (click)="addAbsence('1.0',item.legajo)">Ausente</a>
-              <a class="dropdown-item" href="#" (click)="addAbsence('0.5',item.legajo)">Media falta</a>
-            </div>
-          </div>
-        </td>
-      </tr>
+              <button class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <ion-icon name="more" ></ion-icon>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" (click)="addAbsence('1.0',item.legajo)">Ausente</a>
+                <a class="dropdown-item" href="#" (click)="addAbsence('0.5',item.legajo)">Media falta</a>
+              </div>
+           </div>
+      </ion-col>   
+    </ion-row>
 
-      <tr>
-        <br>
-        <br>
-      </tr>
-    </tbody>
-  </table>
-
+    <br><br><br>
+  </ion-grid>
 
   <ion-fab left bottom>
     <button ion-fab color="dark">
@@ -50,7 +45,7 @@
       <button ion-fab>
         <ion-icon name="camera"></ion-icon>
       </button>
-      <button ion-fab>
+      <button ion-fab (click)="cleanItems()">
         <ion-icon name="trash"></ion-icon>
       </button>
       <button ion-fab>
