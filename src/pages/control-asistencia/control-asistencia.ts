@@ -13,7 +13,7 @@ import { LoadingController } from 'ionic-angular';
 export class ControlAsistenciaPage {
   
   items: any[];
-  checkbox : boolean;
+  itemsLengthAux  : number = 0;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, db: AngularFireDatabase,
@@ -26,9 +26,7 @@ export class ControlAsistenciaPage {
     // console.log('ionViewDidLoad ControlAsistenciaPage');
   }
 
-  cleanItems(){
-      this.checkbox = false;
-  }
+
 
   getAlumnos() {
     // configuro spinner para mientras se cargan los datos 
@@ -39,21 +37,38 @@ export class ControlAsistenciaPage {
 
     //recupero los datos, mientras muestra spinner
     this.dataservice.getItems().subscribe(
-      datos => {
+      datos => {      
         this.items = datos;
-        loading.dismiss();
-        // setTimeout(() => {
-        //   loading.dismiss();
-        // }, 3000);
+        setTimeout(() => {
+          loading.dismiss();
+        }, 3000);
       },
       error => console.error(error),
       () => console.log("ok")
     );
   }
 
-  test(){
-    alert("prueba");
+
+
+
+  addValidatedItem(e){
+   if(e.checked){
+    this.itemsLengthAux = this.itemsLengthAux + 1;
+    }else{
+      this.itemsLengthAux = this.itemsLengthAux - 1;
+    }
   }
+
+
+  validateGrid(){
+    if(this.items.length == this.itemsLengthAux){
+      alert("Desea enviar los datos?");
+    }else{
+
+      alert("No verificó todos los alumnos.");
+    }
+  }
+
 
   addAbsence(parValue,legajo){
     this.items.forEach(element => {
@@ -63,5 +78,11 @@ export class ControlAsistenciaPage {
     });
         
   }
+
+
+  test(){
+    alert("prueba");
+  }
+
 
 }//class
