@@ -14,29 +14,88 @@
 
 
 <ion-content id="cuerpo" padding>
-  
-  <ion-list >
-    <button class="list user" ion-item  (click)="itemSelected(item)">
+
+  <ion-list>
+    <button class="list user" ion-item (click)="itemSelected(item)">
         <i class="fa fa-user-circle" aria-hidden="true"></i> {{loginProvider.usuarioLogueado['nombre']}}
-    </button> 
+    </button>
   </ion-list>
   <ion-list class="mt-5">
-    <button class="list" ion-item  (click)="itemSelected('ABM')">
-      ABM
-    </button> 
-    <button class="list" ion-item  (click)="itemSelected('perfil')">
-      Datos personales
-    </button> 
-    <button class="list" ion-item  (click)="itemSelected('control-asistencia')">
-      Tomar asistencia
-    </button> 
-    <button class="list" ion-item  (click)="itemSelected('agregar-alumnos')">
-      Insertar alumnos
-    </button> 
-    <button class="list logout" ion-item  (click)="logout()">
+
+    <div id="divProfesor" *ngIf="tipoUsuario == 'Profesor'">
+      <button class="list" ion-item (click)="itemSelected('control-asistencia')">
+        Tomar asistencia
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('ABM-cuestionarios')">
+        Carga Cuestionarios
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('aviso-importancia')">
+       Avisos de Importancia
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('graficos-estadisticos')">
+        Gráficos Estadísticos
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('qr-profesores')">
+        QR Para Profesores
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('qr-encuestas')">
+        QR Para Encuestas
+      </button>
+    </div>
+
+    <div id="divAdministrativo" *ngIf="tipoUsuario == 'Administrativo'"> 
+      <button class="list" ion-item (click)="itemSelected('control-asistencia')">
+        Tomar asistencia
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('carga-archivos')">
+        Carga Archivos Excel/CSV
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('aviso-importancia')">
+        Avisos de Importancia
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('ABM-alumnos')">
+        ABM Alumnos
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('graficos-estadisticos')">
+        Gráficos Estadísticos
+      </button>
+    </div>
+
+    <div id="divAlumno" *ngIf="tipoUsuario == 'Alumno'">
+      <button class="list" ion-item (click)="itemSelected('qr-alumnos')">
+        QR Para Alumnos
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('qr-encuestas')">
+        QR Para Encuestas
+      </button>
+    </div>
+
+    <div id="divAdministrador" *ngIf="tipoUsuario == 'Administrador'">
+      <button class="list" ion-item (click)="itemSelected('ABM-profesores')">
+        ABM Profesor
+      </button>
+
+      <button class="list" ion-item (click)="itemSelected('ABM-administrativos')">
+        ABM Administrativo
+      </button>
+    </div>
+
+    <button class="list logout" ion-item (click)="logout()">
       <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
-    </button> 
+    </button>
+
   </ion-list>
 
-  <p>Esta lista de menú habría que generarla dentro de varios array, una para cada tipo de usuario, y para mostrarla solo iteramos el array y mostramos las opciones correspondientes para cada uno.</p>
+  <p>Esta lista de menú habría que generarla dentro de varios array, una para cada tipo de usuario, y para mostrarla solo iteramos
+    el array y mostramos las opciones correspondientes para cada uno.</p>
 </ion-content>

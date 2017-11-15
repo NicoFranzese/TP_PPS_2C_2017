@@ -35,6 +35,7 @@ export class LoginPage implements OnInit{
     this.loginProvider.usuarioLogueadoSubject.subscribe(
       data=> 
       {
+        localStorage.setItem("tipoUsuario","Alumno");
         this.loader.dismiss();
         this.navCtrl.push(PrincipalPage);
       }
