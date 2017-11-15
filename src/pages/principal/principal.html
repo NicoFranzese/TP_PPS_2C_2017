@@ -15,14 +15,16 @@
 
 <ion-content id="cuerpo" padding>
 
-  <ion-list>
-    <button class="list user" ion-item (click)="itemSelected(item)">
-        <i class="fa fa-user-circle" aria-hidden="true"></i> {{loginProvider.usuarioLogueado['nombre']}}
-    </button>
-  </ion-list>
+
   <ion-list class="mt-5">
 
     <div id="divProfesor" *ngIf="tipoUsuario == 'Profesor'">
+        <ion-list>
+            <button class="list user" ion-item (click)="itemSelected(item)">
+                <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
+            </button>
+          </ion-list>
+
       <button class="list" ion-item (click)="itemSelected('control-asistencia')">
         Tomar asistencia
       </button>
@@ -49,6 +51,11 @@
     </div>
 
     <div id="divAdministrativo" *ngIf="tipoUsuario == 'Administrativo'"> 
+        <ion-list>
+            <button class="list user" ion-item (click)="itemSelected(item)">
+                <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
+            </button>
+          </ion-list>
       <button class="list" ion-item (click)="itemSelected('control-asistencia')">
         Tomar asistencia
       </button>
@@ -71,6 +78,11 @@
     </div>
 
     <div id="divAlumno" *ngIf="tipoUsuario == 'Alumno'">
+        <ion-list>
+            <button class="list user" ion-item (click)="itemSelected(item)">
+                <i class="fa fa-user-circle" aria-hidden="true"></i> {{loginProvider.usuarioLogueado['nombre']}}
+            </button>
+          </ion-list>
       <button class="list" ion-item (click)="itemSelected('qr-alumnos')">
         QR Para Alumnos
       </button>
@@ -81,6 +93,11 @@
     </div>
 
     <div id="divAdministrador" *ngIf="tipoUsuario == 'Administrador'">
+        <ion-list>
+            <button class="list user" ion-item (click)="itemSelected(item)">
+                <i class="fa fa-user-circle" aria-hidden="true"></i> Admin
+            </button>
+          </ion-list>
       <button class="list" ion-item (click)="itemSelected('ABM-profesores')">
         ABM Profesor
       </button>

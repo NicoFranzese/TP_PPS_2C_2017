@@ -40,8 +40,7 @@ export class PrincipalPage {
   }
 
 
-  private itemSelected(pageName) {
-  
+  private itemSelected(pageName) {  
 
     switch (pageName) {
       case "control-asistencia": {

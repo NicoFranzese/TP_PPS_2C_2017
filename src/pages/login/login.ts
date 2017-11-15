@@ -11,6 +11,8 @@ import { LoadingController } from 'ionic-angular';
 export class LoginPage implements OnInit{
 
   private loader;
+  public usuario;
+  public clave;
 
   constructor(private navCtrl: NavController,
               private loginProvider: LoginProvider,
@@ -23,9 +25,21 @@ export class LoginPage implements OnInit{
     this.loginProvider.logOut();
   }
 
+  Ingresar(){
+    if((this.usuario =="Admin") && (this.clave =="Admin")){
+      this.mostrarLoading("Autentificando...");
+      this.loader.dismiss();
+      localStorage.setItem("tipoUsuario","Administrador");
+      this.navCtrl.push(PrincipalPage);
+    }else{
+      console.log("Usuario Administrador incorrecto");
+    }
+  }
+
   private loginSocial(proveedor: string): any
   {
     this.mostrarLoading("Autentificando...");
+    localStorage.setItem("tipoUsuario","Alumno");
     this.loginProvider.loginRedSocial(proveedor);
     this.navegarPrincipalPage();
   }
@@ -35,7 +49,6 @@ export class LoginPage implements OnInit{
     this.loginProvider.usuarioLogueadoSubject.subscribe(
       data=> 
       {
-        localStorage.setItem("tipoUsuario","Alumno");
         this.loader.dismiss();
         this.navCtrl.push(PrincipalPage);
       }
