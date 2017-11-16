@@ -32,4 +32,20 @@ page-principal {
     .logout{
         background: color($colors, danger);
     }
+
+    // customizo menu que agrega inasistencias
+    .dropdown-item{
+        min-width: 160px;
+        min-height: 30px;
+        font-size: 125%;
+    }
+    .dropdown-menu{
+        position: absolute;
+        min-width: 160px;
+        min-height: 60px;
+        border-radius: 10px;
+    }
+ 
+
+
 }

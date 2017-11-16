@@ -40,7 +40,7 @@ export class PrincipalPage {
   }
 
 
-  private itemSelected(pageName) {  
+  private itemSelected(pageName,selectedOperation?:string) {  
 
     switch (pageName) {
       case "control-asistencia": {
@@ -88,6 +88,7 @@ export class PrincipalPage {
         break;
       }
       case "ABM-administrativos": {
+        localStorage.setItem("operacion", selectedOperation);
         this.navCtrl.push(AbmAdministrativosPage);
         break;
       }

@@ -14,5 +14,20 @@
 
 
 <ion-content padding>
-
+  <ion-label>Nombre</ion-label>
+  <input type="text" class="form-control" placeholder="Nombre" id="nombre" name="nombre" [(ngModel)] = "nombre">
+  <br>
+  <ion-label>Apellido</ion-label>
+  <input type="text" class="form-control" placeholder="Apellido" id="apellido" name="apellido" [(ngModel)] = "apellido">
+  <br>  
+  <ion-label>Usuario</ion-label>
+  <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario" [(ngModel)] = "usuario">
+  <br>  
+  <ion-item>
+      <ion-label>Perfil</ion-label>
+      <ion-select [(ngModel)]="gender">
+        <ion-option value="f">Female</ion-option>
+        <ion-option value="m">Male</ion-option>
+      </ion-select>
+    </ion-item>
 </ion-content>

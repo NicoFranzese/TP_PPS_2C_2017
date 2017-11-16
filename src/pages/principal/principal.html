@@ -19,11 +19,11 @@
   <ion-list class="mt-5">
 
     <div id="divProfesor" *ngIf="tipoUsuario == 'Profesor'">
-        <ion-list>
-            <button class="list user" ion-item (click)="itemSelected(item)">
-                <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
-            </button>
-          </ion-list>
+      <ion-list>
+        <button class="list user" ion-item (click)="itemSelected(item)">
+          <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
+        </button>
+      </ion-list>
 
       <button class="list" ion-item (click)="itemSelected('control-asistencia')">
         Tomar asistencia
@@ -34,7 +34,7 @@
       </button>
 
       <button class="list" ion-item (click)="itemSelected('aviso-importancia')">
-       Avisos de Importancia
+        Avisos de Importancia
       </button>
 
       <button class="list" ion-item (click)="itemSelected('graficos-estadisticos')">
@@ -50,12 +50,12 @@
       </button>
     </div>
 
-    <div id="divAdministrativo" *ngIf="tipoUsuario == 'Administrativo'"> 
-        <ion-list>
-            <button class="list user" ion-item (click)="itemSelected(item)">
-                <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
-            </button>
-          </ion-list>
+    <div id="divAdministrativo" *ngIf="tipoUsuario == 'Administrativo'">
+      <ion-list>
+        <button class="list user" ion-item (click)="itemSelected(item)">
+          <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
+        </button>
+      </ion-list>
       <button class="list" ion-item (click)="itemSelected('control-asistencia')">
         Tomar asistencia
       </button>
@@ -78,11 +78,11 @@
     </div>
 
     <div id="divAlumno" *ngIf="tipoUsuario == 'Alumno'">
-        <ion-list>
-            <button class="list user" ion-item (click)="itemSelected(item)">
-                <i class="fa fa-user-circle" aria-hidden="true"></i> {{loginProvider.usuarioLogueado['nombre']}}
-            </button>
-          </ion-list>
+      <ion-list>
+        <button class="list user" ion-item (click)="itemSelected(item)">
+          <i class="fa fa-user-circle" aria-hidden="true"></i> {{loginProvider.usuarioLogueado['nombre']}}
+        </button>
+      </ion-list>
       <button class="list" ion-item (click)="itemSelected('qr-alumnos')">
         QR Para Alumnos
       </button>
@@ -93,18 +93,26 @@
     </div>
 
     <div id="divAdministrador" *ngIf="tipoUsuario == 'Administrador'">
-        <ion-list>
-            <button class="list user" ion-item (click)="itemSelected(item)">
-                <i class="fa fa-user-circle" aria-hidden="true"></i> Admin
-            </button>
-          </ion-list>
+      <ion-list>
+        <button class="list user" ion-item (click)="itemSelected(item)">
+          <i class="fa fa-user-circle" aria-hidden="true"></i> Admin
+        </button>
+      </ion-list>
       <button class="list" ion-item (click)="itemSelected('ABM-profesores')">
         ABM Profesor
       </button>
 
-      <button class="list" ion-item (click)="itemSelected('ABM-administrativos')">
-        ABM Administrativo
-      </button>
+      <div class="btn-group">
+          <button class="toggle more list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ABM Administrativo
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="itemSelected('ABM-administrativos','a')">Alta</a>
+            <a class="dropdown-item" (click)="itemSelected('ABM-administrativos','b')">Baja</a>
+            <a class="dropdown-item" (click)="itemSelected('ABM-administrativos','m')">Modificación</a>
+          </div>
+       </div>
+
     </div>
 
     <button class="list logout" ion-item (click)="logout()">
