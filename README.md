@@ -1,26 +1,27 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+## Tareas designadas
 
-## How to use this template
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+### Nicolás Franzese:
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+* (D) Aviso de faltas
+* (E) Aviso de importancia
+* (M) QR Alumnos
+* (N) QR Profesores
+* (O) QR para encuestas
 
-### With the Ionic CLI:
+### Pablo Valenzuela:
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+* (A) Toma de asistencia alumnos
+* (G) ABM Alumnos
+* (H) Administración de su perfil
+* (J) ABM profesor y administrativo
+* (L) Gráficos estadísticos
 
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start mySideMenu sidemenu
-```
+### Mariano Wilson:
 
-Then, to run it, cd into `mySideMenu` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
+* (B) Carga de cuestionarios / Encuestas dinamicas
+* (C) Carga de archivos .csv
+* (F) Login con red social
+* (I) Diseño de estilos
+* (K) Descarga de archivos
 
