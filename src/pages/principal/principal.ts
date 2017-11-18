@@ -15,6 +15,7 @@ import { QrAlumnosPage } from '../qr-alumnos/qr-alumnos';
 import { QrEncuestasPage } from '../qr-encuestas/qr-encuestas';
 import { QrProfesoresPage } from '../qr-profesores/qr-profesores';
 
+
 @IonicPage()
 @Component({
   selector: 'page-principal',
@@ -26,7 +27,8 @@ export class PrincipalPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private loginProvider: LoginProvider
+    private loginProvider: LoginProvider,
+    
   ) {
   }
 
@@ -102,5 +104,6 @@ export class PrincipalPage {
     this.loginProvider.logOut();
     this.navCtrl.push(LoginPage);
   }
+
 
 }

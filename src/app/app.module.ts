@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule }    from '@angular/http';
+import { PapaParseModule } from 'ngx-papaparse';
+
+import { FileChooser } from '@ionic-native/file-chooser';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -56,7 +59,8 @@ import { DataProvider } from '../providers/data/data';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    PapaParseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -80,7 +84,8 @@ import { DataProvider } from '../providers/data/data';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoginProvider,
-    DataProvider
+    DataProvider,
+    FileChooser
   ]
 })
 export class AppModule {}

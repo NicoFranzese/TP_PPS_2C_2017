@@ -1,3 +1,22 @@
 page-carga-archivos {
+    .btn{
+        font-size: 20px;
+    }
+    #sin-archivo
+    {
+        text-align: center;
+    }
+
+    span{
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .card-content-md
+    {
+        padding: 2px 16px !important;
+        background: #222222 !important;
+        color: #fff !important;
+    }
 
 }

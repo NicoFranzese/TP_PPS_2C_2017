@@ -26,14 +26,18 @@ export class LoginPage implements OnInit{
   }
 
   Ingresar(){
-    if((this.usuario =="Admin") && (this.clave =="Admin")){
-      this.mostrarLoading("Autentificando...");
-      this.loader.dismiss();
-      localStorage.setItem("tipoUsuario","Administrador");
-      this.navCtrl.push(PrincipalPage);
-    }else{
-      console.log("Usuario Administrador incorrecto");
-    }
+     this.mostrarLoading("Autentificando...");
+        this.loader.dismiss();
+        localStorage.setItem("tipoUsuario","Administrativo");
+        this.navCtrl.push(PrincipalPage);
+    // if((this.usuario =="Admin") && (this.clave =="Admin")){
+    //   this.mostrarLoading("Autentificando...");
+    //   this.loader.dismiss();
+    //   localStorage.setItem("tipoUsuario","Administrador");
+    //   this.navCtrl.push(PrincipalPage);
+    // }else{
+    //   console.log("Usuario Administrador incorrecto");
+    // }
   }
 
   private loginSocial(proveedor: string): any
