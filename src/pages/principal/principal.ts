@@ -70,7 +70,7 @@ export class PrincipalPage {
         break;
       }
       case "ABM-alumnos": {
-        this.navCtrl.push(QrAlumnosPage);
+        this.navCtrl.push(AbmAlumnosPage);
         break;
       }
       case "graficos-estadisticos": {

@@ -13,6 +13,7 @@ export class LoginPage implements OnInit{
   private loader;
   public usuario;
   public clave;
+  public tipoUsuSeleccionado;
 
   constructor(private navCtrl: NavController,
               private loginProvider: LoginProvider,
@@ -26,18 +27,38 @@ export class LoginPage implements OnInit{
   }
 
   Ingresar(){
-     this.mostrarLoading("Autentificando...");
-        this.loader.dismiss();
-        localStorage.setItem("tipoUsuario","Administrativo");
-        this.navCtrl.push(PrincipalPage);
-    // if((this.usuario =="Admin") && (this.clave =="Admin")){
-    //   this.mostrarLoading("Autentificando...");
-    //   this.loader.dismiss();
-    //   localStorage.setItem("tipoUsuario","Administrador");
-    //   this.navCtrl.push(PrincipalPage);
-    // }else{
-    //   console.log("Usuario Administrador incorrecto");
-    // }
+    this.mostrarLoading("Autentificando...");
+    this.loader.dismiss();
+
+    if((this.usuario =="Administrador") && (this.clave =="123")){
+      localStorage.setItem("tipoUsuario","Administrador");
+      this.navCtrl.push(PrincipalPage);
+    }else if((this.usuario =="Administrativo") && (this.clave =="123")){
+      localStorage.setItem("tipoUsuario","Administrativo");
+      this.navCtrl.push(PrincipalPage);
+    }else if((this.usuario =="Alumno") && (this.clave =="123")){
+      localStorage.setItem("tipoUsuario","Alumno");
+      this.navCtrl.push(PrincipalPage);
+    }else if((this.usuario =="Profesor") && (this.clave =="123")){
+      localStorage.setItem("tipoUsuario","Profesor");
+      this.navCtrl.push(PrincipalPage);
+    }     
+  }
+
+  HardcodearUsuario(){
+    if(this.tipoUsuSeleccionado=="Administrativo"){
+      this.usuario = "Administrativo";
+      this.clave = "123";
+    }else if(this.tipoUsuSeleccionado=="Administrador"){
+      this.usuario = "Administrador";
+      this.clave = "123";
+    }else if(this.tipoUsuSeleccionado=="Alumno"){
+      this.usuario = "Alumno";
+      this.clave = "123";
+    }else if(this.tipoUsuSeleccionado=="Profesor"){
+      this.usuario = "Profesor";
+      this.clave = "123";
+    }
   }
 
   private loginSocial(proveedor: string): any
