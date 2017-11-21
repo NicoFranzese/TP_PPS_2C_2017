@@ -33,16 +33,16 @@ page-principal {
         background: color($colors, danger);
     }
 
-    // customizo menu que agrega inasistencias
+    // customizo menu para elegir tipo de operacion
     .dropdown-item{
-        min-width: 160px;
-        min-height: 30px;
+        min-width: 180px;
+        min-height: 50px;
         font-size: 125%;
     }
     .dropdown-menu{
         position: absolute;
-        min-width: 160px;
-        min-height: 60px;
+        min-width: 180px;
+        min-height: 100px;
         border-radius: 10px;
     }
  

@@ -101,17 +101,11 @@
       <button class="list" ion-item (click)="itemSelected('ABM-profesores')">
         ABM Profesor
       </button>
+      <button class="list" ion-item (click)="itemSelected('ABM-administrativos')">
+        ABM Administrativo
+      </button>
 
-      <div class="btn-group">
-          <button class="toggle more list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ABM Administrativo
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" (click)="itemSelected('ABM-administrativos','a')">Alta</a>
-            <a class="dropdown-item" (click)="itemSelected('ABM-administrativos','b')">Baja</a>
-            <a class="dropdown-item" (click)="itemSelected('ABM-administrativos','m')">Modificación</a>
-          </div>
-       </div>
+     
 
     </div>
 

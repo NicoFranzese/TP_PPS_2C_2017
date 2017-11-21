@@ -36,7 +36,7 @@ export class ControlAsistenciaPage {
     loading.present();
 
     //recupero los datos, mientras muestra spinner
-    this.dataservice.getItems().subscribe(
+    this.dataservice.getItems("alumnos").subscribe(
       datos => {      
         this.items = datos;
         setTimeout(() => {

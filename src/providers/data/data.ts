@@ -26,8 +26,8 @@ export class DataProvider {
 
 
   
-  public getItems() {
-    this.items = this.db.list('alumnos').valueChanges();
+  public getItems(entityName) {
+    this.items = this.db.list(entityName).valueChanges();
     return this.items;
   }
 

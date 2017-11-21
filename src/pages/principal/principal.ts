@@ -42,19 +42,40 @@ export class PrincipalPage {
   }
 
 
-  private itemSelected(pageName,selectedOperation?:string) {  
+  private itemSelected(pageName) {  
 
     switch (pageName) {
       case "control-asistencia": {
         this.navCtrl.push(ControlAsistenciaPage);
         break;
       }
+      case "aviso-importancia": {
+        this.navCtrl.push(AvisoImportanciaPage);
+        break;
+      }
+      case "carga-archivos": {
+        this.navCtrl.push(CargaArchivosPage);
+        break;
+      }
+      
       case "ABM-cuestionarios": {
         this.navCtrl.push(AbmCuestionariosPage);
         break;
       }
-      case "aviso-importancia": {
-        this.navCtrl.push(AvisoImportanciaPage);
+      case "ABM-alumnos": {
+        this.navCtrl.push(AbmAlumnosPage);
+        break;
+      }
+      case "ABM-profesores": {
+        this.navCtrl.push(AbmProfesoresPage);
+        break;
+      }
+      case "ABM-administrativos": {
+        this.navCtrl.push(AbmAdministrativosPage);
+        break;
+      }
+      case "graficos-estadisticos": {
+        this.navCtrl.push(GraficosEstadisticosPage);
         break;
       }
       case "qr-profesores": {
@@ -65,18 +86,6 @@ export class PrincipalPage {
         this.navCtrl.push(QrEncuestasPage);
         break;
       }
-      case "carga-archivos": {
-        this.navCtrl.push(CargaArchivosPage);
-        break;
-      }
-      case "ABM-alumnos": {
-        this.navCtrl.push(AbmAlumnosPage);
-        break;
-      }
-      case "graficos-estadisticos": {
-        this.navCtrl.push(GraficosEstadisticosPage);
-        break;
-      }
       case "qr-alumnos": {
         this.navCtrl.push(QrAlumnosPage);
         break;
@@ -85,15 +94,7 @@ export class PrincipalPage {
         this.navCtrl.push(QrEncuestasPage);
         break;
       }
-      case "ABM-profesores": {
-        this.navCtrl.push(AbmProfesoresPage);
-        break;
-      }
-      case "ABM-administrativos": {
-        localStorage.setItem("operacion", selectedOperation);
-        this.navCtrl.push(AbmAdministrativosPage);
-        break;
-      }
+
 
     }
    
