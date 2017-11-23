@@ -33,7 +33,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginProvider } from '../providers/login/login';
 import { DataProvider } from '../providers/data/data';
+import { EscanearQrProvider } from '../providers/escanear-qr/escanear-qr';
 
+import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-escaneado';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { DataProvider } from '../providers/data/data';
     GraficosEstadisticosPage,
     QrAlumnosPage,
     QrEncuestasPage,
-    QrProfesoresPage
+    QrProfesoresPage,
+    ResultadoEscaneadoPage
   ],
   imports: [
     HttpModule,
@@ -77,7 +80,8 @@ import { DataProvider } from '../providers/data/data';
     GraficosEstadisticosPage,
     QrAlumnosPage,
     QrEncuestasPage,
-    QrProfesoresPage
+    QrProfesoresPage,
+    ResultadoEscaneadoPage
   ],
   providers: [
     StatusBar,
@@ -85,7 +89,8 @@ import { DataProvider } from '../providers/data/data';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoginProvider,
     DataProvider,
-    FileChooser
+    FileChooser,
+    EscanearQrProvider
   ]
 })
 export class AppModule {}

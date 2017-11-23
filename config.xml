@@ -96,4 +96,6 @@
     <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.0" />
+    <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
 </widget>
