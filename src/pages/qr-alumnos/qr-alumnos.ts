@@ -43,8 +43,20 @@ export class QrAlumnosPage {
         data => console.info(),
         err => { console.error(err); },
         () => {
-          localStorage.getItem("Resultado Escaneo");
-          this.navCtrl.push(ResultadoEscaneadoPage);
+          if (localStorage.getItem("ResultadoEscaneo") == "Escaneo Valido"){
+            this.navCtrl.push(ResultadoEscaneadoPage);
+          }else{
+            try {
+              this.toast.show('Código QR Erróneo', '4000', 'center').subscribe(
+                toast => {
+                  console.log(toast);
+                }
+              );
+            } catch (e) {
+              // alert("Código QR Erróneo");
+            }
+            this.navCtrl.push(PrincipalPage);
+          }
         }
       );
     }, (err) => {

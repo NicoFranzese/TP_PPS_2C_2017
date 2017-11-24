@@ -36,6 +36,7 @@ import { DataProvider } from '../providers/data/data';
 import { EscanearQrProvider } from '../providers/escanear-qr/escanear-qr';
 
 import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-escaneado';
+import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/resultado-escaneado';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-e
     LoginProvider,
     DataProvider,
     FileChooser,
-    EscanearQrProvider
+    EscanearQrProvider,
+    ResultadoEscaneadoProvider
   ]
 })
 export class AppModule {}

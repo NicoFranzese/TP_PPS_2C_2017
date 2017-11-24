@@ -16,7 +16,7 @@ export class DataProvider {
 
 
   constructor(public http: Http, public db: AngularFireDatabase) {
-    console.log('Hello DataProvider Provider');
+    // console.log('Hello DataProvider Provider');
   }
 
 
