@@ -34,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginProvider } from '../providers/login/login';
 import { DataProvider } from '../providers/data/data';
 import { EscanearQrProvider } from '../providers/escanear-qr/escanear-qr';
-
+import { MateriaProvider } from '../providers/materia/materia';
+import { CursoProvider } from '../providers/curso/curso';
 import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-escaneado';
 import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/resultado-escaneado';
 
@@ -92,7 +93,9 @@ import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/res
     DataProvider,
     FileChooser,
     EscanearQrProvider,
-    ResultadoEscaneadoProvider
+    ResultadoEscaneadoProvider,
+    MateriaProvider,
+    CursoProvider,
   ]
 })
 export class AppModule {}
