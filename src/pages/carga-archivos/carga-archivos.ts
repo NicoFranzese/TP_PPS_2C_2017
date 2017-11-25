@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FileChooser } from '@ionic-native/file-chooser';
 import { PapaParseService } from 'ngx-papaparse';
+import { MateriaProvider } from '../../providers/materia/materia';
+import { DataProvider } from '../../providers/data/data';
+import { CursoProvider } from '../../providers/curso/curso';
 
 
 
@@ -12,7 +14,9 @@ import { PapaParseService } from 'ngx-papaparse';
 })
 export class CargaArchivosPage {
 
-  constructor(private fileChooser: FileChooser,
+  constructor(private materiaProvider: MateriaProvider,
+              private alumnoProvider: DataProvider,
+              private cursoProvider: CursoProvider,
               private papa: PapaParseService) { }
 
   private title = "Importar CSV Alumnos";
@@ -20,10 +24,19 @@ export class CargaArchivosPage {
   private arrAlumnosCSV = [];
   private materia;
   private comision;
+  private cuatrimestre;
   private anioLectivo;
+  private diaHorario;
 
   ionViewDidLoad() {
+
     
+  }
+
+  private vaciarCSV()
+  {
+    this.arrAlumnosCSV = [];
+    this.hayArchivo = false;
   }
 
   private cargarCSV(event)
@@ -36,38 +49,76 @@ export class CargaArchivosPage {
     //Archivo subido
     let file = event.srcElement.files[0];
 
-    //Array donde se guardan los registros
-    let arrSCV = [];
-
     //Array con el nombre del archivo
     //1ra posición nombre materia
     //2da posición comisión + cuatrimestre + año
-    let arrName = file.name.split(" ");
-    
-    //Desconpongo los datos de la primera posicion del arrName con los datos separados por "-"
-    let arrDatosCursada = arrName[1].split("-");
+    let arrName = file.name.split("-");
 
-    //Descompongo los datos de la posicion 2 de arrDatosCursada para poder obtener el año lectivo y separar la extensión del archivo
-    let arrAnioLectivo = arrDatosCursada[2].split(".");
-
-    //Obtengo los datos que necesito "Materia, Comision, Año lectivo"
     this.materia = arrName[0];
-    this.comision = arrDatosCursada[1];
-    this.anioLectivo = arrAnioLectivo[0];
+    this.comision = arrName[1];  
 
-    //Recorro los datos leidos y armo los registros
+    //Descompongo los datos de la posicion 2 de arrName para poder obtener el año lectivo y separar la extensión del archivo
+    let arrAnioLectivo = arrName[2].split(".");
+    //Obtengo el cuatrimestre y el año lectivo
+    this.cuatrimestre = arrAnioLectivo[0][0];
+    this.cuatrimestre += arrAnioLectivo[0][1];
+    this.anioLectivo = arrAnioLectivo[0][2];
+    this.anioLectivo += arrAnioLectivo[0][3];
+    this.anioLectivo += arrAnioLectivo[0][4];
+    this.anioLectivo += arrAnioLectivo[0][5];
+
+
+    // Recorro los datos leidos y armo los registros
+    let arrCSV = [];
     this.papa.parse(file,{
+      encoding: "ISO-8859-1",
       complete: (results) => {
           for(let i = 0; i < results.data.length -1; i++)
           {
-            arrSCV.push(results.data[i]);
+            arrCSV.push(results.data[i]);
           }
-        this.arrAlumnosCSV = arrSCV;
-        console.log(arrSCV);
+          arrCSV.forEach(element => {
+            let tupla = element[0].split(';') + element[1].split(';');
+            let arrAlumno = tupla.split(',');
+            this.arrAlumnosCSV.push(arrAlumno)
+            
+          });
+          this.diaHorario = this.arrAlumnosCSV[0][2];
       }
+      
   });
+  console.log(this.arrAlumnosCSV);
   this.hayArchivo = true;
-  // this.title = materia + " " + comision + " " + anioLectivo;
+ 
   }
+
+
+  private cargarDatos()
+  {
+    this.insertarMateria();
+    this.insertarCurso();
+    this.insertarALumno();
+  }
+
+  private insertarMateria()
+  {
+    this.materiaProvider.addMateria(this.materia, this.diaHorario);
+  }
+
+  private insertarCurso()
+  {
+    this.cursoProvider.addCurso(this.materiaProvider.ultimoID, this.comision)
+  }
+
+  private insertarALumno()
+  { 
+    let id: number = 0;
+    this.arrAlumnosCSV.forEach(element => {
+      id += 1;
+      this.alumnoProvider.addAlumno({"id": id, "legajo": element[0], "nombre": element[1]});
+    });
+  }
+
+
 
 }

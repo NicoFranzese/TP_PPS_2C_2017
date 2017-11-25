@@ -12,7 +12,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class DataProvider {
 
-  items: Observable<any[]>;
+  private DBalumnos = this.db.list('alumnos');
+  private items: Observable<any[]>;
 
 
   constructor(public http: Http, public db: AngularFireDatabase) {
@@ -31,6 +32,10 @@ export class DataProvider {
     return this.items;
   }
 
+  public addAlumno(alumno)
+  {
+    this.DBalumnos.push(alumno);
+  }
 
 
 }

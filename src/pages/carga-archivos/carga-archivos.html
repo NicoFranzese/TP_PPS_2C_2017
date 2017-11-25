@@ -17,62 +17,64 @@
 
   <div id="sin-archivo" *ngIf="!hayArchivo">
     <i class="fa fa-file-excel-o fa-5x mb-4" aria-hidden="true"></i>
-    <!-- <button class="btn btn-azul" (click)="cargarCSV()">
-      <i class="fa fa-upload" aria-hidden="true"></i>
-      Cargar archivo .csv
-    </button> -->
+
     <input type="file" (change)="cargarCSV($event)">
   </div>
   <div *ngIf="hayArchivo">
-      <ion-card>
-          
-            <ion-card-content class="card">
-              <ion-grid>
-                <ion-row>
-                  <ion-col>
-                    <span>{{materia}}</span>
-                  </ion-col>
-                  <ion-col>
-                    <span>{{comision}}</span>
-                  </ion-col>
-                  <ion-col>
-                    <span>{{anioLectivo}}</span>
-                  </ion-col>
-                </ion-row> 
-              </ion-grid>
-              
-            </ion-card-content>
-          
-          </ion-card>
-    <ion-list>
-      <div class="row" ion-item *ngFor="let i of arrAlumnosCSV">
-        <div class="col-4">
-          <p><b>Legajo: </b>{{i[0]}} </p>
-        </div>
-        <div class="col-4">
-           <p><b>Apellido y nombre: </b>{{i[1]}}</p>
-        </div>
-        <div class="col-4">
-            <p><b>Día y horario: </b>{{i[2]}}</p>
-        </div>
-        
-      </div>  
-    </ion-list>
+    <ion-card>
+
+      <ion-card-content class="card">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <span>{{materia}}</span>
+            </ion-col>
+            <ion-col>
+              <span>{{comision}}</span>
+            </ion-col>
+            <ion-col>
+              <span>{{anioLectivo}}</span>
+            </ion-col>
+            <ion-col>
+              <span>{{cuatrimestre}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+      <p class="text-center">{{diaHorario}}</p>
+
+    </ion-card>
+
+    <ion-grid>
+
+      <ion-row class="row row-header">
+        <ion-col class="col col-4">Legajo</ion-col>
+        <ion-col class="col col-8">Alumno</ion-col>
+      </ion-row>
+
+      <ion-row class="registro" *ngFor="let item of arrAlumnosCSV" align-items-center>
+
+        <ion-col class="col col-4">{{item[0]}}</ion-col>
+        <ion-col class="col col-8 cortar">{{item[1]}}</ion-col>
+
+      </ion-row>
+    </ion-grid>
 
   </div>
 
   <ion-fab left bottom *ngIf="hayArchivo">
-      <button ion-fab color="dark">
-        <ion-icon name="arrow-dropup"></ion-icon>
+    <button ion-fab color="dark">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="vaciarCSV()">
+        <i class="fa fa-trash" aria-hidden="true"></i>
       </button>
-      <ion-fab-list side="top">          
-        <button ion-fab>
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </button>
-        <button ion-fab >
-            <i class="fa fa-upload" aria-hidden="true"></i>
-        </button>
-      </ion-fab-list>
-    </ion-fab>
+      <button (click)="cargarDatos()" ion-fab>
+        <i class="fa fa-upload" aria-hidden="true"></i>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>
