@@ -27,7 +27,7 @@ export class ResultadoEscaneadoProvider {
     return this.http.post(this.ruta + "traerResultadoEscaneado.php",
     JSON.stringify(jsonAEnviar)
     )
-    .map(data => data.json());           
+    .map(data => data.json());          
   }   
 
 }

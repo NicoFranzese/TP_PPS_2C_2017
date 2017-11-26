@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 /*
   Generated class for the EscanearQrProvider provider.
@@ -12,21 +14,24 @@ import 'rxjs/add/operator/map';
 export class EscanearQrProvider {
 
   public ruta = "hosting";
+  items: Observable<any[]>;
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public db: AngularFireDatabase) {
     // console.log('Hello EscanearQrProvider Provider');
   }
 
-  EscanearQr(codigoQR, tipo) {    
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json; charset=utf-8; Access-Control-Allow-Origin: *; Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS"');
-     
-      var jsonAEnviar ={codigoQR: codigoQR, tipo: tipo};
+  EscanearQr(codigoQR, tipo, usuLog) {
+      var jsonAEnviar ={codigoQR: codigoQR, tipo: tipo, usuario: usuLog};
       return this.http.post(this.ruta + "escaneoQr.php",
       JSON.stringify(jsonAEnviar)
     )
     .map(response => localStorage.setItem("ResultadoEscaneo", response.text()));
     // .map(data => data.json());  
+  }
+
+  public getExisteQR(entityName) {
+    this.items = this.db.list(entityName).valueChanges();
+    return this.items;
   }
 
 }
