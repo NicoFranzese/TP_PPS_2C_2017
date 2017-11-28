@@ -1,12 +1,7 @@
-<!--
-  Generated template for the PrincipalPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header id="header">
+<ion-header style="background:#033c52">
 
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>Menu principal</ion-title>
   </ion-navbar>
 
@@ -15,107 +10,31 @@
 
 <ion-content id="cuerpo" padding>
 
+  <div class="row">
+    <div class="col-6">
 
-  <ion-list class="mt-5">
-
-    <div id="divProfesor" *ngIf="tipoUsuario == 'Profesor'">
-      <ion-list>
-        <button class="list user" ion-item (click)="itemSelected(item)">
-          <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
-        </button>
-      </ion-list>
-
-      <button class="list" ion-item (click)="itemSelected('control-asistencia')">
-        Tomar asistencia
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('ABM-cuestionarios')">
-        Carga Cuestionarios
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('aviso-importancia')">
-        Avisos de Importancia
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('graficos-estadisticos')">
-        Gráficos Estadísticos
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('qr-profesores')">
-        QR Para Profesores
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('qr-encuestas')">
-        QR Para Encuestas
-      </button>
     </div>
+    <div class="col-6">
 
-    <div id="divAdministrativo" *ngIf="tipoUsuario == 'Administrativo'">
-      <ion-list>
-        <button class="list user" ion-item (click)="itemSelected(item)">
-          <i class="fa fa-user-circle" aria-hidden="true"></i> Falta Tomar Usuario
-        </button>
-      </ion-list>
-      <button class="list" ion-item (click)="itemSelected('control-asistencia')">
-        Tomar asistencia
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('carga-archivos')">
-        Carga Archivos Excel/CSV
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('aviso-importancia')">
-        Avisos de Importancia
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('ABM-alumnos')">
-        ABM Alumnos
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('graficos-estadisticos')">
-        Gráficos Estadísticos
-      </button>
-    </div>
-
-    <div id="divAlumno" *ngIf="tipoUsuario == 'Alumno'">
-      <ion-list>
-        <button class="list user" ion-item (click)="itemSelected(item)">
-          <i class="fa fa-user-circle" aria-hidden="true"></i> {{loginProvider.usuarioLogueado['nombre']}}
-        </button>
-      </ion-list>
-      <button class="list" ion-item (click)="itemSelected('qr-alumnos')">
-        QR Para Alumnos
-      </button>
-
-      <button class="list" ion-item (click)="itemSelected('qr-encuestas')">
-        QR Para Encuestas
-      </button>
-    </div>
-
-    <div id="divAdministrador" *ngIf="tipoUsuario == 'Administrador'">
-      <ion-list>
-        <button class="list user" ion-item (click)="itemSelected(item)">
-          <i class="fa fa-user-circle" aria-hidden="true"></i> Admin
-        </button>
-      </ion-list>
-      <button class="list" ion-item (click)="itemSelected('ABM-profesores')">
-        ABM Profesor
-      </button>
-      <button class="list" ion-item (click)="itemSelected('ABM-administrativos')">
-        ABM Administrativo
-      </button>
-
-     
+      <h3>
+        <i class="fa fa-male fa-x4 mr-3" aria-hidden="true"></i>
+        <b>Usuario</b>
+      </h3>
 
     </div>
 
-    <button class="list logout" ion-item (click)="logout()">
-      <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
-    </button>
-
-  </ion-list>
-
-  <p>Esta lista de menú habría que generarla dentro de varios array, una para cada tipo de usuario, y para mostrarla solo iteramos
-    el array y mostramos las opciones correspondientes para cada uno.</p>
+    <div class="col-6" *ngFor="let item of arrOpciones">
+      <button class="btn btn-opcion" (click)="itemSelected(item[2])">
+        <i class={{item[1]}} aria-hidden="true"></i>
+        <span>{{item[0]}}</span>
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-opcion logout" (click)="logout()">
+        <i class="fa fa-sign-out fa-5x icon" aria-hidden="true"></i>
+        <span>Salir</span>
+      </button>
+    </div>
+  </div>
 
 </ion-content>

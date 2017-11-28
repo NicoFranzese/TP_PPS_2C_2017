@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule }    from '@angular/http';
 import { PapaParseModule } from 'ngx-papaparse';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { FileChooser } from '@ionic-native/file-chooser';
 
@@ -37,6 +38,7 @@ import { EscanearQrProvider } from '../providers/escanear-qr/escanear-qr';
 import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-escaneado';
 import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/resultado-escaneado';
 import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
+import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
 
 @NgModule({
   declarations: [
@@ -93,7 +95,9 @@ import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
     FileChooser,
     EscanearQrProvider,
     ResultadoEscaneadoProvider,
-    CsvAlumnosProvider
+    CsvAlumnosProvider,
+    BarcodeScanner,
+    AlmacenDatosProvider
   ]
 })
 export class AppModule {}

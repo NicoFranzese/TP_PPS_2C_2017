@@ -23,6 +23,7 @@ export class CargaArchivosPage {
   private cuatrimestre;
   private anioLectivo;
   private diaHorario;
+  private fondo = "#02648b";
 
   ionViewDidLoad() {
     this.csvAlumnosProvider.operacionFinalizada$.subscribe(
@@ -34,11 +35,12 @@ export class CargaArchivosPage {
   {
     this.arrAlumnosCSV = [];
     this.hayArchivo = false;
+    this.fondo = "#02648b";
   }
 
   private cargarCSV(event)
   {
-
+    this.fondo = "#fff";
     //Archivo subido
     let file = event.srcElement.files[0];
 

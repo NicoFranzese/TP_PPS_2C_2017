@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login/login';
 import { LoginPage } from '../login/login';
+import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-datos';
 
 import { AbmAdministrativosPage } from '../abm-administrativos/abm-administrativos';
 import { AbmAlumnosPage } from '../abm-alumnos/abm-alumnos';
@@ -25,15 +26,20 @@ export class PrincipalPage {
 
   public tipoUsuario;
 
+  private arrOpciones = [];
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private loginProvider: LoginProvider,
+    private almacenDatosProvider: AlmacenDatosProvider
     
   ) {
   }
 
   ionViewDidLoad() {
     this.tipoUsuario = localStorage.getItem("tipoUsuario");
+    this.cambiarMenu();
+
     // this.tipoUsuario = "Profesor";
     // this.tipoUsuario = "Administrador";
     // this.tipoUsuario = "Administrativo";
@@ -100,10 +106,126 @@ export class PrincipalPage {
    
   }
 
-
   private logout() {
     this.loginProvider.logOut();
     this.navCtrl.push(LoginPage);
+  }
+
+  //Según el tipo de usuario logueado muestro las opciones
+  private cambiarMenu()
+  {
+    this.arrOpciones = [];
+    let arrAux = [];
+
+    switch(this.tipoUsuario)
+    {
+      case 'Profesor':
+        arrAux = [];
+        arrAux[0] = 'Carga Cuestionarios';
+        arrAux[1] = 'fa fa-question-circle fa-5x icon';
+        arrAux[2] =  'ABM-cuestionarios';
+        arrAux[3] = AbmCuestionariosPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'Avisos de Importancia';
+        arrAux[1] = 'fa fa-flag fa-5x icon';
+        arrAux[2] =  'aviso-importancia';
+        arrAux[3] = AvisoImportanciaPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'Gráficos Estadísticos';
+        arrAux[1] = 'fa fa-pie-chart fa-5x icon';
+        arrAux[2] =  'graficos-estadisticos';
+        arrAux[3] = GraficosEstadisticosPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'QR Para Profesores';
+        arrAux[1] = 'fa fa-qrcode fa-5x icon';
+        arrAux[2] =  'qr-profesores';
+        arrAux[3] = QrProfesoresPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'QR Para Encuestas';
+        arrAux[1] = 'fa fa-qrcode fa-5x icon';
+        arrAux[2] =  'qr-encuestas';
+        arrAux[3] = QrEncuestasPage;
+        this.arrOpciones.push(arrAux);
+      break;
+
+      case 'Administrativo':
+        arrAux = [];
+        arrAux[0] = 'Tomar asistencia';
+        arrAux[1] = 'fa fa-list-alt fa-5x icon';
+        arrAux[2] =  'control-asistencia';
+        arrAux[3] = ControlAsistenciaPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'Inscribir alumnos CSV';
+        arrAux[1] = 'fa fa-file-excel-o fa-5x icon';
+        arrAux[2] =  'carga-archivos';
+        arrAux[3] = CargaArchivosPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'Avisos de Importancia';
+        arrAux[1] = 'fa fa-flag fa-5x icon';
+        arrAux[2] =  'aviso-importancia';
+        arrAux[3] = AvisoImportanciaPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'ABM Alumnos';
+        arrAux[1] = 'fa fa-users fa-5x icon';
+        arrAux[2] =  'ABM-alumnos';
+        arrAux[3] = AbmAlumnosPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = ' Gráficos Estadísticos';
+        arrAux[1] = 'fa fa-pie-chart fa-5x icon';
+        arrAux[2] =  'graficos-estadisticos';
+        arrAux[3] = GraficosEstadisticosPage;
+        this.arrOpciones.push(arrAux);
+      break;
+
+      case 'Alumno':
+        arrAux = [];
+        arrAux[0] = 'QR Para Alumnos';
+        arrAux[1] = 'fa fa-qrcode fa-5x icon';
+        arrAux[2] =  'qr-alumnos';
+        arrAux[3] = QrAlumnosPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'QR Para Encuestas';
+        arrAux[1] = 'fa fa-qrcode fa-5x icon';
+        arrAux[2] =  'qr-encuestas';
+        arrAux[3] = QrEncuestasPage;
+        this.arrOpciones.push(arrAux);
+      break;
+
+      case 'Administrador':
+        arrAux = [];
+        arrAux[0] = 'ABM Profesores';
+        arrAux[1] = 'fa fa-users fa-5x icon';
+        arrAux[2] =  'ABM-profesores';
+        arrAux[3] = AbmProfesoresPage;
+        this.arrOpciones.push(arrAux);
+
+        arrAux = [];
+        arrAux[0] = 'ABM Administrativos';
+        arrAux[1] = 'fa fa-users fa-5x icon';
+        arrAux[2] =  'ABM-administrativos';
+        arrAux[3] = AbmAdministrativosPage;
+        this.arrOpciones.push(arrAux);
+      break;
+    }
+    this.almacenDatosProvider.arrMenuOpciones.next(this.arrOpciones);
   }
 
 

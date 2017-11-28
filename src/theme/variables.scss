@@ -22,8 +22,14 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-#header{
-  background: #05455f;
+
+
+.toolbar-background-md{
+  background: #033c52 !important;
+}
+
+.toolbar-title-md, .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
+  color: #fff !important;
 }
 
 #cuerpo{

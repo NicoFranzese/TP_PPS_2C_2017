@@ -14,39 +14,79 @@ page-principal {
     //     font-size: 18px;
     // }
 
-    .list{
-        text-align: center;
-        font-size: 20px;
-        background: color($colors, greendark);
-        color: #fff;
-    }
+    // .list{
+    //     text-align: center;
+    //     font-size: 20px;
+    //     background: color($colors, greendark);
+    //     color: #fff;
+    // }
 
-    .user{
-        background: color($colors, primary);
-        color: rgb(88, 38, 38) !important;
-        font-weight: bold;
-        font-size: 25px !important;
-        box-shadow: 0px 0px 33px 10px rgba(0,0,0,0.75);
-    }
+    // .user{
+    //     background: color($colors, primary);
+    //     color: rgb(88, 38, 38) !important;
+    //     font-weight: bold;
+    //     font-size: 25px !important;
+    //     box-shadow: 0px 0px 33px 10px rgba(0,0,0,0.75);
+    // }
 
-    .logout{
-        background: color($colors, danger);
+    // .logout{
+    //     background: color($colors, danger);
         
-    }
+    // }
 
-    // customizo menu para elegir tipo de operacion
-    .dropdown-item{
-        min-width: 180px;
-        min-height: 50px;
-        font-size: 125%;
-    }
-    .dropdown-menu{
-        position: absolute;
-        min-width: 180px;
-        min-height: 100px;
-        border-radius: 10px;
-    }
+    // // customizo menu para elegir tipo de operacion
+    // .dropdown-item{
+    //     min-width: 180px;
+    //     min-height: 50px;
+    //     font-size: 125%;
+    // }
+    // .dropdown-menu{
+    //     position: absolute;
+    //     min-width: 180px;
+    //     min-height: 100px;
+    //     border-radius: 10px;
+    // }
  
+    .row{
+        padding: 0 5px;
+    }
 
+    .col-6, .col-12  {
+        padding: 0 !important;
+    }
+
+    h3{
+        color: #000;
+        text-align: center;
+        border-radius: 3px;
+        padding: 4px 0;   
+        box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75);
+        margin-bottom: 15px;
+        margin-right: 5px;
+    }
+
+
+    .btn-opcion{
+        display: inline-block;
+        width: 97%;
+        height: 127px;
+        background: rgba(0, 0, 0, 0.5607843137254902);
+        margin-top: 5px;
+        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.75);
+    }
+
+    .btn-opcion.logout{
+        background: #90261f;
+    }
+
+    span{
+        font-size: 14px;
+    }
+
+    i.icon{
+        display: block !important;
+        margin-bottom: 10px;
+    }
+    
 
 }

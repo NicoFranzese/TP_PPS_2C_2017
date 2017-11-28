@@ -49,7 +49,8 @@ page-login {
     }
 
     .btn.fb{
-        background: color($colors, facebook);
+        //background: color($colors, facebook);
+        background: #1c3467;
         box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
     }
 
@@ -59,7 +60,8 @@ page-login {
     }
 
     .btn.ingreso{
-        background: color($colors, greendark);
+        //background: color($colors, greendark);
+        background: #012c3d;
         box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
     }
 }
