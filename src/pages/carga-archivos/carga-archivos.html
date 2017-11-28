@@ -13,12 +13,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding id="cuerpo">
 
   <div id="sin-archivo" *ngIf="!hayArchivo">
-    <i class="fa fa-file-excel-o fa-5x mb-4" aria-hidden="true"></i>
+    
+    <img src="./assets/img/csv.png" width="250">
 
-    <input type="file" (change)="cargarCSV($event)">
+    <input type="file" class="mt-3" (change)="cargarCSV($event)">
   </div>
   <div *ngIf="hayArchivo">
     <ion-card>

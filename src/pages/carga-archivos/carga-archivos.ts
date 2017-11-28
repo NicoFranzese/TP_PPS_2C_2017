@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PapaParseService } from 'ngx-papaparse';
-import { MateriaProvider } from '../../providers/materia/materia';
-import { DataProvider } from '../../providers/data/data';
-import { CursoProvider } from '../../providers/curso/curso';
-
+import { CsvAlumnosProvider } from '../../providers/csv-alumnos/csv-alumnos';
 
 
 @IonicPage()
@@ -14,9 +11,8 @@ import { CursoProvider } from '../../providers/curso/curso';
 })
 export class CargaArchivosPage {
 
-  constructor(private materiaProvider: MateriaProvider,
-              private alumnoProvider: DataProvider,
-              private cursoProvider: CursoProvider,
+  constructor(
+              private csvAlumnosProvider: CsvAlumnosProvider,
               private papa: PapaParseService) { }
 
   private title = "Importar CSV Alumnos";
@@ -29,8 +25,9 @@ export class CargaArchivosPage {
   private diaHorario;
 
   ionViewDidLoad() {
-
-    
+    this.csvAlumnosProvider.operacionFinalizada$.subscribe(
+      data => this.vaciarCSV()
+    );
   }
 
   private vaciarCSV()
@@ -41,10 +38,6 @@ export class CargaArchivosPage {
 
   private cargarCSV(event)
   {
-    // this.fileChooser.open()
-    // .then(uri => console.log(uri))
-    // .catch(e => console.log(e));
-
 
     //Archivo subido
     let file = event.srcElement.files[0];
@@ -95,28 +88,7 @@ export class CargaArchivosPage {
 
   private cargarDatos()
   {
-    this.insertarMateria();
-    this.insertarCurso();
-    this.insertarALumno();
-  }
-
-  private insertarMateria()
-  {
-    this.materiaProvider.addMateria(this.materia, this.diaHorario);
-  }
-
-  private insertarCurso()
-  {
-    this.cursoProvider.addCurso(this.materiaProvider.ultimoID, this.comision)
-  }
-
-  private insertarALumno()
-  { 
-    let id: number = 0;
-    this.arrAlumnosCSV.forEach(element => {
-      id += 1;
-      this.alumnoProvider.addAlumno({"id": id, "legajo": element[0], "nombre": element[1]});
-    });
+    this.csvAlumnosProvider.cargarAlumnos(this.arrAlumnosCSV, this.materia, this.comision);
   }
 
 

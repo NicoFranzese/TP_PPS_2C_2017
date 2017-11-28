@@ -34,10 +34,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginProvider } from '../providers/login/login';
 import { DataProvider } from '../providers/data/data';
 import { EscanearQrProvider } from '../providers/escanear-qr/escanear-qr';
-import { MateriaProvider } from '../providers/materia/materia';
-import { CursoProvider } from '../providers/curso/curso';
 import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-escaneado';
 import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/resultado-escaneado';
+import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
 
 @NgModule({
   declarations: [
@@ -94,8 +93,7 @@ import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/res
     FileChooser,
     EscanearQrProvider,
     ResultadoEscaneadoProvider,
-    MateriaProvider,
-    CursoProvider,
+    CsvAlumnosProvider
   ]
 })
 export class AppModule {}
