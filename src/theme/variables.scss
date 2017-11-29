@@ -43,7 +43,8 @@ $app-direction: ltr;
   color: #fff;
   font-size: 17px;
   line-height: 30px;
-  border-radius: 5px;
+  border-radius: 6px;
+  background: #012c3d;
 }
 
 .btn-azul{
@@ -68,7 +69,8 @@ $colors: (
   bg:         #02648b,
   facebook:   #425f9c,
   google:     #dc483b,
-  greendark:  #009688
+  greendark:  #009688,
+  default: #012c3d
 );
 
 

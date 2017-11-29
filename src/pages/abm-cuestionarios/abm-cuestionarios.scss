@@ -1,3 +1,62 @@
 page-abm-cuestionarios {
 
+    img
+    {
+        display:block;
+        margin:0 auto;
+    }
+
+    p{
+        font-style: italic;
+    }
+
+    .btn{
+        font-size: 17px;
+    }
+
+    //TABLA
+    .col {
+        // border: solid 1px grey;
+        border-bottom-style: none;
+        border-right-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    // cabecera de la grilla 
+    .row-header{
+        border-bottom: 3px solid rgb(151, 141, 141);
+        font-weight: bold;
+        text-align: center;
+        
+    }
+
+    // separaci�n para las filas 
+    .row{
+        padding:3px;
+        text-align: center;
+    }
+
+    // efecto mouse over
+    .row:hover{
+        background-color:#DCD9D8;
+        .more{background-color:#DCD9D8;}
+    }
+
+
+    // recortar el texto que sobra en el campo alumno
+    .cortar{
+        width:150px;
+        height:20px;
+        text-overflow:ellipsis;
+        white-space:nowrap; 
+        overflow:hidden; 
+    }
+    .cortar:hover {
+        width: auto;
+        height:auto;
+        white-space: initial;
+        overflow:visible;
+        cursor: pointer;
+    }
 }

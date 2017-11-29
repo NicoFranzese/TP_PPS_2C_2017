@@ -23,8 +23,7 @@ export class DataProvider {
 
   public addItem(entityName, object)
   {
-    this.db.list(entityName).push(object);
+    return this.db.list(entityName).push(object);
   }
-
 
 }

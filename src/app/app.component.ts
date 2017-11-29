@@ -7,6 +7,7 @@ import { LoginProvider } from '../providers/login/login';
 import { LoginPage } from '../pages/login/login';
 import { CargaArchivosPage } from '../pages/carga-archivos/carga-archivos';
 import { ControlAsistenciaPage } from '../pages/control-asistencia/control-asistencia';
+import { AbmCuestionariosPage } from '../pages/abm-cuestionarios/abm-cuestionarios';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // rootPage: any = CargaArchivosPage;
-  rootPage: any = LoginPage;
+  rootPage: any = AbmCuestionariosPage;
 
   pages: Array<{title: string, component: any}> = [];
 

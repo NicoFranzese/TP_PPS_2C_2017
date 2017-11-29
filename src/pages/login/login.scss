@@ -25,12 +25,8 @@ page-login {
     }
 
     .btn{
-        width: 100%;
-        height: 40px;
-        color: #fff;
-        font-size: 17px;
-        line-height: 30px;
-        border-radius: 5px;
+        font-size: 17px !important; 
+
 
         .fa.fa-facebook-square, .fa.fa-google-plus-square{
             float: left;

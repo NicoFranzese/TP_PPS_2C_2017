@@ -121,7 +121,7 @@ export class PrincipalPage {
     {
       case 'Profesor':
         arrAux = [];
-        arrAux[0] = 'Carga Cuestionarios';
+        arrAux[0] = 'Gestor de Cuestionarios';
         arrAux[1] = 'fa fa-question-circle fa-5x icon';
         arrAux[2] =  'ABM-cuestionarios';
         arrAux[3] = AbmCuestionariosPage;
