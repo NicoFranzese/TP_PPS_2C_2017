@@ -9,12 +9,18 @@ import { CsvAlumnosProvider } from '../../providers/csv-alumnos/csv-alumnos';
   selector: 'page-carga-archivos',
   templateUrl: 'carga-archivos.html',
 })
+
+// const fileTransfer: FileTransferObject = this.transfer.create();
+
+
 export class CargaArchivosPage {
 
-  constructor(
-              private csvAlumnosProvider: CsvAlumnosProvider,
+  
+
+  constructor(private csvAlumnosProvider: CsvAlumnosProvider,
               private papa: PapaParseService) { }
 
+            
   private title = "Importar CSV Alumnos";
   private hayArchivo = false;
   private arrAlumnosCSV = [];
@@ -24,6 +30,7 @@ export class CargaArchivosPage {
   private anioLectivo;
   private diaHorario;
   private fondo = "#02648b";
+
 
   ionViewDidLoad() {
     this.csvAlumnosProvider.operacionFinalizada$.subscribe(
@@ -42,7 +49,9 @@ export class CargaArchivosPage {
   {
     this.fondo = "#fff";
     //Archivo subido
+    console.log(event);
     let file = event.srcElement.files[0];
+    console.log(file);
 
     //Array con el nombre del archivo
     //1ra posición nombre materia
@@ -93,6 +102,5 @@ export class CargaArchivosPage {
     this.csvAlumnosProvider.cargarAlumnos(this.arrAlumnosCSV, this.materia, this.comision);
   }
 
-
-
+  
 }

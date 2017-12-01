@@ -6,6 +6,9 @@ import { PapaParseModule } from 'ngx-papaparse';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { FileChooser } from '@ionic-native/file-chooser';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -97,7 +100,9 @@ import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
     ResultadoEscaneadoProvider,
     CsvAlumnosProvider,
     BarcodeScanner,
-    AlmacenDatosProvider
+    AlmacenDatosProvider, 
+    FileTransfer,
+    File
   ]
 })
 export class AppModule {}
