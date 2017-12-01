@@ -11,7 +11,7 @@
     <div class="col-12">
       <img src="./assets/img/test.png" class="mt-3" width="150">
       <p class="mt-5 text-muted text-center">No hay cuestionarios para mostrar...</p>
-      <button class="btn" (click)="mostrarAlertPregunta()">
+      <button class="btn" (click)="mostrarAlertPregunta('alta')">
         <i class="fa fa-list-alt" aria-hidden="true"></i> Agregar formulario</button>
     </div>
   </div>
@@ -20,17 +20,32 @@
     <ion-row class="row row-header">
       <ion-col class="col col-3">Restante</ion-col>
       <ion-col class="col col-7">Pregunta</ion-col>
-      <ion-col class="col col-2">Editar</ion-col>
+      <ion-col class="col col-2">Menú</ion-col>
     </ion-row>
     <ion-row *ngFor="let item of arrCuestionarios" align-items-center>
       <ion-col class="col col-3">{{item.horasDuracion}} hs.</ion-col>
       <ion-col class="col col-7">{{item.pregunta}}</ion-col>
-      <ion-col class="col col-2"><button class="btn" style="width:80%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></ion-col>
+      <ion-col class="col col-2">
+        <!-- <button class="btn" style="width:80%" (click)="editarCuestionario(item)">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </button> -->
+        <div class="dropdown">
+          <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <ion-icon name="more"></ion-icon>
+          </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="editarCuestionario(item)" >Editar</a>
+              <a class="dropdown-item" >Ver estadísticas</a>
+              <a class="dropdown-item" >Finalizar</a>
+            </div>
+          </div>
+        
+      </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-fab left bottom *ngIf="hayCuestionarios">
-    <button ion-fab color="default" (click)="mostrarAlertPregunta()">
+    <button ion-fab color="default" (click)="mostrarAlertPregunta('alta')">
         <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
   </ion-fab>

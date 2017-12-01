@@ -41,6 +41,9 @@ page-abm-cuestionarios {
     .row:hover{
         background-color:#DCD9D8;
         .more{background-color:#DCD9D8;}
+        #dropdownMenuButton{
+            background: #DCD9D8;
+        }
     }
 
 
@@ -59,4 +62,21 @@ page-abm-cuestionarios {
         overflow:visible;
         cursor: pointer;
     }
+
+    #dropdownMenuButton{
+        display: inline-block;
+        height: auto;
+        width: 50px;
+        background: #fff;
+    }
+
+    ion-icon {
+        font-size: 2.2em !important;
+    }
+
+    .dropdown-menu {
+        font-size: 1.5rem !important; 
+    }
+
+
 }

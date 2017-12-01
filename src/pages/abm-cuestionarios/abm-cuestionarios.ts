@@ -16,12 +16,15 @@ export class AbmCuestionariosPage {
   private alertPregunta;
   private alertTipoRespuestas;
   private alertRespuestas;
-  private cantRespuestas: number;
-  private pregunta: string;
-  private horasDuracion: number;
+  private cantRespuestas;
+  private pregunta;
+  private horasDuracion;
   private tipoRespuestas: string;
   private arrRespuestas = [];
+  private fechaInicio = "";
   private idCuestionario: number;
+
+  private tituloCuestionario: string;
 
 
   constructor(private navCtrl: NavController, 
@@ -33,28 +36,49 @@ export class AbmCuestionariosPage {
 
   ionViewDidLoad() {
     this.obtenerUltimoIDCuestionarios();
-    this.calcularTiempoRestante("29/11/2017 00:30");
   }
 
-  private mostrarAlertPregunta()
+  private resetearVariables()
   {
+    this.cantRespuestas = "";
+    this.pregunta = "";
+    this.horasDuracion = "";
+    this.tipoRespuestas = "";
+    this.arrRespuestas = [];
+    this.fechaInicio = "";
+  }
+
+  private mostrarAlertPregunta(operacion: string)
+  {
+    if(operacion == 'alta')
+    {
+      this.resetearVariables();
+      this.obtenerUltimoIDCuestionarios();
+      this.tituloCuestionario = "Nuevo cuestionario";
+    }
+    else
+      this.tituloCuestionario = "Editar cuestionario"
+      
       this.alertPregunta = this.alertCtrl.create({
-        title: 'Nuevo cuestionario',
+        title: this.tituloCuestionario,
         message: "Complete los datos",
         inputs: [
           {
             name: 'pregunta',
-            placeholder: 'Pregunta'
+            placeholder: 'Pregunta',
+            value: this.pregunta
           },
           {
             name: 'cantRespuestas',
             placeholder: 'Cantidad de respuestas',
-            type: 'number'
+            type: 'number',
+            value: this.cantRespuestas
           },
           {
             name: 'horasDuracion',
             placeholder: 'Horas de duraciòn',
-            type: 'number'
+            type: 'number',
+            value: this.horasDuracion
           }
 
         ],
@@ -71,34 +95,38 @@ export class AbmCuestionariosPage {
               this.pregunta = data.pregunta;
               this.cantRespuestas = data.cantRespuestas;
               this.horasDuracion = data.horasDuracion;
-              this.mostrarAlertTipoRespuestas();
+              this.mostrarAlertTipoRespuestas(operacion);
             }
           }
         ]
       }).present();
   }
 
-  private mostrarAlertTipoRespuestas()
+  private mostrarAlertTipoRespuestas(operacion)
   {
 
     this.alertPregunta = this.alertCtrl.create({
-      title: 'Nuevo cuestionario',
+      title: this.tituloCuestionario,
       message: "Seleccione el tipo de respuesta",
       inputs: [
         {
           type:'radio',
           label:'Elegir solo una opciòn',
-          value:'radio'
+          value:'radio',
+          checked: this.tipoRespuestas == 'radio'
         },
         {
           type:'radio',
           label:'Elegir varias opciones',
-          value:'radio'
+          value:'check',
+          checked: this.tipoRespuestas == 'check'
+          
         },
         {
           type:'radio',
           label:'Escribir respuesta',
-          value:'text'
+          value:'text',
+          checked: this.tipoRespuestas == 'text'
         }
       ],
       buttons: [
@@ -113,31 +141,42 @@ export class AbmCuestionariosPage {
           handler: data => {
             this.tipoRespuestas = data;
             if(data != 'text')
-              this.mostrarAlertRespuestas();
+              this.mostrarAlertRespuestas(operacion);
             else
-              this.generarCuestionario();
+              this.guardarCuestionario(operacion);
           }
         }
       ]
     }).present();
   }
 
-  private mostrarAlertRespuestas()
+  private mostrarAlertRespuestas(operacion: string)
   { 
     let inputs = [];
 
-    for(let i = 0; i < this.cantRespuestas; i++)
+    for(let i = 0; i < Number.parseInt(this.cantRespuestas); i++)
     {
-      inputs.push(
+      if(operacion == 'editar')
       {
-          type: 'text',
-          // name: 'respuesta',
-          placeholder: `Respuesta ${i+1}`
-      });
+        inputs.push(
+        {
+            type: 'text',
+            value: this.arrRespuestas[i].respuesta,
+            placeholder: `Respuesta ${i+1}`
+        });
+      }
+      else
+      {
+        inputs.push(
+          {
+              type: 'text',
+              placeholder: `Respuesta ${i+1}`
+          });
+      }
     }
 
     this.alertRespuestas = this.alertCtrl.create({
-      title: 'Nuevo cuestionario',
+      title: this.tituloCuestionario,
       message: "Complete con las respuestas posibles",
       inputs,
       buttons: [
@@ -151,13 +190,14 @@ export class AbmCuestionariosPage {
           text: 'Generar cuestionario',
           handler: data => {
             {
-              for(let i=0; i<this.cantRespuestas; i++)
+              this.arrRespuestas = [];
+              for(let i=0; i<Number.parseInt(this.cantRespuestas); i++)
               {
                 let obj = {'respuesta': data[i]};
                 this.arrRespuestas.push(obj);
               }
             }
-            this.generarCuestionario();
+            this.guardarCuestionario(operacion);
           }
         }
       ]
@@ -187,36 +227,36 @@ export class AbmCuestionariosPage {
     );
   }
 
-  private generarCuestionario()
+  private guardarCuestionario(operacion)
   {
-    let fecha = new Date();
-    let fechaInicio = "";
-    fechaInicio += fecha.getDay() + "/";
-    fechaInicio += fecha.getMonth()+1 + "/";
-    fechaInicio += fecha.getFullYear() + " ";
-    fechaInicio += fecha.getHours() + ":";
-    fechaInicio += fecha.getMinutes();
-
+    if(operacion == 'alta')
+    {
+      let fecha = new Date();
+      this.fechaInicio += fecha.getDay() + "/";
+      this.fechaInicio += fecha.getMonth()+1 + "/";
+      this.fechaInicio += fecha.getFullYear() + " ";
+      this.fechaInicio += fecha.getHours() + ":";
+      this.fechaInicio += fecha.getMinutes();
+    }
     
     let obj = 
     {
       'id': this.idCuestionario,
       'pregunta': this.pregunta,
-      'fechaInicio': fechaInicio,
+      'fechaInicio': this.fechaInicio,
       'horasDuracion': this.horasDuracion,
       'tipoRespuestas': this.tipoRespuestas,
       'arrRespuestas':  this.arrRespuestas
     }
 
-    if(this.dataProvider.addItem('cuestionarios', obj))
-    {
-      this.mostrarMsjToast("¡Cuestionario generado con èxito!");
-    }
+    this.dataProvider.addItem('cuestionarios', obj);
+
+    if(operacion == 'alta')  
+      this.mostrarMsjToast("¡Cuestionario generado con èxito!");  
     else
-    {
-      this.mostrarMsjToast("Hubo un problema al generar el cuestionario. Intente mas tarde.");
-    }
+      this.mostrarMsjToast("¡Cuestionario editado con èxito!");
     
+  
   }
 
   private mostrarMsjToast(msg: string)
@@ -228,20 +268,38 @@ export class AbmCuestionariosPage {
     }).present();
   }
 
-  private calcularTiempoRestante(fechaHora: string)
+  private editarCuestionario(item)
   {
-    let arrFechaHoraAnt = fechaHora.split(" ");
-    let arrFechaAnt = arrFechaHoraAnt[0].split("/");
-    let arrHoraAnt = arrFechaHoraAnt[1].split(":");
+    this.idCuestionario = item.id;
+    this.pregunta = item.pregunta;
 
-    //Convierto la hora del cuestionario a formato UNIX
-    let epochAnt = new Date(Number.parseInt(arrFechaAnt[2]), Number.parseInt(arrFechaAnt[1]), Number.parseInt(arrFechaAnt[0]), Number.parseInt(arrHoraAnt[0]), Number.parseInt(arrHoraAnt[1])).valueOf();
-    let epochHoy = new Date().valueOf();
-    let millisec = epochAnt - epochHoy;
-
-    console.log(millisec / 60000);
+    if(item.arrRespuestas)
+      this.cantRespuestas = item.arrRespuestas.length;
+    else
+      this.cantRespuestas = 1;
     
+    this.horasDuracion = item.horasDuracion;
+    this.tipoRespuestas = item.tipoRespuestas;
+    this.arrRespuestas = item.arrRespuestas;
+    this.fechaInicio = item.fechaInicio;
+
+    this.mostrarAlertPregunta('editar');
+
   }
+
+  // private calcularTiempoRestante(fechaHora: string)
+  // {
+  //   let arrFechaHoraAnt = fechaHora.split(" ");
+  //   let arrFechaAnt = arrFechaHoraAnt[0].split("/");
+  //   let arrHoraAnt = arrFechaHoraAnt[1].split(":");
+
+  //   //Convierto la hora del cuestionario a formato UNIX
+  //   let epochAnt = new Date(Number.parseInt(arrFechaAnt[2]), Number.parseInt(arrFechaAnt[1]), Number.parseInt(arrFechaAnt[0]), Number.parseInt(arrHoraAnt[0]), Number.parseInt(arrHoraAnt[1])).valueOf();
+  //   let epochHoy = new Date().valueOf();
+  //   let millisec = epochAnt - epochHoy;
+
+  //   console.log(millisec / 60000); 
+  // }
 
 }
 
