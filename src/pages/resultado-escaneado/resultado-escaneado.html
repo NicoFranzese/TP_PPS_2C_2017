@@ -14,5 +14,19 @@
 
 
 <ion-content padding>
+  <div style="text-align: center" *ngIf="escaneoDesde == 'Alumno'">
+    Aula: {{aula}} <br>
+    Horario: {{horario}} <br>
+    Legajo: {{legDocente}} <br>
+  </div>
 
+  <div style="text-align: center" *ngIf="escaneoDesde == 'Profesor'">
+      Aula: {{aula}} <br>
+      Horario: {{horario}} <br>
+      Legajo: {{legDocente}} <br>
+    </div>
+
+    <div style="text-align: center" *ngIf="escaneoDesde == 'Encuesta'">
+        Acá iría la encuesta
+      </div>
 </ion-content>

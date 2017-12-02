@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 /*
   Generated class for the ResultadoEscaneadoProvider provider.
 
@@ -12,8 +13,8 @@ import 'rxjs/add/operator/map';
 export class ResultadoEscaneadoProvider {
 
   public ruta = "hosting";
-
-  constructor(public http: Http) {
+  items: Observable<any[]>;
+  constructor(public http: Http,  public db: AngularFireDatabase) {
     // console.log('Hello ResultadoEscaneadoProvider Provider');
   }
 
@@ -29,5 +30,10 @@ export class ResultadoEscaneadoProvider {
     )
     .map(data => data.json());          
   }   
+
+  public traerDatos(entityName) {
+    this.items = this.db.list(entityName).valueChanges();
+    return this.items;
+  }
 
 }

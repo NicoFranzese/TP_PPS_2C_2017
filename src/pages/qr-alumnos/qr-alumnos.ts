@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
-import { Toast } from '@ionic-native/toast'
+// import { Toast } from '@ionic-native/toast'
 
 import { EscanearQrProvider } from '../../providers/escanear-qr/escanear-qr'
 
@@ -31,7 +31,7 @@ export class QrAlumnosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private barcodeScanner: BarcodeScanner,
-    private toast: Toast,
+    // private toast: Toast,
     public servicioEscanearQr: EscanearQrProvider,
     public loadingCtrl: LoadingController) {
     this.escanear();
@@ -78,10 +78,12 @@ export class QrAlumnosPage {
           if(CodigoQROK == 1){
             localStorage.setItem("materiaEscaneada", materia);
             localStorage.setItem("comisionEscaneada", comision);
+            localStorage.setItem("escaneoDesde", "Alumnos");
             this.navCtrl.push(ResultadoEscaneadoPage);
           }else{
             localStorage.setItem("materiaEscaneada", "");
             localStorage.setItem("comisionEscaneada", "");
+            localStorage.setItem("escaneoDesde", "");
             alert("Codigo QR Erróneo");            
             this.navCtrl.push(PrincipalPage);
           }   
