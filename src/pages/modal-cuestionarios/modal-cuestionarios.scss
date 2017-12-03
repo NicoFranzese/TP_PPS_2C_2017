@@ -1,21 +1,39 @@
-page-abm-cuestionarios {
+page-modal-cuestionarios {
 
-    img
+    .list.list-md
     {
-        display:block;
-        margin:0 auto;
+        margin: 0 !important;
+        border: 1px solid rgba(96, 125, 139, 0.29);
+        border-radius: 5px;
+        }
+
+    .item-md
+    {
+        // background: rgba(0, 150, 136, 0.12) !important;
+    }
+    .label.label-md
+    {
+        margin-left: 5px;
     }
 
-    p{
-        font-style: italic;
-    }
 
-    .btn{
-        font-size: 17px;
+    .form-control
+    {
+        height: 35px;
     }
+    #date-time
+    {
+        height: 35px;
+    }
+ .item-datetime
+        {
+         padding: 0 !important;
+        }
 
-    //TABLA
-    .col {
+
+
+      //TABLA
+      .col {
         // border: solid 1px grey;
         border-bottom-style: none;
         border-right-style: none;
@@ -27,14 +45,13 @@ page-abm-cuestionarios {
     .row-header{
         border-bottom: 3px solid rgb(151, 141, 141);
         font-weight: bold;
-       
         
     }
 
     // separaci�n para las filas 
     .row{
         padding:3px;
-       padding-right: 10px;
+        padding-right: 10px;
     }
 
     // efecto mouse over
@@ -63,6 +80,11 @@ page-abm-cuestionarios {
         cursor: pointer;
     }
 
+    .menu
+    {
+        text-align: center;
+    }
+
     #dropdownMenuButton{
         display: inline-block;
         height: auto;
@@ -77,6 +99,13 @@ page-abm-cuestionarios {
     .dropdown-menu {
         font-size: 1.5rem !important; 
     }
+
+    .btn{
+        font-size: 15px;
+    }
+ 
+
+
 
 
 }

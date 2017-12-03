@@ -1,0 +1,66 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{almacenDatos.operacionCuestionario}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-row class="row row-header mb-3">
+        <ion-col class="col col-12"><h3>Datos bàsicos</h3></ion-col>
+      </ion-row>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="titulo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Termina el dìa</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="fechaFin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>A la hora</ion-label>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="horaFin"></ion-datetime>
+    </ion-item>
+  </ion-list>
+ 
+
+
+
+
+  <ion-grid *ngIf="arrPreguntas.length != 0" class="mt-5">
+      <ion-row class="row row-header">
+        <ion-col class="col col-12"><h3>Preguntas</h3></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let item of arrPreguntas" align-items-center>
+        <ion-col class="col col-10 cortar">{{item.pregunta}}</ion-col>
+        <ion-col class="col col-2" class="text-right">
+          <div class="dropdown">
+            <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <ion-icon name="more"></ion-icon>
+            </div>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="editarPregunta(item)">Editar</a>
+                <a class="dropdown-item" (click)="eliminarPregunta(item)">Eliminar</a>
+              </div>
+            </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <button class="btn mt-5" (click)="mostrarAlertPregunta('Nueva pregunta')">Agregar pregunta</button>
+
+
+
+
+
+
+
+  <ion-fab left bottom *ngIf="arrPreguntas.length != 0" >
+      <button ion-fab color="default" (click)="guardarCuestionario()">
+          <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-fab>
+</ion-content>

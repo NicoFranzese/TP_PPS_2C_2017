@@ -29,6 +29,14 @@ export class DataProvider {
   {
     this.db.database.ref(entityName +'/'+ object.id).set(object);
   }
+
+  //El path puede ser por ejemplo:
+  //'cuestionarios/1'
+  //'cuestionaris'/arrRespuestas/2
+  public deleteItem(path)
+  {
+    this.db.database.ref(path).remove();
+  }
   
 
 }
