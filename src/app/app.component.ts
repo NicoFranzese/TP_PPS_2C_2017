@@ -17,7 +17,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // rootPage: any = CargaArchivosPage;
-  rootPage: any = AbmCuestionariosPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}> = [];
 

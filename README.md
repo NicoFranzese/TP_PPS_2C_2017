@@ -7,7 +7,8 @@
 * (E) Aviso de importancia
 * (M) QR Alumnos
 * (N) QR Profesores
-* (O) QR para encuestas
+* (K) Descarga de archivos
+
 
 ### Pablo Valenzuela:
 
@@ -23,5 +24,6 @@
 * (C) Carga de archivos .csv
 * (F) Login con red social
 * (I) Diseño de estilos
-* (K) Descarga de archivos
+* (O) QR para encuestas
+
 
