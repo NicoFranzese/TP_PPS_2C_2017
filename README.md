@@ -6,8 +6,8 @@
 * (D) Aviso de faltas
 * (E) Aviso de importancia
 * (M) QR Alumnos
-* (N) QR Profesores
-* (K) Descarga de archivos
+* (J) ABM profesor y administrativo
+* (K) Descarga de archivosgi
 
 
 ### Pablo Valenzuela:
@@ -15,7 +15,7 @@
 * (A) Toma de asistencia alumnos
 * (G) ABM Alumnos
 * (H) Administración de su perfil
-* (J) ABM profesor y administrativo
+* (N) QR Profesores
 * (L) Gráficos estadísticos
 
 ### Mariano Wilson:
