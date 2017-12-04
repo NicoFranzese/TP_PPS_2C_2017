@@ -14,31 +14,13 @@
 
 
 <ion-content padding>
-    <!-- <ion-segment [(ngModel)]="filtros">
-        <ion-segment-button value="dia">Día</ion-segment-button>
-        <ion-segment-button value="aula">Aula</ion-segment-button>
-      </ion-segment>
 
-      <div [ngSwitch]="filtros" >
-          <ion-list *ngSwitchCase="'dia'" >
-            <ion-item><h2>Lunes</h2></ion-item>
-            <ion-item><h2>Martes</h2></ion-item>
-            <ion-item><h2>Miercoles</h2></ion-item>
-            <ion-item><h2>Jueves</h2></ion-item>
-            <ion-item><h2>Viernes</h2></ion-item>
-            <ion-item><h2>Sabado</h2></ion-item>
-          </ion-list>
+  
+      <!-- <ion-searchbar (ionInput)="searchItems($event)" *ngIf="selectedOption != 'dia'"></ion-searchbar> -->
 
-          <ion-list *ngSwitchCase="'aula'">
-              <ion-item><h2>401</h2></ion-item>
-              <ion-item><h2>402</h2></ion-item>
-            </ion-list>
-      </div> -->
-
-      <ion-searchbar (ionInput)="searchItems($event)" *ngIf="selectedOption != 'dia'"></ion-searchbar>
-      <ion-list>
+      <ion-list *ngIf="selectedOption == 'alumno'">
         <ion-item *ngFor="let item of items">
-          {{ item }}
+          {{ item.legajo }} - {{ item.nombre_apellido }}
         </ion-item>
       </ion-list>
 

@@ -21,72 +21,30 @@ export class ModalCtrlAsistenciaPage {
 
   selectedOption : string;
   searchQuery: string = '';
-  items: any[];
-  auxItems: any[];
+  public items: any[];
+
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,
     public dataservice : DataProvider) {
-
+      this.selectedOption =  this.navParams.get('selectedOption');
+      this.initializeItems(this.selectedOption);
 
   }
 
- isAlumno(element, index, array) { 
-    return (element.tipo_entidad =="alumno"); 
- } 
 
 
   initializeItems(selectedOption) {
 
-
-    switch(selectedOption) { 
-      case 'dia': { 
-        this.items = [
-          'Lunes',
-          'Martes',
-          'Miércoles',
-          'Jueves',
-          'Viernes',
-          'Sábado'
-        ];
-         break; 
-      } 
-      case 'materia': { 
-         //statements; 
-         break; 
-      } 
-      case 'aula': { 
-        //statements; 
-        break; 
-     } 
-     case 'docente': { 
-      //statements; 
-      break; 
-     }   
-     case 'alumno': { 
-        // this.getDBData("entidad_persona");
-        // for (let item in this.auxItems){
-        //    let aux = JSON.parse(item);
-        //    console.log("aux: " + aux);
-        //    if (aux.tipo_entidad == "alumno"){
-        //       this.items.fill(aux)
-        //    }
-
-        //  }
-        //  console.log("items:" + this.items);
-    break; 
- } 
-      default: { 
-         //statements; 
-         break; 
-      } 
-   } 
-    
-
+    if(this.selectedOption == "dia"){
+      this.items = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado' ];
+    }else if(this.selectedOption == "alumno" || this.selectedOption == "docente"){
+      this.getDBData("entidades_persona",this.selectedOption);
+    }else{
+      this.getDBData("cursos")  ;
+    }
 
   }
-
-
 
   searchItems(ev: any) {
     // Reset items back to all of the items
@@ -103,7 +61,7 @@ export class ModalCtrlAsistenciaPage {
     }
   }
 
- getDBData(entityName){
+  getDBData(entityName,filter?){
      // configuro spinner para mientras se cargan los datos 
   const loading = this.loadingCtrl.create({
     content: 'Espere por favor...'
@@ -112,16 +70,21 @@ export class ModalCtrlAsistenciaPage {
 
   //recupero los datos, mientras muestra spinner
   this.dataservice.getItems(entityName).subscribe(
-    datos => {      
-      this.auxItems = datos;
-      setTimeout(() => {
-        loading.dismiss();
-      }, 2000);
+    datos => {     
+
+      if(this.selectedOption == "alumno" || this.selectedOption == "docente"){
+        this.items = datos.filter((item) => item.tipo_entidad == filter );
+      } else{
+        this.items = datos;
+      } 
+      console.info(this.items);
+      loading.dismiss();
     },
     error => console.error(error),
     () => console.log("ok")
   );
- }
+ }//getPeople
+
 
 
 
@@ -130,18 +93,12 @@ export class ModalCtrlAsistenciaPage {
 
 
   ionViewDidLoad() {
-    this.selectedOption =  this.navParams.get('selectedOption');
-    console.log("opcion: "+ this.selectedOption);
-    this.initializeItems(this.selectedOption);
-  }
-
-  ngOnInit(){
 
   }
+
 
 
  close(){
-
   this.navCtrl.push(ControlAsistenciaPage);
  }
 
