@@ -1,5 +1,11 @@
 page-control-asistencia{
     
+    .card-content-md {
+        padding: 2px 16px;
+        font-size: 1.2rem;
+        line-height: 1.5;
+      }
+
     .col {
         // border: solid 1px grey;
         border-bottom-style: none;
@@ -16,12 +22,13 @@ page-control-asistencia{
     }
 
     // separación para las filas 
-    .row{
+    .row.row-grid{
         padding:3px;
+        border-bottom: 1px solid #ddd;
     }
 
     // efecto mouse over
-    .row:hover{
+    .row.row-grid:hover{
         background-color:#DCD9D8;
         .more{background-color:#DCD9D8;}
     }
@@ -63,10 +70,6 @@ page-control-asistencia{
         border-radius: 10px;
     }
 
-    ion-row{
-    border-bottom: 1px solid #ddd;
-    }
-    
 
 
 

@@ -33,6 +33,8 @@ import { QrAlumnosPage } from '../pages/qr-alumnos/qr-alumnos';
 import { QrEncuestasPage } from '../pages/qr-encuestas/qr-encuestas';
 import { QrProfesoresPage } from '../pages/qr-profesores/qr-profesores';
 import { ModalCuestionariosPage } from '../pages/modal-cuestionarios/modal-cuestionarios';
+import { ModalCtrlAsistenciaPage} from '../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -61,7 +63,8 @@ import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
     QrEncuestasPage,
     QrProfesoresPage,
     ResultadoEscaneadoPage,
-    ModalCuestionariosPage
+    ModalCuestionariosPage,
+    ModalCtrlAsistenciaPage
   ],
   imports: [
     HttpModule,
@@ -90,7 +93,8 @@ import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
     QrEncuestasPage,
     QrProfesoresPage,
     ResultadoEscaneadoPage,
-    ModalCuestionariosPage
+    ModalCuestionariosPage,
+    ModalCtrlAsistenciaPage
   ],
   providers: [
     StatusBar,
