@@ -10,6 +10,8 @@ import { ControlAsistenciaPage } from '../pages/control-asistencia/control-asist
 import { AbmCuestionariosPage } from '../pages/abm-cuestionarios/abm-cuestionarios';
 import { NotificationProvider } from '../providers/notification/notification';
 
+// import { Push,PushObject, PushOptions  } from '@ionic-native/push';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -26,10 +28,12 @@ export class MyApp {
               public splashScreen: SplashScreen, 
               private almacenDatosProvider: AlmacenDatosProvider,
               private loginProvider: LoginProvider,
-              private notificationsProvider: NotificationProvider) 
+              private notificationsProvider: NotificationProvider
+              // , private pushNativo: Push
+            ) 
   {
-    
-    this.notificationsProvider.init();
+
+    // this.notificationsProvider.init();
 
     this.initializeApp();
 
@@ -62,6 +66,40 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
+      // if(this.platform.is('core') || this.platform.is('mobileweb')) {
+
+      // } else {
+      //   this.pushNativo.hasPermission()
+      //   .then((res: any) => {
+      //     if (res.isEnabled) {
+      //       console.log('Permiso OK para Enviar Push Notificaciones');
+      //     } else {
+      //       console.log('Permiso Deneagado para Enviar Push Notificaciones');
+      //     }
+      //   });
+
+      //   const options: PushOptions = {
+      //     android: { },
+      //     ios: {
+      //         alert: 'true',
+      //         badge: true,
+      //         sound: 'false'
+      //     },
+      //     windows: {},
+      //     browser: {
+      //         pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+      //     }
+      //   };
+
+      //   const pushObject: PushObject = this.pushNativo.init(options);   
+      //   pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification)); 
+      //   pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+      //   pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+      // }
+
+     
+
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -73,4 +111,7 @@ export class MyApp {
     this.nav.setRoot(page.component);
 
   }
+
+
+
 }

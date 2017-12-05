@@ -45,7 +45,9 @@ import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-e
 import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/resultado-escaneado';
 import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
 import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
+
 import { NotificationProvider } from '../providers/notification/notification';
+// import { Push,PushObject, PushOptions  } from '@ionic-native/push';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,7 @@ import { NotificationProvider } from '../providers/notification/notification';
     FileTransfer,
     File,
     NotificationProvider
+    // ,    Push
   ]
 })
 export class AppModule {}
