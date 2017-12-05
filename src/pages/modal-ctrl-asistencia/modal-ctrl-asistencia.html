@@ -15,18 +15,52 @@
 
 <ion-content padding>
 
-  
-      <!-- <ion-searchbar (ionInput)="searchItems($event)" *ngIf="selectedOption != 'dia'"></ion-searchbar> -->
+  <ion-fab top>
+    <ion-searchbar (ionInput)="searchItems($event)" *ngIf="selectedOption != 'dia'"></ion-searchbar>
+  </ion-fab>
+  <br>
+  <br>
 
-      <ion-list *ngIf="selectedOption == 'alumno'">
-        <ion-item *ngFor="let item of items">
-          {{ item.legajo }} - {{ item.nombre_apellido }}
-        </ion-item>
-      </ion-list>
+  <div *ngIf="flagHide == false">
+    <ion-list *ngIf="selectedOption == 'alumno' ||  selectedOption == 'docente'">
+      <ion-item *ngFor="let item of items">
+        <a  (click)="getComision(selectedOption,item.legajo)">{{ item.nombre_apellido }}</a>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="selectedOption == 'materia'">
+      <ion-item *ngFor="let item of items">
+        <a  (click)="getComision(selectedOption,item.sigla_materia)">{{ item.sigla_materia }}</a>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="selectedOption == 'aula'">
+      <ion-item *ngFor="let item of items">
+        <a  (click)="getComision(selectedOption,item.aula)">{{ item.aula }}</a>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="selectedOption == 'dia'">
+      <ion-item *ngFor="let item of items">
+        <a  (click)="getComision(selectedOption,item)">{{ item }}</a>
+       </ion-item>
+    </ion-list>
+  </div>
 
 
+  <div *ngIf="flagHide == true">
+      <ion-list>
+          <ion-item *ngFor="let item of comisiones">
+            <a  (click)="sendCourseList(item)">{{ item.comision }}</a>
+          </ion-item>
+        </ion-list>
+  </div>
 
-    <button ion-button (click)="close()">Cerrar</button>
 
+  <ion-fab center bottom>
+    <button ion-fab mini color="dark" (click)="close()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>

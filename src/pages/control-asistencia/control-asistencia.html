@@ -1,3 +1,8 @@
+<!-- mgw009
+1597534862 -->
+
+
+
 <ion-header>
   <ion-navbar>
     <ion-title>Control de asistencia</ion-title>
@@ -45,24 +50,23 @@
     <br>
   </ion-grid>
 
-  <ion-fab left bottom>
-    <button ion-fab color="dark">
-      <ion-icon name="arrow-dropup"></ion-icon>
-    </button>
-    <ion-fab-list side="top">
-      <button ion-fab>
-        <ion-icon name="camera"></ion-icon>
-      </button>
-      <button ion-fab (click)="cleanItems()">
-        <ion-icon name="trash"></ion-icon>
-      </button>
-      <button ion-fab (click)="validateGrid()">
-        <ion-icon name="send"></ion-icon>
-      </button>
-      <button ion-fab (click)="presentActionSheet()">
-          <ion-icon name="log-in"></ion-icon>
+  <ion-fab bottom>
+    <ion-grid>
+      <ion-row padding-left class="ml-4">
+        <button ion-fab mini color="dark" (click)="presentActionSheet()">
+          <ion-icon name="add"></ion-icon>
         </button>
-    </ion-fab-list>
+        <button ion-fab mini color="dark">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+        <button ion-fab mini color="dark" (click)="cleanItems()">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+        <button ion-fab mini color="dark" (click)="test()">
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-row>
+    </ion-grid>
   </ion-fab>
 
 

@@ -21,7 +21,6 @@ export class ControlAsistenciaPage {
      public dataservice : DataProvider,public loadingCtrl: LoadingController, public modalCtrl: ModalController,
      public actionSheetCtrl: ActionSheetController) {
   
-   this.getAlumnos();
   }
 
   ionViewDidLoad() {
@@ -34,27 +33,8 @@ export class ControlAsistenciaPage {
     optionModal.present();
   }
 
-  getAlumnos() {
-    // configuro spinner para mientras se cargan los datos 
-    const loading = this.loadingCtrl.create({
-      content: 'Espere por favor...'
-    });
-    loading.present();
 
-    //recupero los datos, mientras muestra spinner
-    this.dataservice.getItems("alumnos").subscribe(
-      datos => {      
-        this.items = datos;
-        this.initialItemsLength = this.items.length;
-        console.log("initialItemsLength: " + this.initialItemsLength);
-        setTimeout(() => {
-          loading.dismiss();
-        }, 2000);
-      },
-      error => console.error(error),
-      () => console.log("ok")
-    );
-  }
+  
 
 
 
@@ -87,6 +67,7 @@ export class ControlAsistenciaPage {
         
   }
 
+
   presentActionSheet() {
 
     let actionSheet = this.actionSheetCtrl.create({
@@ -97,7 +78,6 @@ export class ControlAsistenciaPage {
           icon: 'calendar',
           role: 'dia',
           handler: () => {
-            console.log('dia');
             let optionModal = this.modalCtrl.create(ModalCtrlAsistenciaPage,{selectedOption : 'dia'});
             optionModal.present();
           }
