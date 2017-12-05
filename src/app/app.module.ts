@@ -45,6 +45,7 @@ import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-e
 import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/resultado-escaneado';
 import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
 import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
+import { NotificationProvider } from '../providers/notification/notification';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
     BarcodeScanner,
     AlmacenDatosProvider, 
     FileTransfer,
-    File
+    File,
+    NotificationProvider
   ]
 })
 export class AppModule {}

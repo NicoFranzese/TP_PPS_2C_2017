@@ -8,7 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { CargaArchivosPage } from '../pages/carga-archivos/carga-archivos';
 import { ControlAsistenciaPage } from '../pages/control-asistencia/control-asistencia';
 import { AbmCuestionariosPage } from '../pages/abm-cuestionarios/abm-cuestionarios';
-
+import { NotificationProvider } from '../providers/notification/notification';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,8 +25,11 @@ export class MyApp {
               public statusBar: StatusBar, 
               public splashScreen: SplashScreen, 
               private almacenDatosProvider: AlmacenDatosProvider,
-              private loginProvider: LoginProvider) 
+              private loginProvider: LoginProvider,
+              private notificationsProvider: NotificationProvider) 
   {
+    
+    this.notificationsProvider.init();
 
     this.initializeApp();
 
