@@ -13,7 +13,7 @@ import { ModalController } from 'ionic-angular';
 export class AbmCuestionariosPage {
 
   private hayCuestionarios: boolean = false;
-  private arrCuestionarios = [];
+  private arrCuestionarios;
   
 
   constructor(private navCtrl: NavController, 
@@ -42,7 +42,6 @@ export class AbmCuestionariosPage {
       data =>
       {
         this.arrCuestionarios = data;
-
         if(data.length == 0)
         {
           this.hayCuestionarios = false;

@@ -1,0 +1,107 @@
+page-encuesta {
+
+    @import url('https://fonts.googleapis.com/css?family=Courgette');
+    //TABLA
+    .col {
+        // border: solid 1px grey;
+        border-bottom-style: none;
+        border-right-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    // cabecera de la grilla 
+    .row-header{
+        border-bottom: 3px solid rgb(151, 141, 141);
+        font-weight: bold;
+        color: #fff;
+        background: #033c52;
+       
+        
+    }
+
+    // separaci�n para las filas 
+    .row{
+        padding:8px 3px !important;
+        padding-right: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    }
+
+    // efecto mouse over
+    .row:hover{
+        background-color:#DCD9D8;
+        .more{background-color:#DCD9D8;}
+        #dropdownMenuButton{
+            background: #DCD9D8;
+        }
+    }
+
+
+    // recortar el texto que sobra en el campo alumno
+    .cortar{
+        width:150px;
+        height:20px;
+        text-overflow:ellipsis;
+        white-space:nowrap; 
+        overflow:hidden; 
+    }
+    .cortar:hover {
+        width: auto;
+        height:auto;
+        white-space: initial;
+        overflow:visible;
+        cursor: pointer;
+    }
+
+    #dropdownMenuButton{
+        display: inline-block;
+        height: auto;
+        width: 50px;
+        background: #fff;
+    }
+
+    ion-icon {
+        font-size: 2.2em !important;
+    }
+
+    .dropdown-menu {
+        font-size: 1.5rem !important; 
+    }
+
+    .fa
+    {
+        color: #af2117;
+    }
+
+    h3{
+        font-family: 'Courgette', cursive;
+    }
+
+    .datos{
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .backRed{
+        background: rgba(244, 67, 54, 0.3803921568627451);
+    }
+
+    .backGreen{
+        background: rgba(76, 175, 80, 0.5098039215686274);
+    }
+
+    span.titulo{
+        font-size: 18px;
+    }
+
+    span.pregunta
+    {
+        font-size: 17px;
+    }
+    
+    
+    
+    
+
+}

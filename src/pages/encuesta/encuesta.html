@@ -1,0 +1,37 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Responder cuestionario</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="datos mb-5 mt-3">
+    <h3>Tìtulo: <span class="float-right">{{titulo}}</span></h3>
+    <h3>Cierre: <span class="float-right">{{cierre}}</span></h3>
+  </div>
+
+  <img src="./assets/img/question.png" style="display:block;margin:auto" width="100">
+
+  <span class="text-muted mt-5 text-center">Seleccione una pregunta para responderla...</span>
+  <ion-grid>
+    <ion-row class="row row-header">
+      <ion-col class="col col-8"><span class="titulo">Preguntas</span></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of arrPreguntas ; let i = index" class={{arrClase[i]}} align-items-center (click)="mostrarEncuesta(item, i)">
+      <ion-col class="col col-8 cortar"><span class="pregunta">{{item.pregunta}}</span></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab left bottom>
+      <button ion-fab color="default" (click)="volverMenu()">
+          <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-fab>
+
+
+  
+</ion-content>

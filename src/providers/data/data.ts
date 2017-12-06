@@ -24,10 +24,9 @@ export class DataProvider {
   //MÈTODO PARA DAR DE ALTA y MODIFICACIÒN
   //entityName: nombre de la entidad del json de firebase
   //object: objeto a insertar en el json de firebase
-  //el object debe poseer un campo ID que serà el que identificarà a los elementos hijos del json
   public addItem(entityName, object)
   {
-    this.db.database.ref(entityName +'/'+ object.id).set(object);
+    this.db.database.ref(entityName).set(object);
   }
 
   //El path puede ser por ejemplo:

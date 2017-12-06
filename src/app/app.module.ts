@@ -34,6 +34,7 @@ import { QrEncuestasPage } from '../pages/qr-encuestas/qr-encuestas';
 import { QrProfesoresPage } from '../pages/qr-profesores/qr-profesores';
 import { ModalCuestionariosPage } from '../pages/modal-cuestionarios/modal-cuestionarios';
 import { ModalCtrlAsistenciaPage} from '../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
+import { EncuestaPage} from '../pages/encuesta/encuesta';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -47,6 +48,7 @@ import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
 import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
 
 import { NotificationProvider } from '../providers/notification/notification';
+import { QrEncuestaProvider } from '../providers/qr-encuesta/qr-encuesta';
 // import { Push,PushObject, PushOptions  } from '@ionic-native/push';
 
 @NgModule({
@@ -67,7 +69,8 @@ import { NotificationProvider } from '../providers/notification/notification';
     QrProfesoresPage,
     ResultadoEscaneadoPage,
     ModalCuestionariosPage,
-    ModalCtrlAsistenciaPage
+    ModalCtrlAsistenciaPage,
+    EncuestaPage
   ],
   imports: [
     HttpModule,
@@ -97,7 +100,8 @@ import { NotificationProvider } from '../providers/notification/notification';
     QrProfesoresPage,
     ResultadoEscaneadoPage,
     ModalCuestionariosPage,
-    ModalCtrlAsistenciaPage
+    ModalCtrlAsistenciaPage,
+    EncuestaPage
   ],
   providers: [
     StatusBar,
@@ -113,7 +117,8 @@ import { NotificationProvider } from '../providers/notification/notification';
     AlmacenDatosProvider, 
     FileTransfer,
     File,
-    NotificationProvider
+    NotificationProvider,
+    QrEncuestaProvider
     // ,    Push
   ]
 })

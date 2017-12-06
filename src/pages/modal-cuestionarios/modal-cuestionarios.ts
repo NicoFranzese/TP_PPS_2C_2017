@@ -118,7 +118,7 @@ export class ModalCuestionariosPage {
         {
           type:'radio',
           label:'Elegir mùltiples opciones',
-          value:'check',
+          value:'checkbox',
           checked: this.tipoRespuestas == 'check'
           
         },
@@ -211,7 +211,8 @@ export class ModalCuestionariosPage {
     {
       'pregunta': this.pregunta,
       'tipoRespuestas': this.tipoRespuestas,
-      'arrRespuestas':  this.arrRespuestas
+      'arrRespuestas':  this.arrRespuestas,
+      'cantRespuestas': this.cantRespuestas
     }
     if(this.operacion == 'Nueva pregunta')
       this.arrPreguntas.push(obj);
@@ -230,11 +231,9 @@ export class ModalCuestionariosPage {
     });
 
     this.pregunta = item.pregunta;
-
+    console.log(item);
     if(item.arrRespuestas)
-      this.cantRespuestas = item.arrRespuestas.length;
-    else
-      this.cantRespuestas = 1;
+      this.cantRespuestas = Number.parseInt(item.cantRespuestas);
     
     this.tipoRespuestas = item.tipoRespuestas;
     this.arrRespuestas = item.arrRespuestas;
@@ -271,7 +270,7 @@ export class ModalCuestionariosPage {
     }
     else
     {
-      this.dataProvider.addItem('cuestionarios', obj);
+      this.dataProvider.addItem('cuestionarios/' + obj.id, obj);
       this.mostrarMsjToast("¡Cuestionario agregado con èxito!");
       this.navCtrl.push(AbmCuestionariosPage);
     }

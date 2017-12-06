@@ -9,9 +9,8 @@
             <path url="/__/auth/callback" />
         </host>
     </universal-links>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.101:8100" />
     <access origin="*" />
-    <!-- <access origin="*.devicepush.com"></access> -->
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -87,7 +86,8 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <allow-navigation href="http://192.168.43.75:8100" />
-    <!-- <allow-navigation href="*.devicepush.com"></allow-navigation> -->
+    <allow-navigation href="http://192.168.1.101:8100" />
+    <engine name="android" spec="~6.3.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
@@ -102,7 +102,6 @@
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.0" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
-    <engine name="android" spec="~6.3.0" />
     <plugin name="com.devicepush.cordova-phonegap" spec="~0.4.6">
         <variable name="SENDER_ID" value="AIzaSyCQIp9m7tMOAz8nADGbXdaKYE_71RgVdxg" />
     </plugin>
