@@ -10,5 +10,25 @@
     {
         "legajo": 66503,
         "email": "franzesens@gmail.com"
+    },
+    {
+        "legajo": 123456,
+        "email": "octavio@villegas",
+        "clave": 123
+    },
+    {
+        "legajo": 7891011,
+        "email": "maxi@neiner",
+        "clave": 123
+    },
+    {
+        "legajo": 121314,
+        "email": "adminis@trativo",
+        "clave": 123
+    },
+    {
+        "legajo": 151617,
+        "email": "adminis@trador",
+        "clave": 123
     }
 ]

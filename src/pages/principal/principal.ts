@@ -38,7 +38,6 @@ export class PrincipalPage {
 
   ionViewDidLoad() {
     this.cambiarMenu();
-
   }
 
 
@@ -110,7 +109,7 @@ export class PrincipalPage {
 
     switch(this.almacenDatosProvider.usuarioLogueado.tipo_entidad)
     {
-      case 'profesor':
+      case 'docente':
         arrAux = [];
         arrAux[0] = 'Gestor de Cuestionarios';
         arrAux[1] = 'fa fa-question-circle fa-5x icon';

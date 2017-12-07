@@ -1,15 +1,16 @@
 <ion-content id="cuerpo" padding>
-  <img src="./assets/img/logo.png">
+  <img src="./assets/img/logo.png" class="animated flip">
 
+<div class="animated bounceInUp">
   <div class="input-group mt-4">
     <span class="input-group-addon"><i class="fa fa-user fa-2x" aria-hidden="true"></i></span>
-    <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario" [(ngModel)]="usuario">
+    <input type="text" class="form-control" placeholder="E-mail" id="email" name="email" [(ngModel)]="email">
   </div>
   <div class="input-group mt-2">
     <span class="input-group-addon"><i class="fa fa-key fa-2x" aria-hidden="true"></i></span>
-    <input type="password" class="form-control" placeholder="Clave" id="clave" name="clave" [(ngModel)]="clave">
+    <input type="password" class="form-control" placeholder="Contraseña" id="clave" name="clave" [(ngModel)]="clave">
   </div>
-<br>
+<!-- <br>
   <div class="list" style="text-align:center">
     <ion-item>
       <ion-label class = "item item-input item-select item-positive">Tipo</ion-label>   
@@ -22,10 +23,11 @@
         </ion-select>
       </ion-item>
   </div>
-<br>
+<br> -->
   <button class="btn mt-2 ingreso" (click)="Ingresar()"><span><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</span></button>
 
   <span id="redes" class="mt-4">O puedes iniciar con:</span>
   <button class="btn fb mt-2" (click)="loginSocial('facebook')"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i><span>Facebook</span></button>
   <button class="btn go mt-2" (click)="loginSocial('google')"><i class="fa fa-2x fa-google-plus-square" aria-hidden="true"></i><span>Google +</span></button>
+</div>
 </ion-content>

@@ -14,9 +14,9 @@ import { ToastController } from 'ionic-angular';
 export class LoginPage implements OnInit{
 
   private loader;
-  public usuario;
+  public email;
   public clave;
-  public tipoUsuSeleccionado;
+  // public tipoUsuSeleccionado;
   private arrUsuarios = [];
   private arrEntidades = [];
   private referenciaSubj;
@@ -56,38 +56,40 @@ export class LoginPage implements OnInit{
 
   Ingresar(){
     this.mostrarLoading("Autentificando...");
-    this.loader.dismiss();
+    let band = false;
+    
+    this.arrUsuarios.forEach(element => {
 
-    if((this.usuario =="Administrador") && (this.clave =="123")){
-      localStorage.setItem("tipoUsuario","Administrador");
-      this.navCtrl.push(PrincipalPage);
-    }else if((this.usuario =="Administrativo") && (this.clave =="123")){
-      localStorage.setItem("tipoUsuario","Administrativo");
-      this.navCtrl.push(PrincipalPage);
-    }else if((this.usuario =="Alumno") && (this.clave =="123")){
-      localStorage.setItem("tipoUsuario","Alumno");
-      this.navCtrl.push(PrincipalPage);
-    }else if((this.usuario =="Profesor") && (this.clave =="123")){
-      localStorage.setItem("tipoUsuario","Profesor");
-      this.navCtrl.push(PrincipalPage);
-    }     
-  }
-
-  HardcodearUsuario(){
-    if(this.tipoUsuSeleccionado=="Administrativo"){
-      this.usuario = "Administrativo";
-      this.clave = "123";
-    }else if(this.tipoUsuSeleccionado=="Administrador"){
-      this.usuario = "Administrador";
-      this.clave = "123";
-    }else if(this.tipoUsuSeleccionado=="Alumno"){
-      this.usuario = "Alumno";
-      this.clave = "123";
-    }else if(this.tipoUsuSeleccionado=="Profesor"){
-      this.usuario = "Profesor";
-      this.clave = "123";
+      if(element.email == this.email && element.clave == this.clave)
+      {
+        band = true;
+        this.obtenerDatosUsuario(element.legajo);
+      }
+      
+    });
+    if(!band)
+    {
+      this.mostrarToast("Usuario y/o contraseña invàlidos");
+      this.loader.dismiss();
     }
+    
   }
+
+  // HardcodearUsuario(){
+  //   if(this.tipoUsuSeleccionado=="Administrativo"){
+  //     this.usuario = "Administrativo";
+  //     this.clave = "123";
+  //   }else if(this.tipoUsuSeleccionado=="Administrador"){
+  //     this.usuario = "Administrador";
+  //     this.clave = "123";
+  //   }else if(this.tipoUsuSeleccionado=="Alumno"){
+  //     this.usuario = "Alumno";
+  //     this.clave = "123";
+  //   }else if(this.tipoUsuSeleccionado=="Profesor"){
+  //     this.usuario = "Profesor";
+  //     this.clave = "123";
+  //   }
+  // }
 
   private loginSocial(proveedor: string): any
   {
@@ -103,6 +105,7 @@ export class LoginPage implements OnInit{
           if(element.email == this.loginProvider.usuarioLogueado['email'])
           {
             band = true;
+            this.referenciaSubj.unsubscribe();
             this.obtenerDatosUsuario(element.legajo);
           }
           
@@ -123,16 +126,32 @@ export class LoginPage implements OnInit{
     this.arrEntidades.forEach(element => {
 
       if(element.legajo == legajo)
+      {
+        let email;
+        let foto;
+
+        if(this.loginProvider.usuarioLogueado['email'] != undefined)
+        {
+          email = this.loginProvider.usuarioLogueado['email'];
+          foto = this.loginProvider.usuarioLogueado['photoURL'];
+        }
+        else
+        {
+          console.log("entre");
+          email = this.email;
+          foto = "./assets/img/anonimo.jpg";
+        }
+
         this.almacenDatos.usuarioLogueado = {
           'legajo': element.legajo,
           'nombre': element.nombre_apellido,
-          'email': this.loginProvider.usuarioLogueado['email'],
           'tipo_entidad': element.tipo_entidad,
-          'photoURL': this.loginProvider.usuarioLogueado['photoURL']
+          'email': email,
+          'photoURL': foto
         }
+      }
     });
     this.loader.dismiss();
-    this.referenciaSubj.unsubscribe();
     this.navCtrl.push(PrincipalPage);
   }
 

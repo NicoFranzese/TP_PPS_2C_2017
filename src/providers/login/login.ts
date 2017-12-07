@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import { PrincipalPage } from '../../pages/principal/principal';
 import { Subject } from 'rxjs/Subject';
 import { Platform } from 'ionic-angular';
+import { AlmacenDatosProvider } from '../almacen-datos/almacen-datos';
 
 
 @Injectable()
@@ -19,7 +20,8 @@ export class LoginProvider {
   private provider;
 
   constructor(private afAuth: AngularFireAuth,
-              private platform: Platform) { 
+              private platform: Platform,
+              private almacenDatos: AlmacenDatosProvider) { 
                
   }
 
@@ -60,6 +62,7 @@ export class LoginProvider {
           console.log(user);
           this.usuarioLogueado['nombre'] = user['user'].displayName;
           this.usuarioLogueado['email'] = user['user'].email;
+          this.usuarioLogueado['photoURL'] = user['user'].photoURL;
           this.usuarioLogueadoSubject.next();
         }).catch((error)=>
         {
@@ -90,6 +93,8 @@ export class LoginProvider {
 
   public logOut()
   {
+    this.usuarioLogueado = [];
+    this.almacenDatos.usuarioLogueado = "";
     this.afAuth.auth.signOut();
   }
   
