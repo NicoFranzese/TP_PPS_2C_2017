@@ -76,10 +76,12 @@ export class LoginProvider {
     this.afAuth.authState.subscribe(
        user=>
        {
+         
          if(user != null)
          {
            this.usuarioLogueado['nombre'] = user.displayName;
            this.usuarioLogueado['email'] = user.email;
+           this.usuarioLogueado['photoURL'] = user.photoURL;
            this.usuarioLogueadoSubject.next();
          }
        }

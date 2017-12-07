@@ -37,14 +37,8 @@ export class PrincipalPage {
   }
 
   ionViewDidLoad() {
-    this.tipoUsuario = localStorage.getItem("tipoUsuario");
     this.cambiarMenu();
 
-    // this.tipoUsuario = "Profesor";
-    // this.tipoUsuario = "Administrador";
-    // this.tipoUsuario = "Administrativo";
-    //console.log(this.tipoUsuario);
-    // console.log(this.loginProvider.usuarioLogueado);
   }
 
 
@@ -100,10 +94,7 @@ export class PrincipalPage {
         this.navCtrl.push(QrEncuestasPage);
         break;
       }
-
-
     }
-   
   }
 
   private logout() {
@@ -117,9 +108,9 @@ export class PrincipalPage {
     this.arrOpciones = [];
     let arrAux = [];
 
-    switch(this.tipoUsuario)
+    switch(this.almacenDatosProvider.usuarioLogueado.tipo_entidad)
     {
-      case 'Profesor':
+      case 'profesor':
         arrAux = [];
         arrAux[0] = 'Gestor de Cuestionarios';
         arrAux[1] = 'fa fa-question-circle fa-5x icon';
@@ -156,7 +147,7 @@ export class PrincipalPage {
         this.arrOpciones.push(arrAux);
       break;
 
-      case 'Administrativo':
+      case 'administrativo':
         arrAux = [];
         arrAux[0] = 'Tomar asistencia';
         arrAux[1] = 'fa fa-list-alt fa-5x icon';
@@ -193,7 +184,7 @@ export class PrincipalPage {
         this.arrOpciones.push(arrAux);
       break;
 
-      case 'Alumno':
+      case 'alumno':
         arrAux = [];
         arrAux[0] = 'QR Para Alumnos';
         arrAux[1] = 'fa fa-qrcode fa-5x icon';
@@ -209,7 +200,7 @@ export class PrincipalPage {
         this.arrOpciones.push(arrAux);
       break;
 
-      case 'Administrador':
+      case 'administrador':
         arrAux = [];
         arrAux[0] = 'ABM Profesores';
         arrAux[1] = 'fa fa-users fa-5x icon';

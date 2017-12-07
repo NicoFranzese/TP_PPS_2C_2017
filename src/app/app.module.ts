@@ -48,7 +48,6 @@ import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
 import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
 
 import { NotificationProvider } from '../providers/notification/notification';
-import { QrEncuestaProvider } from '../providers/qr-encuesta/qr-encuesta';
 // import { Push,PushObject, PushOptions  } from '@ionic-native/push';
 
 @NgModule({
@@ -117,9 +116,7 @@ import { QrEncuestaProvider } from '../providers/qr-encuesta/qr-encuesta';
     AlmacenDatosProvider, 
     FileTransfer,
     File,
-    NotificationProvider,
-    QrEncuestaProvider
-    // ,    Push
+    NotificationProvider    // ,    Push
   ]
 })
 export class AppModule {}

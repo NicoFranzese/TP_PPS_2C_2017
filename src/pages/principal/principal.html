@@ -11,17 +11,22 @@
 <ion-content id="cuerpo" padding>
 
   <div class="row">
-    <div class="col-6">
-
+    <div class="col-12">
+        <ion-list>
+            <ion-item id="datos">
+              <ion-thumbnail item-start>
+                <img src={{almacenDatosProvider.usuarioLogueado.photoURL}} id="img-perfil">
+              </ion-thumbnail>
+              <h2>{{almacenDatosProvider.usuarioLogueado.nombre}}</h2>
+              <p>{{almacenDatosProvider.usuarioLogueado.legajo}} </p>
+              <p>{{almacenDatosProvider.usuarioLogueado.tipo_entidad}}</p>
+              <p><a href="#">Administrar perfil</a></p>
+            </ion-item>
+          </ion-list>
     </div>
-    <div class="col-6">
+  </div>
 
-      <h3>
-        <i class="fa fa-male fa-x4 mr-3" aria-hidden="true"></i>
-        <b>Usuario</b>
-      </h3>
-
-    </div>
+  <div class="row">
 
     <div class="col-6" *ngFor="let item of arrOpciones">
       <button class="btn btn-opcion" (click)="itemSelected(item[2])">

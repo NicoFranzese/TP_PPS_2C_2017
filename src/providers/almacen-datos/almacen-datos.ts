@@ -8,6 +8,8 @@ import { BehaviorSubject } from 'rxjs'
 @Injectable()
 export class AlmacenDatosProvider {
 
+  public usuarioLogueado;
+  
   public arrMenuOpciones = new BehaviorSubject([]);
   public arrMenuOpciones$ = this.arrMenuOpciones.asObservable();
 
