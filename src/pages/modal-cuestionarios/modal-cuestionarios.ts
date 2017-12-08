@@ -252,13 +252,14 @@ export class ModalCuestionariosPage {
       this.horaInicio = fecha.getHours() + ":" + fecha.getMinutes();
     }
 
+    let arrFechaFin = this.fechaFin.split('-');
     let obj = 
     {
       'id': this.almacenDatos.ultimoIdCuestionario,
       'titulo': this.titulo,
       'fechaInicio': this.fechaInicio,
       'horaInicio': this.horaInicio,
-      'fechaFin': this.fechaFin,
+      'fechaFin': arrFechaFin[2] +"/"+ arrFechaFin[1] +"/"+ arrFechaFin[0],
       'horaFin': this.horaFin,
       'arrPreguntas': this.arrPreguntas
     };

@@ -15,6 +15,7 @@ export class AbmCuestionariosPage {
   private hayCuestionarios: boolean = false;
   private arrCuestionarios;
   
+  
 
   constructor(private navCtrl: NavController, 
               private navParams: NavParams,
@@ -25,9 +26,8 @@ export class AbmCuestionariosPage {
 
   ionViewDidLoad() {
     this.obtenerUltimoIDCuestionarios();
+    
   }
-
-
 
   private modalCuestionario(operacion: string)
   {
@@ -42,6 +42,11 @@ export class AbmCuestionariosPage {
       data =>
       {
         this.arrCuestionarios = data;
+
+        //Si vengo de escanear un qr como profesor, edito el cuestionario
+        if(this.navParams.get('id'))
+          this.vengoDeLeerQr();
+
         if(data.length == 0)
         {
           this.hayCuestionarios = false;
@@ -67,6 +72,30 @@ export class AbmCuestionariosPage {
   {
     this.dataProvider.deleteItem('cuestionarios/' + item.id);
   }
+
+  private vengoDeLeerQr()
+  {
+    //Obtengo el id enviado desde la pag principal
+    let idEscaneado = this.navParams.get('id');
+    
+    //Recorro los cuestionarios y encuentro el que quiero editar
+    this.arrCuestionarios.forEach(element => {
+      if(element.id == idEscaneado)
+      {
+        let respuesta = this.almacenDatos.calcularHorasRestantes(element);
+        alert(respuesta);
+        //  this.editarCuestionario(element);
+      }
+       
+    });
+
+  }
+
+  private test(item)
+  {
+    console.log(item);
+  }
+
 
 
 }

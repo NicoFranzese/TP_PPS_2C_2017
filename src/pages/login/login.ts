@@ -14,8 +14,8 @@ import { ToastController } from 'ionic-angular';
 export class LoginPage implements OnInit{
 
   private loader;
-  public email;
-  public clave;
+  public email ="maxi@neiner";
+  public clave= 123;
   // public tipoUsuSeleccionado;
   private arrUsuarios = [];
   private arrEntidades = [];
@@ -35,6 +35,7 @@ export class LoginPage implements OnInit{
     this.loginProvider.logOut();
     this.traerUsuarios();
     this.traerEntidades();
+
   }
 
 
@@ -74,22 +75,6 @@ export class LoginPage implements OnInit{
     }
     
   }
-
-  // HardcodearUsuario(){
-  //   if(this.tipoUsuSeleccionado=="Administrativo"){
-  //     this.usuario = "Administrativo";
-  //     this.clave = "123";
-  //   }else if(this.tipoUsuSeleccionado=="Administrador"){
-  //     this.usuario = "Administrador";
-  //     this.clave = "123";
-  //   }else if(this.tipoUsuSeleccionado=="Alumno"){
-  //     this.usuario = "Alumno";
-  //     this.clave = "123";
-  //   }else if(this.tipoUsuSeleccionado=="Profesor"){
-  //     this.usuario = "Profesor";
-  //     this.clave = "123";
-  //   }
-  // }
 
   private loginSocial(proveedor: string): any
   {

@@ -15,6 +15,8 @@ import { GraficosEstadisticosPage } from '../graficos-estadisticos/graficos-esta
 import { QrAlumnosPage } from '../qr-alumnos/qr-alumnos';
 import { QrEncuestasPage } from '../qr-encuestas/qr-encuestas';
 import { QrProfesoresPage } from '../qr-profesores/qr-profesores';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { EncuestaPage } from '../encuesta/encuesta';
 
 
 @IonicPage()
@@ -31,7 +33,8 @@ export class PrincipalPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private loginProvider: LoginProvider,
-    private almacenDatosProvider: AlmacenDatosProvider
+    private almacenDatosProvider: AlmacenDatosProvider,
+    private barcodeScanner: BarcodeScanner
     
   ) {
   }
@@ -81,16 +84,12 @@ export class PrincipalPage {
         this.navCtrl.push(QrProfesoresPage);
         break;
       }
-      case "qr-encuestas": {
-        this.navCtrl.push(QrEncuestasPage);
-        break;
-      }
       case "qr-alumnos": {
         this.navCtrl.push(QrAlumnosPage);
         break;
       }
       case "qr-encuestas": {
-        this.navCtrl.push(QrEncuestasPage);
+        this.qrEncuestas();
         break;
       }
     }
@@ -216,6 +215,25 @@ export class PrincipalPage {
       break;
     }
     this.almacenDatosProvider.arrMenuOpciones.next(this.arrOpciones);
+  }
+
+  private qrEncuestas()
+  {
+    this.barcodeScanner.scan().then((barcodeData) => {
+      let idLeido = Number.parseInt(barcodeData.text);
+
+      let component;
+      console.log(this.almacenDatosProvider.usuarioLogueado.tipo_entidad);
+      if(this.almacenDatosProvider.usuarioLogueado.tipo_entidad == 'docente')  
+        component = AbmCuestionariosPage;
+      else
+        component = EncuestaPage;
+
+      this.navCtrl.push(component, {'id': idLeido});
+      
+     }, (err) => {
+         console.error(err);
+     });
   }
 
 
