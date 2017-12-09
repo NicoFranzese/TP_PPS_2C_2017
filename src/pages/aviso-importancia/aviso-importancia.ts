@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 /**
  * Generated class for the AvisoImportanciaPage page.
@@ -14,12 +16,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'aviso-importancia.html',
 })
 export class AvisoImportanciaPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public mensaje;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public localNoti: LocalNotifications,
+              public platform: Platform) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AvisoImportanciaPage');
+    // console.log('ionViewDidLoad AvisoImportanciaPage');
   }
+
+  PushClicked(){
+    this.platform.ready().then(() => {
+      this.localNoti.schedule({
+        title: 'Alerta de Gestión Académica!',
+        text: this.mensaje,
+        at: new Date(new Date().getTime() + 3600),
+        led: 'FF0000',
+        icon:'', //ruta del icono
+        sound: null //Ruta del archivo de sonido
+     });
+    });
+  }
+
 
 }

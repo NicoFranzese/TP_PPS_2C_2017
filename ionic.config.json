@@ -1,6 +1,6 @@
 {
   "name": "asistenciApp",
-  "app_id": "",
+  "app_id": "7b6edbfb",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

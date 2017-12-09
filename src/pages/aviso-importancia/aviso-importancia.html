@@ -7,12 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>avisoImportancia</ion-title>
+    <ion-title>Avisos de Importancia</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <br>
+  <div style="text-align: center">
+  <label class="item item-input">
+      <textarea placeholder="Mensaje que enviará" id="mensaje" name="mensaje" [(ngModel)]="mensaje"
+        style="width: 80%"></textarea>
+  </label>
+  <br>
+  <button ion-button (click)= "PushClicked()"> enviar</button>
+</div>
 </ion-content>

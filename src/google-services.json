@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "221375600569",
+    "firebase_url": "https://pps2017sp.firebaseio.com",
+    "project_id": "pps2017sp",
+    "storage_bucket": "pps2017sp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221375600569:android:c15cfa0087a6723f",
+        "android_client_info": {
+          "package_name": "com.ionicframework.gestionacademica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221375600569-i2lbc24npbf0fuf0ek3bubpd7rkc300h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4t_fQA9RDeVjoBZ6Dd1lSs88Z-czFFLE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

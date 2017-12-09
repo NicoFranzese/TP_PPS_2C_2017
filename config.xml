@@ -103,7 +103,11 @@
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.0" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
-    <plugin name="com.devicepush.cordova-phonegap" spec="~0.4.6">
+    <plugin name="com.devicepush.cordova-phonegap" spec="^0.4.6">
         <variable name="SENDER_ID" value="AIzaSyCQIp9m7tMOAz8nADGbXdaKYE_71RgVdxg" />
+    </plugin>
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
+    <plugin name="phonegap-plugin-push" spec="~2.1.2">
+        <variable name="SENDER_ID" value="90645577011" />
     </plugin>
 </widget>

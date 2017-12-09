@@ -48,7 +48,31 @@ import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
 import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
 
 import { NotificationProvider } from '../providers/notification/notification';
+
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 // import { Push,PushObject, PushOptions  } from '@ionic-native/push';
+
+// import { CloudSettings, CloudModule } from '@ionic/cloud-angular'
+
+// const cloudSettings: CloudSettings = {
+//   'core' : {
+//     'app_id' : '7b6edbfb'    
+//   },
+//   'push':{
+//     'sender_id' : '90645577011',
+//     'pluginConfig': {
+//       'ios': {
+//         'badge' : true,
+//         'sound' : true
+//       },
+//       'android': {
+//         'iconColor' : '#343434'
+//       }
+//     }
+//   }
+// }
+
 
 @NgModule({
   declarations: [
@@ -80,6 +104,7 @@ import { NotificationProvider } from '../providers/notification/notification';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     PapaParseModule
+    // ,    CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -116,6 +141,7 @@ import { NotificationProvider } from '../providers/notification/notification';
     AlmacenDatosProvider, 
     FileTransfer,
     File,
+    LocalNotifications,
     NotificationProvider    // ,    Push
   ]
 })

@@ -11,6 +11,8 @@ import { AbmCuestionariosPage } from '../pages/abm-cuestionarios/abm-cuestionari
 import { NotificationProvider } from '../providers/notification/notification';
 import { EncuestaPage } from '../pages/encuesta/encuesta';
 
+// import { Push, PushToken } from '@ionic/cloud-angular'
+
 // import { Push,PushObject, PushOptions  } from '@ionic-native/push';
 
 @Component({
@@ -30,6 +32,7 @@ export class MyApp {
               private almacenDatosProvider: AlmacenDatosProvider,
               private loginProvider: LoginProvider,
               private notificationsProvider: NotificationProvider
+              // public push: Push
               // , private pushNativo: Push
             ) 
   {
@@ -103,6 +106,9 @@ export class MyApp {
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      // this.RegisterNotification();
+      // this.Notification();
     });
   }
 
@@ -112,6 +118,21 @@ export class MyApp {
     this.nav.setRoot(page.component);
 
   }
+
+  // private RegisterNotification(){
+  //   this.push.register().then((t: PushToken) => {
+  //     return this.push.saveToken(t);
+  //   }).then((t: PushToken) => {
+  //     console.log('token grabado:', t.token);
+  //   });
+  // }
+
+  // private Notification(){
+  //   this.push.rx.notification()
+  //     .subscribe((msg) => {
+  //       alert(msg.title + ':' + msg.text)
+  //   });
+  // } 
 
 
 
