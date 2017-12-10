@@ -3,12 +3,12 @@
 
 ### Nicolás Franzese:
 
-* (D) Aviso de faltas
+
 * (E) Aviso de importancia
 * (M) QR Alumnos
 * (J) ABM profesor y administrativo
 * (K) Descarga de archivosgi
-
+* (L) Gráficos estadísticos
 
 ### Pablo Valenzuela:
 
@@ -16,7 +16,7 @@
 * (G) ABM Alumnos
 * (H) Administración de su perfil
 * (N) QR Profesores
-* (L) Gráficos estadísticos
+* (D) Aviso de faltas
 
 ### Mariano Wilson:
 
