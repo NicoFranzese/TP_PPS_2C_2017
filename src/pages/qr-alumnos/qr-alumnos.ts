@@ -28,6 +28,7 @@ import { LoadingController } from 'ionic-angular';
 export class QrAlumnosPage {
 
   public items;
+  public personas;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private barcodeScanner: BarcodeScanner,
@@ -52,16 +53,28 @@ export class QrAlumnosPage {
     let CodigoQROK = 0;
 
     this.barcodeScanner.scan().then((barcodeData) => {
-
-      let arr = barcodeData.toString().split("-");
+      let arr = (barcodeData.text).split("-");
+      // console.log(arr);
+      // console.log(arr[0]);
+      // console.log(arr[1]);
       let materia = arr[0];
       let comision = arr[1];
-  
+
     /*Ir a la tabla Cursos y ver si existe PPS Si existe en campo "sigla_materia" y si existe la comision en el campo comision
       Si se da la condicion anterior, que me muestre el Aula, horario y Legajo profesor.*/
 
-      this.servicioEscanearQr.getExisteQR("cursos").subscribe(
+      this.servicioEscanearQr.getExisteQR("entidades_persona").subscribe(        
+        datos => {      
+          this.personas = datos;
+          setTimeout(() => {
+            loading.dismiss();
+          }, 3000);
+        },
+        error => {console.error(error); this.navCtrl.push(PrincipalPage);},
+        () => {console.log("ok");}
+      );   
 
+      this.servicioEscanearQr.getExisteQR("cursos").subscribe(
         datos => {      
           this.items = datos;
           setTimeout(() => {
@@ -69,9 +82,18 @@ export class QrAlumnosPage {
           }, 3000);
 
           //Valido que el código QR sea válido
-          this.items.forEach(element => {
+          this.items.forEach(element => {      
             if ((element.sigla_materia==materia) && (element.comision==comision)) {
-              CodigoQROK = 1;
+              this.personas.forEach(per => {
+                if (element.legajo_docente==per.legajo) {
+                  console.log("legajo curso ;"+element.legajo_docente);
+                  console.log("legajo persona ;"+per.legajo);
+                  CodigoQROK = 1;
+                  localStorage.setItem("profesorEscaneado", per.nombre_apellido);
+                  localStorage.setItem("aulaEscaneada", element.aula);
+                  localStorage.setItem("horarioEscaneada", element.dia_horario);
+                }
+              });
             }
           });
 
@@ -84,6 +106,7 @@ export class QrAlumnosPage {
             localStorage.setItem("materiaEscaneada", "");
             localStorage.setItem("comisionEscaneada", "");
             localStorage.setItem("escaneoDesde", "");
+            localStorage.setItem("profesorEscaneado", "");
             alert("Codigo QR Erróneo");            
             this.navCtrl.push(PrincipalPage);
           }   

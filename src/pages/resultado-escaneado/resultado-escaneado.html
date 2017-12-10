@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ResultadoEscaneado</ion-title>
+    <ion-title>Resultado Escaneado</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,15 +15,15 @@
 
 <ion-content padding>
   <div style="text-align: center" *ngIf="escaneoDesde == 'Alumno'">
+    Materia: {{materia}} <br>
+    Comision: {{comision}} <br>
     Aula: {{aula}} <br>
     Horario: {{horario}} <br>
-    Legajo: {{legDocente}} <br>
+    Profesor: {{profesor}} <br>
   </div>
 
   <div style="text-align: center" *ngIf="escaneoDesde == 'Profesor'">
-      Aula: {{aula}} <br>
-      Horario: {{horario}} <br>
-      Legajo: {{legDocente}} <br>
+    Acá irá lo escaneado por el profesor
     </div>
 
     <div style="text-align: center" *ngIf="escaneoDesde == 'Encuesta'">

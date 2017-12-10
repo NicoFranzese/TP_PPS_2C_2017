@@ -34,4 +34,9 @@ export class EscanearQrProvider {
     return this.items;
   }
 
+  public getPersonas(entityName) {
+    this.items = this.db.list(entityName).valueChanges();
+    return this.items;
+  }
+
 }

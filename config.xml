@@ -107,7 +107,9 @@
         <variable name="SENDER_ID" value="AIzaSyCQIp9m7tMOAz8nADGbXdaKYE_71RgVdxg" />
     </plugin>
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
-    <plugin name="phonegap-plugin-push" spec="~2.1.2">
+    <plugin name="phonegap-plugin-push" spec="^1.10.2">
         <variable name="SENDER_ID" value="90645577011" />
     </plugin>
+    <allow-navigation href="http://192.168.0.4:8100" />
+    <allow-navigation href="http://192.168.56.1:8100" />
 </widget>
