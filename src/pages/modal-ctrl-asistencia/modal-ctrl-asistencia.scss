@@ -1,3 +1,57 @@
 page-modal-ctrl-asistencia {
 
+    // customizo menu que agrega inasistencias
+    .dropdown-item{
+        min-width: 100px;
+        min-height: 40px;
+        font-size: 130%;
+        text-align:center;
+        vertical-align: middle;
+        border-bottom: 1px solid rgb(151, 141, 141);
+    }
+    .dropdown-header{
+        font-size: 130%;
+        border-bottom: 2px groove lightblue;
+        text-overflow:ellipsis;
+        white-space:nowrap; 
+        overflow:hidden; 
+    }
+    .dropdown-menu{
+        position: absolute;
+        min-width: 100px;
+        min-height: 40px;
+        border-color: grey;
+        padding: 8px 0px 0px 0px;
+    }
+
+    // cabecera de la grilla 
+    .row-header{
+        border-bottom: 3px solid rgb(151, 141, 141);
+        font-weight: bold;
+        
+    }
+
+    // separación para las filas 
+    .row.row-grid{
+        padding:3px;
+        border-bottom: 1px solid #ddd;
+    }
+
+
+    // recortar el texto que sobra en el campo alumno
+    // .cortar{
+        // width:150px;
+        // height:20px;
+        // text-overflow:ellipsis;
+        // white-space:nowrap; 
+        // overflow:hidden; 
+    // }
+    // .cortar:hover {
+    //     width: auto;
+    //     height:auto;
+    //     white-space: initial;
+    //     overflow:visible;
+    //     cursor: pointer;
+    // }
+
 }

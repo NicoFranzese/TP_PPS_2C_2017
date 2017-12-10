@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ModalCtrlAsistenciaPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -13,47 +7,87 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding >
 
   <ion-fab top>
-    <ion-searchbar (ionInput)="searchItems($event)" *ngIf="selectedOption != 'dia'"></ion-searchbar>
+    <ion-searchbar (ionInput)="searchItems($event)" *ngIf="selectedOption != 'dia'" class="ml-3"></ion-searchbar>
   </ion-fab>
   <br>
-  <br>
-
-  <div *ngIf="flagHide == false">
-    <ion-list *ngIf="selectedOption == 'alumno' ||  selectedOption == 'docente'">
-      <ion-item *ngFor="let item of items">
-        <a  (click)="getComision(selectedOption,item.legajo)">{{ item.nombre_apellido }}</a>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngIf="selectedOption == 'materia'">
-      <ion-item *ngFor="let item of items">
-        <a  (click)="getComision(selectedOption,item.sigla_materia)">{{ item.sigla_materia }}</a>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngIf="selectedOption == 'aula'">
-      <ion-item *ngFor="let item of items">
-        <a  (click)="getComision(selectedOption,item.aula)">{{ item.aula }}</a>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngIf="selectedOption == 'dia'">
-      <ion-item *ngFor="let item of items">
-        <a  (click)="getComision(selectedOption,item)">{{ item }}</a>
-       </ion-item>
-    </ion-list>
-  </div>
 
 
-  <div *ngIf="flagHide == true">
-      <ion-list>
-          <ion-item *ngFor="let item of comisiones">
-            <a  (click)="sendCourseList(item)">{{ item.comision }}</a>
-          </ion-item>
-        </ion-list>
+  <div class="mt-5">
+
+    <ion-grid *ngIf="selectedOption == 'alumno' ||  selectedOption == 'docente'">
+      <ion-row class="row row-header">
+        <ion-col class="col col-3">Legajo</ion-col>
+        <ion-col class="col col-9">Apellido y nombre</ion-col>
+      </ion-row>
+      <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
+        <ion-col class="col col-3">{{item.legajo}}</ion-col>
+        <ion-col class="col col-9 cortar ">
+          <div class="btn-group" style="height:50;width:252;">
+            <a (click)="getComision(selectedOption,item.legajo)" class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.nombre_apellido }}</a>
+            <div class="dropdown-menu">
+              <h2 class="dropdown-header">Comisiones de {{item.nombre_apellido}}</h2>
+              <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }}</a>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="selectedOption == 'materia'">
+      <ion-row class="row row-header">
+        <ion-col class="col col-12">Asignatura</ion-col>
+      </ion-row>
+      <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
+        <ion-col class="col col-12 cortar ">
+          <div class="btn-group" style="height:50;width:252;">
+            <a (click)="getComision(selectedOption,item.sigla_materia)" class="toggle more" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">{{ item.sigla_materia }}</a>
+            <div class="dropdown-menu">
+              <h2 class="dropdown-header">Comisiones de {{item.sigla_materia}}</h2>
+              <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }}</a>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="selectedOption == 'aula'">
+      <ion-row class="row row-header">
+        <ion-col class="col col-12">Asignatura</ion-col>
+      </ion-row>
+      <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
+        <ion-col class="col col-12 cortar ">
+          <div class="btn-group" style="height:50;width:252;">
+            <a (click)="getComision(selectedOption,item.aula)" class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.aula }}</a>
+            <div class="dropdown-menu">
+              <h2 class="dropdown-header">Comisiones del aula {{item.aula}}</h2>
+              <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }} </a>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="selectedOption == 'dia'">
+      <ion-row class="row row-header">
+        <ion-col class="col col-12">Día</ion-col>
+      </ion-row>
+      <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
+        <ion-col class="col col-12 cortar ">
+          <div class="btn-group" style="height:50;width:252;">
+            <a (click)="getComision(selectedOption,item)" class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item }}</a>
+            <div class="dropdown-menu">
+              <h2 class="dropdown-header">Comisiones del día {{item}}</h2>
+              <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }}</a>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </div>
 
 

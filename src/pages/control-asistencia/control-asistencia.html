@@ -42,17 +42,23 @@
     </ion-row>
 
     <ion-row *ngIf="initialItemsLength == '0'" class="mt-5">
-      <p padding>Por favor, seleccione una comisión...</p>
+        <br><br><br>
+        <ion-card>
+            <ion-card-content padding-top>
+                <h2>Por favor, seleccione una comisión...</h2>
+            </ion-card-content>
+          </ion-card>
     </ion-row>
 
-    <br>
-    <br>
-    <br>
+    <br><br><br>
   </ion-grid>
 
+
+
   <ion-fab bottom>
-    <ion-grid>
-      <ion-row padding-left class="ml-4">
+    <ion-grid>    
+      <ion-row padding-left class="ml-5">
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <button ion-fab mini color="dark" (click)="presentActionSheet()">
           <ion-icon name="add"></ion-icon>
         </button>
