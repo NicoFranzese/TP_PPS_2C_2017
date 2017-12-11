@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , ViewController} from 'ionic-angular';
 import { ControlAsistenciaPage} from '../../pages/control-asistencia/control-asistencia';
 import { LoadingController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
@@ -14,10 +14,6 @@ import { DataProvider } from '../../providers/data/data';
 export class ModalCtrlAsistenciaPage {
 
   comisiones: any[];
-  public cursos: any[] ;
-  cursadas: any[] ;
-  entidades_persona: any[] ;
-  cursadas_alumnos: any[] ;
   filteredItems: any[];
   auxItems: any[];
 
@@ -26,26 +22,45 @@ export class ModalCtrlAsistenciaPage {
   flagHide : boolean = false;
   flagCursos : boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,
-    public dataservice : DataProvider) {
+  constructor(public navCtrl    : NavController,     private viewCtrl: ViewController,    public navParams: NavParams,
+              public loadingCtrl: LoadingController ,public dataservice : DataProvider) {
+      
       this.selectedOption =  this.navParams.get('selectedOption');
       this.initializeItems();
-      console.clear();
-      console.log("paso por constructor");
   }
 
-  // traigo los datos para listar en pantalla, según el criterio q eligió el usuario
+  ionViewDidLoad() { }
+
+
+  // inicializo los datos para listar en pantalla, según el criterio q eligió el usuario
   initializeItems() {
-    
+    // configuro spinner para mostrar mientras se consultan los datos 
+    const loading = this.loadingCtrl.create({
+      content: 'Espere por favor...'
+    });
+    loading.present(); 
+
     if(this.selectedOption == "dia"){
       this.filteredItems = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sabado' ];
+      this.getDBData("entidades_persona");
+      this.getDBData("cursos");
     }else if(this.selectedOption == "alumno" || this.selectedOption == "docente"){
       this.getDBData("entidades_persona",true);
+      this.getDBData("cursos");
     }else {
-      this.getDBData("cursos",true)  ;
+      this.getDBData("entidades_persona");
+      this.getDBData("cursos",true);
     }
-   
-  }
+
+      this.getDBData("cursadas_alumnos");
+      this.getDBData("cursadas");
+
+      setTimeout(() => {
+        loading.dismiss();
+      }, 2000);
+
+  }//initializeItems()
+
 
   // función que busca los items para el searchBar
   searchItems(ev: any) {
@@ -68,33 +83,22 @@ export class ModalCtrlAsistenciaPage {
         return result;
       })
     }
-  }
+  }//searchItems()
 
-  getDBData(entityName,firstTime? :boolean){
-    // configuro spinner para mostrar mientras se consultan los datos 
-    
-    const loading = this.loadingCtrl.create({
-      content: 'Espere por favor...'
-    });
-    if(firstTime){ loading.present(); }
 
+  getDBData(entityName,itemsToShow? :boolean){
     this.dataservice.getItems(entityName).subscribe(
       datos => {
-        if(firstTime){
-          console.log("primera vez: " + entityName);
+        if(itemsToShow){
           if(entityName == "entidades_persona"){
             this.auxItems = datos.filter((item) => item.tipo_entidad == this.selectedOption);
           }else{
             this.auxItems = datos;
           }
-          localStorage.setItem(entityName,JSON.stringify(this.auxItems));
           this.filteredItems = this.auxItems;
-          setTimeout(() => {
-            loading.dismiss();
-          }, 2000);
-        }else{
-          localStorage.setItem(entityName,JSON.stringify(datos));
-        }
+        } 
+        localStorage.setItem(entityName,JSON.stringify(datos));
+        
       },
       error => console.error(error),
       () => console.log("ok")
@@ -104,59 +108,56 @@ export class ModalCtrlAsistenciaPage {
 
 // obtengo la lista de comisiones según los filtros q eligió el usuario
  getComision(option,filter){
-  console.log("getcomision("+option+","+filter+");");
-  let auxCursadasAlumno,auxCursada,auxCursos,auxCursadasAlumno2,auxCursada2,auxCursos2 : any;
+  let tbCursadasAlumno,tbCursada,tbCursos,auxCursadasAlumno,auxCursada,auxCursos : any;
   this.comisiones = [];
 
   switch(option) { 
     case 'aula': { 
-      auxCursos= JSON.parse(localStorage.getItem("cursos")); 
-      auxCursos2 = auxCursos.filter((item) => item.aula == filter );
-      auxCursos2.forEach(element => {
+      tbCursos= JSON.parse(localStorage.getItem("cursos")); 
+      auxCursos = tbCursos.filter((item) => item.aula == filter );
+      auxCursos.forEach(element => {
         this.comisiones.push(element.comision + "-" + element.sigla_materia);
       });
        break; 
     } 
     case 'dia': { 
-      auxCursos= JSON.parse(localStorage.getItem("cursos")); 
-      auxCursos2 = auxCursos.filter((item) => {
+      tbCursos= JSON.parse(localStorage.getItem("cursos")); 
+      auxCursos = tbCursos.filter((item) => {
         return (item.dia_horario.trim().toLowerCase().indexOf(filter.toLowerCase()) > -1);
        });
-       auxCursos2.forEach(element => {
+       auxCursos.forEach(element => {
         this.comisiones.push(element.comision + "-" + element.sigla_materia);
       });
       break; 
     } 
     case 'docente': { 
-      auxCursos= JSON.parse(localStorage.getItem("cursos")); 
-      auxCursos2 = auxCursos.filter((item) => item.legajo_docente == filter );
-      auxCursos2.forEach(element => {
+      tbCursos= JSON.parse(localStorage.getItem("cursos")); 
+      auxCursos = tbCursos.filter((item) => item.legajo_docente == filter );
+      auxCursos.forEach(element => {
         this.comisiones.push(element.comision + "-" + element.sigla_materia);
       });
       break; 
     } 
     case 'materia': { 
-      auxCursos= JSON.parse(localStorage.getItem("cursos"));
-      auxCursos2 = auxCursos.filter((item) => item.sigla_materia == filter );
-      auxCursos2.forEach(element => {
+      tbCursos= JSON.parse(localStorage.getItem("cursos"));
+      auxCursos = tbCursos.filter((item) => item.sigla_materia == filter );
+      auxCursos.forEach(element => {
         this.comisiones.push(element.comision + "-" + element.sigla_materia);
       });
       break; 
     } 
-    case 'alumno': { 
-            
-      auxCursadasAlumno  = JSON.parse(localStorage.getItem("cursadas_alumnos"));
-      auxCursada         = JSON.parse(localStorage.getItem("cursadas"));
-      auxCursos          = JSON.parse(localStorage.getItem("cursos")); 
+    case 'alumno': {      
+      tbCursadasAlumno  = JSON.parse(localStorage.getItem("cursadas_alumnos"));
+      tbCursada         = JSON.parse(localStorage.getItem("cursadas"));
+      tbCursos          = JSON.parse(localStorage.getItem("cursos")); 
 
-      auxCursadasAlumno2 = auxCursadasAlumno.filter((item) => item.legajo_alumno == filter);
+      auxCursadasAlumno = tbCursadasAlumno.filter((item) => item.legajo_alumno == filter);
 
-      auxCursadasAlumno2.forEach(element => {
-        auxCursada2 = auxCursada.find((item) => item.id_cursada == element.id_cursada);
-        auxCursos2 = auxCursos.find((item)=> item.id_curso == auxCursada2.id_curso);
-        this.comisiones.push(auxCursos2.comision + "-" + auxCursos2.sigla_materia);
+      auxCursadasAlumno.forEach(element => {
+        auxCursada = tbCursada.find((item) => item.id_cursada == element.id_cursada);
+        auxCursos = tbCursos.find((item)=> item.id_curso == auxCursada.id_curso);
+        this.comisiones.push(auxCursos.comision + "-" + auxCursos.sigla_materia);
       });
-      console.info("comisiones: ", this.comisiones);
       break; 
     } 
    } //switch
@@ -164,18 +165,30 @@ export class ModalCtrlAsistenciaPage {
 
  
  sendCourseList(item){
-  alert(item);
- }
+    this.navCtrl.push(ControlAsistenciaPage,{comision:item})
+    .then(() => {
+      // first we find the index of the current view controller:
+      const index = this.viewCtrl.index;
+      // then we remove it from the navigation stack
+      this.navCtrl.remove(index);
+    });
+ }//sendCourseList()
+
 
  close(){
-  this.navCtrl.push(ControlAsistenciaPage);
- }
+    this.navCtrl.push(ControlAsistenciaPage) 
+    .then(() => {
+      // first we find the index of the current view controller:
+      const index = this.viewCtrl.index;
+      // then we remove it from the navigation stack
+      this.navCtrl.remove(index);
+    });
+ }//close()
 
  test(){
    alert("ok");
  }
 
- ionViewDidLoad() { }
 
 }//class
 

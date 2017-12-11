@@ -26,7 +26,7 @@
         <ion-checkbox style="padding-top:5px" color="dark" (ionChange)="addValidatedItem($event)"></ion-checkbox>
       </ion-col>
       <ion-col class="col col-3">{{item.legajo}}</ion-col>
-      <ion-col class="col col-6 cortar">{{item.alumno}}</ion-col>
+      <ion-col class="col col-6 cortar">{{item.nombre_apellido}}</ion-col>
       <ion-col class="col col-1" text-center>{{item.inasistencias}}</ion-col>
       <ion-col class="col col-1">
         <div class="btn-group" style="height:50;width:252;">
@@ -62,10 +62,10 @@
         <button ion-fab mini color="dark" (click)="presentActionSheet()">
           <ion-icon name="add"></ion-icon>
         </button>
-        <button ion-fab mini color="dark">
+        <button ion-fab mini color="dark" (click)="test()">
           <ion-icon name="camera"></ion-icon>
         </button>
-        <button ion-fab mini color="dark" (click)="cleanItems()">
+        <button ion-fab mini color="dark" (click)="test()">
           <ion-icon name="trash"></ion-icon>
         </button>
         <button ion-fab mini color="dark" (click)="test()">
