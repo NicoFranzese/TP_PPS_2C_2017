@@ -27,6 +27,7 @@
       </ion-col>
       <ion-col class="col col-3">{{item.legajo}}</ion-col>
       <ion-col class="col col-6 cortar">{{item.nombre_apellido}}</ion-col>
+
       <ion-col class="col col-1" text-center>{{item.inasistencias}}</ion-col>
       <ion-col class="col col-1">
         <div class="btn-group" style="height:50;width:252;">
@@ -45,7 +46,7 @@
         <br><br><br>
         <ion-card>
             <ion-card-content padding-top>
-                <h2>Por favor, seleccione una comisión...</h2>
+                <h2>No hay datos para mostrar. Por favor, seleccione una comisión...</h2>
             </ion-card-content>
           </ion-card>
     </ion-row>
@@ -59,16 +60,16 @@
     <ion-grid>    
       <ion-row padding-left class="ml-5">
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <button ion-fab mini color="dark" (click)="presentActionSheet()">
+        <button class="btn-fab" ion-fab mini (click)="presentActionSheet()">
           <ion-icon name="add"></ion-icon>
         </button>
-        <button ion-fab mini color="dark" (click)="test()">
+        <button class="btn-fab" ion-fab mini (click)="test()">
           <ion-icon name="camera"></ion-icon>
         </button>
-        <button ion-fab mini color="dark" (click)="test()">
+        <button class="btn-fab" ion-fab mini (click)="test()">
           <ion-icon name="trash"></ion-icon>
         </button>
-        <button ion-fab mini color="dark" (click)="test()">
+        <button class="btn-fab" ion-fab mini (click)="test()">
           <ion-icon name="send"></ion-icon>
         </button>
       </ion-row>

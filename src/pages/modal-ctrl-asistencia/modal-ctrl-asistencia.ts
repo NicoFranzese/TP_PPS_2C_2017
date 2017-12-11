@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , ViewController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams , ViewController ,LoadingController} from 'ionic-angular';
 import { ControlAsistenciaPage} from '../../pages/control-asistencia/control-asistencia';
-import { LoadingController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 
 
@@ -13,14 +12,13 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class ModalCtrlAsistenciaPage {
 
-  comisiones: any[];
-  filteredItems: any[];
-  auxItems: any[];
-
-  selectedOption : string;
-  searchQuery: string = '';
-  flagHide : boolean = false;
-  flagCursos : boolean = false;
+  comisiones:      any[];
+  auxItems:        any[];
+  filteredItems:   any[];
+  flagHide :       boolean = false;
+  flagCursos :     boolean = false;
+  searchQuery:     string = '';
+  selectedOption:  string;
 
   constructor(public navCtrl    : NavController,     private viewCtrl: ViewController,    public navParams: NavParams,
               public loadingCtrl: LoadingController ,public dataservice : DataProvider) {
@@ -32,7 +30,9 @@ export class ModalCtrlAsistenciaPage {
   ionViewDidLoad() { }
 
 
-  // inicializo los datos para listar en pantalla, según el criterio q eligió el usuario
+  // Carga inicial de datos. El param opcional de getDBData([..]) lo uso para determinar si debo modificar el array que se muestra en pantalla.
+  // Esto cambia según la opción de filtro elegida, cargo el array con la tabla correspondiente (curos o entidades_persona) y
+  // el resto de las tablas simplemente las guardo en local.
   initializeItems() {
     // configuro spinner para mostrar mientras se consultan los datos 
     const loading = this.loadingCtrl.create({
@@ -41,6 +41,7 @@ export class ModalCtrlAsistenciaPage {
     loading.present(); 
 
     if(this.selectedOption == "dia"){
+      // En este caso, los datos no cambian asique manejo un array estático.
       this.filteredItems = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sabado' ];
       this.getDBData("entidades_persona");
       this.getDBData("cursos");
@@ -85,7 +86,9 @@ export class ModalCtrlAsistenciaPage {
     }
   }//searchItems()
 
-
+ 
+  // Consulta contra BBDD, si la tabla es "entidades_persona" filtro por alumno o docente.
+  //  Todas las consultas las persisto en localStorage
   getDBData(entityName,itemsToShow? :boolean){
     this.dataservice.getItems(entityName).subscribe(
       datos => {
