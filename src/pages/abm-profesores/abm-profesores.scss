@@ -1,3 +1,68 @@
 page-abm-profesores {
+    .col {
+        // border: solid 1px grey;
+        border-bottom-style: none;
+        border-right-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
+    // cabecera de la grilla 
+    .row-header{
+        border-bottom: 3px solid rgb(151, 141, 141);
+        font-weight: bold;
+        
+    }
+
+    // separación para las filas 
+    .row{
+        padding:3px;
+    }
+
+    // efecto mouse over
+    .row:hover{
+        background-color:#DCD9D8;
+        .more{background-color:#DCD9D8;}
+    }
+
+
+    // recortar el texto que sobra en el campo alumno
+    .cortar{
+        width:150px;
+        height:20px;
+        text-overflow:ellipsis;
+        white-space:nowrap; 
+        overflow:hidden; 
+    }
+    .cortar:hover {
+        width: auto;
+        height:auto;
+        white-space: initial;
+        overflow:visible;
+        cursor: pointer;
+    }
+
+    // configuro el icono del boton "más..."
+    .more{
+        background-color: #FFFFFF;
+        padding-top:3px;
+    }
+
+
+    // customizo menu que agrega inasistencias
+    .dropdown-item{
+        min-width: 160px;
+        min-height: 30px;
+        font-size: 125%;
+    }
+    .dropdown-menu{
+        position: absolute;
+        min-width: 160px;
+        min-height: 60px;
+        border-radius: 10px;
+    }
+
+    ion-row{
+    border-bottom: 1px solid #ddd;
+    }
 }

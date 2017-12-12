@@ -35,6 +35,7 @@ import { QrProfesoresPage } from '../pages/qr-profesores/qr-profesores';
 import { ModalCuestionariosPage } from '../pages/modal-cuestionarios/modal-cuestionarios';
 import { ModalCtrlAsistenciaPage} from '../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
 import { EncuestaPage} from '../pages/encuesta/encuesta';
+import { ModalAbmDocentesPage} from '../pages/modal-abm-docentes/modal-abm-docentes';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -93,7 +94,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     ResultadoEscaneadoPage,
     ModalCuestionariosPage,
     ModalCtrlAsistenciaPage,
-    EncuestaPage
+    EncuestaPage,
+    ModalAbmDocentesPage
   ],
   imports: [
     HttpModule,
@@ -125,7 +127,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     ResultadoEscaneadoPage,
     ModalCuestionariosPage,
     ModalCtrlAsistenciaPage,
-    EncuestaPage
+    EncuestaPage,
+    ModalAbmDocentesPage
   ],
   providers: [
     StatusBar,

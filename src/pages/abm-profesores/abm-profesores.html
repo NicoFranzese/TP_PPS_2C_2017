@@ -7,12 +7,61 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>abmProfesores</ion-title>
+    <ion-title>ABM Profesores</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <ion-grid>
+        
+      <ion-row class="row row-header">
+        <ion-col class="col col-1">
+          <!-- <ion-checkbox style="padding-top:5px" color="dark" (ionChange)="changeAll($event)" [(ngModel)]="chkAlumno" ></ion-checkbox> -->
+        </ion-col>
+        <ion-col class="col col-3">Legajo</ion-col>
+        <ion-col class="col col-6">Nombre y Apellido</ion-col>
+        <ion-col class="col col-2" text-center>Accion</ion-col>
+      </ion-row>
+      <div *ngFor="let item of items" >
+      <ion-row *ngIf="item.tipo_entidad == 'docente'" align-items-center>
+        <ion-col class="col col-1">
+          <ion-checkbox style="padding-top:5px" color="dark" (ionChange)="test()"  ></ion-checkbox>
+        </ion-col>
+        <ion-col class="col col-3">{{item.legajo}}</ion-col>
+        <ion-col class="col col-6 cortar">{{item.nombre_apellido}}</ion-col>
+        <ion-col class="col col-1">
+            <div class="btn-group" style="height:50;width:252;">
+                <button class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <ion-icon name="more" ></ion-icon>
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#" (click)="AbrirModal('Modificacion', item.legajo)">Modificar</a>
+                  <a class="dropdown-item" href="#" (click)="Baja(item.legajo)">Eliminar</a>
+                </div>
+              </div>
+        </ion-col>   
+      </ion-row>
+    </div>
+  
+      <br><br><br>
+    </ion-grid>
+
+
+
+
+
+    <ion-fab bottom>
+        <ion-grid>    
+          <ion-row padding-left class="ml-5">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn-fab" ion-fab mini (click)="AbrirModal('Alta', 0)">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-row>
+        </ion-grid>
+      </ion-fab>
 
 </ion-content>
