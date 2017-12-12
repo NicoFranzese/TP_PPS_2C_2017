@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ViewController ,LoadingController} from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
-import { AbmProfesoresPage } from '../abm-profesores/abm-profesores';
+import { AbmAdministrativosPage } from '../abm-administrativos/abm-administrativos';
+
 /**
- * Generated class for the ModalAbmDocentesPage page.
+ * Generated class for the ModalAbmAdministrativosPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,17 +12,17 @@ import { AbmProfesoresPage } from '../abm-profesores/abm-profesores';
 
 @IonicPage()
 @Component({
-  selector: 'page-modal-abm-docentes',
-  templateUrl: 'modal-abm-docentes.html',
+  selector: 'page-modal-abm-administrativos',
+  templateUrl: 'modal-abm-administrativos.html',
 })
-export class ModalAbmDocentesPage {
+export class ModalAbmAdministrativosPage {
 
   public accion;
   public legajo;
   public nombre_apellido;
   public email;
   public clave;
-  public tipo_entidad = "docente";
+  public tipo_entidad = "administrativo";
 
   public ultimoIDEntidadesPersona;
   public arrEntidadesPersona;
@@ -34,11 +35,11 @@ export class ModalAbmDocentesPage {
 
   constructor(public navCtrl    : NavController,     private viewCtrl: ViewController,    public navParams: NavParams,
     public loadingCtrl: LoadingController ,public dataProvider : DataProvider) {
-      this.obtenerUltimoIDEntidadesPersona();
-      this.obtenerUltimoIDUsuarios();
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
-
+      this.obtenerUltimoIDEntidadesPersona();
+      this.obtenerUltimoIDUsuarios();
+      
     this.accion =  this.navParams.get('accion');
 
     if (this.accion == 'Modificacion'){
@@ -52,14 +53,12 @@ export class ModalAbmDocentesPage {
       this.email =  "";
       this.clave =  "";
     }
-
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad ModalAbmDocentesPage');
+    // console.log('ionViewDidLoad ModalAbmAdministrativosPage');
   }
 
-  
   private obtenerUltimoIDEntidadesPersona()
   {
     this.dataProvider.getItems('entidades_persona').subscribe(
@@ -146,11 +145,9 @@ export class ModalAbmDocentesPage {
       () => console.log("ok")
     );
   }
+  
 
   Aceptar(){
-    
-        // this.obtenerUltimoIDEntidadesPersona();
-        // this.obtenerUltimoIDUsuarios();
     
         if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
           (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
@@ -172,10 +169,9 @@ export class ModalAbmDocentesPage {
               }
             }
 
-            
             let obj = 
             {
-              'legajo': this.legajo,
+              'legajo': this.legajo.toString(),
               'nombre_apellido': this.nombre_apellido,
               'tipo_entidad': this.tipo_entidad
             };        
@@ -183,7 +179,7 @@ export class ModalAbmDocentesPage {
       
             let objUsu = 
             {
-              'legajo': this.legajo,
+              'legajo': this.legajo.toString(),
               'email': this.email,
               'clave': this.clave
             };                
@@ -196,7 +192,7 @@ export class ModalAbmDocentesPage {
     
             alert("Se ah guardado con éxito.");
     
-            this.navCtrl.push(AbmProfesoresPage);
+            this.navCtrl.push(AbmAdministrativosPage);
           } catch (error) {
             alert("Algo ha fallado, verifique su conexión a internet.");
           }      

@@ -100,17 +100,13 @@ export class AbmProfesoresPage {
     }
 
     for (let i=0;i<this.itemsUsuarios.length;i++){ 
-      if (this.items[i].legajo==leg) {
+      if (this.itemsUsuarios[i].legajo==leg) {
         this.dataProvider.deleteItem('usuarios/'+i);
       }
     }
 
     this.getItemsEntidadesPersonas();
     this.getItemsUsuarios();
-  }
-
-  Modificaciones(){
-
   }
 
   AbrirModal(accion, leg){

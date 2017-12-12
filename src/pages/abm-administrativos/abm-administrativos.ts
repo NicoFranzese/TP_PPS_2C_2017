@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController, ViewController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+
+import { PrincipalPage } from '../principal/principal';
+import { ModalAbmAdministrativosPage } from '../modal-abm-administrativos/modal-abm-administrativos';
 
 /**
  * Generated class for the AbmAdministrativosPage page.
@@ -17,23 +20,36 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class AbmAdministrativosPage {
 
+  public legajo;
+  public nombre_apellido;
+  public email;
+  public clave;
+  public tipo_entidad = "administrativo";
 
-  items: any[];
+  public ultimoIDEntidadesPersona;
+  public arrEntidadesPersona;
+
+  public ultimoIDUsuarios;
+  public arrUsuarios;
+
+  public items;
+  public itemsUsuarios;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,
-     public dataservice : DataProvider) {
-       this.getItems();
-       console.log(this.items);
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private dataProvider: DataProvider,
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
+    private viewCtrl: ViewController) {
+      this.getItemsEntidadesPersonas();
+      this.getItemsUsuarios();
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad AbmAdministrativosPage');
   }
 
-
-  
-  getItems() {
+  getItemsEntidadesPersonas() {
     // configuro spinner para mientras se cargan los datos 
     const loading = this.loadingCtrl.create({
       content: 'Espere por favor...'
@@ -41,12 +57,36 @@ export class AbmAdministrativosPage {
     loading.present();
 
     //recupero los datos, mientras muestra spinner
-    this.dataservice.getItems("entidades_persona").subscribe(
+    this.dataProvider.getItems("entidades_persona").subscribe(
       datos => {      
         this.items = datos;
+
         setTimeout(() => {
           loading.dismiss();
         }, 3000);
+
+      },
+      error => console.error(error),
+      () => console.log("ok")
+    );
+  }
+
+  getItemsUsuarios() {
+    // configuro spinner para mientras se cargan los datos 
+    const loading = this.loadingCtrl.create({
+      content: 'Espere por favor...'
+    });
+    loading.present();
+
+    //recupero los datos, mientras muestra spinner
+    this.dataProvider.getItems("usuarios").subscribe(
+      datos => {      
+        this.itemsUsuarios = datos;
+
+        setTimeout(() => {
+          loading.dismiss();
+        }, 3000);
+
       },
       error => console.error(error),
       () => console.log("ok")
@@ -54,96 +94,65 @@ export class AbmAdministrativosPage {
   }
 
 
-   test(){
-     alert("ok");
-   }
+  Baja(leg){
+    for (let i=0;i<this.items.length;i++){ 
+      if (this.items[i].legajo.toString()==leg.toString()) {
+        this.dataProvider.deleteItem('entidades_persona/'+i);
+      }
+    }
 
-   private obtenerUltimoIDEntidadesPersona()
-   {
-     this.dataProvider.getItems('entidades_persona').subscribe(
-       data =>
-       {
-         this.arrEntidadesPersona = data;
- 
-         if(data.length == 0)
-         {
-           this.ultimoIDEntidadesPersona = 1;
-         }
-         else
-         {
-           this.ultimoIDEntidadesPersona= data.length;
-         }
-         // console.log(data.length +1);
-       },
-       err => console.error(err)
-     );
-   }
- 
-   private obtenerUltimoIDUsuarios()
-   {
-     this.dataProvider.getItems('usuarios').subscribe(
-       data =>
-       {
-         this.arrUsuarios = data;
- 
-         if(data.length == 0)
-         {
-           this.ultimoIDUsuarios = 1;
-         }
-         else
-         {
-           this.ultimoIDUsuarios= data.length;
-         }
-         
-         // console.log(data.length +1);
-       },
-       err => console.error(err)
-     );
-   }
- 
-   Alta(){
- 
-     // this.obtenerUltimoIDEntidadesPersona();
-     // this.obtenerUltimoIDUsuarios();
- 
-     console.log(this.ultimoIDEntidadesPersona);
-     console.log(this.ultimoIDUsuarios);
- 
-     if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
-       (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
-     (this.email == null) || (this.email == undefined) || (this.email == "") ||
-       (this.clave == null) || (this.clave == undefined) || (this.clave == "")){
-         alert("Debe ingresar valores para los campos que visualiza en pantalla");
-     }else{
-       try {
-         let obj = 
-         {
-           'legajo': this.legajo,
-           'nombre_apellido': this.nombre_apellido,
-           'tipo_entidad': this.tipo_entidad
-         };        
-         this.dataProvider.addItem('entidades_persona/' +  this.ultimoIDEntidadesPersona, obj);
+    for (let j=0;j<this.itemsUsuarios.length;j++){ 
+      if (this.itemsUsuarios[j].legajo.toString()==leg.toString()) {
+        this.dataProvider.deleteItem('usuarios/'+j);
+      }
+    }
+
+    this.getItemsEntidadesPersonas();
+    this.getItemsUsuarios();
+  }
+
+
+  AbrirModal(accion, leg){
+    
+        if (accion == 'Modificacion'){
+          for (let i=0;i<this.items.length;i++){ 
+            if (this.items[i].legajo==leg) {
+              this.nombre_apellido = this.items[i].nombre_apellido;
+            }
+          }
+    
+          for (let j=0;j<this.itemsUsuarios.length;j++){ 
+            if (this.itemsUsuarios[j].legajo==leg) {
+              this.email = this.itemsUsuarios[j].email;
+              this.clave = this.itemsUsuarios[j].clave;        
+            }
+          }
+    
+    
+          let optionModal = this.modalCtrl.create(ModalAbmAdministrativosPage,{accion: accion, 
+                                                                        legajo: leg.toString(),
+                                                                        nombre: this.nombre_apellido, 
+                                                                        email: this.email,
+                                                                        clave: this.clave});
+                                                                        optionModal.present()
+          .then(() => {
+            // first we find the index of the current view controller:
+            // const index = this.viewCtrl.index;
+            // then we remove it from the navigation stack
+            // this.navCtrl.remove(index);
+          });
+        }else{
+          let optionModal = this.modalCtrl.create(ModalAbmAdministrativosPage,{accion: accion});
+          optionModal.present()
+          .then(() => {
+            // first we find the index of the current view controller:
+            // const index = this.viewCtrl.index;
+            // then we remove it from the navigation stack
+            // this.navCtrl.remove(index);
+          });
+        }
+       
+      }
    
-         let objUsu = 
-         {
-           'legajo': this.legajo,
-           'email': this.email,
-           'clave': this.clave
-         };                
-         this.dataProvider.addItem('usuarios/' +  this.ultimoIDUsuarios, objUsu);
- 
-         this.legajo="";
-         this.nombre_apellido="";
-         this.email="";
-         this.clave="";
- 
-         alert("Se ah agregado el docente.");
- 
-         this.navCtrl.push(PrincipalPage);
-       } catch (error) {
-         alert("Algo ha fallado, verifique su conexión a internet.");
-       }      
-     }
-   }
 
 }

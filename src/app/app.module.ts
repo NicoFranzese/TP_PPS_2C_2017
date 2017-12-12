@@ -36,7 +36,7 @@ import { ModalCuestionariosPage } from '../pages/modal-cuestionarios/modal-cuest
 import { ModalCtrlAsistenciaPage} from '../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
 import { EncuestaPage} from '../pages/encuesta/encuesta';
 import { ModalAbmDocentesPage} from '../pages/modal-abm-docentes/modal-abm-docentes';
-
+import { ModalAbmAdministrativosPage} from '../pages/modal-abm-administrativos/modal-abm-administrativos';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -95,7 +95,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     ModalCuestionariosPage,
     ModalCtrlAsistenciaPage,
     EncuestaPage,
-    ModalAbmDocentesPage
+    ModalAbmDocentesPage,
+    ModalAbmAdministrativosPage
   ],
   imports: [
     HttpModule,
@@ -128,7 +129,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     ModalCuestionariosPage,
     ModalCtrlAsistenciaPage,
     EncuestaPage,
-    ModalAbmDocentesPage
+    ModalAbmDocentesPage,
+    ModalAbmAdministrativosPage
   ],
   providers: [
     StatusBar,
