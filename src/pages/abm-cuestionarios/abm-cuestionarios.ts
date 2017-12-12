@@ -44,6 +44,7 @@ export class AbmCuestionariosPage {
         this.arrCuestionarios = data;
 
         //Si vengo de escanear un qr como profesor, edito el cuestionario
+        console.log(this.navParams.get('id'));
         if(this.navParams.get('id'))
           this.vengoDeLeerQr();
 
@@ -82,9 +83,9 @@ export class AbmCuestionariosPage {
     this.arrCuestionarios.forEach(element => {
       if(element.id == idEscaneado)
       {
-        let respuesta = this.almacenDatos.calcularHorasRestantes(element);
-        alert(respuesta);
-        //  this.editarCuestionario(element);
+        // let respuesta = this.almacenDatos.calcularHorasRestantes(element);
+        // alert(respuesta);
+         this.editarCuestionario(element);
       }
        
     });

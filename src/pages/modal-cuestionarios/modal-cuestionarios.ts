@@ -291,7 +291,10 @@ export class ModalCuestionariosPage {
   {
     this.titulo = this.almacenDatos.cuestionarioEditar.titulo;
     this.almacenDatos.ultimoIdCuestionario = this.almacenDatos.cuestionarioEditar.id;
-    this.fechaFin = this.almacenDatos.cuestionarioEditar.fechaFin;
+
+    let arrFecha = this.almacenDatos.cuestionarioEditar.fechaFin.split('/');;
+    this.fechaFin = arrFecha[2] +'-'+ arrFecha[1] +'-'+ arrFecha[0];
+    
     this.horaFin = this.almacenDatos.cuestionarioEditar.horaFin;
     this.fechaInicio = this.almacenDatos.cuestionarioEditar.fechaInicio;
     this.horaInicio = this.almacenDatos.cuestionarioEditar.horaInicio;

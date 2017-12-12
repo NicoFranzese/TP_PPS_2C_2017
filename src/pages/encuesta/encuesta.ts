@@ -33,6 +33,7 @@ export class EncuestaPage {
   ionViewDidLoad() {
     
     let id = this.navParams.get('id');
+    // let id = 2;
     this.test(id);
 
   }

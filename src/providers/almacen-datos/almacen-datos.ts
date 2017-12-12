@@ -24,7 +24,7 @@ export class AlmacenDatosProvider {
     
   }
 
-  public calcularHorasRestantes(cuestionario)
+  public calcularHorasDuracion(cuestionario, medida)
   {
 
     let arrFechaInicio = cuestionario.fechaInicio.split("/");
@@ -41,14 +41,39 @@ export class AlmacenDatosProvider {
     let horasTotales = Math.trunc(minutosTotales / 60);
     let minutosRestantes = minutosTotales % 60;
 
-    console.log(fecha1);
-    console.log(fecha2);
+    // console.log(fecha1);
+    // console.log(fecha2);
 
-    if(minutosRestantes <= 0 || horasTotales <= 0)
-      return "Finalizada";
-    else 
-      return horasTotales +' horas, '+ minutosRestantes +' minutos';
+    if(medida == 'hora')
+    {
+      if(minutosRestantes != 0)
+        return horasTotales +' horas, '+ minutosRestantes +' minutos';
+      else
+        return horasTotales +' horas';
+    }
+    else
+    {
+      //Retorno milisegundos
+      return res;
+    }
 
   }
 
+  public calcularTiempoRestante(cuestionario)
+  {
+    let arrFechaInicio = cuestionario.fechaInicio.split("/");
+    let arrHoraInicio = cuestionario.horaInicio.split(":");
+    let fecha = new Date();
+    console.log(fecha.getDate());
+    let fecha1 = new Date(Number.parseInt(arrFechaInicio[2]), Number.parseInt(arrFechaInicio[1]) -1, Number.parseInt(arrFechaInicio[0]), Number.parseInt(arrHoraInicio[0]), Number.parseInt(arrHoraInicio[1])).getTime();
+    let fecha2 = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), fecha.getHours(),fecha.getMinutes()).getTime();
+    // console.log(fecha1);
+    // console.log(fecha2);
+    let res = fecha2 - fecha1;
+
+    let duracion = this.calcularHorasDuracion(cuestionario, 'mili');
+
+    return res - Number.parseInt(duracion.toString());
+
+  }
 }

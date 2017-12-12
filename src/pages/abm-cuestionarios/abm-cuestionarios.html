@@ -19,12 +19,12 @@
   <ion-grid *ngIf="hayCuestionarios">
     <ion-row class="row row-header">
       <ion-col class="col col-6">Tìtulo</ion-col>
-      <ion-col class="col col-4">Finaliza</ion-col>
+      <ion-col class="col col-4">Duraciòn</ion-col>
       <ion-col class="col col-2"></ion-col>
     </ion-row>
     <ion-row *ngFor="let item of arrCuestionarios" align-items-center (click)="test(item)">
       <ion-col class="col col-6 cortar">{{item.titulo}}</ion-col>
-      <ion-col class="col col-4">{{almacenDatos.calcularHorasRestantes(item)}}</ion-col>
+      <ion-col class="col col-4">{{almacenDatos.calcularHorasDuracion(item, 'hora')}}</ion-col>
       <ion-col class="col col-2 text-right">
 
         <div class="dropdown">

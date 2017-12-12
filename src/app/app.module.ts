@@ -51,6 +51,7 @@ import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
 import { NotificationProvider } from '../providers/notification/notification';
 
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { QrEncuestasProvider } from '../providers/qr-encuestas/qr-encuestas';
 
 // import { Push,PushObject, PushOptions  } from '@ionic-native/push';
 
@@ -147,7 +148,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     FileTransfer,
     File,
     LocalNotifications,
-    NotificationProvider    // ,    Push
+    NotificationProvider,
+    QrEncuestasProvider    // ,    Push
   ]
 })
 export class AppModule {}

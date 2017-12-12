@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login/login';
 import { LoginPage } from '../login/login';
 import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-datos';
+import { QrEncuestasProvider } from '../../providers/qr-encuestas/qr-encuestas';
 
 import { AbmAdministrativosPage } from '../abm-administrativos/abm-administrativos';
 import { AbmAlumnosPage } from '../abm-alumnos/abm-alumnos';
@@ -38,7 +39,8 @@ export class PrincipalPage {
     private barcodeScanner: BarcodeScanner,
     private dataProvider: DataProvider,
     public platform: Platform,
-    public localNoti: LocalNotifications
+    public localNoti: LocalNotifications,
+    private qrEncuestasProvider: QrEncuestasProvider
     
   ) {
     this.obtenerAvisos();
@@ -94,7 +96,7 @@ export class PrincipalPage {
         break;
       }
       case "qr-encuestas": {
-        this.qrEncuestas();
+        this.qrEncuestasProvider.verificarEntidad(5);
         break;
       }
     }
@@ -222,24 +224,6 @@ export class PrincipalPage {
     this.almacenDatosProvider.arrMenuOpciones.next(this.arrOpciones);
   }
 
-  private qrEncuestas()
-  {
-    this.barcodeScanner.scan().then((barcodeData) => {
-      let idLeido = Number.parseInt(barcodeData.text);
-
-      let component;
-      console.log(this.almacenDatosProvider.usuarioLogueado.tipo_entidad);
-      if(this.almacenDatosProvider.usuarioLogueado.tipo_entidad == 'docente')  
-        component = AbmCuestionariosPage;
-      else
-        component = EncuestaPage;
-
-      this.navCtrl.push(component, {'id': idLeido});
-      
-     }, (err) => {
-         console.error(err);
-     });
-  }
 
   private obtenerAvisos()
   {
