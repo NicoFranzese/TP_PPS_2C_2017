@@ -64,6 +64,7 @@ export class LoginPage implements OnInit{
       if(element.email == this.email && element.clave == this.clave)
       {
         band = true;
+        localStorage.setItem("legajoLogueado", element.legajo);
         this.obtenerDatosUsuario(element.legajo);
       }
       

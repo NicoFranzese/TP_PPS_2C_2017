@@ -5,22 +5,36 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Avisos de Importancia</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-  <br>
-  <div style="text-align: center">
-  <label class="item item-input">
-      <textarea placeholder="Mensaje que enviará" id="mensaje" name="mensaje" [(ngModel)]="mensaje"
-        style="width: 80%"></textarea>
-  </label>
-  <br>
-  <button ion-button (click)= "PushClicked()"> enviar</button>
-</div>
-</ion-content>
+  
+    <ion-navbar>
+      <ion-title>Avisos de Importancia</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <br>
+    <div class="list" style="text-align:center">
+        <ion-item>
+          <ion-label class = "item item-input item-select item-positive">Seleccione a quien está Destinado</ion-label>   
+            <ion-select [(ngModel)]="tipoUsuSeleccionado" id="tipoUsuSeleccionado" name="tipoUsuSeleccionado">
+                <ion-option selected>Seleccione Usuario</ion-option>
+                <ion-option>administrador</ion-option>
+                <ion-option>administrativo</ion-option>
+                <ion-option>alumno</ion-option>
+                <ion-option>docente</ion-option>
+                <ion-option>todos</ion-option>
+            </ion-select>
+          </ion-item>
+      </div>
+    <div style="text-align: center">    
+    <label class="item item-input">
+        <textarea placeholder="Mensaje que enviará" id="mensaje" name="mensaje" [(ngModel)]="mensaje"
+          style="width: 80%"></textarea>
+    </label>
+    <br>
+    <button ion-button (click)= "PushClicked()"> enviar</button>
+  </div>
+  </ion-content>
+  
