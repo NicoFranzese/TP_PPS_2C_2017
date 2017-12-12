@@ -77,29 +77,62 @@ export class CargaArchivosPage {
     this.papa.parse(file,{
       encoding: "ISO-8859-1",
       complete: (results) => {
+
+        let res = results.data[0][0].split(';').length
+
+        if(res == 2)
+        {
           for(let i = 0; i < results.data.length -1; i++)
           {
             arrCSV.push(results.data[i]);
           }
+          console.log(arrCSV);
           arrCSV.forEach(element => {
             let tupla = element[0].split(';') + element[1].split(';');
+            // console.log(tupla);
             let arrAlumno = tupla.split(',');
             this.arrAlumnosCSV.push(arrAlumno)
             
           });
           this.diaHorario = this.arrAlumnosCSV[0][2];
+        }
+        else
+        {
+          for(let i = 0; i < results.data.length -1; i++)
+          {
+            this.arrAlumnosCSV.push(results.data[i]);
+          }
+          this.diaHorario = this.arrAlumnosCSV[0][2];
+          console.log(this.arrAlumnosCSV);
+        }
       }
       
   });
   console.log(this.arrAlumnosCSV);
   this.hayArchivo = true;
+
+  console.log("Materia: ", this.materia);
+  console.log("Comision: ", this.comision);
+  console.log(this.arrAlumnosCSV);
  
   }
 
 
   private cargarDatos()
   {
+    this.operacionFinalizada();
     this.csvAlumnosProvider.cargarAlumnos(this.arrAlumnosCSV, this.materia, this.comision);
+  }
+
+  private operacionFinalizada()
+  {
+    let ref = this.csvAlumnosProvider.operacionFinalizada$.subscribe(
+      data =>
+      {
+        this.vaciarCSV();
+        ref.unsubscribe();
+      }
+    )
   }
 
   

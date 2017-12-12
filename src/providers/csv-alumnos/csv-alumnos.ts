@@ -16,9 +16,7 @@ export class CsvAlumnosProvider {
   private arrCursadasAlumnos = [];
   private ultimoIdCursadasAlumnos: number = 0;
   private toast;
-  private loader = this.loadingCtrl.create({
-    content: "Inscribiendo alumnos..."
-  });
+  private loader;
 
   private operacionFinalizada = new Subject();
   public operacionFinalizada$ = this.operacionFinalizada.asObservable();
@@ -63,7 +61,6 @@ export class CsvAlumnosProvider {
       data => 
       {
         this.arrCursadasAlumnos = data; 
-        this.obtenerUltimoIdCursadasAlumnos();
       },
       err => console.error(err)
     );
@@ -96,7 +93,7 @@ export class CsvAlumnosProvider {
       console.log("Comision: ", comisionUpp);
       console.log("Comision element: ", comElementUpp);
 
-      if(materiaUpp.localeCompare(matElementUpp) == 0 && comisionUpp.localeCompare(comElementUpp) == 0)
+      if(materiaUpp.trim().localeCompare(matElementUpp.trim()) == 0 && comisionUpp.trim().localeCompare(comElementUpp.trim()) == 0)
       {
         idCurso = element.id_curso;
       }
@@ -126,28 +123,31 @@ export class CsvAlumnosProvider {
 
   public cargarAlumnos(arrAlumnos, materia, comision)
   {
-    this.loader.present();
+    this.presentLoading("Insertando alumnos");
+
+    this.obtenerUltimoIdCursadasAlumnos();
 
     let idCurso = this.obtenerIdCurso(materia, comision);
 
     if(idCurso)
     {
       let idCursada = this.obtenerIdCursada(idCurso);
+      // let arrGuardar = [];
       let cantSubidas: number = 0;
 
       //CARGO LOS ALUMNOS
       arrAlumnos.forEach(element => {
         this.ultimoIdCursadasAlumnos += 1;
-        this.dataProvider.addItem('cursadas_alumnos',
-        {
+        this.dataProvider.addItem('cursadas_alumnos/' + this.ultimoIdCursadasAlumnos,{
           'id_cursada_alumno': this.ultimoIdCursadasAlumnos, 
           'legajo_alumno': element[0],
           'id_cursada': idCursada
         });
         cantSubidas += 1;
       }); 
-      
-      //Si se suben todos los alumnos cargo la pantalla
+
+      // this.dataProvider.addItem('cursadas_alumnos', arrGuardar);
+  
       if(cantSubidas == arrAlumnos.length)
       {
         this.loader.dismiss();
@@ -156,8 +156,9 @@ export class CsvAlumnosProvider {
       else
       {
         this.loader.dismiss();
-        this.crearToast("Hubo un problema al guardar los usuarios");
+        this.crearToast("Carga errònea, intente màs tarde");
       }
+
       this.operacionFinalizada.next();
     }
     else
@@ -173,6 +174,13 @@ export class CsvAlumnosProvider {
       message: msg,
       duration: 3000
     }).present();
+  }
+
+  presentLoading(msg) {
+    this.loader = this.loadingCtrl.create({
+      content: msg,
+    });
+    this.loader.present();
   }
 
 
