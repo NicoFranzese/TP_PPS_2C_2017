@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-datos';
 import { PrincipalPage } from '../principal/principal'; 
 import { ToastController } from 'ionic-angular';
 
@@ -26,7 +27,8 @@ export class EncuestaPage {
               private navParams: NavParams,
               private alertCtrl: AlertController,
               private dataProvider: DataProvider,
-              private toastCtrl: ToastController) 
+              private toastCtrl: ToastController,
+              private almacenDatos: AlmacenDatosProvider) 
   {
   }
 
@@ -122,8 +124,7 @@ export class EncuestaPage {
   private GuardarRespuesta(obj, pregunta)
   {
     let idPregunta = this.arrPreguntas.indexOf(pregunta);
-    let legajo = 16658;
-    this.dataProvider.addItem('cuestionarios/' + this.idEncuesta + '/' + 'arrPreguntas' + '/' + idPregunta + '/' + 'arrRespondidos' + '/' + legajo, obj);
+    this.dataProvider.addItem('cuestionarios/' + this.idEncuesta + '/' + 'arrPreguntas' + '/' + idPregunta + '/' + 'arrRespondidos' + '/' + this.almacenDatos.usuarioLogueado['legajo'], obj);
     this.arrClase[idPregunta] = "row backGreen";
   }
 

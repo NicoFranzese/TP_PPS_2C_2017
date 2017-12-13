@@ -53,27 +53,7 @@ import { NotificationProvider } from '../providers/notification/notification';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { QrEncuestasProvider } from '../providers/qr-encuestas/qr-encuestas';
 
-// import { Push,PushObject, PushOptions  } from '@ionic-native/push';
 
-// import { CloudSettings, CloudModule } from '@ionic/cloud-angular'
-
-// const cloudSettings: CloudSettings = {
-//   'core' : {
-//     'app_id' : '7b6edbfb'    
-//   },
-//   'push':{
-//     'sender_id' : '90645577011',
-//     'pluginConfig': {
-//       'ios': {
-//         'badge' : true,
-//         'sound' : true
-//       },
-//       'android': {
-//         'iconColor' : '#343434'
-//       }
-//     }
-//   }
-// }
 
 
 @NgModule({

@@ -42,6 +42,7 @@ export class QrEncuestasProvider {
   {
     let encontradoBand: boolean = false;
     let empezoVotacion;
+    let tituloAlert;
 
     if(this.almacenDatosProvider.usuarioLogueado.tipo_entidad == 'docente')
     {
@@ -52,16 +53,26 @@ export class QrEncuestasProvider {
         if(element.id == idLeido)
         {
           empezoVotacion = this.empezoVotacion(element);
+          if(this.almacenDatosProvider.calcularTiempoRestante(element) >= 0)
+          {
+            tituloAlert = 'Votaciòn terminada';
+          }
+          else
+          {
+            tituloAlert = 'La votaciòn ya comenzò'
+          }
+
+          console.log(tituloAlert);
           encontradoBand = true;
         }
       });
 
       if(encontradoBand)
       {
-        if(empezoVotacion)
+        if(empezoVotacion || tituloAlert == 'Votaciòn terminada')
         {
           let alerta = this.alertCtrl.create({
-            title: 'La votaciòn ya comenzò',
+            title: tituloAlert,
             message: '¿Que acciòn desea realizar?',
             buttons: [
               {
@@ -129,6 +140,54 @@ export class QrEncuestasProvider {
     }
     if(this.almacenDatosProvider.usuarioLogueado.tipo_entidad == 'alumno')
     {
+      this.arrCuestionarios.forEach(element => 
+        {
+        console.log(element.id);
+        if(element.id == idLeido)
+        {
+          encontradoBand = true;
+          
+          if(this.almacenDatosProvider.calcularTiempoRestante(element) >= 0)
+          {
+            tituloAlert = "Votaciòn terminada";
+          }
+          else
+          {
+     
+            if(this.alumnoVoto(element))
+            {
+              
+              tituloAlert = "Usted ya ha votado";
+            }
+            else
+            {
+              this.nav.push(EncuestaPage, {'id': idLeido});
+            }
+          }
+          if(tituloAlert == "Votaciòn terminada" || tituloAlert == "Usted ya ha votado")
+          {
+            let alerta = this.alertCtrl.create({
+              title: tituloAlert,
+              message: '¿Que acciòn desea realizar?',
+              buttons: [
+                {
+                  text: 'Cancelar',
+                  role: 'cancel',
+                  handler: data => {
+                  }
+                },
+                {
+                  text: 'Ver resultados',
+                  handler: data => {
+                   
+                  }
+                }
+              ]
+            });
+            alerta.present();
+          }
+        }
+      });
     }
      
   }
@@ -157,6 +216,28 @@ export class QrEncuestasProvider {
       message: msg,
       duration: 3000
     }).present();
+  }
+
+  //Compruebo que el alumno haya realizado la votacion en la encuesta recibida
+  //Recorro todas las preguntas de este arreglo y verifico que se encuentren las respuestas
+  //en la posicion mediante su legajo
+  private alumnoVoto(cuestionario)
+  {
+    let legajo = this.almacenDatosProvider.usuarioLogueado['legajo'];
+    let band = true;
+
+    cuestionario['arrPreguntas'].forEach(element => {
+      if(element.arrRespondidos)
+      {
+        if(!element.arrRespondidos[legajo])
+          band = false;
+      }
+      else
+        band = false;
+    });
+
+  return band;
+    
   }
 
 

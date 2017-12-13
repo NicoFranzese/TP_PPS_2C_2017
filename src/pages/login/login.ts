@@ -14,9 +14,8 @@ import { ToastController } from 'ionic-angular';
 export class LoginPage implements OnInit{
 
   private loader;
-  public email ="adminis@trativo";
+  public email ="maxi@neiner";
   public clave= 123;
-  // public tipoUsuSeleccionado;
   private arrUsuarios = [];
   private arrEntidades = [];
   private referenciaSubj;
