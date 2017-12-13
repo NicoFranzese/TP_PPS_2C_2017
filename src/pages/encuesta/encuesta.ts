@@ -47,16 +47,17 @@ export class EncuestaPage {
       {
         if(data == undefined)
         {
-          this.mostrarToast("Emncuesta inexistente");
+          this.mostrarToast("Encuesta inexistente");
           this.navCtrl.push(PrincipalPage);
         }
         else
         {
           this.arrEncuesta = data;
+          console.log(this.arrEncuesta);
           this.arrPreguntas = data[0];
           this.pintarRows();
-          this.titulo = data[6];
-          this.cierre = data[2].toString() + " " + data[4].toString();
+          this.titulo = data[7];
+          this.cierre = data[1].toString() + " " + data[3].toString();
           this.idEncuesta = this.arrEncuesta[5];
         }
       },

@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the GraficosEstadisticosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +9,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class GraficosEstadisticosPage {
 
+  private idEncuesta;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GraficosEstadisticosPage');
+
+    //NICO: cuando le tengo que mostrar al usuario el resultado de la encuesta lo mando a esta pàgina
+    //y te mando el id de la encuesta
+
+    if(this.navParams.get('idEncuesta'))
+      this.idEncuesta = this.navParams.get('idEncuesta');
   }
 
 }

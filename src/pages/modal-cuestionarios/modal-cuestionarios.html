@@ -19,11 +19,11 @@
 
     <ion-item>
       <ion-label>Termina el dìa</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="fechaFin"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" cancelText="Cancelar" doneText="Aceptar" [(ngModel)]="fechaFin"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>A la hora</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="horaFin"></ion-datetime>
+      <ion-datetime displayFormat="h:mm A" cancelText="Cancelar" doneText="Aceptar" pickerFormat="h mm A" [(ngModel)]="horaFin"></ion-datetime>
     </ion-item>
   </ion-list>
  
@@ -50,7 +50,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <button class="btn mt-5" (click)="mostrarAlertPregunta('Nueva pregunta')">Agregar pregunta</button>
+    <button class="btn mt-5" (click)="mostrarAlertPregunta('Nueva pregunta')" *ngIf="arrPreguntas.length == 0">Agregar pregunta</button>
 
 
 

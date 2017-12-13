@@ -261,7 +261,8 @@ export class ModalCuestionariosPage {
       'horaInicio': this.horaInicio,
       'fechaFin': arrFechaFin[2] +"/"+ arrFechaFin[1] +"/"+ arrFechaFin[0],
       'horaFin': this.horaFin,
-      'arrPreguntas': this.arrPreguntas
+      'arrPreguntas': this.arrPreguntas,
+      'legajo_creador': this.almacenDatos.usuarioLogueado['legajo']
     };
     console.log(obj);
 

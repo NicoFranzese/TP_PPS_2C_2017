@@ -4,9 +4,11 @@ import { DataProvider } from '../../providers/data/data';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { EncuestaPage } from '../../pages/encuesta/encuesta';
 import { AbmCuestionariosPage } from '../../pages/abm-cuestionarios/abm-cuestionarios';
+import { GraficosEstadisticosPage } from '../../pages/graficos-estadisticos/graficos-estadisticos';
 import { App } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+
 
 
 @Injectable()
@@ -43,6 +45,7 @@ export class QrEncuestasProvider {
     let encontradoBand: boolean = false;
     let empezoVotacion;
     let tituloAlert;
+    let encuesta;
 
     if(this.almacenDatosProvider.usuarioLogueado.tipo_entidad == 'docente')
     {
@@ -52,49 +55,19 @@ export class QrEncuestasProvider {
         console.log(element.id);
         if(element.id == idLeido)
         {
-          empezoVotacion = this.empezoVotacion(element);
-          if(this.almacenDatosProvider.calcularTiempoRestante(element) >= 0)
-          {
-            tituloAlert = 'Votaciòn terminada';
-          }
-          else
-          {
-            tituloAlert = 'La votaciòn ya comenzò'
-          }
-
-          console.log(tituloAlert);
+          encuesta = element;
           encontradoBand = true;
         }
       });
 
       if(encontradoBand)
       {
-        if(empezoVotacion || tituloAlert == 'Votaciòn terminada')
-        {
-          let alerta = this.alertCtrl.create({
-            title: tituloAlert,
-            message: '¿Que acciòn desea realizar?',
-            buttons: [
-              {
-                text: 'Cancelar',
-                role: 'cancel',
-                handler: data => {
-                }
-              },
-              {
-                text: 'Ver resultados',
-                handler: data => {
-                 alert('Ir a resultados');
-                }
-              }
-            ]
-          });
-          alerta.present();
-        }
-        else
+
+        //Si el usuario (profesor) es el creador de la encuesta lo dejo editarla y ver los resultados
+        if(encuesta.legajo_creador == this.almacenDatosProvider.usuarioLogueado['legajo'])
         {
           let alert = this.alertCtrl.create({
-            title: 'La votaciòn aùn no comenzò',
+            title: 'Encuesta encontrada',
             message: '¿Que acciòn desea realizar?',
             inputs: [
               {
@@ -114,7 +87,7 @@ export class QrEncuestasProvider {
                 role: 'cancel',
                 handler: data => 
                 {
-                  
+
                 }
               },
               {
@@ -125,12 +98,57 @@ export class QrEncuestasProvider {
                     case 'editar':
                       this.nav.push(AbmCuestionariosPage, {'id': idLeido});
                     break;
+                    case 'resultados':
+                      this.nav.push(GraficosEstadisticosPage, {'idEncuesta': idLeido});
+                    break;
                   }
                 }
               }
             ]
           });
           alert.present();
+        }
+        else
+        {
+          if(this.almacenDatosProvider.calcularTiempoRestante(encuesta) < 0)
+          {
+            let alert = this.alertCtrl.create({
+              title: '¡Importante!',
+              message: 'La votaciòn aùn no terminò',
+              buttons: [
+                {
+                  text: 'Aceptar',
+                  handler: data => {
+                  }
+                }
+              ]
+            });
+            alert.present();
+          }
+          else
+          {
+            let alert = this.alertCtrl.create({
+              title: 'La votación ha terminado',
+              message: '¿Desea ver el resultado?',
+              buttons: [
+                {
+                  text: 'Cancelar',
+                  role: 'cancel',
+                  handler: data => 
+                  {
+                    
+                  }
+                },
+                {
+                  text: 'Ver resultados',
+                  handler: data => {
+                    this.nav.push(GraficosEstadisticosPage, {'idEncuesta': idLeido});
+                  }
+                }
+              ]
+            });
+            alert.present();
+          }
         }
       }
       else
@@ -179,7 +197,7 @@ export class QrEncuestasProvider {
                 {
                   text: 'Ver resultados',
                   handler: data => {
-                   
+                    this.nav.push(GraficosEstadisticosPage, {'idEncuesta': idLeido});
                   }
                 }
               ]
