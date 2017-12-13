@@ -11,53 +11,58 @@
 
 <ion-content class="cuerpo" padding>
 
+  <ion-card>
+    <ion-card-content class="card-header">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <span>{{com}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <p class="text-center">poner fecha</p>
+    </ion-card>
+
   <ion-grid>
     <ion-row class="row row-header">
       <ion-col class="col col-1">
         <!-- <ion-checkbox style="padding-top:5px" color="dark" (ionChange)="changeAll($event)" [(ngModel)]="chkAlumno" ></ion-checkbox> -->
       </ion-col>
       <ion-col class="col col-3">Legajo</ion-col>
-      <ion-col class="col col-6">Alumno</ion-col>
-      <ion-col class="col col-2" text-center>Inasist.</ion-col>
+      <ion-col class="col col-8">Alumno</ion-col>
     </ion-row>
 
-    <ion-row class="row-grid" *ngFor="let item of items" align-items-center>
+    <ion-row class="row-grid" *ngFor="let item of items"  align-items-center (click)="addAbsence(item.legajo)" [ngStyle]="{'color': getStyle(item.legajo,'color')}">
       <ion-col class="col col-1">
-        <ion-checkbox style="padding-top:5px" color="dark" (ionChange)="addValidatedItem($event)"></ion-checkbox>
+          <ion-icon name="checkmark-circle" *ngIf="getStyle(item.legajo,'icon') == '0'"></ion-icon>
+          <ion-icon name="alert" *ngIf="getStyle(item.legajo,'icon') == '1'"></ion-icon>
+          <ion-icon name="remove-circle" *ngIf="getStyle(item.legajo,'icon') == '2'"></ion-icon>
       </ion-col>
       <ion-col class="col col-3">{{item.legajo}}</ion-col>
-      <ion-col class="col col-6 cortar">{{item.nombre_apellido}}</ion-col>
-
-      <ion-col class="col col-1" text-center>{{item.inasistencias}}</ion-col>
-      <ion-col class="col col-1">
-        <div class="btn-group" style="height:50;width:252;">
-          <button class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <ion-icon name="more"></ion-icon>
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" (click)="addAbsence('1.0',item.legajo)">Ausente</a>
-            <a class="dropdown-item" href="#" (click)="addAbsence('0.5',item.legajo)">Media falta</a>
-          </div>
-        </div>
-      </ion-col>
+      <ion-col class="col col-8 cortar">{{item.nombre_apellido}}</ion-col>
     </ion-row>
 
     <ion-row *ngIf="initialItemsLength == '0'" class="mt-5">
-        <br><br><br>
-        <ion-card>
-            <ion-card-content padding-top>
-                <h2>No hay datos para mostrar. Por favor, seleccione una comisión...</h2>
-            </ion-card-content>
-          </ion-card>
+      <br>
+      <br>
+      <br>
+      <ion-card>
+        <ion-card-content padding-top>
+          <h2>No hay datos para mostrar. Por favor, seleccione una comisión...</h2>
+        </ion-card-content>
+      </ion-card>
     </ion-row>
 
-    <br><br><br>
+    <br>
+    <br>
+    <br>
   </ion-grid>
 
 
 
   <ion-fab bottom>
-    <ion-grid>    
+    <ion-grid>
       <ion-row padding-left class="ml-5">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn-fab" ion-fab mini (click)="presentActionSheet()">
@@ -66,7 +71,7 @@
         <button class="btn-fab" ion-fab mini (click)="test()">
           <ion-icon name="camera"></ion-icon>
         </button>
-        <button class="btn-fab" ion-fab mini (click)="test()">
+        <button class="btn-fab" ion-fab mini (click)="clear()">
           <ion-icon name="trash"></ion-icon>
         </button>
         <button class="btn-fab" ion-fab mini (click)="test()">

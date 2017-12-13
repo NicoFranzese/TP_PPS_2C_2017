@@ -14,27 +14,33 @@ import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-
 export class ControlAsistenciaPage {
   
   items: any[];
+  arrAusencias: any[] = [];
+  lastId : number;
   itemsLengthAux  : number = 0;
   initialItemsLength : number = 0;
+  tbCursadasAlumno : any;
+  comision : string;
 
   constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
               public dataservice : DataProvider,              public loadingCtrl: LoadingController, public modalCtrl: ModalController,
               public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController) {
        
         console.clear(); 
-        let comision = navParams.get("comision");
-       if(comision!=null){this.getListaAlumnos(comision)}
+       this.comision = navParams.get("comision");
+       if(this.comision!=null){this.getListaAlumnos(this.comision)}
   }
 
   ionViewDidLoad() {}
 
   getListaAlumnos(comision){
-    let tbEntidadesPersona,tbCursadasAlumno,tbCursada,tbCursos,auxCursos,auxCursadasAlumno,auxCursada,auxCursos2,auxAlumno : any;
+    let tbEntidadesPersona,tbCursada,tbCursos,auxCursos,auxCursadasAlumno,auxCursada,auxCursos2,auxAlumno : any;
     let com = comision.toString().split("-");
     this.items = [];
+    this.getDBData("asistencias");
+    this.lastId = Number(localStorage.getItem("lastId"));
 
     tbEntidadesPersona  = JSON.parse(localStorage.getItem("entidades_persona"));
-    tbCursadasAlumno    = JSON.parse(localStorage.getItem("cursadas_alumnos"));
+    this.tbCursadasAlumno    = JSON.parse(localStorage.getItem("cursadas_alumnos"));
     tbCursada           = JSON.parse(localStorage.getItem("cursadas"));
     tbCursos            = JSON.parse(localStorage.getItem("cursos")); 
 
@@ -42,18 +48,32 @@ export class ControlAsistenciaPage {
     auxCursos2 =  auxCursos.find((item)=> item.sigla_materia == com[1]);
 	
     auxCursada = tbCursada.find((item)=> item.id_curso == auxCursos2.id_curso);
-    auxCursadasAlumno = tbCursadasAlumno.filter((item)=> item.id_cursada == auxCursada.id_cursada);
+    auxCursadasAlumno = this.tbCursadasAlumno.filter((item)=> item.id_cursada == auxCursada.id_cursada);
 
     // ya tengo los alumnos que cursan la comision recibida por param
     console.info("auxCursadasAlumno",auxCursadasAlumno);
     auxCursadasAlumno.forEach(element => {
       auxAlumno = tbEntidadesPersona.find((item)=> item.legajo == element.legajo_alumno);
       this.items.push(auxAlumno);
-    });
 
-    if(this.items.length > 0){this.initialItemsLength = 1;}
+      this.initialItemsLength = 1;
 
-  }
+      // inicializo el array para toma de asistencia
+      let obj = 
+        {
+          'id_asistencia': this.lastId + 1,
+          'id_cursada_alumno' : element.id_cursada_alumno,
+          'fecha': Date(),
+          'inasistencia' : 1
+        };
+      this.lastId = this.lastId + 1;
+        
+      this.arrAusencias.push(obj);  
+      
+     }); 
+   
+
+  }//getListaAlumnos
 
 
   getDBData(entityName){
@@ -62,11 +82,11 @@ export class ControlAsistenciaPage {
       content: 'Espere por favor...'
     });
     loading.present(); 
-
+ 
     this.dataservice.getItems(entityName).subscribe(
       datos => {
-          this.items = datos;
-              // localStorage.setItem(entityName,JSON.stringify(this.items));
+          localStorage.setItem(entityName,JSON.stringify(datos));
+          localStorage.setItem("lastId",datos[datos.length -1].id_asistencia);
           setTimeout(() => {
             loading.dismiss();
           }, 2000);
@@ -74,9 +94,10 @@ export class ControlAsistenciaPage {
       error => console.error(error),
       () => console.log("ok")
     );
+
   }//getDBData
 
-
+  
   addValidatedItem(e){
    if(e.checked){
     this.itemsLengthAux = this.itemsLengthAux + 1;
@@ -95,15 +116,47 @@ export class ControlAsistenciaPage {
   }//validateGrid()
 
 
-  addAbsence(parValue,legajo){
-    this.items.forEach(element => {
-      if (element.legajo==legajo) {
-       element.inasistencias =  Number.parseFloat(parValue);
+  addAbsence(parLegajo){
+    let auxAlumno : any;
+    auxAlumno = this.tbCursadasAlumno.find((item)=> item.legajo_alumno == parLegajo);
+
+    this.arrAusencias.forEach(element => {
+      if (element.id_cursada_alumno==auxAlumno.id_cursada_alumno) {
+        if (element.inasistencia == 1){
+          element.inasistencia= 0
+        }else if (element.inasistencia == 0){
+          element.inasistencia = Number.parseFloat("0.5");
+        }else{
+          element.inasistencia= 1;
+        }
       }
     });
-        
+   
   }//addAbsence()
 
+  getStyle(parLegajo,styleType){
+    let result : any;
+    let auxAlumno : any;
+    auxAlumno = this.tbCursadasAlumno.find((item)=> item.legajo_alumno == parLegajo);
+    this.arrAusencias.forEach(element => {
+      if (element.id_cursada_alumno==auxAlumno.id_cursada_alumno) {
+          if(Number.parseFloat(element.inasistencia) == 0.0){
+              result = styleType == "icon" ? 0 : "#367F4F";
+          }else if(Number.parseFloat(element.inasistencia) == 1.0){
+              result = styleType == "icon" ? 2 : "#FF7A66";
+          }else {
+              result = styleType == "icon" ? 1 : "#BF9D38";
+          }
+      }
+    });
+    return result;
+  }
+
+  clear(){
+    this.arrAusencias.forEach(element => {
+      element.inasistencia = 1;
+    });
+  }
 
   presentActionSheet() {
     let viewIndex = this.viewCtrl.index;
