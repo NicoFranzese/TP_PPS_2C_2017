@@ -10,6 +10,7 @@ import { ControlAsistenciaPage } from '../pages/control-asistencia/control-asist
 import { AbmCuestionariosPage } from '../pages/abm-cuestionarios/abm-cuestionarios';
 import { NotificationProvider } from '../providers/notification/notification';
 import { EncuestaPage } from '../pages/encuesta/encuesta';
+import { AvisoImportanciaPage } from '../pages/aviso-importancia/aviso-importancia';
 
 // import { Push, PushToken } from '@ionic/cloud-angular'
 
@@ -22,6 +23,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // rootPage: any = EncuestaPage;
+  // rootPage: any = AbmCuestionariosPage;
   rootPage: any = LoginPage;
 
   //PARA EL SPLASH ANIMADO

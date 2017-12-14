@@ -45,14 +45,26 @@ $app-direction: ltr;
   line-height: 30px;
   border-radius: 6px;
   background: #012c3d;
+  font-family: 'Roboto';
 }
 
 .btn-azul{
   background: #488aff;
 }
 
+.btn-default{
+  background: #012c3d !important;
+  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+}
+
 .btn-fab{
   background-color: #033c52 !important;
+}
+
+.img-block
+{
+    display: block;
+    margin: auto;
 }
 
 // Named Color Variables

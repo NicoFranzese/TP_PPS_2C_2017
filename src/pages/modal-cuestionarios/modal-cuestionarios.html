@@ -8,6 +8,9 @@
 
 
 <ion-content padding>
+
+    <img src="./assets/img/test2.png" width="150" class="img-block mb-3">
+
     <ion-row class="row row-header mb-3">
         <ion-col class="col col-12"><h3>Datos bàsicos</h3></ion-col>
       </ion-row>
@@ -31,12 +34,12 @@
 
 
 
-  <ion-grid *ngIf="arrPreguntas.length != 0" class="mt-5">
+  <ion-grid *ngIf="arrPreguntas.length != 0" class="mt-1">
       <ion-row class="row row-header">
-        <ion-col class="col col-12"><h3>Preguntas</h3></ion-col>
+        <ion-col class="col col-12"><h3>Pregunta</h3></ion-col>
       </ion-row>
       <ion-row *ngFor="let item of arrPreguntas" align-items-center>
-        <ion-col class="col col-10 cortar">{{item.pregunta}}</ion-col>
+        <ion-col class="col col-10 cortar"><span id="pregunta">{{item.pregunta}}</span></ion-col>
         <ion-col class="col col-2" class="text-right">
           <div class="dropdown">
             <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

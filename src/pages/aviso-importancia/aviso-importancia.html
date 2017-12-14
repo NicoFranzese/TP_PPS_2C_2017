@@ -13,12 +13,12 @@
   </ion-header>
   
   
-  <ion-content padding>
-    <br>
+  <ion-content id="cuerpo" padding>
+    <div class="animated rotateIn"><img src="./assets/img/push2.png" class="img-block mt-4 mb-4" width="200"></div>
     <div class="list" style="text-align:center">
-        <ion-item>
+        <ion-item class="animated bounceInLeft">
           <ion-label class = "item item-input item-select item-positive">Seleccione a quien está Destinado</ion-label>   
-            <ion-select [(ngModel)]="tipoUsuSeleccionado" id="tipoUsuSeleccionado" name="tipoUsuSeleccionado">
+            <ion-select okText="Aceptar" cancelText="Cancelar" [(ngModel)]="tipoUsuSeleccionado" id="tipoUsuSeleccionado" name="tipoUsuSeleccionado">
                 <ion-option selected>Seleccione Usuario</ion-option>
                 <ion-option>administrador</ion-option>
                 <ion-option>administrativo</ion-option>
@@ -29,12 +29,12 @@
           </ion-item>
       </div>
     <div style="text-align: center">    
-    <label class="item item-input">
+    <!-- <label class="item item-input"> -->
         <textarea placeholder="Mensaje que enviará" id="mensaje" name="mensaje" [(ngModel)]="mensaje"
-          style="width: 80%"></textarea>
-    </label>
+          class="mt-4 animated bounceInRight"></textarea>
+    <!-- </label> -->
     <br>
-    <button ion-button (click)= "PushClicked()"> enviar</button>
+    <button ion-button class="btn btn-default animated bounceInUp" (click)= "PushClicked()">Enviar &nbsp;<ion-icon name="send"></ion-icon></button>
   </div>
   </ion-content>
   
