@@ -113,4 +113,5 @@
     </plugin>
     <allow-navigation href="http://192.168.0.4:8100" />
     <allow-navigation href="http://192.168.56.1:8100" />
+    <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
 </widget>

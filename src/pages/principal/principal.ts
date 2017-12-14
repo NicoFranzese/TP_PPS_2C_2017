@@ -53,6 +53,8 @@ export class PrincipalPage {
 
   private itemSelected(pageName) {  
 
+    this.almacenDatosProvider.reproducirSonido('plop');
+
     switch (pageName) {
       case "control-asistencia": {
         this.navCtrl.push(ControlAsistenciaPage);
@@ -103,6 +105,7 @@ export class PrincipalPage {
   }
 
   private logout() {
+    this.almacenDatosProvider.reproducirSonido('plop');
     this.loginProvider.logOut();
     this.navCtrl.push(LoginPage);
   }

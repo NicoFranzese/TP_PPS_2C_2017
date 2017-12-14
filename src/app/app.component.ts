@@ -110,6 +110,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       //PARA EL SPLASH ANIMADO
+      this.almacenDatosProvider.reproducirSonido('beep');
       setTimeout(() => this.splash = false, 4000);
 
       // this.RegisterNotification();

@@ -4,11 +4,10 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule }    from '@angular/http';
 import { PapaParseModule } from 'ngx-papaparse';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-
+import { NativeAudio } from '@ionic-native/native-audio';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -16,11 +15,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { PrincipalPage } from '../pages/principal/principal';
-
 import { AbmAdministrativosPage } from '../pages/abm-administrativos/abm-administrativos';
 import { AbmAlumnosPage } from '../pages/abm-alumnos/abm-alumnos';
 import { AbmCuestionariosPage } from '../pages/abm-cuestionarios/abm-cuestionarios';
@@ -47,9 +44,7 @@ import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-e
 import { ResultadoEscaneadoProvider } from '../providers/resultado-escaneado/resultado-escaneado';
 import { CsvAlumnosProvider } from '../providers/csv-alumnos/csv-alumnos';
 import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
-
 import { NotificationProvider } from '../providers/notification/notification';
-
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { QrEncuestasProvider } from '../providers/qr-encuestas/qr-encuestas';
 
@@ -129,7 +124,8 @@ import { QrEncuestasProvider } from '../providers/qr-encuestas/qr-encuestas';
     File,
     LocalNotifications,
     NotificationProvider,
-    QrEncuestasProvider    // ,    Push
+    QrEncuestasProvider,    // ,    Push
+    NativeAudio
   ]
 })
 export class AppModule {}

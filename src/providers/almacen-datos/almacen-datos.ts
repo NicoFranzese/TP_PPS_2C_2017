@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'
+import { NativeAudio } from '@ionic-native/native-audio';
 
 
   //Este servicio se usa para comunicar datos entre componentes
@@ -20,8 +21,11 @@ export class AlmacenDatosProvider {
   public ultimoIdCuestionario: number;
   public cuestionarioEditar;
 
-  constructor() {
-    
+  //Para saber si es la primera vez que se abre la app, le asigno tiempo o no al sonido
+  public primeraVezApp: boolean = true;
+
+  constructor(private nativeAudio: NativeAudio) {
+    this.instanciarAudios();
   }
 
   public calcularHorasDuracion(cuestionario, medida)
@@ -74,6 +78,19 @@ export class AlmacenDatosProvider {
     let duracion = this.calcularHorasDuracion(cuestionario, 'mili');
 
     return res - Number.parseInt(duracion.toString());
-
   }
+
+  private instanciarAudios()
+  {
+    this.nativeAudio.preloadSimple('plop', 'assets/sound/plop.mp3').then(msg => console.log(msg), err => console.error(err));
+    this.nativeAudio.preloadSimple('intro', 'assets/sound/intro.mp3').then(msg => console.log(msg), err => console.error(err));
+    this.nativeAudio.preloadSimple('beep', 'assets/sound/beep.mp3').then(msg => console.log(msg), err => console.error(err));
+  }
+
+  public reproducirSonido(id: string)
+  {
+    this.nativeAudio.play(id).then(msg => console.log(msg), err => console.error(err));
+  }
+
+
 }

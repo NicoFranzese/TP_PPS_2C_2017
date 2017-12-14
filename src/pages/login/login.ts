@@ -35,7 +35,14 @@ export class LoginPage {
 
   ionViewDidLoad() {
     
-
+    if(this.almacenDatos.primeraVezApp)
+    {
+      setTimeout(() =>this.almacenDatos.reproducirSonido('intro'), 4500);
+      this.almacenDatos.primeraVezApp = false;
+    }
+    else
+      this.almacenDatos.reproducirSonido('intro');
+  
     this.loginProvider.logOut();
     this.traerUsuarios();
     this.traerEntidades();
