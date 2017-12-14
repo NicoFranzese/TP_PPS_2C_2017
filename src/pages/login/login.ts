@@ -11,7 +11,7 @@ import { ToastController } from 'ionic-angular';
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage implements OnInit{
+export class LoginPage {
 
   private loader;
   public email ="maxi@neiner";
@@ -19,6 +19,10 @@ export class LoginPage implements OnInit{
   private arrUsuarios = [];
   private arrEntidades = [];
   private referenciaSubj;
+
+  //PARA EL SPLASH ANIMADO
+  private splash = true;
+  
 
   constructor(private navCtrl: NavController,
               private loginProvider: LoginProvider,
@@ -29,12 +33,14 @@ export class LoginPage implements OnInit{
   {
   }
 
-  ngOnInit()
-  {
+
+  ionViewDidLoad() {
+    //PARA EL SPLASH ANIMADO
+    setTimeout(() => this.splash = false, 4000);
+
     this.loginProvider.logOut();
     this.traerUsuarios();
     this.traerEntidades();
-
   }
 
 
