@@ -20,8 +20,7 @@ export class LoginPage {
   private arrEntidades = [];
   private referenciaSubj;
 
-  //PARA EL SPLASH ANIMADO
-  private splash = true;
+
   
 
   constructor(private navCtrl: NavController,
@@ -35,8 +34,7 @@ export class LoginPage {
 
 
   ionViewDidLoad() {
-    //PARA EL SPLASH ANIMADO
-    setTimeout(() => this.splash = false, 4000);
+    
 
     this.loginProvider.logOut();
     this.traerUsuarios();

@@ -24,6 +24,9 @@ export class MyApp {
   // rootPage: any = EncuestaPage;
   rootPage: any = LoginPage;
 
+  //PARA EL SPLASH ANIMADO
+  private splash = true;
+
   pages: Array<{title: string, component: any}> = [];
 
   constructor(public platform: Platform, 
@@ -106,6 +109,8 @@ export class MyApp {
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      //PARA EL SPLASH ANIMADO
+      setTimeout(() => this.splash = false, 4000);
 
       // this.RegisterNotification();
       // this.Notification();
