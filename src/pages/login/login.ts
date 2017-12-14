@@ -32,7 +32,6 @@ export class LoginPage {
   {
   }
 
-
   ionViewDidLoad() {
     
     if(this.almacenDatos.primeraVezApp)

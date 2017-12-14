@@ -24,6 +24,8 @@ export class QrEncuestasProvider {
               private almacenDatosProvider: AlmacenDatosProvider,
               private alertCtrl: AlertController) 
   {
+    
+    //Para que funcione el NavCtller en el Provider
     this.nav = this.app.getActiveNav();
     this.traerCuestionarios();
   }

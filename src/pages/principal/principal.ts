@@ -98,7 +98,7 @@ export class PrincipalPage {
         break;
       }
       case "qr-encuestas": {
-        this.qrEncuestasProvider.verificarEntidad(2);
+        this.qrEncuestasProvider.escanearQR();
         break;
       }
     }

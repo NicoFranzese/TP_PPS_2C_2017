@@ -5,11 +5,14 @@ import { DataProvider } from '../data/data';
 import { LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { Subject } from 'Rxjs';
-
+import { App } from 'ionic-angular';
+import { ControlAsistenciaPage } from '../../pages/control-asistencia/control-asistencia';
 
 
 @Injectable()
 export class CsvAlumnosProvider {
+
+  private nav;
 
   private arrCursadas = [];
   private arrCursos = [];
@@ -24,8 +27,12 @@ export class CsvAlumnosProvider {
 
   constructor(private dataProvider: DataProvider,
               private loadingCtrl: LoadingController,
-              private toastCtrl: ToastController) 
+              private toastCtrl: ToastController,
+              private app: App) 
   {
+    //Para que funcione el NavCtller en el Provider
+    this.nav = this.app.getActiveNav();
+
     this.traerArrCursadas();
     this.traerArrCursos();
     this.traerArrCursadasAlumnos();
@@ -152,6 +159,11 @@ export class CsvAlumnosProvider {
       {
         this.loader.dismiss();
         this.crearToast("¡Usuarios guardados exitosamente!");
+        
+        //Envio al usuario a la pagina de toma de asistencia con la comision a tomar
+        let comision_materia = comision.toUpperCase() +'-'+ materia;
+        this.nav.push(ControlAsistenciaPage, {'comision': comision_materia});
+        
       }
       else
       {
