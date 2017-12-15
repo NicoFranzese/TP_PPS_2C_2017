@@ -3,6 +3,8 @@ import { IonicPage,NavController,NavParams,ModalController,ActionSheetController
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { DataProvider } from '../../providers/data/data';
+import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
+
 import { LoadingController } from 'ionic-angular';
 import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
 import { Subject } from 'rxjs/Subject';
@@ -33,7 +35,7 @@ export class ControlAsistenciaPage {
 
   constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
               public dataservice : DataProvider,              public loadingCtrl: LoadingController, public modalCtrl: ModalController,
-              public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,     ) {
+              public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,      private gFx: GlobalFxProvider) {
          
     console.clear(); 
     this.getDate();
@@ -161,31 +163,6 @@ export class ControlAsistenciaPage {
 
   }//getDBData
 
-  
-  sendList(){
-    this.arrAusencias.forEach(element => {
-      this.dataservice.addItem('asistencias/' + element.id_asistencia , element);
-    });
-  }
-
-  addAbsence(parLegajo){
-    let auxAlumno : any;
-    auxAlumno = this.tbCursadasAlumno.find((item)=> item.legajo_alumno == parLegajo);
-
-    this.arrAusencias.forEach(element => {
-      if (element.id_cursada_alumno==auxAlumno.id_cursada_alumno) {
-        if (element.inasistencia == 1){
-          element.inasistencia= 0
-        }else if (element.inasistencia == 0){
-          element.inasistencia = Number.parseFloat("0.5");
-        }else{
-          element.inasistencia= 1;
-        }
-      }
-    });
-   
-  }//addAbsence()
-
   getStyle(parLegajo,styleType){
     let result : any;
     let auxAlumno : any;
@@ -202,12 +179,6 @@ export class ControlAsistenciaPage {
       }
     });
     return result;
-  }
-
-  clear(){
-    this.arrAusencias.forEach(element => {
-      element.inasistencia = 1;
-    });
   }
 
   presentActionSheet() {
@@ -299,7 +270,45 @@ export class ControlAsistenciaPage {
     actionSheet.present();    
   }//presentActionSheet()
 
+  clear(){
+    if(this.gFx.presentConfirm("CONFIRMAR","¿Desea reiniciar la lista?")){
+      this.arrAusencias.forEach(element => {
+        element.inasistencia = 1;
+      });
+    }
 
+  }
+
+  addAbsence(parLegajo){
+    let auxAlumno : any;
+    auxAlumno = this.tbCursadasAlumno.find((item)=> item.legajo_alumno == parLegajo);
+
+    this.arrAusencias.forEach(element => {
+      if (element.id_cursada_alumno==auxAlumno.id_cursada_alumno) {
+        if (element.inasistencia == 1){
+          element.inasistencia= 0
+        }else if (element.inasistencia == 0){
+          element.inasistencia = Number.parseFloat("0.5");
+        }else{
+          element.inasistencia= 1;
+        }
+      }
+    });
+   
+  }//addAbsence()
+
+
+  sendList() {
+    if(this.gFx.presentConfirm("CONFIRMAR","¿Desea enviar los datos?")){
+      // si está todo ok envío los datos
+      this.arrAusencias.forEach(element => {
+      this.dataservice.addItem('asistencias/' + element.id_asistencia , element);
+      });
+    }
+  }
+
+
+  
   test(){
     alert("prueba");
   }
