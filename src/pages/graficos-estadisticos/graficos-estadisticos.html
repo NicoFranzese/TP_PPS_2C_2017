@@ -1,13 +1,80 @@
+<!--
+  Generated template for the GraficosEstadisticosPage page.
 
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Gràficos Estadisticos</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+  
+    <ion-navbar>
+      <ion-title>graficosEstadisticos</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+      <ion-item>
+          <ion-label>Elija Curso</ion-label>
+          <ion-select [(ngModel)]="curso" id="curso" name="curso"  (ngModelChange)="MostrarCurso()"> 
+            <ion-option selected [value]="seleccioneCurso">Seleccione Curso</ion-option>
+            <ion-option *ngFor="let curso of cursos" [value] = "curso.sigla_materia + '-' + curso.comision">
+              {{curso.sigla_materia}}-{{curso.comision}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+  
+          <ion-item *ngIf="curso != 'Seleccione Curso'">
+            <ion-label class = "item item-input item-select item-positive">Que desea Graficar?</ion-label>   
+              <ion-select [(ngModel)]="grafico" id="grafico" name="grafico">
+                <ion-option selected>Seleccione gráfico</ion-option>
+                <ion-option>Encuestas</ion-option>
+                <ion-option>Asistencias</ion-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item *ngIf="grafico == 'Asistencias'">
+            <ion-label class = "item item-input item-select item-positive">Que tipo de asistencia desea graficar?</ion-label>   
+              <ion-select [(ngModel)]="tipoGrafico" id="tipoGrafico" name="tipoGrafico" (ngModelChange)="CargarGraficosAsistencias()">
+                <ion-option selected value="seleccioneTipo">Seleccione tipo de asistencia</ion-option>
+                <ion-option value="P">Presente</ion-option>
+                <ion-option value="MF">Meda Falta</ion-option>
+                <ion-option value="A">Ausente</ion-option>
+            </ion-select>
+          </ion-item>
+  
+  
+          <!-- <ion-item > -->
+           <ion-card *ngIf="tipoGrafico != 'seleccioneTipo'">
+              <ion-card-header>
+                Bar Chart
+              </ion-card-header>
+              <ion-card-content> 
+                <canvas #barCanvas></canvas>
+              </ion-card-content>
+            </ion-card>
+          <!-- </ion-item> -->
+  
+          <ion-card>
+              <ion-card-header>
+                Doughnut Chart
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #doughnutCanvas></canvas>
+              </ion-card-content>
+            </ion-card>
+          
+            <ion-card>
+              <ion-card-header>
+                Line Chart
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #lineCanvas></canvas>
+              </ion-card-content>
+            </ion-card>
+  
+  
+    
+  </ion-content>
+  
