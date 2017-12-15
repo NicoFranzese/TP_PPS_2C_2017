@@ -35,9 +35,9 @@
 
 
   <ion-grid *ngIf="arrPreguntas.length != 0" class="mt-1">
-      <!-- <ion-row class="row row-header"> -->
+      <ion-row class="row">
         <ion-col class="col col-12 mb-4 mt-5"><h3>Pregunta</h3></ion-col>
-      <!-- </ion-row> -->
+      </ion-row>
       <ion-row *ngFor="let item of arrPreguntas" id="rowPregunta" align-items-center>
         <ion-col class="col col-10 cortar"><span id="pregunta">{{item.pregunta}}</span></ion-col>
         <ion-col class="col col-2" class="text-right">

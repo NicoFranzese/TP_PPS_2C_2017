@@ -21,6 +21,7 @@
     "@angular/platform-browser": "4.4.4",
     "@angular/platform-browser-dynamic": "4.4.4",
     "@ionic-native/barcode-scanner": "^4.4.2",
+    "@ionic-native/camera": "^4.5.2",
     "@ionic-native/core": "4.3.2",
     "@ionic-native/file": "^4.4.2",
     "@ionic-native/file-chooser": "^4.4.2",
@@ -34,11 +35,13 @@
     "@ionic/cloud-angular": "^0.12.0",
     "@ionic/storage": "2.0.1",
     "angularfire2": "^5.0.0-rc.3",
+    "chart.js": "^2.7.1",
     "com.devicepush.cordova-phonegap": "^0.4.6",
     "cordova-android": "~6.3.0",
     "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
+    "cordova-plugin-camera": "^3.0.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-file": "^5.0.0",
@@ -92,7 +95,8 @@
       "phonegap-plugin-push": {
         "SENDER_ID": "90645577011"
       },
-      "cordova-plugin-nativeaudio": {}
+      "cordova-plugin-nativeaudio": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android"

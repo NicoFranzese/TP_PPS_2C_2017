@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { DataProvider } from '../data/data';
+import { GlobalFxProvider } from '../global-fx/global-fx';
 import { LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { Subject } from 'Rxjs';
@@ -26,6 +25,7 @@ export class CsvAlumnosProvider {
 
 
   constructor(private dataProvider: DataProvider,
+              private gFxProvider: GlobalFxProvider,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               private app: App) 
@@ -158,12 +158,14 @@ export class CsvAlumnosProvider {
       if(cantSubidas == arrAlumnos.length)
       {
         this.loader.dismiss();
-        this.crearToast("¡Usuarios guardados exitosamente!");
+        this.crearToast("Alumnos guardados exitosamente!");
         
         //Envio al usuario a la pagina de toma de asistencia con la comision a tomar
         let comision_materia = comision.toUpperCase() +'-'+ materia.toUpperCase();
         console.log(comision_materia);
-        this.nav.push(ControlAsistenciaPage, {'comision': comision_materia});
+
+        // if(this.gFxProvider.presentConfirm("Mensaje de confirmación","¿Desea tomar lista a la comisión ingresada?"))
+          this.nav.push(ControlAsistenciaPage, {'comision': comision_materia});
         
       }
       else
@@ -173,7 +175,7 @@ export class CsvAlumnosProvider {
       }
 
       this.operacionFinalizada.next();
-    }
+    } 
     else
     {
       alert("Materia o comisiòn no cargadas");

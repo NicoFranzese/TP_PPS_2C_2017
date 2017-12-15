@@ -14,7 +14,7 @@ import { ToastController } from 'ionic-angular';
 export class LoginPage {
 
   private loader;
-  public email ="maxi@neiner";
+  public email ="adminis@trativo";
   public clave= 123;
   private arrUsuarios = [];
   private arrEntidades = [];
@@ -34,14 +34,6 @@ export class LoginPage {
 
   ionViewDidLoad() {
     
-    if(this.almacenDatos.primeraVezApp)
-    {
-      setTimeout(() =>this.almacenDatos.reproducirSonido('intro'), 4500);
-      this.almacenDatos.primeraVezApp = false;
-    }
-    else
-      this.almacenDatos.reproducirSonido('intro');
-  
     this.loginProvider.logOut();
     this.traerUsuarios();
     this.traerEntidades();
@@ -67,7 +59,7 @@ export class LoginPage {
   Ingresar(){
     this.mostrarLoading("Autentificando...");
     let band = false;
-    
+  
     this.arrUsuarios.forEach(element => {
 
       if(element.email == this.email && element.clave == this.clave)
@@ -102,6 +94,7 @@ export class LoginPage {
             band = true;
             this.referenciaSubj.unsubscribe();
             this.obtenerDatosUsuario(element.legajo);
+            this.guardarFotoPerfil(element.legajo);
           }
           
         });
@@ -164,4 +157,48 @@ export class LoginPage {
       duration: 3000
     }).present();
   }
+
+  private guardarFotoPerfil(legajo)
+  {
+    console.log(legajo);
+    this.dataProvider.getItems('fotoPerfil/'+legajo+'/arrFotos').subscribe(
+      data => 
+      {
+        console.log(data);
+        if(data.length == 0)
+        {
+          let arr = [];
+          arr.push(this.loginProvider.usuarioLogueado['photoURL']);
+          this.dataProvider.addItem('fotoPerfil/'+legajo+'/arrFotos/',arr);
+        }
+        else
+        {
+          this.dataProvider.addItem('fotoPerfil/'+legajo+'/arrFotos/0',this.loginProvider.usuarioLogueado['photoURL']);
+        }
+      }
+    );
+  }
+
+  // private test(legajo)
+  // {
+  //   console.log(legajo);
+  //   this.dataProvider.getItems('fotoPerfil/'+legajo+'/arrFotos').subscribe(
+  //     data => 
+  //     {
+  //       console.log(data);
+  //       if(data.length == 0)
+  //       {
+  //         let arr = [];
+  //         arr.push('http://www.alvarodiezinmobiliaria.com/Vista/Imagenes/sinfoto.jpg');
+  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/arrFotos/',arr);
+  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/fotoElegida/',{'posicion':0});
+  //       }
+  //       else
+  //       {
+  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/arrFotos/0','http://www.alvarodiezinmobiliaria.com/Vista/Imagenes/sinfoto.jpg');
+  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/fotoElegida/',{'posicion':0});
+  //       }
+  //     }
+  //   );
+  // }
 }

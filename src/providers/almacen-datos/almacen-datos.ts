@@ -22,7 +22,7 @@ export class AlmacenDatosProvider {
   public cuestionarioEditar;
 
   //Para saber si es la primera vez que se abre la app, le asigno tiempo o no al sonido
-  public primeraVezApp: boolean = true;
+  // public primeraVezApp: boolean = true;
 
   constructor(private nativeAudio: NativeAudio) {
     this.instanciarAudios();
