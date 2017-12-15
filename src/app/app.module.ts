@@ -47,6 +47,7 @@ import { AlmacenDatosProvider } from '../providers/almacen-datos/almacen-datos';
 import { NotificationProvider } from '../providers/notification/notification';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { QrEncuestasProvider } from '../providers/qr-encuestas/qr-encuestas';
+import { GlobalFxProvider } from '../providers/global-fx/global-fx';
 
 
 
@@ -125,7 +126,8 @@ import { QrEncuestasProvider } from '../providers/qr-encuestas/qr-encuestas';
     LocalNotifications,
     NotificationProvider,
     QrEncuestasProvider,    // ,    Push
-    NativeAudio
+    NativeAudio,
+    GlobalFxProvider
   ]
 })
 export class AppModule {}
