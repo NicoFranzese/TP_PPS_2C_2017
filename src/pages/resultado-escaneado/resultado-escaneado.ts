@@ -55,11 +55,11 @@ export class ResultadoEscaneadoPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ResultadoEscaneadoPage');
-    this.materia ="PPS";
-    this.aula ="505";
-    this.comision ="4A";
-    this.horario = "Sabados 09.00 a 10 hs"
-    this.profesor = "Villegas Octavio" ;
+    // this.materia ="PPS";
+    // this.aula ="505";
+    // this.comision ="4A";
+    // this.horario = "Sabados 09.00 a 10 hs"
+    // this.profesor = "Villegas Octavio" ;
 
   }
 

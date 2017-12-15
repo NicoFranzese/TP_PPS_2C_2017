@@ -26,8 +26,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // rootPage: any = EncuestaPage;
-  rootPage: any = ResultadoEscaneadoPage;
-  // rootPage: any = LoginPage;
+  // rootPage: any = ResultadoEscaneadoPage;
+  rootPage: any = LoginPage;
 
   //PARA EL SPLASH ANIMADO
   private splash = true;
