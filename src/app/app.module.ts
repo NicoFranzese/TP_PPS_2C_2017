@@ -34,7 +34,7 @@ import { ModalCtrlAsistenciaPage} from '../pages/modal-ctrl-asistencia/modal-ctr
 import { EncuestaPage} from '../pages/encuesta/encuesta';
 import { ModalAbmDocentesPage} from '../pages/modal-abm-docentes/modal-abm-docentes';
 import { ModalAbmAdministrativosPage} from '../pages/modal-abm-administrativos/modal-abm-administrativos';
-
+import { Camera } from '@ionic-native/camera';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginProvider } from '../providers/login/login';
@@ -127,7 +127,9 @@ import { GlobalFxProvider } from '../providers/global-fx/global-fx';
     NotificationProvider,
     QrEncuestasProvider,    // ,    Push
     NativeAudio,
-    GlobalFxProvider
+    GlobalFxProvider,
+    Camera
+,
   ]
 })
 export class AppModule {}

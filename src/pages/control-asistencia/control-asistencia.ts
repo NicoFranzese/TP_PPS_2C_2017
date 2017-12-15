@@ -9,6 +9,9 @@ import { LoadingController } from 'ionic-angular';
 import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
 import { Subject } from 'rxjs/Subject';
 
+
+
+
 @IonicPage()
 @Component({
   selector: 'page-control-asistencia',
@@ -25,6 +28,7 @@ export class ControlAsistenciaPage {
   tbCursos :            any[];
 
   lastId :              any;
+  lastIdPhoto :         any;
   itemsLengthAux  :     number = 0;
   initialItemsLength :  number = 0;
   comision :            string;
@@ -50,15 +54,16 @@ export class ControlAsistenciaPage {
   }
 
 
-  ionViewDidLoad(){
-   
+  ionViewDidLoad(){   
   }
+
 
   getDate(){
     let d = new Date();
     this.fechaActual = d.getDate()+"/"+(Number(d.getMonth())+1)+"/"+d.getFullYear();
     console.log(this.fechaActual);
   }
+
 
   // Carga inicial de datos.
    initializeItems(){
@@ -74,6 +79,7 @@ export class ControlAsistenciaPage {
       this.getDBData("entidades_persona");
       this.getDBData("cursadas");
       this.getDBData("cursos");
+      this.getDBData("asistencia_curso");
       this.getDBData("asistencias");
 
     
@@ -100,6 +106,7 @@ export class ControlAsistenciaPage {
     auxCursos2 =  auxCursos.find((item)=> item.sigla_materia == com[1]);
     // obtengo la cursada de ese curso
     auxCursada = this.tbCursada.find((item)=> item.id_curso == auxCursos2.id_curso);
+    localStorage.setItem("idCursada",auxCursada.id_cursada);
     // filtro todos los alumnos de esa cursada
     auxCursadasAlumno = this.tbCursadasAlumno.filter((item)=> item.id_cursada == auxCursada.id_cursada);
 
@@ -149,12 +156,17 @@ export class ControlAsistenciaPage {
                 this.tbEntidadesPersona = datos;
                 break;
               }
+              case 'asistencia_curso':{
+                this.lastIdPhoto = (datos.length == 0 ? 1 : datos[datos.length-1].id_asistencia_curso );
+                break;
+              }
               case 'asistencias':{
                 this.tbAsistencias = datos;
                 this.lastId = (datos.length == 0 ? 1 : datos[datos.length-1].id_asistencia );
                 this.obsDB.next();
                 break;
               }
+    
             }     
       },
       error => console.error(error),
@@ -162,6 +174,7 @@ export class ControlAsistenciaPage {
     );
 
   }//getDBData
+
 
   getStyle(parLegajo,styleType){
     let result : any;
@@ -180,6 +193,7 @@ export class ControlAsistenciaPage {
     });
     return result;
   }
+
 
   presentActionSheet() {
     let viewIndex = this.viewCtrl.index;
@@ -270,6 +284,7 @@ export class ControlAsistenciaPage {
     actionSheet.present();    
   }//presentActionSheet()
 
+
   clear(){
     if(this.gFx.presentConfirm("CONFIRMAR","¿Desea reiniciar la lista?")){
       this.arrAusencias.forEach(element => {
@@ -278,6 +293,7 @@ export class ControlAsistenciaPage {
     }
 
   }
+
 
   addAbsence(parLegajo){
     let auxAlumno : any;
@@ -307,10 +323,24 @@ export class ControlAsistenciaPage {
     }
   }
 
-
   
-  test(){
-    alert("prueba");
+  takePicture(){
+    //data es el base64 de la foto
+    this.gFx.getPhoto().subscribe(
+      data => {
+        let obj = 
+        {
+          'id_asistencia_curso': this.lastIdPhoto ,
+          'id_cursada' : localStorage.getItem("idCursada") ,
+          'fecha': this.fechaActual,
+          'foto' : data
+        };
+      
+      this.dataservice.addItem('asistencia_curso/' + this.lastIdPhoto , obj);
+      this.lastIdPhoto = this.lastIdPhoto + 1;      
+        
+      }
+    );
   }
 
 

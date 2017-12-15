@@ -61,14 +61,14 @@
 
 
 
-  <ion-fab bottom>
+  <ion-fab bottom *ngIf="initialItemsLength != '0'">
     <ion-grid>
       <ion-row padding-left class="ml-5">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn-fab" ion-fab mini (click)="presentActionSheet()">
           <ion-icon name="add"></ion-icon>
         </button>
-        <button class="btn-fab" ion-fab mini (click)="test()">
+        <button class="btn-fab" ion-fab mini (click)="takePicture()" >
           <ion-icon name="camera"></ion-icon>
         </button>
         <button class="btn-fab" ion-fab mini (click)="clear()">
@@ -81,5 +81,10 @@
     </ion-grid>
   </ion-fab>
 
+  <ion-fab center bottom *ngIf="initialItemsLength == '0'">
+    <button class="btn-fab" ion-fab mini (click)="presentActionSheet()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>
