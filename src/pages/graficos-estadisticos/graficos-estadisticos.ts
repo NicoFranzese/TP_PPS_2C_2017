@@ -40,12 +40,7 @@ export class GraficosEstadisticosPage {
   }
 
   ionViewDidLoad() {
-        //NICO: cuando le tengo que mostrar al usuario el resultado de la encuesta lo mando a esta pàgina
-    //y te mando el id de la encuesta
 
-    if(this.navParams.get('idEncuesta'))
-      this.idEncuesta = this.navParams.get('idEncuesta');
-    
   }
 
   private obtenerCantidadPersonas()
