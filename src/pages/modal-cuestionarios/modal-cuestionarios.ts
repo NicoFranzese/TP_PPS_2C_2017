@@ -111,20 +111,20 @@ export class ModalCuestionariosPage {
       inputs: [
         {
           type:'radio',
-          label:'Elegir solo una opciòn',
+          label:'Elegir solo una opciòn (radio)',
           value:'radio',
           checked: this.tipoRespuestas == 'radio'
         },
         {
           type:'radio',
-          label:'Elegir mùltiples opciones',
+          label:'Elegir mùltiples opciones (check)',
           value:'checkbox',
           checked: this.tipoRespuestas == 'check'
           
         },
         {
           type:'radio',
-          label:'Escribir respuesta',
+          label:'Escribir respuesta (text)',
           value:'text',
           checked: this.tipoRespuestas == 'text'
         }

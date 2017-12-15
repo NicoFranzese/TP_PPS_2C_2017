@@ -56,10 +56,10 @@ page-modal-cuestionarios {
 
     // efecto mouse over
     .row:hover{
-        background-color:#DCD9D8;
-        .more{background-color:#DCD9D8;}
+        background-color:#012c3d;
+        .more{background-color:#012c3d;}
         #dropdownMenuButton{
-            background: #DCD9D8;
+            background: #02648b;
         }
     }
 
@@ -89,7 +89,19 @@ page-modal-cuestionarios {
         display: inline-block;
         height: auto;
         width: 50px;
-        background: #fff;
+        background: #012c3d;
+        color: #fff;
+    }
+    .dropdown:hover{
+        background: #012c3d !important;
+    }
+
+    #rowPregunta{
+        border: 3px solid #033c52;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        background: #012c3d;
+        color: #fff !important;
     }
 
     ion-icon {
@@ -110,6 +122,8 @@ page-modal-cuestionarios {
         padding: 5px;
         text-align: center;
         margin: 0 !important;
+        text-shadow: 4px 4px 2px #000;
+        font-size: 25px;
    }
 
    #pregunta
@@ -118,7 +132,46 @@ page-modal-cuestionarios {
        font-size: 16px;
    }
 
-   
+   .item-md{
+        background: #02648b !important;
+        border: 2px solid #033c52;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        padding: 0;
+    }
+
+    .item-inner{
+        border: 0 !important;
+        padding: 0 !important;
+    }
+
+    ion-label
+    {
+        color: #fff !important;
+        background: #012c3d !important;
+        padding: 13px 8px;
+        margin: 0 !important;
+    }
+    .item-inner{
+        border-bottom-color: #03658b !important;
+        box-shadow: inset 0 -1px 0 0 #03658b !important;
+    }
+
+    .text-input{
+        background: #fff !important;
+        padding: 13px 8px;
+        margin: 0 !important;
+        width: 100%;
+    }
+
+    ion-datetime#dateHora{
+        border-bottom: 2px solid #033c52 !important;
+    }
+
+    ion-datetime
+    {
+        background: #fff;
+    }
 
 
 
