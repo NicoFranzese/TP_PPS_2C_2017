@@ -44,7 +44,7 @@ page-modal-cuestionarios {
     // cabecera de la grilla 
     .row-header{
         border-bottom: 3px solid rgb(151, 141, 141);
-        font-weight: bold;
+        
         
     }
 
@@ -130,6 +130,9 @@ page-modal-cuestionarios {
    {
        font-weight: bold;
        font-size: 16px;
+       color: #fff;
+       background: #033c52;
+       padding: 15px;
    }
 
    .item-md{

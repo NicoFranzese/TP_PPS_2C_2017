@@ -13,6 +13,7 @@ import { AbmProfesoresPage } from '../pages/abm-profesores/abm-profesores';
 import { NotificationProvider } from '../providers/notification/notification';
 import { EncuestaPage } from '../pages/encuesta/encuesta';
 import { AvisoImportanciaPage } from '../pages/aviso-importancia/aviso-importancia';
+import { ResultadoEscaneadoPage } from '../pages/resultado-escaneado/resultado-escaneado';
 
 // import { Push, PushToken } from '@ionic/cloud-angular'
 
@@ -25,7 +26,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // rootPage: any = EncuestaPage;
-  rootPage: any = AbmCuestionariosPage;
+  rootPage: any = ResultadoEscaneadoPage;
   // rootPage: any = LoginPage;
 
   //PARA EL SPLASH ANIMADO

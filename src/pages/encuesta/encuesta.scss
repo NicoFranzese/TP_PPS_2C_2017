@@ -14,8 +14,7 @@ page-encuesta {
     .row-header{
         border-bottom: 3px solid rgb(151, 141, 141);
         font-weight: bold;
-        color: #fff;
-        background: #033c52;
+
        
         
     }
@@ -74,7 +73,19 @@ page-encuesta {
     }
 
     h3{
-        font-family: 'Courgette', cursive;
+        font-family: 'Roboto', cursive;
+        background: #fff;
+        padding: 15px;
+        padding-left: 0;
+        border-radius: 5px;
+
+        .label{
+            background: #033c52;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
     }
 
     .datos{
@@ -84,21 +95,60 @@ page-encuesta {
     }
 
     .backRed{
-        background: rgba(244, 67, 54, 0.3803921568627451);
+        background: rgb(119, 50, 45);
     }
 
     .backGreen{
         background: rgba(76, 175, 80, 0.5098039215686274);
     }
 
-    span.titulo{
-        font-size: 18px;
-    }
+    // span.titulo{
+    //     font-size: 18px;
+    //     color: #fff;
+    //     background: #033c52;
+    //     margin: 0;
+        
+    // }
 
-    span.pregunta
+    .titulo
     {
         font-size: 17px;
+        background: #033c52;
+        color: #fff;
+        padding: 12px;
+        text-align: center;
     }
+
+    .pregunta
+    {
+        font-weight: bold;
+        font-size: 15+px;
+    }
+
+    .muted
+    {
+        text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+
+    }
+
+    p{
+        margin: 0;
+        display: inline-block;
+    }
+
+    .rojo{
+        color: #fff;
+        background: rgb(119, 50, 45);
+        padding: 5px;
+    }
+
+    .verde{
+        color: #fff;
+        background: rgba(76, 175, 80, 0.5098039215686274);
+        padding: 5px;
+    }
+
+
     
     
     
