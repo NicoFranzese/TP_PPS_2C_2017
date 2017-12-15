@@ -12,11 +12,13 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class ModalCtrlAsistenciaPage {
 
-  comisiones:      any[];
-  auxItems:        any[];
-  filteredItems:   any[];
-  flagHide :       boolean = false;
-  flagCursos :     boolean = false;
+  comisiones:       any[];
+  auxItems:         any[];
+  filteredItems:    any[];
+  tbCursadasAlumno: any[];
+  tbCursada :       any[];
+  tbCursos :        any[];
+
   searchQuery:     string = '';
   selectedOption:  string;
 
@@ -24,10 +26,12 @@ export class ModalCtrlAsistenciaPage {
               public loadingCtrl: LoadingController ,public dataservice : DataProvider) {
       
       this.selectedOption =  this.navParams.get('selectedOption');
-      this.initializeItems();
+     
   }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() { 
+    this.initializeItems();
+  }
 
 
   // Carga inicial de datos. El param opcional de getDBData([..]) lo uso para determinar si debo modificar el array que se muestra en pantalla.
@@ -100,8 +104,14 @@ export class ModalCtrlAsistenciaPage {
           }
           this.filteredItems = this.auxItems;
         } 
-        localStorage.setItem(entityName,JSON.stringify(datos));
-        
+        // guardo las tablas para luego poder obtener las comisiones
+        if(entityName=="cursos"){
+          this.tbCursos = datos;
+        }else if (entityName=="cursadas"){
+          this.tbCursada = datos;
+        }else{
+          this.tbCursadasAlumno = datos;
+        }        
       },
       error => console.error(error),
       () => console.log("ok")
@@ -111,21 +121,19 @@ export class ModalCtrlAsistenciaPage {
 
 // obtengo la lista de comisiones según los filtros q eligió el usuario
  getComision(option,filter){
-  let tbCursadasAlumno,tbCursada,tbCursos,auxCursadasAlumno,auxCursada,auxCursos : any;
+  let auxCursadasAlumno,auxCursada,auxCursos : any;
   this.comisiones = [];
 
   switch(option) { 
     case 'aula': { 
-      tbCursos= JSON.parse(localStorage.getItem("cursos")); 
-      auxCursos = tbCursos.filter((item) => item.aula == filter );
+      auxCursos = this.tbCursos.filter((item) => item.aula == filter );
       auxCursos.forEach(element => {
         this.comisiones.push(element.comision + "-" + element.sigla_materia);
       });
        break; 
     } 
     case 'dia': { 
-      tbCursos= JSON.parse(localStorage.getItem("cursos")); 
-      auxCursos = tbCursos.filter((item) => {
+      auxCursos = this.tbCursos.filter((item) => {
         return (item.dia_horario.trim().toLowerCase().indexOf(filter.toLowerCase()) > -1);
        });
        auxCursos.forEach(element => {
@@ -134,31 +142,25 @@ export class ModalCtrlAsistenciaPage {
       break; 
     } 
     case 'docente': { 
-      tbCursos= JSON.parse(localStorage.getItem("cursos")); 
-      auxCursos = tbCursos.filter((item) => item.legajo_docente == filter );
+      auxCursos = this.tbCursos.filter((item) => item.legajo_docente == filter );
       auxCursos.forEach(element => {
         this.comisiones.push(element.comision + "-" + element.sigla_materia);
       });
       break; 
     } 
     case 'materia': { 
-      tbCursos= JSON.parse(localStorage.getItem("cursos"));
-      auxCursos = tbCursos.filter((item) => item.sigla_materia == filter );
+      auxCursos = this.tbCursos.filter((item) => item.sigla_materia == filter );
       auxCursos.forEach(element => {
         this.comisiones.push(element.comision + "-" + element.sigla_materia);
       });
       break; 
     } 
     case 'alumno': {      
-      tbCursadasAlumno  = JSON.parse(localStorage.getItem("cursadas_alumnos"));
-      tbCursada         = JSON.parse(localStorage.getItem("cursadas"));
-      tbCursos          = JSON.parse(localStorage.getItem("cursos")); 
-
-      auxCursadasAlumno = tbCursadasAlumno.filter((item) => item.legajo_alumno == filter);
+      auxCursadasAlumno = this.tbCursadasAlumno.filter((item) => item.legajo_alumno == filter);
 
       auxCursadasAlumno.forEach(element => {
-        auxCursada = tbCursada.find((item) => item.id_cursada == element.id_cursada);
-        auxCursos = tbCursos.find((item)=> item.id_curso == auxCursada.id_curso);
+        auxCursada = this.tbCursada.find((item) => item.id_cursada == element.id_cursada);
+        auxCursos = this.tbCursos.find((item)=> item.id_curso == auxCursada.id_curso);
         this.comisiones.push(auxCursos.comision + "-" + auxCursos.sigla_materia);
       });
       break; 
@@ -189,7 +191,7 @@ export class ModalCtrlAsistenciaPage {
  }//close()
 
  test(){
-   alert("ok");
+   console.log("ok");
  }
 
 

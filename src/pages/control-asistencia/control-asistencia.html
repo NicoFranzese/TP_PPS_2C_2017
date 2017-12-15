@@ -11,18 +11,18 @@
 
 <ion-content class="cuerpo" padding>
 
-  <ion-card>
+  <ion-card *ngIf="initialItemsLength != '0'">
     <ion-card-content class="card-header">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <span>{{com}}</span>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-      <p class="text-center">poner fecha</p>
-    </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col text-center>
+            <h2>{{comision}}</h2>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <h6 text-center>{{fechaActual}}</h6>
+  </ion-card>
 
   <ion-grid>
     <ion-row class="row row-header">
@@ -33,11 +33,11 @@
       <ion-col class="col col-8">Alumno</ion-col>
     </ion-row>
 
-    <ion-row class="row-grid" *ngFor="let item of items"  align-items-center (click)="addAbsence(item.legajo)" [ngStyle]="{'color': getStyle(item.legajo,'color')}">
+    <ion-row class="row-grid" *ngFor="let item of items" align-items-center (click)="addAbsence(item.legajo)" [ngStyle]="{'color': getStyle(item.legajo,'color')}">
       <ion-col class="col col-1">
-          <ion-icon name="checkmark-circle" *ngIf="getStyle(item.legajo,'icon') == '0'"></ion-icon>
-          <ion-icon name="alert" *ngIf="getStyle(item.legajo,'icon') == '1'"></ion-icon>
-          <ion-icon name="remove-circle" *ngIf="getStyle(item.legajo,'icon') == '2'"></ion-icon>
+        <ion-icon name="checkmark-circle" *ngIf="getStyle(item.legajo,'icon') == '0'"></ion-icon>
+        <ion-icon name="alert" *ngIf="getStyle(item.legajo,'icon') == '1'"></ion-icon>
+        <ion-icon name="remove-circle" *ngIf="getStyle(item.legajo,'icon') == '2'"></ion-icon>
       </ion-col>
       <ion-col class="col col-3">{{item.legajo}}</ion-col>
       <ion-col class="col col-8 cortar">{{item.nombre_apellido}}</ion-col>
@@ -74,7 +74,7 @@
         <button class="btn-fab" ion-fab mini (click)="clear()">
           <ion-icon name="trash"></ion-icon>
         </button>
-        <button class="btn-fab" ion-fab mini (click)="test()">
+        <button class="btn-fab" ion-fab mini (click)="sendList()">
           <ion-icon name="send"></ion-icon>
         </button>
       </ion-row>

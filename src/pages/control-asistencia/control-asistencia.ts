@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ModalController,ActionSheetController ,ViewController } from 'ionic-angular';
+import { IonicPage,NavController,NavParams,ModalController,ActionSheetController,ViewController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { DataProvider } from '../../providers/data/data';
 import { LoadingController } from 'ionic-angular';
 import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
+import { Subject } from 'rxjs/Subject';
 
 @IonicPage()
 @Component({
@@ -13,84 +14,146 @@ import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-
 })
 export class ControlAsistenciaPage {
   
-  items: any[];
-  arrAusencias: any[] = [];
-  lastId : number;
-  itemsLengthAux  : number = 0;
-  initialItemsLength : number = 0;
-  tbCursadasAlumno : any;
-  comision : string;
+  items:                any[];
+  arrAusencias:         any[];
+  tbAsistencias:        any[];
+  tbEntidadesPersona:   any[];
+  tbCursadasAlumno:     any[];
+  tbCursada :           any[];
+  tbCursos :            any[];
+
+  lastId :              any;
+  itemsLengthAux  :     number = 0;
+  initialItemsLength :  number = 0;
+  comision :            string;
+  fechaActual :         string;
+
+  obsDB = new Subject();
+
 
   constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
               public dataservice : DataProvider,              public loadingCtrl: LoadingController, public modalCtrl: ModalController,
-              public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController) {
-       
-        console.clear(); 
-       this.comision = navParams.get("comision");
-       if(this.comision!=null){this.getListaAlumnos(this.comision)}
+              public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,     ) {
+         
+    console.clear(); 
+    this.getDate();
+    this.comision = this.navParams.get("comision");
+    
+    if(this.comision!=null){this.initializeItems();}
+
+      this.obsDB.subscribe(
+        terminoOperacion =>  this.getListaAlumnos(this.comision)
+      );   
+
   }
 
-  ionViewDidLoad() {}
+
+  ionViewDidLoad(){
+   
+  }
+
+  getDate(){
+    let d = new Date();
+    this.fechaActual = d.getDate()+"/"+(Number(d.getMonth())+1)+"/"+d.getFullYear();
+    console.log(this.fechaActual);
+  }
+
+  // Carga inicial de datos.
+   initializeItems(){
+    // configuro spinner para mostrar mientras se consultan los datos
+      console.log("initializeItems");
+
+      const loading = this.loadingCtrl.create({
+        content: 'Espere por favor...'
+      });
+      loading.present(); 
+      
+      this.getDBData("cursadas_alumnos");
+      this.getDBData("entidades_persona");
+      this.getDBData("cursadas");
+      this.getDBData("cursos");
+      this.getDBData("asistencias");
+
+    
+
+      setTimeout(() => {
+        loading.dismiss();
+      }, 2000);
+
+      
+  }//initializeItems()
+
 
   getListaAlumnos(comision){
-    let tbEntidadesPersona,tbCursada,tbCursos,auxCursos,auxCursadasAlumno,auxCursada,auxCursos2,auxAlumno : any;
-    let com = comision.toString().split("-");
+    console.log("getListaAlumnos:"+comision);
+
+    let auxCursos,auxCursadasAlumno,auxCursada,auxCursos2,auxAlumno : any;
+    let com = comision.toString().trim().split("-");
     this.items = [];
-    this.getDBData("asistencias");
-    this.lastId = Number(localStorage.getItem("lastId"));
+    this.arrAusencias  = [];
 
-    tbEntidadesPersona  = JSON.parse(localStorage.getItem("entidades_persona"));
-    this.tbCursadasAlumno    = JSON.parse(localStorage.getItem("cursadas_alumnos"));
-    tbCursada           = JSON.parse(localStorage.getItem("cursadas"));
-    tbCursos            = JSON.parse(localStorage.getItem("cursos")); 
-
-    auxCursos = tbCursos.filter((item)=> item.comision == com[0]);
+    //filtro los cursos de la comisión (x ej "4A")
+    auxCursos = this.tbCursos.filter((item)=> item.comision == com[0]);
+    // obtengo el curso para la materia especificada (x ej "PPS")
     auxCursos2 =  auxCursos.find((item)=> item.sigla_materia == com[1]);
-	
-    auxCursada = tbCursada.find((item)=> item.id_curso == auxCursos2.id_curso);
+    // obtengo la cursada de ese curso
+    auxCursada = this.tbCursada.find((item)=> item.id_curso == auxCursos2.id_curso);
+    // filtro todos los alumnos de esa cursada
     auxCursadasAlumno = this.tbCursadasAlumno.filter((item)=> item.id_cursada == auxCursada.id_cursada);
 
-    // ya tengo los alumnos que cursan la comision recibida por param
-    console.info("auxCursadasAlumno",auxCursadasAlumno);
-    auxCursadasAlumno.forEach(element => {
-      auxAlumno = tbEntidadesPersona.find((item)=> item.legajo == element.legajo_alumno);
-      this.items.push(auxAlumno);
+    console.info("auxCursadasAlumno:",auxCursadasAlumno);
 
+    // ya tengo los alumnos que cursan la comision recibida por param
+    auxCursadasAlumno.forEach(element => {
+      auxAlumno = this.tbEntidadesPersona.find((item)=> item.legajo == element.legajo_alumno);
+      this.items.push(auxAlumno);
       this.initialItemsLength = 1;
 
       // inicializo el array para toma de asistencia
       let obj = 
         {
-          'id_asistencia': this.lastId + 1,
+          'id_asistencia': this.lastId ,
           'id_cursada_alumno' : element.id_cursada_alumno,
-          'fecha': Date(),
+          'fecha': this.fechaActual,
           'inasistencia' : 1
         };
-      this.lastId = this.lastId + 1;
-        
+      this.lastId = this.lastId + 1;      
       this.arrAusencias.push(obj);  
-      
-     }); 
+    }); //foreach
    
-
   }//getListaAlumnos
 
 
   getDBData(entityName){
-    // configuro spinner para mostrar mientras se consultan los datos 
-    const loading = this.loadingCtrl.create({
-      content: 'Espere por favor...'
-    });
-    loading.present(); 
  
     this.dataservice.getItems(entityName).subscribe(
       datos => {
-          localStorage.setItem(entityName,JSON.stringify(datos));
-          debugger
-          localStorage.setItem("lastId",datos[datos.length -1].id_asistencia);
-          setTimeout(() => {
-            loading.dismiss();
-          }, 2000);
+          
+            // guardo las tablas para luego poder obtener las comisiones
+            switch(entityName) { 
+              case 'cursos': { 
+                this.tbCursos = datos;
+                break; 
+              } 
+              case 'cursadas':{
+                this.tbCursada = datos;
+                break;
+              }
+              case 'cursadas_alumnos':{
+                this.tbCursadasAlumno = datos;
+                break;
+              }
+              case 'entidades_persona':{
+                this.tbEntidadesPersona = datos;
+                break;
+              }
+              case 'asistencias':{
+                this.tbAsistencias = datos;
+                this.lastId = (datos.length == 0 ? 1 : datos[datos.length-1].id_asistencia );
+                this.obsDB.next();
+                break;
+              }
+            }     
       },
       error => console.error(error),
       () => console.log("ok")
@@ -99,23 +162,11 @@ export class ControlAsistenciaPage {
   }//getDBData
 
   
-  addValidatedItem(e){
-   if(e.checked){
-    this.itemsLengthAux = this.itemsLengthAux + 1;
-    }else{
-      this.itemsLengthAux = this.itemsLengthAux - 1;
-    }
-  }//addValidatedItem()
-
-
-  validateGrid(){
-    if(this.items.length == this.itemsLengthAux){
-      alert("Desea enviar los datos?");
-    }else{
-      alert("No verificó todos los alumnos.");
-    }
-  }//validateGrid()
-
+  sendList(){
+    this.arrAusencias.forEach(element => {
+      this.dataservice.addItem('asistencias/' + element.id_asistencia , element);
+    });
+  }
 
   addAbsence(parLegajo){
     let auxAlumno : any;
