@@ -7,7 +7,7 @@
 <ion-header>
   
     <ion-navbar>
-      <ion-title>graficosEstadisticos</ion-title>
+      <ion-title>Gráficos Estadisticos</ion-title>
     </ion-navbar>
   
   </ion-header>
@@ -34,9 +34,19 @@
             </ion-select>
           </ion-item>
   
+          <ion-item *ngIf="grafico == 'Encuestas'">
+            <ion-label class = "item item-input item-select item-positive">Seleccione Encuesta</ion-label>   
+              <ion-select [(ngModel)]="encuesta" id="encuesta" name="encuesta" (ngModelChange)="CargaGraficos()">
+                <ion-option selected value="seleccioneEncuesta">Seleccione encuesta</ion-option>
+                <ion-option *ngFor="let encuesta of encuestas" [value] = "encuesta.id + '-' + encuesta.titulo">
+                  {{encuesta.id}}-{{encuesta.titulo}}
+                </ion-option>
+            </ion-select>
+          </ion-item>
+
           <ion-item *ngIf="grafico == 'Asistencias'">
             <ion-label class = "item item-input item-select item-positive">Que tipo de asistencia desea graficar?</ion-label>   
-              <ion-select [(ngModel)]="tipoGrafico" id="tipoGrafico" name="tipoGrafico" (ngModelChange)="CargarGraficosAsistencias()">
+              <ion-select [(ngModel)]="tipoGrafico" id="tipoGrafico" name="tipoGrafico" (ngModelChange)="CargaGraficos()">
                 <ion-option selected value="seleccioneTipo">Seleccione tipo de asistencia</ion-option>
                 <ion-option value="P">Presente</ion-option>
                 <ion-option value="MF">Meda Falta</ion-option>
@@ -45,36 +55,23 @@
           </ion-item>
   
   
-          <!-- <ion-item > -->
-           <ion-card *ngIf="tipoGrafico != 'seleccioneTipo'">
+           <ion-card *ngIf="grafico == 'Asistencias' && tipoGrafico != 'seleccioneTipo'">
               <ion-card-header>
-                Bar Chart
+                Gráfico de asistencias
               </ion-card-header>
               <ion-card-content> 
                 <canvas #barCanvas></canvas>
               </ion-card-content>
             </ion-card>
-          <!-- </ion-item> -->
   
-          <ion-card>
+          <ion-card *ngIf="grafico == 'Encuestas' && encuesta != 'seleccioneEncuesta'">
               <ion-card-header>
-                Doughnut Chart
+                Personas que realizaron Encuesta
               </ion-card-header>
               <ion-card-content>
                 <canvas #doughnutCanvas></canvas>
               </ion-card-content>
             </ion-card>
-          
-            <ion-card>
-              <ion-card-header>
-                Line Chart
-              </ion-card-header>
-              <ion-card-content>
-                <canvas #lineCanvas></canvas>
-              </ion-card-content>
-            </ion-card>
-  
-  
-    
+              
   </ion-content>
   
