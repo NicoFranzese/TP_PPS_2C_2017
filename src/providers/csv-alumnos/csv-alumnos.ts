@@ -161,7 +161,8 @@ export class CsvAlumnosProvider {
         this.crearToast("¡Usuarios guardados exitosamente!");
         
         //Envio al usuario a la pagina de toma de asistencia con la comision a tomar
-        let comision_materia = comision.toUpperCase() +'-'+ materia;
+        let comision_materia = comision.toUpperCase() +'-'+ materia.toUpperCase();
+        console.log(comision_materia);
         this.nav.push(ControlAsistenciaPage, {'comision': comision_materia});
         
       }

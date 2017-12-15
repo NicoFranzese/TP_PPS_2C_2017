@@ -13,29 +13,32 @@
 </ion-header>
 
 
-<ion-content padding>
-    <div class="list list-inset">
-        <ion-item>
-          <ion-label style="font-family: 'Lobster', cursive">Legajo</ion-label>
-          <ion-input [(ngModel)]="legajo" id="legajo" name="legajo"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label style="font-family: 'Lobster', cursive">Nombre y Apellido</ion-label>
-          <ion-input [(ngModel)]="nombre_apellido" id="nombre_apellido" name="nombre_apellido"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label style="font-family: 'Lobster', cursive">eMail</ion-label>
-          <ion-input [(ngModel)]="email" id="email" name="email" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label style="font-family: 'Lobster', cursive">Clave</ion-label>
-          <ion-input [(ngModel)]="clave" id="clave" name="clave" type="password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <button ion-button color="corporate" (click)="Aceptar()">Aceptar</button>
-          <!-- <button ion-button color="danger" (click)="Cancelar()">Cancelar</button> -->
-        </ion-item>
-      <br>
-      <br>
+<ion-content id="cuerpo" padding>
+  <div class="list list-inset">
+
+    <div class="row  mb-5">
+      <div class="col-12">
+        <img src="./assets/img/anonimo.jpg" width="150" id="perfil" class="img-block">
+      </div>
     </div>
+
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">Legajo</ion-label>
+      <ion-input [(ngModel)]="legajo" id="legajo" name="legajo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">Nombre y Apellido</ion-label>
+      <ion-input [(ngModel)]="nombre_apellido" id="nombre_apellido" name="nombre_apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">eMail</ion-label>
+      <ion-input [(ngModel)]="email" id="email" name="email" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">Clave</ion-label>
+      <ion-input [(ngModel)]="clave" id="clave" name="clave" type="password"></ion-input>
+    </ion-item>
+  </div>
+  <button class="btn btn-default mt-3" (click)="Aceptar()">Aceptar</button>
+
 </ion-content>

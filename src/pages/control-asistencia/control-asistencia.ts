@@ -86,6 +86,7 @@ export class ControlAsistenciaPage {
     this.dataservice.getItems(entityName).subscribe(
       datos => {
           localStorage.setItem(entityName,JSON.stringify(datos));
+          debugger
           localStorage.setItem("lastId",datos[datos.length -1].id_asistencia);
           setTimeout(() => {
             loading.dismiss();

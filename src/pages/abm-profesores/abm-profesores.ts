@@ -120,6 +120,7 @@ export class AbmProfesoresPage {
 
       for (let i=0;i<this.itemsUsuarios.length;i++){ 
         if (this.itemsUsuarios[i].legajo==leg) {
+          console.log(this.itemsUsuarios[i]);
           this.email = this.itemsUsuarios[i].email;
           this.clave = this.itemsUsuarios[i].clave;        
         }

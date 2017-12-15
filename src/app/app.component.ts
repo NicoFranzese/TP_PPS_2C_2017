@@ -8,6 +8,8 @@ import { LoginPage } from '../pages/login/login';
 import { CargaArchivosPage } from '../pages/carga-archivos/carga-archivos';
 import { ControlAsistenciaPage } from '../pages/control-asistencia/control-asistencia';
 import { AbmCuestionariosPage } from '../pages/abm-cuestionarios/abm-cuestionarios';
+import { AbmAdministrativosPage } from '../pages/abm-administrativos/abm-administrativos';
+import { AbmProfesoresPage } from '../pages/abm-profesores/abm-profesores';
 import { NotificationProvider } from '../providers/notification/notification';
 import { EncuestaPage } from '../pages/encuesta/encuesta';
 import { AvisoImportanciaPage } from '../pages/aviso-importancia/aviso-importancia';
@@ -23,8 +25,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // rootPage: any = EncuestaPage;
-  // rootPage: any = AbmCuestionariosPage;
-  rootPage: any = LoginPage;
+  rootPage: any = AbmCuestionariosPage;
+  // rootPage: any = LoginPage;
 
   //PARA EL SPLASH ANIMADO
   private splash = true;
