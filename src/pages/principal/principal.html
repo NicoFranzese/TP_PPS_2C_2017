@@ -15,7 +15,7 @@
         <ion-list>
             <ion-item id="datos" >
               <ion-thumbnail item-start>
-                <img src={{almacenDatosProvider.usuarioLogueado.photoURL}} id="img-perfil">
+                <img [src]="almacenDatosProvider.usuarioLogueado.photoURL" id="img-perfil">
               </ion-thumbnail>
               <h2><b>{{almacenDatosProvider.usuarioLogueado.nombre}}</b></h2>
               <p>{{almacenDatosProvider.usuarioLogueado.legajo}} </p>

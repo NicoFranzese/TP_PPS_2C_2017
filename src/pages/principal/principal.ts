@@ -53,6 +53,12 @@ export class PrincipalPage {
 
   ionViewDidLoad() {
     this.cambiarMenu();
+
+    if(this.almacenDatosProvider.primeraVezApp)
+    {
+      this.asignarFotoPerfil();
+      this.almacenDatosProvider.primeraVezApp = false;
+    }
   }
 
 
@@ -297,5 +303,18 @@ export class PrincipalPage {
       });
   }
 
+  private asignarFotoPerfil()
+  {
+    console.log(this.almacenDatosProvider.usuarioLogueado.legajo);
+    this.dataProvider.getItems('fotoPerfil/'+ this.almacenDatosProvider.usuarioLogueado.legajo).subscribe(
+      tbFotoPerfil =>
+      {
+        let indice = tbFotoPerfil[1].posicion;
+        this.almacenDatosProvider.usuarioLogueado.photoURL = tbFotoPerfil[0][indice];
+        console.log(tbFotoPerfil[0][indice]);
+        console.log(this.almacenDatosProvider.usuarioLogueado.photoURL);
+      }
+    )
+  }
 
 }
