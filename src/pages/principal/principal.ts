@@ -272,7 +272,7 @@ export class PrincipalPage {
                       at: new Date(new Date().getTime() + 3600),
                       led: 'FF0000',
                       icon:'', //ruta del icono
-                      sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
+                      sound: '' //Ruta del archivo de sonido
                     });
                   //Elimino aviso para que no vuelva a enviarlo.
                     // this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
