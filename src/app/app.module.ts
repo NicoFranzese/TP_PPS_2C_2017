@@ -43,6 +43,7 @@ import { ModalAbmDocentesPage}        from '../pages/modal-abm-docentes/modal-ab
 import { ModalAbmAdministrativosPage} from '../pages/modal-abm-administrativos/modal-abm-administrativos';
 import { ResultadoEscaneadoPage }     from '../pages/resultado-escaneado/resultado-escaneado';
 import { EdicionPerfilPage}           from '../pages/edicion-perfil/edicion-perfil';
+import { ModalImprimirAlumnosPdfPage} from '../pages/modal-imprimir-alumnos-pdf/modal-imprimir-alumnos-pdf';
 
 // providers
 import { LoginProvider }              from '../providers/login/login';
@@ -80,7 +81,8 @@ import { GlobalFxProvider }           from '../providers/global-fx/global-fx';
     EncuestaPage,
     ModalAbmDocentesPage,
     ModalAbmAdministrativosPage,
-    EdicionPerfilPage
+    EdicionPerfilPage,
+    ModalImprimirAlumnosPdfPage
   ],
   imports: [
     HttpModule,
@@ -115,7 +117,8 @@ import { GlobalFxProvider }           from '../providers/global-fx/global-fx';
     EncuestaPage,
     ModalAbmDocentesPage,
     ModalAbmAdministrativosPage,
-    EdicionPerfilPage
+    EdicionPerfilPage,
+    ModalImprimirAlumnosPdfPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,39 @@
+<!--
+  Generated template for the ModalImprimirAlumnosPdfPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Imprimir Listado de Alumnos Pdf</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div>
+        <div id="divImprimir" style="text-align:center">
+          <img src="./assets/img/logo.png" style="width:150px; height:150px">
+          <table class="table table-hover">
+            <thead class="thead-inverse">
+              <tr>
+                <th>Legajo</th>
+                <th>Alumno</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items" class="table-info animated fadeIn">
+                <!-- <th scope="row"><span class="badge badge-default badge-pill">{{p.ID}}</span></th> -->
+                <td style="width:60px"><b>{{item.legajo}}</b></td>
+                <td style="width:300px">{{item.nombre_apellido}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button ion-button color="secondary" (click)="confirmarExportacion()">Imprimir</button>
+        </div>
+      </div>
+</ion-content>

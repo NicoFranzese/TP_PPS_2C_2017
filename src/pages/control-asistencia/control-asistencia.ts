@@ -7,6 +7,7 @@ import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
 import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
+import { ModalImprimirAlumnosPdfPage} from '../../pages/modal-imprimir-alumnos-pdf/modal-imprimir-alumnos-pdf';
 import { Subject } from 'rxjs/Subject';
 
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
@@ -33,6 +34,9 @@ export class ControlAsistenciaPage {
   initialItemsLength :  number = 0;
   comision :            string;
   fechaActual :         string;
+
+  public bandImprimirPDF = 0;
+  public bandImprimioPDF = 0;
 
   obsDB = new Subject();
 
@@ -432,42 +436,13 @@ export class ControlAsistenciaPage {
   
   }  
   
-  exportarAPDF(): void {
-    if(document.getElementById("divImprimir") != null){
-      let printContents, popupWin;
-      printContents = document.getElementById('divImprimir').innerHTML;
-
-      // printContents = '<div id="print-section"> '+
-      //                   // '<img src="./assets/img/logo.png"> style="width=200px; heigth=200px'+
-      //                     '<ion-grid>'+
-      //                       '<ion-row class="row row-header">'+
-      //                         '<ion-col class="col col-1">'+                             
-      //                         '</ion-col>'+
-      //                         '<ion-col class="col col-3">Legajo</ion-col>'+
-      //                         '<ion-col class="col col-8">Alumno</ion-col>'+
-      //                       '</ion-row>'+                      
-      //                       '<ion-row class="row-grid" *ngFor="let item of '+ this.items +'" align-items-center>'+
-      //                         '<ion-col class="col col-1">'+ 
-      //                         '</ion-col>'+
-      //                         '<ion-col class="col col-3">{{item.legajo}}</ion-col>'+
-      //                         '<ion-col class="col col-8 cortar">{{item.nombre_apellido}}</ion-col>'+
-      //                       '</ion-row>'+                      
-      //                     '</ion-grid>'+
-      //                   '</div>'
+  exportarAPDF() {
+    let optionModal = this.modalCtrl.create(ModalImprimirAlumnosPdfPage,{items: this.items});
+    optionModal.present()
+    .then(() => {
+    });
+   }
 
 
-      popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-      popupWin.document.open();
-      popupWin.document.write(`
-        <html>
-          <head>
-
-          </head>
-            <body onload="window.print();window.close()">${printContents}</body>
-        </html>`
-      );
-      popupWin.document.close();
-    }
-  }
 
 }//class
