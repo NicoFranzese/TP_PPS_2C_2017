@@ -96,7 +96,7 @@ export class LoginProvider {
     this.usuarioLogueado = [];
     this.almacenDatos.usuarioLogueado = "";
     this.afAuth.auth.signOut();
-    this.almacenDatos.reproducirSonido('intro');
+    // this.almacenDatos.reproducirSonido('intro');
   }
 
   

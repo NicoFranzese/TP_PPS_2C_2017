@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/map';
-
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GlobalFxProvider {

@@ -37,27 +37,28 @@ export class PrincipalPage {
   public arrAvisos;
   private arrOpciones = [];
 
-  constructor(public  navCtrl: NavController,
-              public  navParams: NavParams,
-              private loginProvider: LoginProvider,
-              private almacenDatosProvider: AlmacenDatosProvider,
-              private barcodeScanner: BarcodeScanner,
-              private dataProvider: DataProvider,
-              public  platform: Platform,
-              public  localNoti: LocalNotifications,
-              private qrEncuestasProvider: QrEncuestasProvider  ) {
-
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private loginProvider: LoginProvider,
+    private almacenDatosProvider: AlmacenDatosProvider,
+    private barcodeScanner: BarcodeScanner,
+    private dataProvider: DataProvider,
+    public platform: Platform,
+    public localNoti: LocalNotifications,
+    private qrEncuestasProvider: QrEncuestasProvider
+    
+  ) {
     this.obtenerAvisos();
-
   }
 
   ionViewDidLoad() {
     this.cambiarMenu();
 
-    if(this.almacenDatosProvider.primeraVezApp)
+    if(this.almacenDatosProvider.primeraVez)
     {
+      this.evaluarMensajeDeInasistencias();
       this.asignarFotoPerfil();
-      this.almacenDatosProvider.primeraVezApp = false;
+      this.almacenDatosProvider.primeraVez = false;
     }
   }
 
@@ -119,6 +120,7 @@ export class PrincipalPage {
   private logout() {
     this.almacenDatosProvider.reproducirSonido('plop');
     this.loginProvider.logOut();
+    this.almacenDatosProvider.reproducirSonido('intro');
     this.navCtrl.push(LoginPage);
   }
 
@@ -303,21 +305,58 @@ export class PrincipalPage {
       });
   }
 
-  private asignarFotoPerfil()
+  private evaluarMensajeDeInasistencias()
+{
+  console.log(this.almacenDatosProvider.usuarioLogueado.tipo_entidad);
+  console.log(this.almacenDatosProvider.usuarioLogueado.legajo);
+  if(
+    this.almacenDatosProvider.usuarioLogueado.tipo_entidad == "alumno" ||
+    this.almacenDatosProvider.usuarioLogueado.tipo_entidad == "docente" ||
+    this.almacenDatosProvider.usuarioLogueado.tipo_entidad == "administrativo"
+  )
   {
-    console.clear();
-    console.log(this.almacenDatosProvider.usuarioLogueado.legajo);
-    this.dataProvider.getItems('fotoPerfil/'+ this.almacenDatosProvider.usuarioLogueado.legajo).subscribe(
+    // debugger
+    this.dataProvider.getItems('aviso_faltas').subscribe(
+      tabAvisoFaltas =>
+       {
+         tabAvisoFaltas.forEach(element => {
 
-      tbFotoPerfil =>
-      {
-        console.log("dentro");
-        let indice = tbFotoPerfil[1].posicion;
-        this.almacenDatosProvider.usuarioLogueado.photoURL = tbFotoPerfil[0][indice];
-        console.log(tbFotoPerfil[0][indice]);
-        console.log(this.almacenDatosProvider.usuarioLogueado.photoURL);
-      }
-    )
+           if(element.legajo == this.almacenDatosProvider.usuarioLogueado.legajo)
+           {
+             //Mando la notificacion
+             this.platform.ready().then(() => {
+              this.localNoti.schedule({
+                title: 'Alerta de Gestión Académica!',
+                text: element.mensaje,
+                at: new Date(new Date().getTime() + 3600),
+                led: 'FF0000',
+                icon:'', //ruta del icono
+                sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
+              });
+            //Elimino aviso para que no vuelva a enviarlo.
+              this.dataProvider.deleteItem('aviso_faltas/'+ this.almacenDatosProvider.usuarioLogueado.legajo);
+            });
+             
+           }
+         });
+       }
+     );
   }
+  
+}
+
+private asignarFotoPerfil()
+{
+  console.log(this.almacenDatosProvider.usuarioLogueado.legajo);
+  this.dataProvider.getItems('fotoPerfil/'+ this.almacenDatosProvider.usuarioLogueado.legajo).subscribe(
+    tbFotoPerfil =>
+    {
+      let indice = tbFotoPerfil[1].posicion;
+      this.almacenDatosProvider.usuarioLogueado.photoURL = tbFotoPerfil[0][indice];
+      console.log(tbFotoPerfil[0][indice]);
+      console.log(this.almacenDatosProvider.usuarioLogueado.photoURL);
+    }
+  )
+}
 
 }

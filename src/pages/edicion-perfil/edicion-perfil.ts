@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ViewController ,LoadingController, Platform} from 'ionic-angular';
+import { LocalNotifications }       from '@ionic-native/local-notifications';
 import { DataProvider }             from '../../providers/data/data';
 import { GlobalFxProvider }         from '../../providers/global-fx/global-fx';
 import { PrincipalPage }            from '../principal/principal';
 
-import { LocalNotifications }                           from '@ionic-native/local-notifications';
+import { ViewChild } from '@angular/core';
+import { Slides } from 'ionic-angular';
+
 
 /**
  * Generated class for the EdicionPerfilPage page.
@@ -47,6 +50,7 @@ export class EdicionPerfilPage {
               public  platform: Platform,
               public  localNoti: LocalNotifications) {
 
+    console.clear();
     this.obtenerAvisos();
     this.legajo =  this.navParams.get('legajo');
     this.nombre_apellido = this.navParams.get('nombre');
@@ -66,6 +70,12 @@ export class EdicionPerfilPage {
   }
 
   
+  @ViewChild(Slides) slides: Slides;
+  
+    goToSlide(slideNumber) {
+      this.slides.slideTo(slideNumber, 500);
+    }
+
   private obtenerUltimoIDEntidadesPersona()
   {
     this.dataProvider.getItems('entidades_persona').subscribe(
@@ -178,15 +188,21 @@ export class EdicionPerfilPage {
 
 
   openCamera(){
-      //data es el base64 de la foto
-      this.gFx.getPhoto().subscribe(
-        data => {
-            this.foto = data;
-        }
-      );
+
+    console.info("arrImages:",this.arrImages);
+    // data es el base64 de la foto
+    this.gFx.getPhoto().subscribe(
+      data => {
+        
+          this.arrImages.push("https://robohash.org/6");
+          console.info("arrImages:",this.arrImages);
+          // this.goToSlide(this.arrImages.length);
+      }
+    );
   }
 
   Aceptar(){
+    
     
         if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
           (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||

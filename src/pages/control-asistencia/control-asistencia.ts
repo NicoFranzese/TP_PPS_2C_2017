@@ -9,6 +9,7 @@ import { LoadingController } from 'ionic-angular';
 import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
 import { ModalImprimirAlumnosPdfPage} from '../../pages/modal-imprimir-alumnos-pdf/modal-imprimir-alumnos-pdf';
 import { Subject } from 'rxjs/Subject';
+import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-datos';
 
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { LocalNotifications }                           from '@ionic-native/local-notifications';
@@ -46,7 +47,8 @@ export class ControlAsistenciaPage {
               public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,      private gFx: GlobalFxProvider,
               private alertCtrl: AlertController,
               public  platform: Platform,
-              public  localNoti: LocalNotifications) {
+              public  localNoti: LocalNotifications,
+			  private almacenDatosProvider: AlmacenDatosProvider) {
     
     console.clear(); 
     this.obtenerAvisos();     
@@ -359,6 +361,7 @@ export class ControlAsistenciaPage {
             try {
               this.arrAusencias.forEach(element => {
                   this.dataservice.addItem('asistencias/' + element.id_asistencia , element);  
+		  this.almacenDatosProvider.verificarLimiteAsistencias(element.id_cursada_alumno, this.comision);
               });
               this.gFx.presentToast("Datos enviados correctamente.");
               this.initialItemsLength = 0 ;
