@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { PapaParseService } from 'ngx-papaparse';
 import { CsvAlumnosProvider } from '../../providers/csv-alumnos/csv-alumnos';
-
+import { LocalNotifications }                           from '@ionic-native/local-notifications';
 
 @IonicPage()
 @Component({
@@ -15,10 +15,14 @@ import { CsvAlumnosProvider } from '../../providers/csv-alumnos/csv-alumnos';
 
 export class CargaArchivosPage {
 
-  
+  public arrAvisos;
 
   constructor(private csvAlumnosProvider: CsvAlumnosProvider,
-              private papa: PapaParseService) { }
+              private papa: PapaParseService,
+              public  platform: Platform,
+              public  localNoti: LocalNotifications) { 
+                this.obtenerAvisos();
+              }
 
             
   private title = "Importar CSV Alumnos";
@@ -135,5 +139,58 @@ export class CargaArchivosPage {
     )
   }
 
+  private obtenerAvisos()
+  {
+    this.dataProvider.getItems('avisos_importancia').subscribe(
+      data => 
+      {
+        // this.arrPersonas = data;
+
+        if(data == undefined)
+        {
+          // alert("No existen personas cargadas en la BD");
+        }
+        else
+        {
+          this.arrAvisos = data;
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                }else{
+                  this.platform.ready().then(() => {
+                    this.localNoti.schedule({
+                      title: 'Alerta de Gestión Académica!',
+                      text: this.arrAvisos[i].mensaje,
+                      at: new Date(new Date().getTime() + 3600),
+                      led: 'FF0000',
+                      icon:'', //ruta del icono
+                      sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
+                    });
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    // this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                  
+                }else{
+                  this.platform.ready().then(() => {
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+        }
+        // console.log(this.arrAvisos);
+      },
+      err => console.log(err)
+    );
+  }
   
 }

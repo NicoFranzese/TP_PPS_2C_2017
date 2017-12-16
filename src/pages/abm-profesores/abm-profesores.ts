@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController, ViewController, Platform } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 
 import { PrincipalPage } from '../principal/principal';
 import { ModalAbmDocentesPage } from '../modal-abm-docentes/modal-abm-docentes';
+import { LocalNotifications }                           from '@ionic-native/local-notifications';
 /**
  * Generated class for the AbmProfesoresPage page.
  *
@@ -32,12 +33,16 @@ export class AbmProfesoresPage {
 
   public items;
   public itemsUsuarios;
+  public arrAvisos;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private dataProvider: DataProvider,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
-    private viewCtrl: ViewController) {
+    private viewCtrl: ViewController,
+    public  platform: Platform,
+    public  localNoti: LocalNotifications) {
+      this.obtenerAvisos();
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
   }
@@ -150,6 +155,60 @@ export class AbmProfesoresPage {
       });
     }
    
+  }
+
+  private obtenerAvisos()
+  {
+    this.dataProvider.getItems('avisos_importancia').subscribe(
+      data => 
+      {
+        // this.arrPersonas = data;
+
+        if(data == undefined)
+        {
+          // alert("No existen personas cargadas en la BD");
+        }
+        else
+        {
+          this.arrAvisos = data;
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                }else{
+                  this.platform.ready().then(() => {
+                    this.localNoti.schedule({
+                      title: 'Alerta de Gestión Académica!',
+                      text: this.arrAvisos[i].mensaje,
+                      at: new Date(new Date().getTime() + 3600),
+                      led: 'FF0000',
+                      icon:'', //ruta del icono
+                      sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
+                    });
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    // this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                  
+                }else{
+                  this.platform.ready().then(() => {
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+        }
+        // console.log(this.arrAvisos);
+      },
+      err => console.log(err)
+    );
   }
 
 
