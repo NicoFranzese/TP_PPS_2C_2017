@@ -36,18 +36,21 @@ export class PrincipalPage {
   public tipoUsuario;
   public arrAvisos;
   private arrOpciones = [];
+  
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private loginProvider: LoginProvider,
-    private almacenDatosProvider: AlmacenDatosProvider,
-    private barcodeScanner: BarcodeScanner,
-    private dataProvider: DataProvider,
-    public platform: Platform,
-    public localNoti: LocalNotifications,
-    private qrEncuestasProvider: QrEncuestasProvider
-    
-  ) {
+              public navParams: NavParams,
+              private loginProvider: LoginProvider,
+              private almacenDatosProvider: AlmacenDatosProvider,
+              private barcodeScanner: BarcodeScanner,
+              private dataProvider: DataProvider,
+              public platform: Platform,
+              public localNoti: LocalNotifications,
+              private qrEncuestasProvider: QrEncuestasProvider) {
+   
+    let userChanged;
+    userChanged = this.navParams.get("logout");
+    if(userChanged!=null){this.logout();}
     this.obtenerAvisos();
   }
 
@@ -301,7 +304,8 @@ export class PrincipalPage {
     this.navCtrl.push(EdicionPerfilPage,
       {
         legajo:this.almacenDatosProvider.usuarioLogueado.legajo,
-        nombre:this.almacenDatosProvider.usuarioLogueado.nombre
+        nombre:this.almacenDatosProvider.usuarioLogueado.nombre,
+        tipo_entidad:this.almacenDatosProvider.usuarioLogueado.tipo_entidad
       });
   }
 

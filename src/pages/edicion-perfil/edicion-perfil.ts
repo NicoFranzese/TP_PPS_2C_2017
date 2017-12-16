@@ -29,7 +29,7 @@ export class EdicionPerfilPage {
   public nombre_apellido;
   public email;
   public clave;
-  public tipo_entidad = "docente";
+  public tipo_entidad;
   public foto;
   public ultimoIDEntidadesPersona;
   public arrEntidadesPersona;
@@ -54,6 +54,7 @@ export class EdicionPerfilPage {
     this.obtenerAvisos();
     this.legajo =  this.navParams.get('legajo');
     this.nombre_apellido = this.navParams.get('nombre');
+    this.tipo_entidad = this.navParams.get('tipo_entidad');       
 
     this.obtenerUltimoIDEntidadesPersona();
     this.obtenerUltimoIDUsuarios();
@@ -189,7 +190,6 @@ export class EdicionPerfilPage {
 
   openCamera(){
 
-    console.info("arrImages:",this.arrImages);
     // data es el base64 de la foto
     this.gFx.getPhoto().subscribe(
       data => {
@@ -248,11 +248,10 @@ export class EdicionPerfilPage {
             this.email="";
             this.clave="";
     
-            this.gFx.presentToast("Se ha guardado con éxito")
-
-            this.navCtrl.push(PrincipalPage);
+            this.gFx.presentToast("Se ha guardado con éxito");
+            this.navCtrl.push(PrincipalPage,{logout:"yes"});
           } catch (error) {
-            this.gFx.presentToast("Error de conexión.")
+            this.gFx.presentToast("Error de conexión.");
           }      
         }
       }
