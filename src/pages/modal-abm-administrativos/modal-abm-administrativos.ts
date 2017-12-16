@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ViewController ,LoadingController} from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { AbmAdministrativosPage } from '../abm-administrativos/abm-administrativos';
+import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
 
 /**
  * Generated class for the ModalAbmAdministrativosPage page.
@@ -34,7 +35,7 @@ export class ModalAbmAdministrativosPage {
   public itemsUsuarios; 
 
   constructor(public navCtrl    : NavController,     private viewCtrl: ViewController,    public navParams: NavParams,
-    public loadingCtrl: LoadingController ,public dataProvider : DataProvider) {
+    public loadingCtrl: LoadingController ,public dataProvider : DataProvider, private gFx: GlobalFxProvider) {
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
       this.obtenerUltimoIDEntidadesPersona();
@@ -153,7 +154,7 @@ export class ModalAbmAdministrativosPage {
           (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
         (this.email == null) || (this.email == undefined) || (this.email == "") ||
           (this.clave == null) || (this.clave == undefined) || (this.clave == "")){
-            alert("Debe ingresar valores para los campos que visualiza en pantalla");
+            this.gFx.presentToast("Debe ingresar valores para los campos que visualiza en pantalla");
         }else{
           try {
 
@@ -184,17 +185,20 @@ export class ModalAbmAdministrativosPage {
               'clave': this.clave
             };                
             this.dataProvider.addItem('usuarios/' +  this.ultimoIDUsuarios, objUsu);
+            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
+            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
     
             this.legajo="";
             this.nombre_apellido="";
             this.email="";
             this.clave="";
     
+            this.gFx.presentToast("Se ha guardado con éxito.");
             alert("Se ah guardado con éxito.");
     
             this.navCtrl.push(AbmAdministrativosPage);
           } catch (error) {
-            alert("Algo ha fallado, verifique su conexión a internet.");
+            this.gFx.presentToast("Algo ha fallado, verifique su conexión a internet.");
           }      
         }
       }

@@ -305,10 +305,13 @@ export class PrincipalPage {
 
   private asignarFotoPerfil()
   {
+    console.clear();
     console.log(this.almacenDatosProvider.usuarioLogueado.legajo);
     this.dataProvider.getItems('fotoPerfil/'+ this.almacenDatosProvider.usuarioLogueado.legajo).subscribe(
+
       tbFotoPerfil =>
       {
+        console.log("dentro");
         let indice = tbFotoPerfil[1].posicion;
         this.almacenDatosProvider.usuarioLogueado.photoURL = tbFotoPerfil[0][indice];
         console.log(tbFotoPerfil[0][indice]);

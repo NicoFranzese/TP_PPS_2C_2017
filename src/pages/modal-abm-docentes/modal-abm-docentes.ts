@@ -180,6 +180,8 @@ export class ModalAbmDocentesPage {
               'tipo_entidad': this.tipo_entidad
             };        
             this.dataProvider.addItem('entidades_persona/' +  this.ultimoIDEntidadesPersona, obj);
+            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
+            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
       
             let objUsu = 
             {
