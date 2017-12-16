@@ -36,8 +36,7 @@ export class ControlAsistenciaPage {
 
   obsDB = new Subject();
 
-
-  constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
+   constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
               public dataservice : DataProvider,              public loadingCtrl: LoadingController, public modalCtrl: ModalController,
               public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,      private gFx: GlobalFxProvider,
               private alertCtrl: AlertController) {
@@ -387,60 +386,88 @@ export class ControlAsistenciaPage {
   }
 
 
-  exportarAExcel(){    
-    
-      var options = { 
-        fieldSeparator: ';',
-        quoteStrings: '',
-        decimalseparator: '.',
-        showLabels: true, 
-        showTitle: false,
-        useBom: true
-      };
-  
-      new Angular2Csv(this.items, 'Alumnos', options);
-   
-    }  
-  
-    accionesDescarga() {
-      let viewIndex = this.viewCtrl.index;
-  
-      let actionSheet = this.actionSheetCtrl.create({
-        title: 'Seleccione tipo de archivo a descargar...',
-        buttons: [
-          {
-            text: 'Descargar CSV',
-            icon: 'book',
-            handler: () => {
-              this.exportarAExcel();
-            }
-          },
-          {
-            text: 'Descargar PDF',
-            icon: 'book',
-            handler: () => {
-              let optionModal = this.modalCtrl.create(ModalCtrlAsistenciaPage,{selectedOption:'materia' });
-              optionModal.present()
-              .then(() => {
-                // first we find the index of the current view controller:
-                const index = this.viewCtrl.index;
-                // then we remove it from the navigation stack
-                this.navCtrl.remove(index);
-              });
-            }
-          },
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }
-        ]
-      });
-      actionSheet.present();    
-    }//presentActionSheet()
-  
+  accionesDescarga() {
+    let viewIndex = this.viewCtrl.index;
 
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Seleccione tipo de archivo a descargar...',
+      buttons: [
+        {
+          text: 'Descargar CSV',
+          icon: 'book',
+          handler: () => {
+            this.exportarAExcel();
+          }
+        },
+        {
+          text: 'Descargar PDF',
+          icon: 'book',
+          handler: () => {
+            this.exportarAPDF();
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();    
+  }//presentActionSheet()
+
+  exportarAExcel(){        
+    var options = { 
+      fieldSeparator: ';',
+      quoteStrings: '',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: false,
+      useBom: true
+    };
+
+    new Angular2Csv(this.items, 'Alumnos', options);
+  
+  }  
+  
+  exportarAPDF(): void {
+    if(document.getElementById("divImprimir") != null){
+      let printContents, popupWin;
+      printContents = document.getElementById('divImprimir').innerHTML;
+
+      // printContents = '<div id="print-section"> '+
+      //                   // '<img src="./assets/img/logo.png"> style="width=200px; heigth=200px'+
+      //                     '<ion-grid>'+
+      //                       '<ion-row class="row row-header">'+
+      //                         '<ion-col class="col col-1">'+                             
+      //                         '</ion-col>'+
+      //                         '<ion-col class="col col-3">Legajo</ion-col>'+
+      //                         '<ion-col class="col col-8">Alumno</ion-col>'+
+      //                       '</ion-row>'+                      
+      //                       '<ion-row class="row-grid" *ngFor="let item of '+ this.items +'" align-items-center>'+
+      //                         '<ion-col class="col col-1">'+ 
+      //                         '</ion-col>'+
+      //                         '<ion-col class="col col-3">{{item.legajo}}</ion-col>'+
+      //                         '<ion-col class="col col-8 cortar">{{item.nombre_apellido}}</ion-col>'+
+      //                       '</ion-row>'+                      
+      //                     '</ion-grid>'+
+      //                   '</div>'
+
+
+      popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+      popupWin.document.open();
+      popupWin.document.write(`
+        <html>
+          <head>
+
+          </head>
+            <body onload="window.print();window.close()">${printContents}</body>
+        </html>`
+      );
+      popupWin.document.close();
+    }
+  }
 
 }//class
