@@ -77,6 +77,12 @@ export class EdicionPerfilPage {
       this.slides.slideTo(slideNumber, 500);
     }
 
+
+    slideChanged() {
+      let currentIndex = this.slides.getActiveIndex();
+      
+    }
+
   private obtenerUltimoIDEntidadesPersona()
   {
     this.dataProvider.getItems('entidades_persona').subscribe(
