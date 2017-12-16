@@ -449,7 +449,7 @@ export class ControlAsistenciaPage {
 
    private obtenerAvisos()
    {
-     this.dataProvider.getItems('avisos_importancia').subscribe(
+     this.dataservice.getItems('avisos_importancia').subscribe(
        data => 
        {
          // this.arrPersonas = data;
@@ -490,7 +490,7 @@ export class ControlAsistenciaPage {
                  }else{
                    this.platform.ready().then(() => {
                    //Elimino aviso para que no vuelva a enviarlo.
-                     this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                     this.dataservice.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
                    });
                  }
            }

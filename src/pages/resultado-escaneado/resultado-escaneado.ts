@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { ResultadoEscaneadoProvider } from '../../providers/resultado-escaneado/resultado-escaneado'
 import { LoadingController } from 'ionic-angular';
 import { LocalNotifications }                           from '@ionic-native/local-notifications';
+import { DataProvider } from '../../providers/data/data';
 
 /**
  * Generated class for the ResultadoEscaneadoPage page.
@@ -34,7 +35,8 @@ export class ResultadoEscaneadoPage {
             public servicioResultadoEscaneado: ResultadoEscaneadoProvider,
             public loadingCtrl: LoadingController,
             public  platform: Platform,
-            public  localNoti: LocalNotifications) {
+            public  localNoti: LocalNotifications,
+            private dataProvider: DataProvider) {
               this.obtenerAvisos();
 
        // configuro spinner para mientras se cargan los datos 

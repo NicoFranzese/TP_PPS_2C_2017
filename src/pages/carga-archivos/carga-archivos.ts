@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { PapaParseService } from 'ngx-papaparse';
 import { CsvAlumnosProvider } from '../../providers/csv-alumnos/csv-alumnos';
 import { LocalNotifications }                           from '@ionic-native/local-notifications';
-
+import { DataProvider } from '../../providers/data/data';
 @IonicPage()
 @Component({
   selector: 'page-carga-archivos',
@@ -20,7 +20,8 @@ export class CargaArchivosPage {
   constructor(private csvAlumnosProvider: CsvAlumnosProvider,
               private papa: PapaParseService,
               public  platform: Platform,
-              public  localNoti: LocalNotifications) { 
+              public  localNoti: LocalNotifications,
+              private dataProvider: DataProvider) { 
                 this.obtenerAvisos();
               }
 
