@@ -1,25 +1,31 @@
+// ionic-angular
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
-import { LoginProvider } from '../../providers/login/login';
-import { LoginPage } from '../login/login';
-import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-datos';
-import { QrEncuestasProvider } from '../../providers/qr-encuestas/qr-encuestas';
+import { BarcodeScanner }                               from '@ionic-native/barcode-scanner';
+import { LocalNotifications }                           from '@ionic-native/local-notifications';
 
-import { AbmAdministrativosPage } from '../abm-administrativos/abm-administrativos';
-import { AbmAlumnosPage } from '../abm-alumnos/abm-alumnos';
-import { AbmCuestionariosPage } from '../abm-cuestionarios/abm-cuestionarios';
-import { AbmProfesoresPage } from '../abm-profesores/abm-profesores';
-import { AvisoImportanciaPage } from '../aviso-importancia/aviso-importancia';
-import { CargaArchivosPage } from '../carga-archivos/carga-archivos';
-import { ControlAsistenciaPage } from '../control-asistencia/control-asistencia';
+// providers
+import { DataProvider }         from '../../providers/data/data';
+import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-datos';
+import { QrEncuestasProvider }  from '../../providers/qr-encuestas/qr-encuestas';
+import { LoginProvider }        from '../../providers/login/login';
+
+// pages
+import { LoginPage }                from '../login/login';
+import { AbmAdministrativosPage }   from '../abm-administrativos/abm-administrativos';
+import { AbmAlumnosPage }           from '../abm-alumnos/abm-alumnos';
+import { AbmCuestionariosPage }     from '../abm-cuestionarios/abm-cuestionarios';
+import { AbmProfesoresPage }        from '../abm-profesores/abm-profesores';
+import { AvisoImportanciaPage }     from '../aviso-importancia/aviso-importancia';
+import { CargaArchivosPage }        from '../carga-archivos/carga-archivos';
+import { ControlAsistenciaPage }    from '../control-asistencia/control-asistencia';
 import { GraficosEstadisticosPage } from '../graficos-estadisticos/graficos-estadisticos';
-import { QrAlumnosPage } from '../qr-alumnos/qr-alumnos';
-import { QrEncuestasPage } from '../qr-encuestas/qr-encuestas';
-import { QrProfesoresPage } from '../qr-profesores/qr-profesores';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { EncuestaPage } from '../encuesta/encuesta';
-import { DataProvider } from '../../providers/data/data';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+import { QrAlumnosPage }            from '../qr-alumnos/qr-alumnos';
+import { QrEncuestasPage }          from '../qr-encuestas/qr-encuestas';
+import { QrProfesoresPage }         from '../qr-profesores/qr-profesores';
+import { EncuestaPage }             from '../encuesta/encuesta';
+import { EdicionPerfilPage}         from '../edicion-perfil/edicion-perfil';
+
 
 @IonicPage()
 @Component({
@@ -29,21 +35,20 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 export class PrincipalPage {
   public tipoUsuario;
   public arrAvisos;
-
   private arrOpciones = [];
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private loginProvider: LoginProvider,
-    private almacenDatosProvider: AlmacenDatosProvider,
-    private barcodeScanner: BarcodeScanner,
-    private dataProvider: DataProvider,
-    public platform: Platform,
-    public localNoti: LocalNotifications,
-    private qrEncuestasProvider: QrEncuestasProvider
-    
-  ) {
+  constructor(public  navCtrl: NavController,
+              public  navParams: NavParams,
+              private loginProvider: LoginProvider,
+              private almacenDatosProvider: AlmacenDatosProvider,
+              private barcodeScanner: BarcodeScanner,
+              private dataProvider: DataProvider,
+              public  platform: Platform,
+              public  localNoti: LocalNotifications,
+              private qrEncuestasProvider: QrEncuestasProvider  ) {
+
     this.obtenerAvisos();
+
   }
 
   ionViewDidLoad() {
@@ -282,5 +287,15 @@ export class PrincipalPage {
       err => console.log(err)
     );
   }
+
+
+  private modificarPerfil(){
+    this.navCtrl.push(EdicionPerfilPage,
+      {
+        legajo:this.almacenDatosProvider.usuarioLogueado.legajo,
+        nombre:this.almacenDatosProvider.usuarioLogueado.nombre
+      });
+  }
+
 
 }

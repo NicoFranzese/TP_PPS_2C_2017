@@ -13,14 +13,14 @@
   <div class="row animated fadeIn ">
     <div class="col-12">
         <ion-list>
-            <ion-item id="datos">
+            <ion-item id="datos" >
               <ion-thumbnail item-start>
                 <img src={{almacenDatosProvider.usuarioLogueado.photoURL}} id="img-perfil">
               </ion-thumbnail>
               <h2><b>{{almacenDatosProvider.usuarioLogueado.nombre}}</b></h2>
               <p>{{almacenDatosProvider.usuarioLogueado.legajo}} </p>
               <p><i>{{almacenDatosProvider.usuarioLogueado.tipo_entidad}}</i></p>
-              <p><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Administrar perfil</a></p>
+              <p><a href="#" (click)="modificarPerfil()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Administrar perfil</a></p>
             </ion-item>
           </ion-list>
     </div>

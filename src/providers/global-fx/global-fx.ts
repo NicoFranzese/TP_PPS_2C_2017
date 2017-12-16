@@ -5,8 +5,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 
-
-import { AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
@@ -16,12 +14,10 @@ import { LoadingController } from 'ionic-angular';
 export class GlobalFxProvider {
 
   private subjectFoto = new BehaviorSubject("");
-  // public obsFoto = this.subjectFoto.asObservable();
   public loader;
 
 
   constructor(public http: Http,
-              private alertCtrl: AlertController,
               private camera: Camera,
               public toastCtrl: ToastController,
               public loadingCtrl: LoadingController) {
@@ -58,38 +54,22 @@ export class GlobalFxProvider {
   }
 
   public presentLoading(msj) {
-    let loader = this.loadingCtrl.create({
-      content: msj,
-      duration: 3000
+    this.loader = this.loadingCtrl.create({
+      content: msj
+      // duration: 3000
     });
     this.loader.present();
   }
 
-  //alert customizable
-  public  presentConfirm(title,msj): boolean {
-    let result : boolean;
-    let alert = this.alertCtrl.create({
-      title: title,
-      message: msj,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            result = false;
-          }
-        },
-        {
-          text: 'Aceptar',
-          handler: () => {
-           result = true;
-          }
-        }
-      ]
-    });
-    alert.present();
-    return result;
+  public dismissLoading(time:number){
+    setTimeout(() => {
+      this.loader.dismiss();
+    }, time);
+
   }
+
+
+
 
 
 

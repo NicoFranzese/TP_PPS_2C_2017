@@ -4,7 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { DataProvider } from '../../providers/data/data';
 import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
-
+import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
 import { Subject } from 'rxjs/Subject';
@@ -39,7 +39,8 @@ export class ControlAsistenciaPage {
 
   constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
               public dataservice : DataProvider,              public loadingCtrl: LoadingController, public modalCtrl: ModalController,
-              public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,      private gFx: GlobalFxProvider) {
+              public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,      private gFx: GlobalFxProvider,
+              private alertCtrl: AlertController) {
          
     console.clear(); 
     this.getDate();
@@ -285,16 +286,6 @@ export class ControlAsistenciaPage {
   }//presentActionSheet()
 
 
-  clear(){
-    if(this.gFx.presentConfirm("CONFIRMAR","¿Desea reiniciar la lista?")){
-      this.arrAusencias.forEach(element => {
-        element.inasistencia = 1;
-      });
-    }
-
-  }
-
-
   addAbsence(parLegajo){
     let auxAlumno : any;
     auxAlumno = this.tbCursadasAlumno.find((item)=> item.legajo_alumno == parLegajo);
@@ -314,14 +305,66 @@ export class ControlAsistenciaPage {
   }//addAbsence()
 
 
-  sendList() {
-    if(this.gFx.presentConfirm("CONFIRMAR","¿Desea enviar los datos?")){
-      // si está todo ok envío los datos
-      this.arrAusencias.forEach(element => {
-      this.dataservice.addItem('asistencias/' + element.id_asistencia , element);
-      });
-    }
+  clear(){
+      
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar',
+      message: '¿Desea reiniciar la lista?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.arrAusencias.forEach(element => {
+              element.inasistencia = 1;
+            });
+          }
+        }
+      ]
+    });
+    alert.present();
   }
+
+
+  sendList() {
+
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar',
+      message: '¿Desea enviar los datos?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            try {
+              this.arrAusencias.forEach(element => {
+                  this.dataservice.addItem('asistencias/' + element.id_asistencia , element);  
+              });
+              this.gFx.presentToast("Datos enviados correctamente.");
+              this.initialItemsLength = 0 ;
+              }
+              catch (error) {
+                this.gFx.presentToast(error);
+              }
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }//sendList
 
   
   takePicture(){
@@ -342,6 +385,9 @@ export class ControlAsistenciaPage {
       }
     );
   }
+
+
+
 
 
 }//class

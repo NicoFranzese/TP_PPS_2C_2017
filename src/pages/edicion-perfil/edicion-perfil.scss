@@ -1,0 +1,45 @@
+page-edicion-perfil {
+    
+        #perfil
+        {
+            border: 3px solid #012c3d;
+            border-radius: 10px;
+        }
+    
+        .item-md{
+            background: #02648b !important;
+            border: 2px solid #033c52;
+            border-radius: 5px;
+            margin-bottom: 3px;
+            padding: 0;
+        }
+    
+        .item-inner{
+            border: 0 !important;
+            padding: 0 !important;
+        }
+    
+        ion-label
+        {
+            color: #fff !important;
+            background: #012c3d !important;
+            padding: 13px 8px;
+            margin: 0 !important;
+        }
+        .item-inner{
+            border-bottom-color: #03658b !important;
+            box-shadow: inset 0 -1px 0 0 #03658b !important;
+        }
+    
+        .text-input{
+            background: #fff !important;
+            padding: 13px 8px;
+            margin: 0 !important;
+            width: 100%;
+        }
+    
+        .btn{
+            font-size: 17px;
+        }
+    }
+    
