@@ -9,7 +9,7 @@ import { LoadingController } from 'ionic-angular';
 import { ModalCtrlAsistenciaPage} from '../../pages/modal-ctrl-asistencia/modal-ctrl-asistencia';
 import { Subject } from 'rxjs/Subject';
 
-
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 
 @IonicPage()
@@ -387,7 +387,60 @@ export class ControlAsistenciaPage {
   }
 
 
-
+  exportarAExcel(){    
+    
+      var options = { 
+        fieldSeparator: ';',
+        quoteStrings: '',
+        decimalseparator: '.',
+        showLabels: true, 
+        showTitle: false,
+        useBom: true
+      };
+  
+      new Angular2Csv(this.items, 'Alumnos', options);
+   
+    }  
+  
+    accionesDescarga() {
+      let viewIndex = this.viewCtrl.index;
+  
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'Seleccione tipo de archivo a descargar...',
+        buttons: [
+          {
+            text: 'Descargar CSV',
+            icon: 'book',
+            handler: () => {
+              this.exportarAExcel();
+            }
+          },
+          {
+            text: 'Descargar PDF',
+            icon: 'book',
+            handler: () => {
+              let optionModal = this.modalCtrl.create(ModalCtrlAsistenciaPage,{selectedOption:'materia' });
+              optionModal.present()
+              .then(() => {
+                // first we find the index of the current view controller:
+                const index = this.viewCtrl.index;
+                // then we remove it from the navigation stack
+                this.navCtrl.remove(index);
+              });
+            }
+          },
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+      actionSheet.present();    
+    }//presentActionSheet()
+  
 
 
 }//class

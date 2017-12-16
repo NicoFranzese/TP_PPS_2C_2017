@@ -34,6 +34,7 @@
     "@ionic-native/toast": "^4.4.2",
     "@ionic/cloud-angular": "^0.12.0",
     "@ionic/storage": "2.0.1",
+    "angular2-csv": "^0.2.5",
     "angularfire2": "^5.0.0-rc.3",
     "chart.js": "^2.7.1",
     "com.devicepush.cordova-phonegap": "^0.4.6",
