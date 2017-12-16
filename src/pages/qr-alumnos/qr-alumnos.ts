@@ -47,104 +47,6 @@ export class QrAlumnosPage {
     //console.log('ionViewDidLoad QrAlumnosPage');
   }
 
-  escanear() {
-    // configuro spinner para mientras se cargan los datos 
-    const loading = this.loadingCtrl.create({
-      content: 'Espere por favor...'
-    });
-    loading.present();
-
-    let CodigoQROK = 0;
-
-    this.barcodeScanner.scan().then((barcodeData) => {
-
-      var f=new Date();
-      this.horaActual=f.getHours(); 
-      console.log(this.horaABuscar);
-      if (this.horaActual < 12){
-        this.horaABuscar = "8:30";
-        console.log(this.horaABuscar);
-      }else{
-        this.horaABuscar = "18:30";
-        console.log(this.horaABuscar);
-      }
-
-      // let arr = (barcodeData.text).split("-");
-      // let materia = arr[0];
-      // let aula = arr[1];
-
-      let aula = barcodeData.text;
-
-    /*Ir a la tabla Cursos y ver si existe PPS Si existe en campo "sigla_materia" y si existe la comision en el campo comision
-      Si se da la condicion anterior, que me muestre el Aula, horario y Legajo profesor.*/
-
-      this.servicioEscanearQr.getExisteQR("entidades_persona").subscribe(        
-        datos => {      
-          this.personas = datos;
-          setTimeout(() => {
-            loading.dismiss();
-          }, 3000);
-        },
-        error => {console.error(error); this.navCtrl.push(PrincipalPage);},
-        () => {console.log("ok");}
-      );   
-
-      this.servicioEscanearQr.getExisteQR("cursos").subscribe(
-        datos => {      
-          this.items = datos;
-          setTimeout(() => {
-            loading.dismiss();
-          }, 3000);
-
-          //Filtro por la hora correspondiente, luego me hago un array de lo filtrado
-          this.auxCursosF1 = this.items.filter((item) => {
-            return (item.dia_horario.trim().toLowerCase().indexOf(this.horaABuscar.toLowerCase()) > -1);
-          });
-
-          //Recorro los elementos filtrados anteriormente, y traigo en un nuevo array unicamente el curso correspondiente al aula
-          this.auxCursosF1.forEach(element => {  
-            if (element==aula) {
-              this.auxCursos = element;              
-            }
-          });
-
-
-          //Valido que el código QR sea válido
-          this.auxCursos.forEach(element => {      
-            // if (element.sigla_materia==materia) {
-              this.personas.forEach(per => {
-                if (element.legajo_docente==per.legajo) {
-                  // console.log("legajo curso ;"+element.legajo_docente);
-                  // console.log("legajo persona ;"+per.legajo);
-                  CodigoQROK = 1;
-                  localStorage.setItem("profesorEscaneado", per.nombre_apellido);
-                  localStorage.setItem("aulaEscaneada", element.aula);
-                  localStorage.setItem("horarioEscaneada", element.dia_horario);
-                  localStorage.setItem("comisionEscaneada", element.comision);
-                  localStorage.setItem("materiaEscaneada", element.sigla_materia);
-                }
-              });
-            // }
-          });
-
-          if(CodigoQROK == 1){           
-            localStorage.setItem("escaneoDesde", "Alumnos");
-            this.navCtrl.push(ResultadoEscaneadoPage);
-          }else{
-            localStorage.setItem("materiaEscaneada", "");
-            localStorage.setItem("comisionEscaneada", "");
-            localStorage.setItem("escaneoDesde", "");
-            localStorage.setItem("profesorEscaneado", "");
-            this.gFx.presentToast("Codigo QR Erróneo");           
-            this.navCtrl.push(PrincipalPage);
-          }   
-        },
-        error => {console.error(error); this.navCtrl.push(PrincipalPage);},
-        () => {console.log("ok");}
-      );    
-    });
-  }
-
   // escanear() {
   //   const loading = this.loadingCtrl.create({
   //     content: 'Espere por favor...'
@@ -154,6 +56,18 @@ export class QrAlumnosPage {
   //   let CodigoQROK = 0;
 
   //   this.barcodeScanner.scan().then((barcodeData) => {
+
+  //     var f=new Date();
+  //     this.horaActual=f.getHours(); 
+  //     console.log(this.horaABuscar);
+  //     if (this.horaActual < 12){
+  //       this.horaABuscar = "8:30";
+  //       console.log(this.horaABuscar);
+  //     }else{
+  //       this.horaABuscar = "18:30";
+  //       console.log(this.horaABuscar);
+  //     }
+
   //     let arr = (barcodeData.text).split("-");
   //     let materia = arr[0];
   //     let comision = arr[1];
@@ -176,24 +90,31 @@ export class QrAlumnosPage {
   //           loading.dismiss();
   //         }, 3000);
 
-  //         this.items.forEach(element => {      
-  //           if ((element.sigla_materia==materia) && (element.comision==comision)) {
+  //         this.auxCursosF1 = this.items.filter((item) => {
+  //           return (item.dia_horario.trim().toLowerCase().indexOf(this.horaABuscar.toLowerCase()) > -1);
+  //         });
+
+  //         this.auxCursosF1.forEach(element => {  
+  //           if (element==aula) {
+  //             this.auxCursos = element;              
+  //           }
+  //         });
+
+  //         this.auxCursos.forEach(element => {      
   //             this.personas.forEach(per => {
   //               if (element.legajo_docente==per.legajo) {
-  //                 console.log("legajo curso ;"+element.legajo_docente);
-  //                 console.log("legajo persona ;"+per.legajo);
   //                 CodigoQROK = 1;
   //                 localStorage.setItem("profesorEscaneado", per.nombre_apellido);
   //                 localStorage.setItem("aulaEscaneada", element.aula);
   //                 localStorage.setItem("horarioEscaneada", element.dia_horario);
+  //                 localStorage.setItem("comisionEscaneada", element.comision);
+  //                 localStorage.setItem("materiaEscaneada", element.sigla_materia);
   //               }
   //             });
-  //           }
+  //           // }
   //         });
 
-  //         if(CodigoQROK == 1){
-  //           localStorage.setItem("materiaEscaneada", materia);
-  //           localStorage.setItem("comisionEscaneada", comision);
+  //         if(CodigoQROK == 1){           
   //           localStorage.setItem("escaneoDesde", "Alumnos");
   //           this.navCtrl.push(ResultadoEscaneadoPage);
   //         }else{
@@ -201,7 +122,7 @@ export class QrAlumnosPage {
   //           localStorage.setItem("comisionEscaneada", "");
   //           localStorage.setItem("escaneoDesde", "");
   //           localStorage.setItem("profesorEscaneado", "");
-  //           alert("Codigo QR Erróneo");            
+  //           this.gFx.presentToast("Codigo QR Erróneo");           
   //           this.navCtrl.push(PrincipalPage);
   //         }   
   //       },
@@ -210,5 +131,71 @@ export class QrAlumnosPage {
   //     );    
   //   });
   // }
+
+  escanear() {
+    const loading = this.loadingCtrl.create({
+      content: 'Espere por favor...'
+    });
+    loading.present();
+
+    let CodigoQROK = 0;
+
+    this.barcodeScanner.scan().then((barcodeData) => {
+      let arr = (barcodeData.text).split("-");
+      let materia = arr[0];
+      let comision = arr[1];
+
+      this.servicioEscanearQr.getExisteQR("entidades_persona").subscribe(        
+        datos => {      
+          this.personas = datos;
+          setTimeout(() => {
+            loading.dismiss();
+          }, 3000);
+        },
+        error => {console.error(error); this.navCtrl.push(PrincipalPage);},
+        () => {console.log("ok");}
+      );   
+
+      this.servicioEscanearQr.getExisteQR("cursos").subscribe(
+        datos => {      
+          this.items = datos;
+          setTimeout(() => {
+            loading.dismiss();
+          }, 3000);
+
+          this.items.forEach(element => {      
+            if ((element.sigla_materia==materia) && (element.comision==comision)) {
+              this.personas.forEach(per => {
+                if (element.legajo_docente==per.legajo) {
+                  console.log("legajo curso ;"+element.legajo_docente);
+                  console.log("legajo persona ;"+per.legajo);
+                  CodigoQROK = 1;
+                  localStorage.setItem("profesorEscaneado", per.nombre_apellido);
+                  localStorage.setItem("aulaEscaneada", element.aula);
+                  localStorage.setItem("horarioEscaneada", element.dia_horario);
+                }
+              });
+            }
+          });
+
+          if(CodigoQROK == 1){
+            localStorage.setItem("materiaEscaneada", materia);
+            localStorage.setItem("comisionEscaneada", comision);
+            localStorage.setItem("escaneoDesde", "Alumnos");
+            this.navCtrl.push(ResultadoEscaneadoPage);
+          }else{
+            localStorage.setItem("materiaEscaneada", "");
+            localStorage.setItem("comisionEscaneada", "");
+            localStorage.setItem("escaneoDesde", "");
+            localStorage.setItem("profesorEscaneado", "");
+            this.gFx.presentToast("Codigo QR Erróneo o no ha escaneado uno.");            
+            this.navCtrl.push(PrincipalPage);
+          }   
+        },
+        error => {console.error(error); this.navCtrl.push(PrincipalPage);},
+        () => {console.log("ok");}
+      );    
+    });
+  }
 
 }
