@@ -1,5 +1,12 @@
 page-edicion-perfil {
     
+    
+
+        .foto-perfil{
+            width: 50%;
+            height: 50%;
+        }
+
         #perfil
         {
             border: 3px solid #012c3d;
@@ -19,8 +26,7 @@ page-edicion-perfil {
             padding: 0 !important;
         }
     
-        ion-label
-        {
+        ion-label {
             color: #fff !important;
             background: #012c3d !important;
             padding: 13px 8px;

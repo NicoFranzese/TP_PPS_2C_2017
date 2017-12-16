@@ -1,67 +1,44 @@
-
 <ion-header>
-  
-    <ion-navbar>
-      <ion-title>Editar perfil del usuario</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content id="cuerpo" padding>
-    <div class="list list-inset">
-  
-      <div class="row  mb-5">
-        <!-- <div class="col-12">
-          <img src="./assets/img/anonimo.jpg" width="150" id="perfil" class="img-block">
-        </div> -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="../assets/img/anonimo.jpg" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="./assets/img/anonimo.jpg" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="./assets/img/anonimo.jpg" alt="Third slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
+
+  <ion-navbar>
+    <ion-title>Editar perfil del usuario</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content id="cuerpo" padding>
+  <div class="list list-inset">
+
+    <div class="row  mb-5"  >   
+        <ion-slides>
+          <ion-slide *ngFor="let imgItem of arrImages">
+            <img class="d-block img-fluid" [src]="imgItem" alt="First slide">
+          </ion-slide>
+        </ion-slides>
       </div>
 
-  
-      <ion-item>
-        <ion-label style="font-family: 'Roboto', sans-serif">Legajo</ion-label>
-        <ion-input [(ngModel)]="legajo" id="legajo" name="legajo" disabled>{{legajo}}</ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label style="font-family: 'Roboto', sans-serif">Nombre y Apellido</ion-label>
-        <ion-input [(ngModel)]="nombre_apellido" id="nombre_apellido" name="nombre_apellido"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label style="font-family: 'Roboto', sans-serif">eMail</ion-label>
-        <ion-input [(ngModel)]="email" id="email" name="email" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label style="font-family: 'Roboto', sans-serif">Clave</ion-label>
-        <ion-input [(ngModel)]="clave" id="clave" name="clave" type="password"></ion-input>
-      </ion-item>
-    </div>
-    <button class="btn btn-default mt-3" (click)="Aceptar()">Aceptar</button>
-  
-  </ion-content>
-  
+      <button class="btn btn-default mt-3 mb-5" (click)="openCamera()" icon-only>
+        <ion-icon name="camera"></ion-icon>
+      </button>
+      
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">Legajo</ion-label>
+      <ion-input [(ngModel)]="legajo" id="legajo" name="legajo" disabled>{{legajo}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">Nombre y Apellido</ion-label>
+      <ion-input [(ngModel)]="nombre_apellido" id="nombre_apellido" name="nombre_apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">eMail</ion-label>
+      <ion-input [(ngModel)]="email" id="email" name="email" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">Clave</ion-label>
+      <ion-input [(ngModel)]="clave" id="clave" name="clave" type="password"></ion-input>
+    </ion-item>
+  </div>
+  <button class="btn btn-default mt-3" (click)="Aceptar()">Aceptar</button>
+
+</ion-content>

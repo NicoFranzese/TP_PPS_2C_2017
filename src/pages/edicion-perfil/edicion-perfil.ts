@@ -13,6 +13,8 @@ import { LocalNotifications }                           from '@ionic-native/loca
  * Ionic pages and navigation.
  */
 
+ declare var $;
+
 @IonicPage()
 @Component({
   selector: 'page-edicion-perfil',
@@ -25,15 +27,15 @@ export class EdicionPerfilPage {
   public email;
   public clave;
   public tipo_entidad = "docente";
-
+  public foto;
   public ultimoIDEntidadesPersona;
   public arrEntidadesPersona;
-
   public ultimoIDUsuarios;
   public arrUsuarios;
-
+  public arrImages;
   public items;
   public itemsUsuarios; 
+  public selectedImage;
   public arrAvisos;
 
   constructor(public navCtrl: NavController,    
@@ -44,15 +46,18 @@ export class EdicionPerfilPage {
               private gFx: GlobalFxProvider,
               public  platform: Platform,
               public  localNoti: LocalNotifications) {
-                this.obtenerAvisos();
+
+    this.obtenerAvisos();
+    this.legajo =  this.navParams.get('legajo');
+    this.nombre_apellido = this.navParams.get('nombre');
 
     this.obtenerUltimoIDEntidadesPersona();
     this.obtenerUltimoIDUsuarios();
     this.getItemsEntidadesPersonas();
     this.getItemsUsuarios();
+    this.getFotos();
 
-    this.legajo =  this.navParams.get('legajo');
-    this.nombre_apellido = this.navParams.get('nombre');
+    $("#carouselExampleControls").carousel('pause');
   }
 
 
@@ -100,6 +105,32 @@ export class EdicionPerfilPage {
     );
   }
 
+  private getFotos()
+  {
+     // configuro spinner para mientras se cargan los datos 
+     const loading = this.loadingCtrl.create({
+      content: 'Espere por favor...'
+    });
+    loading.present();
+
+    //recupero los datos, mientras muestra spinner
+    this.dataProvider.getItems("fotoPerfil/"+this.legajo).subscribe(
+      datos => {      
+        this.arrImages = datos[0];
+        this.selectedImage = datos[1];
+        console.info("arrImages",this.arrImages);
+        setTimeout(() => {
+          loading.dismiss();
+        }, 3000);
+
+      },
+      error => console.error(error),
+      () => console.log("ok")
+    );
+  }
+
+
+
   getItemsEntidadesPersonas() {
     // configuro spinner para mientras se cargan los datos 
     const loading = this.loadingCtrl.create({
@@ -142,6 +173,17 @@ export class EdicionPerfilPage {
       error => console.error(error),
       () => console.log("ok")
     );
+  }
+
+
+
+  openCamera(){
+      //data es el base64 de la foto
+      this.gFx.getPhoto().subscribe(
+        data => {
+            this.foto = data;
+        }
+      );
   }
 
   Aceptar(){

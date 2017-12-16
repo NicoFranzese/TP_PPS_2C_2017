@@ -47,9 +47,9 @@ export class ControlAsistenciaPage {
               private alertCtrl: AlertController,
               public  platform: Platform,
               public  localNoti: LocalNotifications) {
-                this.obtenerAvisos();
-         
+    
     console.clear(); 
+    this.obtenerAvisos();     
     this.getDate();
     this.comision = this.navParams.get("comision");
     
@@ -127,6 +127,7 @@ export class ControlAsistenciaPage {
       this.initialItemsLength = 1;
 
       // inicializo el array para toma de asistencia
+      this.lastId = this.lastId + 1;  
       let obj = 
         {
           'id_asistencia': this.lastId ,
@@ -134,7 +135,7 @@ export class ControlAsistenciaPage {
           'fecha': this.fechaActual,
           'inasistencia' : 1
         };
-      this.lastId = this.lastId + 1;      
+          
       this.arrAusencias.push(obj);  
     }); //foreach
    
@@ -165,12 +166,12 @@ export class ControlAsistenciaPage {
                 break;
               }
               case 'asistencia_curso':{
-                this.lastIdPhoto = (datos.length == 0 ? 1 : datos[datos.length-1].id_asistencia_curso );
+                this.lastIdPhoto = (datos.length == 0 ? 0 : datos[datos.length-1].id_asistencia_curso );
                 break;
               }
               case 'asistencias':{
                 this.tbAsistencias = datos;
-                this.lastId = (datos.length == 0 ? 1 : datos[datos.length-1].id_asistencia );
+                this.lastId = (datos.length == 0 ? 0 : datos[datos.length-1].id_asistencia );
                 this.obsDB.next();
                 break;
               }
@@ -378,6 +379,7 @@ export class ControlAsistenciaPage {
     //data es el base64 de la foto
     this.gFx.getPhoto().subscribe(
       data => {
+        this.lastIdPhoto = this.lastIdPhoto + 1; 
         let obj = 
         {
           'id_asistencia_curso': this.lastIdPhoto ,
@@ -387,7 +389,7 @@ export class ControlAsistenciaPage {
         };
       
       this.dataservice.addItem('asistencia_curso/' + this.lastIdPhoto , obj);
-      this.lastIdPhoto = this.lastIdPhoto + 1;      
+           
         
       }
     );
