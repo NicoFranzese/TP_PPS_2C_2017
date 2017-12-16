@@ -5,6 +5,7 @@ import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-dato
 import { ModalCuestionariosPage} from '../modal-cuestionarios/modal-cuestionarios';
 import { ModalController } from 'ionic-angular';
 import { LocalNotifications }                           from '@ionic-native/local-notifications';
+import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
 
 @IonicPage()
 @Component({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-
+import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
 import { DataProvider } from '../../providers/data/data';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
@@ -26,7 +26,8 @@ export class AvisoImportanciaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public localNoti: LocalNotifications,
               public platform: Platform,
-              private dataProvider: DataProvider) {
+              private dataProvider: DataProvider,
+              private gFx: GlobalFxProvider) {
                 this.obtenerPersonas();
                 this.obtenerUltimoIDAvisosImportancia();   
   }
@@ -65,7 +66,7 @@ export class AvisoImportanciaPage {
 
         if(data == undefined)
         {
-          alert("No existen personas cargadas en la BD");
+          this.gFx.presentToast("No existen personas cargadas en la BD.");
         }
         else
         {
@@ -80,8 +81,8 @@ export class AvisoImportanciaPage {
 
   PushClicked(){
     if((this.mensaje == null) || (this.mensaje == undefined) || (this.mensaje == "") ||
-      (this.tipoUsuSeleccionado == null) || (this.tipoUsuSeleccionado == undefined) || (this.tipoUsuSeleccionado == "")){
-        alert("Debe seleccionar a quien va destinado el Aviso y escribir un mensaje");
+      (this.tipoUsuSeleccionado == null) || (this.tipoUsuSeleccionado == undefined) || (this.tipoUsuSeleccionado == "")){        
+        this.gFx.presentToast("Debe seleccionar a quien va destinado el Aviso y escribir un mensaje");
     }else{
       if (this.tipoUsuSeleccionado == "todos"){
         for (let i=0;i<this.arrPersonas.length;i++){ 
@@ -119,7 +120,7 @@ export class AvisoImportanciaPage {
         }
       }
 
-      alert("Se ah enviado el aviso.");
+      this.gFx.presentToast("Se ah enviado el aviso.");
     }
   }
 

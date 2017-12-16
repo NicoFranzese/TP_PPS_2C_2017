@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController, ViewController, Platform } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
-
+import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
 import { PrincipalPage } from '../principal/principal';
 import { ModalAbmAdministrativosPage } from '../modal-abm-administrativos/modal-abm-administrativos';
 
@@ -44,7 +44,8 @@ export class AbmAdministrativosPage {
     public modalCtrl: ModalController,
     private viewCtrl: ViewController,
     public  platform: Platform,
-    public  localNoti: LocalNotifications) {
+    public  localNoti: LocalNotifications,
+    private gFx: GlobalFxProvider) {
       this.obtenerAvisos();
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
