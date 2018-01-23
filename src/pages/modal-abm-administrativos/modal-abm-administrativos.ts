@@ -34,8 +34,23 @@ export class ModalAbmAdministrativosPage {
   public items;
   public itemsUsuarios; 
 
+  //traduccciones
+  public traduccionTitulo;
+  public traduccionLegajo;
+  public traduccionNomYApe;
+  public traduccionEmail;
+  public traduccionClave;
+  public traduccionAceptar;
+
   constructor(public navCtrl    : NavController,     private viewCtrl: ViewController,    public navParams: NavParams,
     public loadingCtrl: LoadingController ,public dataProvider : DataProvider, private gFx: GlobalFxProvider) {
+      //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+      if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+        localStorage.setItem("Lenguaje", "Es");
+      }
+      //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+      this.traducir(localStorage.getItem("Lenguaje"));
+
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
       this.obtenerUltimoIDEntidadesPersona();
@@ -59,6 +74,34 @@ export class ModalAbmAdministrativosPage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ModalAbmAdministrativosPage');
   }
+
+    //Método que traduce objetos de la pagina 
+    traducir(lenguaje){    
+      //Según lenguaje seleccionado se traducen los objetos.
+      if(lenguaje == 'Es'){
+        this.traduccionLegajo = "Legajo";
+        this.traduccionNomYApe = "Nombre y Apellido";
+        this.traduccionEmail = "Email";
+        this.traduccionClave = "Clave";
+        this.traduccionAceptar = "Aceptar";
+        this.traduccionTitulo = "Administrativo";
+      }else if(lenguaje == 'Usa'){
+        this.traduccionLegajo = "File";
+        this.traduccionNomYApe = "Name and surname";
+        this.traduccionEmail = "E-mail";
+        this.traduccionClave = "Password";
+        this.traduccionAceptar = "Accept";
+        this.traduccionTitulo = "Administrative";
+      }else if(lenguaje == 'Br'){
+        this.traduccionLegajo = "Arquivo";
+        this.traduccionNomYApe = "Nome e sobrenome";
+        this.traduccionEmail = "E-mail";
+        this.traduccionClave = "senha";
+        this.traduccionAceptar = "Aceitar";
+        this.traduccionTitulo = "Administrativo";
+      }
+  
+    }
 
   private obtenerUltimoIDEntidadesPersona()
   {

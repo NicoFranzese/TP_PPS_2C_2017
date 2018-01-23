@@ -1,20 +1,39 @@
 
 <ion-content id="cuerpo" padding>
+
+  <br>
+  <div style="margin-left: 3%">
+    <!-- <ion-fab top right edge> -->
+  <ion-fab right edge>
+        <button ion-fab mini><img class="translate" src="./assets/icon/mundo.png"/></button>
+        <ion-fab-list>
+          <!-- <button ion-fab (click)="Subir()"><ion-icon name="md-cloud-upload"></ion-icon></button> -->
+          <!-- <button ion-fab (click)="Subir()"><img src="./assets/img/subir.png"/></button> -->
+          <!-- <button ion-fab (click)="Eliminar()"><img src="./assets/img/eliminar.png"/></button> -->
+          <!-- <button ion-fab (click)="Galeria()"><ion-icon name="ios-images"></ion-icon></button>      -->
+          <button><img class="translate" id="es" src="http://niarapp.com/MesAPP/Imagenes/Sistema/es.png" alt="Español" (click)="traducir('Es')" /></button>
+          <button><img class="translate" id="en" src="http://niarapp.com/MesAPP/Imagenes/Sistema/usa.png" alt="Inglés" (click)="traducir('Usa')" /></button>
+          <button><img class="translate" id="br" src="http://niarapp.com/MesAPP/Imagenes/Sistema/br.png" alt="Portugués" (click)="traducir('Br')" /></button>
+
+        </ion-fab-list>
+      </ion-fab>
+    </div>
   <img src="./assets/img/logo.png" class="animated flip">
 
 <div class="animated bounceInUp">
+  
   <div class="input-group mt-4">
     <span class="input-group-addon"><i class="fa fa-user fa-2x" aria-hidden="true"></i></span>
-    <input type="text" class="form-control" placeholder="E-mail" id="email" name="email" [(ngModel)]="email">
+    <input type="text" class="form-control" placeholder="{{traduccionEmail}}" id="email" name="email" [(ngModel)]="email">
   </div>
   <div class="input-group mt-2">
     <span class="input-group-addon"><i class="fa fa-key fa-2x" aria-hidden="true"></i></span>
-    <input type="password" class="form-control" placeholder="Contraseña" id="clave" name="clave" [(ngModel)]="clave">
+    <input type="password" class="form-control" placeholder="{{traduccionClave}}" id="clave" name="clave" [(ngModel)]="clave">
   </div>
 
-  <button class="btn mt-2 ingreso" (click)="Ingresar()"><span><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</span></button>
+  <button class="btn mt-2 ingreso" (click)="Ingresar()"><span><i class="fa fa-sign-in" aria-hidden="true"></i>{{traduccionIngresar}}</span></button>
 
-  <span id="redes" class="mt-4">O puedes iniciar con:</span>
+  <span id="redes" class="mt-4">{{traduccionOIngresarCon}}</span>
   <button class="btn fb mt-2" (click)="loginSocial('facebook')" disabled><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i><span>Facebook</span></button>
   <button class="btn go mt-2" (click)="loginSocial('google')"><i class="fa fa-2x fa-google-plus-square" aria-hidden="true"></i><span>Google +</span></button>
 </div>

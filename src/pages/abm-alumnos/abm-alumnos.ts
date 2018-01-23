@@ -36,6 +36,14 @@ export class AbmAlumnosPage {
   public itemsUsuarios;
   public arrAvisos;
 
+  //Traducciones
+  public traduccionLegajo;
+  public traduccionNomYApe;
+  public traduccionAccion;
+  public traduccionModificar;
+  public traduccionEliminar;
+  public traduccionTitulo;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private dataProvider: DataProvider,
     public loadingCtrl: LoadingController,
@@ -44,6 +52,14 @@ export class AbmAlumnosPage {
     public  platform: Platform,
     public  localNoti: LocalNotifications,
     private gFx: GlobalFxProvider) {
+
+      //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+      if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+        localStorage.setItem("Lenguaje", "Es");
+      }
+      //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+      this.traducir(localStorage.getItem("Lenguaje"));
+      
       this.obtenerAvisos();
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
@@ -53,6 +69,36 @@ export class AbmAlumnosPage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad AbmProfesoresPage');
   }
+
+    //Método que traduce objetos de la pagina 
+    traducir(lenguaje){    
+      //Según lenguaje seleccionado se traducen los objetos.
+      if(lenguaje == 'Es'){
+        this.traduccionLegajo = "Legajo";
+        this.traduccionNomYApe = "Nombre y Apellido";
+        this.traduccionAccion = "Acción";
+        this.traduccionModificar = "Modificar";
+        this.traduccionEliminar = "Eliminar";
+        this.traduccionTitulo = "ABM Alumnos";
+      }else if(lenguaje == 'Usa'){
+        this.traduccionLegajo = "File";
+        this.traduccionNomYApe = "Name and surname";
+        this.traduccionAccion = "Action";
+        this.traduccionModificar = "Modify";
+        this.traduccionEliminar = "Remove";
+        this.traduccionTitulo = "ABM Students";
+      }else if(lenguaje == 'Br'){
+        this.traduccionLegajo = "Arquivo";
+        this.traduccionNomYApe = "Nome e sobrenome";
+        this.traduccionAccion = "Ação";
+        this.traduccionModificar = "Modificar";
+        this.traduccionEliminar = "Excluir";
+        this.traduccionTitulo = "ABM Estudantes";
+      }
+      console.log(lenguaje);
+      console.log(this.traduccionTitulo);
+      console.log(this.traduccionAccion);
+    }
 
   getItemsEntidadesPersonas() {
     // configuro spinner para mientras se cargan los datos 

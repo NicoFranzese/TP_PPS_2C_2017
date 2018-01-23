@@ -60,4 +60,34 @@ page-login {
         background: #012c3d;
         box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
     }
+
+    .flags {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 100001;
+        overflow: hidden;
+    }
+    .flags ul {
+        padding-left: 0;
+        margin-left: 0;
+        overflow: hidden;
+    }
+    .flags ul li {
+        list-style: none;
+        float: left;
+        display: inline-block;
+        text-align: center;
+        margin: 0 5px;
+    }
+    .flags ul li img {
+        height: 15px;
+        cursor: pointer;
+    }
+    .flags ul li img:not(.activeLang) {
+        opacity: 0.5;
+    }
+    .flags ul li img:not(.activeLang):hover {
+        opacity: 1;
+    }
 }

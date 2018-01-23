@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ABM Profesores</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,9 +14,9 @@
         
       <ion-row class="row row-header">
 
-        <ion-col class="col col-3">Legajo</ion-col>
-        <ion-col class="col col-7">Nombre y Apellido</ion-col>
-        <ion-col class="col col-2" text-center>Accion</ion-col>
+        <ion-col class="col col-3">{{traduccionLegajo}}</ion-col>
+        <ion-col class="col col-7">{{traduccionNomYApe}}</ion-col>
+        <ion-col class="col col-2" text-center>{{traduccionAccion}}</ion-col>
       </ion-row>
       <div *ngFor="let item of items" >
       <ion-row *ngIf="item.tipo_entidad == 'docente'" align-items-center>
@@ -29,8 +29,8 @@
                   <ion-icon name="more" ></ion-icon>
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#" (click)="AbrirModal('Modificacion', item.legajo)">Modificar</a>
-                  <a class="dropdown-item" href="#" (click)="Baja(item.legajo)">Eliminar</a>
+                  <a class="dropdown-item" href="#" (click)="AbrirModal('Modificacion', item.legajo)">{{traduccionModificar}}</a>
+                  <a class="dropdown-item" href="#" (click)="Baja(item.legajo)">{{traduccionEliminar}}</a>
                 </div>
               </div>
         </ion-col>   

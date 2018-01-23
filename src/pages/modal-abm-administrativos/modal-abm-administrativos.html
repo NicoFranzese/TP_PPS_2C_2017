@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Administrativos</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,23 +20,23 @@
   </div>
     <div class="list list-inset">
         <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">Legajo</ion-label>
+          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionLegajo}}</ion-label>
           <ion-input [(ngModel)]="legajo" id="legajo" name="legajo"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">Nombre y Apellido</ion-label>
+          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionNomYApe}}</ion-label>
           <ion-input [(ngModel)]="nombre_apellido" id="nombre_apellido" name="nombre_apellido"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">eMail</ion-label>
+          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionEmail}}</ion-label>
           <ion-input [(ngModel)]="email" id="email" name="email" type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">Clave</ion-label>
+          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionClave}}</ion-label>
           <ion-input [(ngModel)]="clave" id="clave" name="clave" type="password"></ion-input>
         </ion-item>
 
-         <button class="btn btn-default mt-3" (click)="Aceptar()">Aceptar</button>
+         <button class="btn btn-default mt-3" (click)="Aceptar()">{{traduccionAceptar}}</button>
 
     
     </div>
