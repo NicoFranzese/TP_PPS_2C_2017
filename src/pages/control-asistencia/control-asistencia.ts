@@ -40,6 +40,13 @@ export class ControlAsistenciaPage {
   public bandImprimioPDF = 0;
   public arrAvisos;
 
+  //traduccion
+  public traduccionTitulo;
+  public traduccionLegajo;
+  public traduccionAlumno;
+  public traduccionNoHayDatos;
+
+
   obsDB = new Subject();
 
    constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
@@ -49,6 +56,13 @@ export class ControlAsistenciaPage {
               public  platform: Platform,
               public  localNoti: LocalNotifications,
 			  private almacenDatosProvider: AlmacenDatosProvider) {
+
+      //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+      if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+        localStorage.setItem("Lenguaje", "Es");
+      }
+      //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+      this.traducir(localStorage.getItem("Lenguaje"));
     
     console.clear(); 
     this.obtenerAvisos();     
@@ -67,6 +81,27 @@ export class ControlAsistenciaPage {
   ionViewDidLoad(){   
   }
 
+  //Método que traduce objetos de la pagina 
+  traducir(lenguaje){    
+    //Según lenguaje seleccionado se traducen los objetos.
+    if(lenguaje == 'Es'){
+      this.traduccionTitulo = "Control de asistencia";
+      this.traduccionLegajo ="Legajo";
+      this.traduccionAlumno ="Alumno";
+      this.traduccionNoHayDatos = "No hay datos para mostrar. Por favor, seleccione una comisión...";
+    }else if(lenguaje == 'Usa'){
+      this.traduccionTitulo = "Import CSV Students";
+      this.traduccionLegajo ="File";
+      this.traduccionAlumno ="Student";
+      this.traduccionNoHayDatos = "No data to display. Please select a commission ...";
+    }else if(lenguaje == 'Br'){
+      this.traduccionTitulo = "Estudantes CSV importados";
+      this.traduccionLegajo ="Arquivo";
+      this.traduccionAlumno ="Estudante";
+      this.traduccionNoHayDatos = "Não há dados para mostrar. Selecione uma comissão ...";
+    }
+
+  }
 
   getDate(){
     let d = new Date();

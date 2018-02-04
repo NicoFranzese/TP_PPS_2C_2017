@@ -5,7 +5,7 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>Control de asistencia</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -29,8 +29,8 @@
       <ion-col class="col col-1">
         <!-- <ion-checkbox style="padding-top:5px" color="dark" (ionChange)="changeAll($event)" [(ngModel)]="chkAlumno" ></ion-checkbox> -->
       </ion-col>
-      <ion-col class="col col-3">Legajo</ion-col>
-      <ion-col class="col col-8">Alumno</ion-col>
+      <ion-col class="col col-3">{{traduccionLegajo}}</ion-col>
+      <ion-col class="col col-8">{{traduccionAlumno}}</ion-col>
     </ion-row>
 
     <ion-row class="row-grid" *ngFor="let item of items" align-items-center (click)="addAbsence(item.legajo)" [ngStyle]="{'color': getStyle(item.legajo,'color')}">
@@ -49,7 +49,7 @@
       <br>
       <ion-card>
         <ion-card-content padding-top>
-          <h2>No hay datos para mostrar. Por favor, seleccione una comisión...</h2>
+          <h2>{{traduccionNoHayDatos}}</h2>
         </ion-card-content>
       </ion-card>
     </ion-row>

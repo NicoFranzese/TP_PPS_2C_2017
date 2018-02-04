@@ -22,11 +22,17 @@ export class CargaArchivosPage {
               public  platform: Platform,
               public  localNoti: LocalNotifications,
               private dataProvider: DataProvider) { 
+                //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+                if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+                  localStorage.setItem("Lenguaje", "Es");
+                }
+                //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+                this.traducir(localStorage.getItem("Lenguaje"));
+
+
                 this.obtenerAvisos();
               }
 
-            
-  private title = "Importar CSV Alumnos";
   private hayArchivo = false;
   private arrAlumnosCSV = [];
   private materia;
@@ -36,6 +42,11 @@ export class CargaArchivosPage {
   private diaHorario;
   private fondo = "#02648b";
 
+  public traduccionTitulo;
+  public traduccionCargarArchivo;
+  public traduccionLegajo;
+  public traduccionAlumno;
+  public traduccionTitle;
 
   ionViewDidLoad() {
     this.csvAlumnosProvider.operacionFinalizada$.subscribe(
@@ -43,6 +54,31 @@ export class CargaArchivosPage {
     );
   }
 
+  //Método que traduce objetos de la pagina 
+  traducir(lenguaje){    
+    //Según lenguaje seleccionado se traducen los objetos.
+    if(lenguaje == 'Es'){
+      this.traduccionTitulo = "Importar CSV Alumnos";
+      this.traduccionCargarArchivo ="Cargar Archivo";
+      this.traduccionLegajo ="Legajo";
+      this.traduccionAlumno ="Alumno";
+      this.traduccionTitle = "Alerta de Gestión Académica!"
+    }else if(lenguaje == 'Usa'){
+      this.traduccionTitulo = "Import CSV Students";
+      this.traduccionCargarArchivo ="File upload";
+      this.traduccionLegajo ="File";
+      this.traduccionAlumno ="Student";
+      this.traduccionTitle = "Academic Management Alert!"
+    }else if(lenguaje == 'Br'){
+      this.traduccionTitulo = "Estudantes CSV importados";
+      this.traduccionCargarArchivo ="Carregar arquivo";
+      this.traduccionLegajo ="Arquivo";
+      this.traduccionAlumno ="Estudante";
+      this.traduccionTitle = "Alerta de Gestão Acadêmica!"
+    }
+
+  }
+  
   private vaciarCSV()
   {
     this.arrAlumnosCSV = [];
@@ -162,7 +198,7 @@ export class CargaArchivosPage {
                 }else{
                   this.platform.ready().then(() => {
                     this.localNoti.schedule({
-                      title: 'Alerta de Gestión Académica!',
+                      title: this.traduccionTitle,
                       text: this.arrAvisos[i].mensaje,
                       at: new Date(new Date().getTime() + 3600),
                       led: 'FF0000',

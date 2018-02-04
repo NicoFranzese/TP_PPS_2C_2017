@@ -23,11 +23,30 @@ export class AvisoImportanciaPage {
   public ultimoIDAviso = 1;
   public arrPersonas;
 
+  //traducciones
+  public traduccionTitulo;
+  public traduccionSeleccioneDestinado;
+  public traduccionSeleccioneUsuario;
+  public traduccionAdministrador;
+  public traduccionAdministrativo;
+  public traduccionAlumno;
+  public traduccionDocente;
+  public traduccionTodos;
+  public traduccionMensajeQueSeEnviara;
+  public traduccionEnviar;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public localNoti: LocalNotifications,
               public platform: Platform,
               private dataProvider: DataProvider,
               private gFx: GlobalFxProvider) {
+                //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+                if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+                  localStorage.setItem("Lenguaje", "Es");
+                }
+                //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+                this.traducir(localStorage.getItem("Lenguaje"));
+                
                 this.obtenerPersonas();
                 this.obtenerUltimoIDAvisosImportancia();   
   }
@@ -35,6 +54,46 @@ export class AvisoImportanciaPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad AvisoImportanciaPage');
+  }
+
+  //Método que traduce objetos de la pagina 
+  traducir(lenguaje){    
+    //Según lenguaje seleccionado se traducen los objetos.
+    if(lenguaje == 'Es'){
+      this.traduccionTitulo = "Avisos de Importancia";
+      this.traduccionSeleccioneDestinado = "Seleccione a quien está Destinado";
+      this.traduccionSeleccioneUsuario = "Seleccione Usuario";
+      this.traduccionAdministrador = "Administrador";
+      this.traduccionAdministrativo = "Administrativo";
+      this.traduccionAlumno = "Alumno";
+      this.traduccionDocente = "Docente";
+      this.traduccionTodos = "Todos";
+      this.traduccionMensajeQueSeEnviara ="Mensaje que enviará";
+      this.traduccionEnviar = "Enviar";
+    }else if(lenguaje == 'Usa'){
+      this.traduccionTitulo = "Important Notices";
+      this.traduccionSeleccioneDestinado = "Select who is Destined";
+      this.traduccionSeleccioneUsuario = "Select User";
+      this.traduccionAdministrador = "Administrator";
+      this.traduccionAdministrativo = "Administrative";
+      this.traduccionAlumno = "Student";
+      this.traduccionDocente = "teacher";
+      this.traduccionTodos = "Everybody";
+      this.traduccionMensajeQueSeEnviara ="Message to be sent";
+      this.traduccionEnviar = "Submit";
+    }else if(lenguaje == 'Br'){
+      this.traduccionTitulo = "Avisos importantes";
+      this.traduccionSeleccioneDestinado = "Selecione quem está Destinado";
+      this.traduccionSeleccioneUsuario = "Selecione Usuário";
+      this.traduccionAdministrador = "Administrador";
+      this.traduccionAdministrativo = "Administrativo";
+      this.traduccionAlumno = "Estudante";
+      this.traduccionDocente = "Professor";
+      this.traduccionTodos = "Todos";
+      this.traduccionMensajeQueSeEnviara ="Mensagem a enviar";
+      this.traduccionEnviar = "Enviar";
+    }
+
   }
 
   private obtenerUltimoIDAvisosImportancia()

@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,7 @@
     <!-- <input type="file" class="mt-3" (change)="cargarCSV($event)"> -->
 
     <span class="btn btn-default btn-file mt-5">
-      <i class="fa fa-file-text-o" aria-hidden="true"></i> Cargar archivo <input type="file" (change)="cargarCSV($event)">
+      <i class="fa fa-file-text-o" aria-hidden="true"></i>{{traduccionCargarArchivo}}<input type="file" (change)="cargarCSV($event)">
     </span>
 
   </div>
@@ -50,8 +50,8 @@
     <ion-grid>
 
       <ion-row class="row row-header">
-        <ion-col class="col col-4">Legajo</ion-col>
-        <ion-col class="col col-8">Alumno</ion-col>
+        <ion-col class="col col-4">{{traduccionLegajo}}</ion-col>
+        <ion-col class="col col-8">{{traduccionAlumno}}</ion-col>
       </ion-row>
 
       <ion-row class="registro" *ngFor="let item of arrAlumnosCSV" align-items-center>
