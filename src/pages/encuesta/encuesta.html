@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Responder cuestionario</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,16 +10,16 @@
 
 <ion-content id="cuerpo" padding>
   <div class="mb-5 mt-4">
-    <h3><span class="label">Tìtulo:</span> <span class="float-right">{{titulo}}</span></h3>
-    <h3><span class="label">Cierre:</span> <span class="float-right">{{cierre}}</span></h3>
+    <h3><span class="label">{{traduccionTitulo2}}</span> <span class="float-right">{{titulo}}</span></h3>
+    <h3><span class="label">{{traduccionCierre}}</span> <span class="float-right">{{cierre}}</span></h3>
   </div>
 
   <img src="./assets/img/question.png" style="display:block;margin:auto" width="150" class="mb-5">
 
-  <span class="mt-5 text-center muted mb-2" style="color: #fff">Seleccione una pregunta para responderla...</span>
+  <span class="mt-5 text-center muted mb-2" style="color: #fff">{{traduccionSeleccionePregunta}}</span>
   
     <!-- <ion-row class="row row-header"> -->
-      <h3 class="label titulo">Pregunta</h3>
+      <h3 class="label titulo">{{traduccionPregunta}}</h3>
     <!-- </ion-row> -->
     <ion-grid>
     <ion-row *ngFor="let item of arrPreguntas ; let i = index" class={{arrClase[i]}} align-items-center (click)="mostrarEncuesta(item, i)">
@@ -27,8 +27,8 @@
       <!-- <ion-col><i>Responder</i></ion-col> -->
     </ion-row>
     <div class="mt-3">
-        <p><span class="rojo">Rojo:</span> sin responder</p>
-        <p><span class="verde">Verde:</span> respondida</p>
+        <p><span class="rojo">{{traduccionRojo}}</span>{{traduccionSinResponder}}</p>
+        <p><span class="verde">{{traduccionVerde}}</span>{{traduccionRespondida}}</p>
     </div>
     
   </ion-grid>

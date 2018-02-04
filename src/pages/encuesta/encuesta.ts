@@ -24,6 +24,17 @@ export class EncuestaPage {
   private arrClase = [];
   public arrAvisos;
 
+  //Traducciones
+  public traduccionTitulo;
+  public traduccionTitulo2;
+  public traduccionCierre;
+  public traduccionPregunta;
+  public traduccionSeleccionePregunta;
+  public traduccionRojo;
+  public traduccionVerde;
+  public traduccionSinResponder;
+  public traduccionRespondida;
+
   constructor(private navCtrl: NavController, 
               private navParams: NavParams,
               private alertCtrl: AlertController,
@@ -43,6 +54,44 @@ export class EncuestaPage {
     this.test(id);
 
   }
+
+    //Método que traduce objetos de la pagina 
+    traducir(lenguaje){    
+      //Según lenguaje seleccionado se traducen los objetos.
+      if(lenguaje == 'Es'){
+        this.traduccionTitulo = "Responder cuestionario";
+        this.traduccionTitulo2 ="Titulo:";
+        this.traduccionCierre ="Cierre";
+        this.traduccionPregunta = "Pregunta";
+        this.traduccionSeleccionePregunta = "Seleccione una pregunta para responderla...";
+        this.traduccionRojo = "Rojo:";
+        this.traduccionVerde = "Verde:";
+        this.traduccionSinResponder = "sin responder";
+        this.traduccionRespondida = "respondida";
+      }else if(lenguaje == 'Usa'){
+        this.traduccionTitulo = "Answer questionnaire";
+        this.traduccionTitulo2 ="Title:";
+        this.traduccionCierre ="Closing";
+        this.traduccionPregunta = "Question";
+        this.traduccionSeleccionePregunta = "Select a question to answer it ...";
+        this.traduccionRojo = "Red:";
+        this.traduccionVerde = "Green:";
+        this.traduccionSinResponder = "without responding";
+        this.traduccionRespondida = "answered";
+      }else if(lenguaje == 'Br'){
+        this.traduccionTitulo = "Questionário de resposta";
+        this.traduccionTitulo2 ="Titulo:";
+        this.traduccionCierre ="Fechamento";
+        this.traduccionPregunta = "Pergunta";
+        this.traduccionSeleccionePregunta = "Selecione uma pergunta para atendê-la ...";
+        this.traduccionRojo = "Vermelho:";
+        this.traduccionVerde = "Verde:";
+        this.traduccionSinResponder = "sem responder";
+        this.traduccionRespondida = "respondeu";
+      }
+  
+    }
+
 
   private test(id)
   {

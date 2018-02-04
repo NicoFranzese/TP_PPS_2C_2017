@@ -41,6 +41,14 @@ export class EdicionPerfilPage {
   public selectedImage;
   public arrAvisos;
 
+  //Traducciones
+  public traduccionTitulo;
+  public traduccionLegajo;
+  public traduccionNomYApe;
+  public traduccionEmail;
+  public traduccionClave;
+  public traduccionAceptar;
+
   constructor(public navCtrl: NavController,    
               private viewCtrl: ViewController,    
               public navParams: NavParams,
@@ -49,6 +57,13 @@ export class EdicionPerfilPage {
               private gFx: GlobalFxProvider,
               public  platform: Platform,
               public  localNoti: LocalNotifications) {
+
+    //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+    if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+      localStorage.setItem("Lenguaje", "Es");
+    }
+    //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+    this.traducir(localStorage.getItem("Lenguaje"));
 
     console.clear();
     this.obtenerAvisos();
@@ -70,6 +85,34 @@ export class EdicionPerfilPage {
     // console.log('ionViewDidLoad ModalAbmDocentesPage');
   }
 
+    //Método que traduce objetos de la pagina 
+    traducir(lenguaje){    
+      //Según lenguaje seleccionado se traducen los objetos.
+      if(lenguaje == 'Es'){
+        this.traduccionTitulo = "Editar perfil del usuario";
+        this.traduccionLegajo ="Legajo";
+        this.traduccionNomYApe ="Nombre y Apellido";
+        this.traduccionEmail = "eMail";
+        this.traduccionClave = "Clave";
+        this.traduccionAceptar = "Aceptar";
+
+      }else if(lenguaje == 'Usa'){
+        this.traduccionTitulo = "Edit user profile";
+        this.traduccionLegajo ="File";
+        this.traduccionNomYApe ="Name and surname";
+        this.traduccionEmail = "e-mail";
+        this.traduccionClave = "Key";
+        this.traduccionAceptar = "To accept";
+      }else if(lenguaje == 'Br'){
+        this.traduccionTitulo = "Editar perfil de usuário";
+        this.traduccionLegajo ="Arquivo";
+        this.traduccionNomYApe ="Nome e sobrenome";
+        this.traduccionEmail = "eMail";
+        this.traduccionClave = "Chave";
+        this.traduccionAceptar = "Aceitar";
+      }
+  
+    }
   
   @ViewChild(Slides) slides: Slides;
   

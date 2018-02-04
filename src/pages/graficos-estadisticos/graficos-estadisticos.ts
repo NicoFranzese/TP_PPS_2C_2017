@@ -38,6 +38,24 @@ export class GraficosEstadisticosPage {
   public encuestas;
   public arrAvisos;
 
+  public traduccionTitulo;
+  public traduccionElijaCurso;
+  public traduccionSeleccioneCurso;
+  public traduccionQueDeseaGraficar;
+  public traduccionSeleccioneGrafico;
+  public traduccionAsistencias;
+  public traduccionEncuestas;
+  public traduccionSeleccioneEncuesta;
+  public traduccionElijaEncuesta;
+  public traduccionTipoAsistenciaDeseaGraficar;
+  public traduccionSeleccioneTipoAsistencia;
+  public traduccionPresente;
+  public traduccionMediaFalta;
+  public traduccionAusente;
+  public traduccionGraficoDeAsistencias;
+  public traduccionPersonasQueRealizaronEncuesta;
+  
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
     private dataProvider: DataProvider,
     public  platform: Platform,
@@ -52,6 +70,68 @@ export class GraficosEstadisticosPage {
   ionViewDidLoad() {
 
   }
+
+//Método que traduce objetos de la pagina 
+traducir(lenguaje){    
+  //Según lenguaje seleccionado se traducen los objetos.
+  if(lenguaje == 'Es'){
+    this.traduccionTitulo = "Gráficos Estadisticos";
+    this.traduccionElijaCurso ="Elija Curso";
+    this.traduccionSeleccioneCurso ="Seleccione Curso";
+    this.traduccionQueDeseaGraficar = "Que desea Graficar?";
+    this.traduccionSeleccioneGrafico = "Seleccione gráfico";
+    this.traduccionAsistencias = "Asistencias";
+    this.traduccionEncuestas = "Encuestas";
+    this.traduccionSeleccioneEncuesta = "Seleccione Encuesta";
+    this.traduccionElijaEncuesta = "Elija Encuesta";
+    this.traduccionTipoAsistenciaDeseaGraficar = "Que tipo de asistencia desea graficar?";
+    this.traduccionSeleccioneTipoAsistencia = "Seleccione tipo de asistencia";
+    this.traduccionPresente = "Presente";
+    this.traduccionMediaFalta = "Media Falta";
+    this.traduccionAusente = "Ausente";
+    this.traduccionGraficoDeAsistencias = "Gráfico de Asistencia";
+    this.traduccionPersonasQueRealizaronEncuesta ="Personas Que realizaron Encuesta";
+
+
+  }else if(lenguaje == 'Usa'){
+    this.traduccionTitulo = "Statistical Graphs";
+    this.traduccionElijaCurso ="Choose Course";
+    this.traduccionSeleccioneCurso ="Select Course";
+    this.traduccionQueDeseaGraficar = "What do you want to graph?";
+    this.traduccionSeleccioneGrafico = "Select graphic";
+    this.traduccionAsistencias = "Assists";
+    this.traduccionEncuestas = "Surveys";
+    this.traduccionSeleccioneEncuesta = "Select Survey";
+    this.traduccionElijaEncuesta = "Choose Survey";
+    this.traduccionTipoAsistenciaDeseaGraficar = "What kind of assistance do you want to graph?";
+    this.traduccionSeleccioneTipoAsistencia = "Select type of assistance";
+    this.traduccionPresente = "I presented";
+    this.traduccionMediaFalta = "Half Fault";
+    this.traduccionAusente = "Absent";
+    this.traduccionGraficoDeAsistencias = "Attendance Chart";
+    this.traduccionPersonasQueRealizaronEncuesta ="People Who Surveyed";
+
+  }else if(lenguaje == 'Br'){
+    this.traduccionTitulo = "Gráficos estatísticos";
+    this.traduccionElijaCurso ="Escolha Curso";
+    this.traduccionSeleccioneCurso ="Selecione Curso";
+    this.traduccionQueDeseaGraficar = "O que você deseja representar?";
+    this.traduccionSeleccioneGrafico = "Selecione gráfico";
+    this.traduccionAsistencias = "Assistências";
+    this.traduccionEncuestas = "Pesquisas";
+    this.traduccionSeleccioneEncuesta = "Selecione Pesquisa";
+    this.traduccionElijaEncuesta = "Escolha Pesquisa";
+    this.traduccionTipoAsistenciaDeseaGraficar = "Que tipo de assistência você deseja representar?";
+    this.traduccionSeleccioneTipoAsistencia = "Selecione o tipo de assistência";
+    this.traduccionPresente = "Presente";
+    this.traduccionMediaFalta = "Half Fault";
+    this.traduccionAusente = "Ausente";
+    this.traduccionGraficoDeAsistencias = "Gráfico de participação";
+    this.traduccionPersonasQueRealizaronEncuesta ="Pessoas que pesquisaram";
+
+  }
+
+}
 
   private obtenerCantidadPersonas()
   {

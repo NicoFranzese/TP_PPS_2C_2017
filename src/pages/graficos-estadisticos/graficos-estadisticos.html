@@ -7,7 +7,7 @@
 <ion-header>
   
     <ion-navbar>
-      <ion-title>Gráficos Estadisticos</ion-title>
+      <ion-title>{{traduccionTitulo}}</ion-title>
     </ion-navbar>
   
   </ion-header>
@@ -16,9 +16,9 @@
   <ion-content padding>
   
       <ion-item>
-          <ion-label>Elija Curso</ion-label>
+          <ion-label>{{traduccionElijaCurso}}</ion-label>
           <ion-select [(ngModel)]="curso" id="curso" name="curso"  (ngModelChange)="MostrarCurso()"> 
-            <ion-option selected [value]="seleccioneCurso">Seleccione Curso</ion-option>
+            <ion-option selected [value]="seleccioneCurso">{{traduccionSeleccioneCurso}}</ion-option>
             <ion-option *ngFor="let curso of cursos" [value] = "curso.sigla_materia + '-' + curso.comision">
               {{curso.sigla_materia}}-{{curso.comision}}
             </ion-option>
@@ -26,18 +26,18 @@
         </ion-item>
   
           <ion-item *ngIf="curso != 'Seleccione Curso'">
-            <ion-label class = "item item-input item-select item-positive">Que desea Graficar?</ion-label>   
+            <ion-label class = "item item-input item-select item-positive">{{traduccionQueDeseaGraficar}}</ion-label>   
               <ion-select [(ngModel)]="grafico" id="grafico" name="grafico">
-                <ion-option selected>Seleccione gráfico</ion-option>
-                <ion-option>Encuestas</ion-option>
-                <ion-option>Asistencias</ion-option>
+                <ion-option selected>{{traduccionSeleccioneGrafico}}</ion-option>
+                <ion-option>{{traduccionEncuestas}}</ion-option>
+                <ion-option>{{traduccionAsistencias}}</ion-option>
             </ion-select>
           </ion-item>
   
           <ion-item *ngIf="grafico == 'Encuestas'">
-            <ion-label class = "item item-input item-select item-positive">Seleccione Encuesta</ion-label>   
+            <ion-label class = "item item-input item-select item-positive">{{traduccionElijaEncuesta}}</ion-label>   
               <ion-select [(ngModel)]="encuesta" id="encuesta" name="encuesta" (ngModelChange)="CargaGraficos()">
-                <ion-option selected value="seleccioneEncuesta">Seleccione encuesta</ion-option>
+                <ion-option selected value="seleccioneEncuesta">{{traduccionSeleccioneEncuesta}}</ion-option>
                 <ion-option *ngFor="let encuesta of encuestas" [value] = "encuesta.id + '-' + encuesta.titulo">
                   {{encuesta.id}}-{{encuesta.titulo}}
                 </ion-option>
@@ -45,19 +45,19 @@
           </ion-item>
 
           <ion-item *ngIf="grafico == 'Asistencias'">
-            <ion-label class = "item item-input item-select item-positive">Que tipo de asistencia desea graficar?</ion-label>   
+            <ion-label class = "item item-input item-select item-positive">{{traduccionTipoAsistenciaDeseaGraficar?}}</ion-label>   
               <ion-select [(ngModel)]="tipoGrafico" id="tipoGrafico" name="tipoGrafico" (ngModelChange)="CargaGraficos()">
-                <ion-option selected value="seleccioneTipo">Seleccione tipo de asistencia</ion-option>
-                <ion-option value="P">Presente</ion-option>
-                <ion-option value="MF">Meda Falta</ion-option>
-                <ion-option value="A">Ausente</ion-option>
+                <ion-option selected value="seleccioneTipo">{{traduccionSeleccioneTipoAsistencia}}</ion-option>
+                <ion-option value="P">{{traduccionPresente}}</ion-option>
+                <ion-option value="MF">{{traduccionMediaFalta}}</ion-option>
+                <ion-option value="A">{{traduccionAusente}}</ion-option>
             </ion-select>
           </ion-item>
   
   
            <ion-card *ngIf="grafico == 'Asistencias' && tipoGrafico != 'seleccioneTipo'">
               <ion-card-header>
-                Gráfico de asistencias
+                {{traduccionGraficoDeAsistencias}}
               </ion-card-header>
               <ion-card-content> 
                 <canvas #barCanvas></canvas>
@@ -66,7 +66,7 @@
   
           <ion-card *ngIf="grafico == 'Encuestas' && encuesta != 'seleccioneEncuesta'">
               <ion-card-header>
-                Personas que realizaron Encuesta
+                {{traduccionPersonasQueRealizaronEncuesta}}
               </ion-card-header>
               <ion-card-content>
                 <canvas #doughnutCanvas></canvas>
