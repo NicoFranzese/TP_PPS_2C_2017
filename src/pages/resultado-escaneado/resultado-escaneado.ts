@@ -31,13 +31,29 @@ export class ResultadoEscaneadoPage {
   public profesor;
   public arrAvisos;
 
+  //Traducciones
+  public traduccionTitulo;
+  public traduccionMateria;
+  public traduccionComision;
+  public traduccionAula;
+  public traduccionHorario;
+  public traduccionProfesor;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
             public servicioResultadoEscaneado: ResultadoEscaneadoProvider,
             public loadingCtrl: LoadingController,
             public  platform: Platform,
             public  localNoti: LocalNotifications,
             private dataProvider: DataProvider) {
-              this.obtenerAvisos();
+
+      //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+      if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+        localStorage.setItem("Lenguaje", "Es");
+      }
+      //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+      this.traducir(localStorage.getItem("Lenguaje"));
+      
+      this.obtenerAvisos();
 
        // configuro spinner para mientras se cargan los datos 
       const loading = this.loadingCtrl.create({
@@ -70,6 +86,37 @@ export class ResultadoEscaneadoPage {
 
   }
 
+  //Método que traduce objetos de la pagina 
+  traducir(lenguaje){    
+    //Según lenguaje seleccionado se traducen los objetos.
+    if(lenguaje == 'Es'){
+      this.traduccionTitulo = "Resultado Escaneado";
+      this.traduccionMateria ="Administrar perfil";
+      this.traduccionComision ="Comision";
+      this.traduccionAula = 'Aula';
+      this.traduccionHorario  = 'Horario';
+      this.traduccionProfesor = 'Profesor';
+       
+    }else if(lenguaje == 'Usa'){
+      this.traduccionTitulo = "Scanned Result";
+      this.traduccionMateria ="Manage profile";
+      this.traduccionComision ="Commission";
+      this.traduccionAula = 'Classroom';
+      this.traduccionHorario  = 'Schedule';
+      this.traduccionProfesor = 'Teacher';
+  
+    }else if(lenguaje == 'Br'){
+      this.traduccionTitulo = "Resultado Escaneado";
+      this.traduccionMateria ="Gerenciar perfil";
+      this.traduccionComision ="Comissão";
+      this.traduccionAula = 'Sala de aula';
+      this.traduccionHorario  = 'Horário';
+      this.traduccionProfesor = 'Professor';
+  
+    }
+  
+  }
+  
   ResultadoEscaneado() {
     this.servicioResultadoEscaneado.ResultadoEscaneado().subscribe(
       data => this.resultadoEscaneado = data,

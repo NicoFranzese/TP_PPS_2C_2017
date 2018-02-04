@@ -2,7 +2,7 @@
 <ion-header style="background:#033c52">
 
   <ion-navbar hideBackButton="true">
-    <ion-title>Menu principal</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,7 +20,7 @@
               <h2><b>{{almacenDatosProvider.usuarioLogueado.nombre}}</b></h2>
               <p>{{almacenDatosProvider.usuarioLogueado.legajo}} </p>
               <p><i>{{almacenDatosProvider.usuarioLogueado.tipo_entidad}}</i></p>
-              <p><a href="#" (click)="modificarPerfil()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Administrar perfil</a></p>
+              <p><a href="#" (click)="modificarPerfil()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{traduccionAdministrarPerfil}}</a></p>
             </ion-item>
           </ion-list>
     </div>
@@ -37,7 +37,7 @@
     <div class="col-6">
       <button class="btn btn-opcion logout" (click)="logout()">
         <i class="fa fa-sign-out fa-5x icon" aria-hidden="true"></i>
-        <span>Salir</span>
+        <span>{{traduccionSalir}}</span>
       </button>
     </div>
   </div>

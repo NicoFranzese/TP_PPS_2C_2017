@@ -12,20 +12,20 @@
     <!-- <img src="./assets/img/test2.png" width="150" class="img-block mb-3"> -->
 
     <!-- <ion-row class="row row-header mb-3"> -->
-        <ion-col class="col col-12"><h3 class="mt-3 mb-4">Datos bàsicos</h3></ion-col>
+        <ion-col class="col col-12"><h3 class="mt-3 mb-4">{{traduccionDatosBasicos}}</h3></ion-col>
       <!-- </ion-row> -->
   <ion-list inset>
     <ion-item>
-      <ion-label>Título</ion-label>
+      <ion-label>{{traduccionTitulo}}</ion-label>
       <ion-input type="text" [(ngModel)]="titulo"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Termina el dìa</ion-label>
+      <ion-label>{{traduccionTerminaElDia}}</ion-label>
       <ion-datetime displayFormat="DD/MM/YYYY" cancelText="Cancelar" doneText="Aceptar" [(ngModel)]="fechaFin"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>A la hora</ion-label>
+      <ion-label>{{traduccionALaHora}}</ion-label>
       <ion-datetime displayFormat="h:mm A" cancelText="Cancelar" doneText="Aceptar" pickerFormat="h mm A" [(ngModel)]="horaFin" id="dateHora"></ion-datetime>
     </ion-item>
   </ion-list>
@@ -36,7 +36,7 @@
 
   <ion-grid *ngIf="arrPreguntas.length != 0" class="mt-1">
       <ion-row class="row">
-        <ion-col class="col col-12 mb-4 mt-5"><h3>Pregunta</h3></ion-col>
+        <ion-col class="col col-12 mb-4 mt-5"><h3>{{traduccionPregunta}}</h3></ion-col>
       </ion-row>
       <ion-row *ngFor="let item of arrPreguntas" id="rowPregunta" align-items-center>
         <ion-col class="col col-10 cortar"><span id="pregunta">{{item.pregunta}}</span></ion-col>
@@ -46,14 +46,14 @@
                   <ion-icon name="more"></ion-icon>
             </div>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="editarPregunta(item)">Editar</a>
-                <a class="dropdown-item" (click)="eliminarPregunta(item)">Eliminar</a>
+                <a class="dropdown-item" (click)="editarPregunta(item)">{{traduccionEditar}}</a>
+                <a class="dropdown-item" (click)="eliminarPregunta(item)">{{traduccionEliminar}}</a>
               </div>
             </div>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <button class="btn mt-5" (click)="mostrarAlertPregunta('Nueva pregunta')" *ngIf="arrPreguntas.length == 0">Agregar pregunta</button>
+    <button class="btn mt-5" (click)="mostrarAlertPregunta('Nueva pregunta')" *ngIf="arrPreguntas.length == 0">{{traduccionAgregarPregunta}}</button>
 
 
 

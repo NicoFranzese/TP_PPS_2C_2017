@@ -31,6 +31,15 @@ export class ModalCuestionariosPage {
   private operacion: string;
   private idPreguntaEditar;
 
+  //Traducciones
+  public traduccionDatosBasicos;
+  public traduccionTitulo;
+  public traduccionTerminaElDia;
+  public traduccionALaHora;
+  public traduccionPregunta;
+  public traduccionEliminar;
+  public traduccionEditar;
+  public traduccionAgregarPregunta;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -40,6 +49,13 @@ export class ModalCuestionariosPage {
               private toastCtrl: ToastController
               ) 
   {
+    //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+    if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+      localStorage.setItem("Lenguaje", "Es");
+    }
+    //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+    this.traducir(localStorage.getItem("Lenguaje"));
+
     console.log(this.almacenDatos.operacionCuestionario);
   }
 
@@ -49,6 +65,45 @@ export class ModalCuestionariosPage {
     else
       this.resetearVariables();
   }
+
+  //Método que traduce objetos de la pagina 
+traducir(lenguaje){    
+  //Según lenguaje seleccionado se traducen los objetos.
+  if(lenguaje == 'Es'){
+    // this.traduccionTitulo = "Seleccione una comisión";
+    this.traduccionDatosBasicos ="Datos Básicos";
+    this.traduccionTitulo ="Título";
+    this.traduccionTerminaElDia = "Termina el Día";
+    this.traduccionALaHora = "A la Hora ";
+    this.traduccionPregunta = "Pregunta";
+    this.traduccionEliminar = "Eliminar";
+    this.traduccionEditar = "Editar";
+    this.traduccionAgregarPregunta = "Agregar pregunta";
+
+  }else if(lenguaje == 'Usa'){
+    this.traduccionDatosBasicos ="Basic data";
+    this.traduccionTitulo ="Title";
+    this.traduccionTerminaElDia = "End the Day";
+    this.traduccionALaHora = "At the Hour";
+    this.traduccionPregunta = "Question";
+    this.traduccionEliminar = "Remove";
+    this.traduccionEditar = "Edit";
+    this.traduccionAgregarPregunta = "Add question";
+
+
+  }else if(lenguaje == 'Br'){
+    this.traduccionDatosBasicos ="Dados básicos";
+    this.traduccionTitulo ="Título";
+    this.traduccionTerminaElDia = "Terminar o dia";
+    this.traduccionALaHora = "Na hora";
+    this.traduccionPregunta = "Pergunta";
+    this.traduccionEliminar = "Excluir";
+    this.traduccionEditar = "Editar";
+    this.traduccionAgregarPregunta = "Adicionar pergunta";
+
+  }
+
+}
 
 
 

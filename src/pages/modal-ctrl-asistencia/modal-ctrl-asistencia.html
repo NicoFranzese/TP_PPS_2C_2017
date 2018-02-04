@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Seleccione una comisión</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,8 +19,8 @@
 
     <ion-grid *ngIf="selectedOption == 'alumno' ||  selectedOption == 'docente'">
       <ion-row class="row row-header">
-        <ion-col class="col col-3">Legajo</ion-col>
-        <ion-col class="col col-9">Apellido y nombre</ion-col>
+        <ion-col class="col col-3">{{traduccionLegajo}}</ion-col>
+        <ion-col class="col col-9">{{traduccionNomYApe}}</ion-col>
       </ion-row>
       <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
         <ion-col class="col col-3">{{item.legajo}}</ion-col>
@@ -28,7 +28,7 @@
           <div class="btn-group" style="height:50;width:252;">
             <a (click)="getComision(selectedOption,item.legajo)" class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.nombre_apellido }}</a>
             <div class="dropdown-menu">
-              <h2 class="dropdown-header">Comisiones de {{item.nombre_apellido}}</h2>
+              <h2 class="dropdown-header">{{traduccionComisionesDe}}{{item.nombre_apellido}}</h2>
               <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }}</a>
             </div>
           </div>
@@ -38,7 +38,7 @@
 
     <ion-grid *ngIf="selectedOption == 'materia'">
       <ion-row class="row row-header">
-        <ion-col class="col col-12">Asignatura</ion-col>
+        <ion-col class="col col-12">{{traduccionAsignatura}}</ion-col>
       </ion-row>
       <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
         <ion-col class="col col-12 cortar ">
@@ -46,7 +46,7 @@
             <a (click)="getComision(selectedOption,item.sigla_materia)" class="toggle more" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">{{ item.sigla_materia }}</a>
             <div class="dropdown-menu">
-              <h2 class="dropdown-header">Comisiones de {{item.sigla_materia}}</h2>
+              <h2 class="dropdown-header">{{traduccionComisionesDe}}{{item.sigla_materia}}</h2>
               <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }}</a>
             </div>
           </div>
@@ -56,14 +56,14 @@
 
     <ion-grid *ngIf="selectedOption == 'aula'">
       <ion-row class="row row-header">
-        <ion-col class="col col-12">Asignatura</ion-col>
+        <ion-col class="col col-12">{{traduccionAsignatura}}</ion-col>
       </ion-row>
       <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
         <ion-col class="col col-12 cortar ">
           <div class="btn-group" style="height:50;width:252;">
             <a (click)="getComision(selectedOption,item.aula)" class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.aula }}</a>
             <div class="dropdown-menu">
-              <h2 class="dropdown-header">Comisiones del aula {{item.aula}}</h2>
+              <h2 class="dropdown-header">{{traduccionComisionesDelAula}} {{item.aula}}</h2>
               <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }} </a>
             </div>
           </div>
@@ -73,14 +73,14 @@
 
     <ion-grid *ngIf="selectedOption == 'dia'">
       <ion-row class="row row-header">
-        <ion-col class="col col-12">Día</ion-col>
+        <ion-col class="col col-12">{{traduccionDia}}</ion-col>
       </ion-row>
       <ion-row class="row-grid" *ngFor="let item of filteredItems" align-items-center>
         <ion-col class="col col-12 cortar ">
           <div class="btn-group" style="height:50;width:252;">
             <a (click)="getComision(selectedOption,item)" class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item }}</a>
             <div class="dropdown-menu">
-              <h2 class="dropdown-header">Comisiones del día {{item}}</h2>
+              <h2 class="dropdown-header">{{traduccionComisionesDelAula}} {{item}}</h2>
               <a class="dropdown-item" href="#" (click)="sendCourseList(itemC)" *ngFor="let itemC of comisiones" padding>{{ itemC }}</a>
             </div>
           </div>

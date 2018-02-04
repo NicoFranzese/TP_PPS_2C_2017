@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Resultado Escaneado</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,23 +19,23 @@
   <div style="text-align: center" *ngIf="escaneoDesde == 'Alumno'">
 
   <ion-item class="mt-5">
-    <ion-label style="font-family: 'Roboto', sans-serif">Materia</ion-label>
+    <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionMateria}}</ion-label>
     <ion-input [(ngModel)]="materia" readonly></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label style="font-family: 'Roboto', sans-serif">Comision</ion-label>
+    <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionComision}}</ion-label>
     <ion-input [(ngModel)]="comision" readonly></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label style="font-family: 'Roboto', sans-serif">Aula</ion-label>
+    <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionAula}}</ion-label>
     <ion-input [(ngModel)]="aula" readonly></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label style="font-family: 'Roboto', sans-serif">Horario</ion-label>
+    <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionHorario}}</ion-label>
     <ion-input [(ngModel)]="horario" readonly></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label style="font-family: 'Roboto', sans-serif">Profesor</ion-label>
+    <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionProfesor}}</ion-label>
     <ion-input [(ngModel)]="profesor" readonly></ion-input>
   </ion-item>
   </div>

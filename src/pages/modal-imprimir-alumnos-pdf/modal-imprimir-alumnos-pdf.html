@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Imprimir Listado de Alumnos Pdf</ion-title>
+    <ion-title>{{traduccionTitulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,8 +20,8 @@
           <table class="table table-hover">
             <thead class="thead-inverse">
               <tr>
-                <th>Legajo</th>
-                <th>Alumno</th>
+                <th>{{traduccionLegajo}}</th>
+                <th>{{traduccionAlumno}}</th>
               </tr>
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
             </tbody>
           </table>
 
-          <button ion-button color="secondary" (click)="confirmarExportacion()">Exportar PDF</button>
+          <button ion-button color="secondary" (click)="confirmarExportacion()">{{traduccionExportarPDF}}</button>
         </div>
       </div>
 </ion-content>

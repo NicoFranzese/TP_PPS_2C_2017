@@ -37,6 +37,21 @@ export class PrincipalPage {
   public arrAvisos;
   private arrOpciones = [];
   
+  //Traducciones
+  public traduccionTitulo;
+  public traduccionAdministrarPerfil;
+  public traduccionSalir;
+  public traduccion00;
+  public traduccion01;
+  public traduccion02;
+  public traduccion03;
+  public traduccion04;
+  public traduccion05;
+  public traduccion06;
+  public traduccion08;
+  public traduccion010;
+  public traduccion012;
+  public traduccion013;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -47,6 +62,12 @@ export class PrincipalPage {
               public platform: Platform,
               public localNoti: LocalNotifications,
               private qrEncuestasProvider: QrEncuestasProvider) {
+    //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+    if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+      localStorage.setItem("Lenguaje", "Es");
+    }
+    //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+    this.traducir(localStorage.getItem("Lenguaje"));
    
     let userChanged;
     userChanged = this.navParams.get("logout");
@@ -65,6 +86,61 @@ export class PrincipalPage {
     }
   }
 
+    //Método que traduce objetos de la pagina 
+    traducir(lenguaje){    
+      //Según lenguaje seleccionado se traducen los objetos.
+      if(lenguaje == 'Es'){
+        this.traduccionTitulo = "Menu principal";
+        this.traduccionAdministrarPerfil ="Administrar perfil";
+        this.traduccionSalir ="Salir";
+        this.traduccion00 = 'Gestor de Cuestionarios';
+        this.traduccion01  = 'Avisos de Importancia';
+        this.traduccion02 = 'Gráficos Estadísticos';
+        this.traduccion03= 'QR Para Profesores';
+        this.traduccion04 = 'QR Para Encuestas';
+        this.traduccion05  = 'Tomar asistencia';
+        this.traduccion06 = 'Inscribir alumnos CSV';
+        this.traduccion08  = 'ABM Alumnos';
+        this.traduccion010  = 'QR Para Alumnos';
+        this.traduccion012  = 'ABM Profesores';
+        this.traduccion013  = 'ABM Administrativos';
+
+    
+      }else if(lenguaje == 'Usa'){
+        this.traduccionTitulo = "Main menu";
+        this.traduccionAdministrarPerfil ="Manage profile";
+        this.traduccionSalir ="Get out";
+        this.traduccion00 = 'Questionnaire Manager';
+        this.traduccion01  = 'Important Notices';
+        this.traduccion02 = 'Statistical Graphs';
+        this.traduccion03= 'QR For Teachers';
+        this.traduccion04 = 'QR For Surveys';
+        this.traduccion05  = 'Take assistance';
+        this.traduccion06 = 'Register CSV students';
+        this.traduccion08  = 'ABM Students';
+        this.traduccion010  = 'QR For Students';
+        this.traduccion012  = 'ABM Teachers';
+        this.traduccion013  = 'ABM Administrative';
+    
+      }else if(lenguaje == 'Br'){
+        this.traduccionTitulo = "Menu principal";
+        this.traduccionAdministrarPerfil ="Gerenciar perfil";
+        this.traduccionSalir ="Sair";
+        this.traduccion00 = 'Gerente do Questionário';
+        this.traduccion01  = 'Avisos importantes';
+        this.traduccion02 = 'Gráficos estatísticos';
+        this.traduccion03= 'QR para professores';
+        this.traduccion04 = 'QR para pesquisas';
+        this.traduccion05  = 'Tome assistência';
+        this.traduccion06 = 'Registre estudantes CSV';
+        this.traduccion08  = 'Estudantes da ABMs';
+        this.traduccion010  = 'QR para estudantes';
+        this.traduccion012  = 'Professores da ABM';
+        this.traduccion013  = 'ABM Administrativo';
+    
+      }
+    
+    }
 
   private itemSelected(pageName) {  
 
@@ -137,35 +213,35 @@ export class PrincipalPage {
     {
       case 'docente':
         arrAux = [];
-        arrAux[0] = 'Gestor de Cuestionarios';
+        arrAux[0] = this.traduccion00;
         arrAux[1] = 'fa fa-question-circle fa-5x icon';
         arrAux[2] =  'ABM-cuestionarios';
         arrAux[3] = AbmCuestionariosPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'Avisos de Importancia';
+        arrAux[0] =this.traduccion01;
         arrAux[1] = 'fa fa-flag fa-5x icon';
         arrAux[2] =  'aviso-importancia';
         arrAux[3] = AvisoImportanciaPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'Gráficos Estadísticos';
+        arrAux[0] = this.traduccion02;
         arrAux[1] = 'fa fa-pie-chart fa-5x icon';
         arrAux[2] =  'graficos-estadisticos';
         arrAux[3] = GraficosEstadisticosPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'QR Para Profesores';
+        arrAux[0] = this.traduccion03;
         arrAux[1] = 'fa fa-qrcode fa-5x icon';
         arrAux[2] =  'qr-profesores';
         arrAux[3] = QrProfesoresPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'QR Para Encuestas';
+        arrAux[0] = this.traduccion04;
         arrAux[1] = 'fa fa-qrcode fa-5x icon';
         arrAux[2] =  'qr-encuestas';
         arrAux[3] = QrEncuestasPage;
@@ -174,35 +250,35 @@ export class PrincipalPage {
 
       case 'administrativo':
         arrAux = [];
-        arrAux[0] = 'Tomar asistencia';
+        arrAux[0] = this.traduccion05;
         arrAux[1] = 'fa fa-list-alt fa-5x icon';
         arrAux[2] =  'control-asistencia';
         arrAux[3] = ControlAsistenciaPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'Inscribir alumnos CSV';
+        arrAux[0] = this.traduccion06;
         arrAux[1] = 'fa fa-file-excel-o fa-5x icon';
         arrAux[2] =  'carga-archivos';
         arrAux[3] = CargaArchivosPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'Avisos de Importancia';
+        arrAux[0] = this.traduccion01;
         arrAux[1] = 'fa fa-flag fa-5x icon';
         arrAux[2] =  'aviso-importancia';
         arrAux[3] = AvisoImportanciaPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'ABM Alumnos';
+        arrAux[0] = this.traduccion08;
         arrAux[1] = 'fa fa-users fa-5x icon';
         arrAux[2] =  'ABM-alumnos';
         arrAux[3] = AbmAlumnosPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = ' Gráficos Estadísticos';
+        arrAux[0] = this.traduccion02;
         arrAux[1] = 'fa fa-pie-chart fa-5x icon';
         arrAux[2] =  'graficos-estadisticos';
         arrAux[3] = GraficosEstadisticosPage;
@@ -211,14 +287,14 @@ export class PrincipalPage {
 
       case 'alumno':
         arrAux = [];
-        arrAux[0] = 'QR Para Alumnos';
+        arrAux[0] = this.traduccion010;
         arrAux[1] = 'fa fa-qrcode fa-5x icon';
         arrAux[2] =  'qr-alumnos';
         arrAux[3] = QrAlumnosPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'QR Para Encuestas';
+        arrAux[0] = this.traduccion04;
         arrAux[1] = 'fa fa-qrcode fa-5x icon';
         arrAux[2] =  'qr-encuestas';
         arrAux[3] = QrEncuestasPage;
@@ -227,14 +303,14 @@ export class PrincipalPage {
 
       case 'administrador':
         arrAux = [];
-        arrAux[0] = 'ABM Profesores';
+        arrAux[0] = this.traduccion012;
         arrAux[1] = 'fa fa-users fa-5x icon';
         arrAux[2] =  'ABM-profesores';
         arrAux[3] = AbmProfesoresPage;
         this.arrOpciones.push(arrAux);
 
         arrAux = [];
-        arrAux[0] = 'ABM Administrativos';
+        arrAux[0] = this.traduccion013;
         arrAux[1] = 'fa fa-users fa-5x icon';
         arrAux[2] =  'ABM-administrativos';
         arrAux[3] = AbmAdministrativosPage;

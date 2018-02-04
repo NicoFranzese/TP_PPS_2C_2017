@@ -60,6 +60,12 @@ export class GraficosEstadisticosPage {
     private dataProvider: DataProvider,
     public  platform: Platform,
     public  localNoti: LocalNotifications) {
+          //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+    if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+      localStorage.setItem("Lenguaje", "Es");
+    }
+    //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+    this.traducir(localStorage.getItem("Lenguaje"));
     this.obtenerAvisos();
     this.CargaMaterias();
     this.obtenerCantidadPersonas();

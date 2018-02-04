@@ -22,8 +22,22 @@ export class ModalCtrlAsistenciaPage {
   searchQuery:     string = '';
   selectedOption:  string;
 
+  public traduccionTitulo;
+  public traduccionNomYApe;
+  public traduccionLegajo;
+  public traduccionComisionDe;
+  public traduccionAsignatura;
+  public traduccionComisionesDelAula;
+  public traduccionDia;
+
   constructor(public navCtrl    : NavController,     private viewCtrl: ViewController,    public navParams: NavParams,
               public loadingCtrl: LoadingController ,public dataservice : DataProvider) {
+                    //Si aún no se presionó ningún lenguaje, se setea por defecto Español
+    if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
+      localStorage.setItem("Lenguaje", "Es");
+    }
+    //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
+    this.traducir(localStorage.getItem("Lenguaje"));
       
       this.selectedOption =  this.navParams.get('selectedOption');
      
@@ -33,6 +47,41 @@ export class ModalCtrlAsistenciaPage {
     this.initializeItems();
   }
 
+
+  //Método que traduce objetos de la pagina 
+traducir(lenguaje){    
+  //Según lenguaje seleccionado se traducen los objetos.
+  if(lenguaje == 'Es'){
+    this.traduccionTitulo = "Seleccione una comisión";
+    this.traduccionNomYApe ="Nombre y Apellido";
+    this.traduccionLegajo ="Legajo";
+    this.traduccionComisionDe = "Comisiones de ";
+    this.traduccionAsignatura = "Asignatura";
+    this.traduccionComisionesDelAula = "Comisiones del Aula ";
+    this.traduccionDia = "Día";
+
+  }else if(lenguaje == 'Usa'){
+    this.traduccionTitulo = "Select a commission";
+    this.traduccionNomYApe ="Name and surname";
+    this.traduccionLegajo ="File";
+    this.traduccionComisionDe = "Commissions of ";
+    this.traduccionAsignatura = "Subject";
+    this.traduccionComisionesDelAula = "Classroom Commissions ";
+    this.traduccionDia = "Day";
+
+
+  }else if(lenguaje == 'Br'){
+    this.traduccionTitulo = "Selecione uma comissão";
+    this.traduccionNomYApe ="Nome e sobrenome";
+    this.traduccionLegajo ="Arquivo";
+    this.traduccionComisionDe = "Comissões de ";
+    this.traduccionAsignatura = "Assunto";
+    this.traduccionComisionesDelAula = "Comissões de sala de aula ";
+    this.traduccionDia = "Dia";
+
+  }
+
+}
 
   // Carga inicial de datos. El param opcional de getDBData([..]) lo uso para determinar si debo modificar el array que se muestra en pantalla.
   // Esto cambia según la opción de filtro elegida, cargo el array con la tabla correspondiente (curos o entidades_persona) y
