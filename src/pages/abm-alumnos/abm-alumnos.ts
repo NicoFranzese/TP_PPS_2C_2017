@@ -34,6 +34,7 @@ export class AbmAlumnosPage {
 
   public items;
   public itemsUsuarios;
+  public itemsCursadasAlumnos;
   public arrAvisos;
 
   //Traducciones
@@ -63,6 +64,7 @@ export class AbmAlumnosPage {
       this.obtenerAvisos();
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
+      this.getItemsCursadasAlumnos();
   }
 
   
@@ -144,23 +146,50 @@ export class AbmAlumnosPage {
     );
   }
 
+  getItemsCursadasAlumnos() {
+    // configuro spinner para mientras se cargan los datos 
+    const loading = this.loadingCtrl.create({
+      content: 'Espere por favor...'
+    });
+    loading.present();
+
+    //recupero los datos, mientras muestra spinner
+    this.dataProvider.getItems("cursadas_alumnos").subscribe(
+      datos => {      
+        this.itemsCursadasAlumnos = datos;
+
+        setTimeout(() => {
+          loading.dismiss();
+        }, 3000);
+
+      },
+      error => console.error(error),
+      () => console.log("ok")
+    );
+  }
 
   Baja(leg){
-    for (let i=0;i<this.items.length;i++){ 
-      if (this.items[i].legajo==leg) {
-        this.dataProvider.deleteItem('entidades_persona/'+i);
+    
+      for (let i=0;i<this.items.length;i++){ 
+        if (this.items[i].legajo==leg) {
+          this.dataProvider.deleteItem('entidades_persona/'+ this.items[i].id_persona);
+        }
       }
-    }
-
-    for (let i=0;i<this.itemsUsuarios.length;i++){ 
-      if (this.itemsUsuarios[i].legajo==leg) {
-        this.dataProvider.deleteItem('usuarios/'+i);
+  
+      for (let i=0;i<this.itemsUsuarios.length;i++){ 
+        if (this.itemsUsuarios[i].legajo==leg) {
+          this.dataProvider.deleteItem('usuarios/'+ this.items[i].id_usuario);
+        }
       }
-    }
+      
+      for (let i=0;i<this.itemsCursadasAlumnos.length;i++){ 
+        if (this.itemsCursadasAlumnos[i].legajo==leg) {
+          this.dataProvider.deleteItem('cursadas_alumnos/'+ this.itemsCursadasAlumnos[i].id_cursada_alumno);
+        }
+      }
+    
 
-    this.getItemsEntidadesPersonas();
-    this.getItemsUsuarios();
-  }
+  }//end Baja
 
   AbrirModal(accion, leg){
 
@@ -259,5 +288,17 @@ export class AbmAlumnosPage {
       err => console.log(err)
     );
   }
+
+  close(){
+    this.navCtrl.push(PrincipalPage).then(() => {
+      // first we find the index of the current view controller:
+      const index = this.viewCtrl.index;
+      // then we remove it from the navigation stack
+      this.navCtrl.remove(index);
+    });
+ }//close()
+
+
+
 
 }

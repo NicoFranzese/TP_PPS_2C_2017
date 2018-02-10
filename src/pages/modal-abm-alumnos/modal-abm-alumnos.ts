@@ -194,6 +194,7 @@ export class ModalAbmAlumnosPage {
     );
   }
 
+  // Alta o modificación
   Aceptar(){
     
         // this.obtenerUltimoIDEntidadesPersona();
@@ -207,18 +208,6 @@ export class ModalAbmAlumnosPage {
         }else{
           try {
 
-            for (let i=0;i<this.items.length;i++){ 
-              if (this.items[i].legajo==this.legajo) {
-                this.dataProvider.deleteItem('entidades_persona/'+i);
-              }
-            }
-        
-            for (let i=0;i<this.itemsUsuarios.length;i++){ 
-              if (this.itemsUsuarios[i].legajo==this.legajo) {
-                this.dataProvider.deleteItem('usuarios/'+i);
-              }
-            }
-
             
             let obj = 
             {
@@ -226,9 +215,7 @@ export class ModalAbmAlumnosPage {
               'nombre_apellido': this.nombre_apellido,
               'tipo_entidad': this.tipo_entidad
             };        
-            this.dataProvider.addItem('entidades_persona/' +  this.ultimoIDEntidadesPersona, obj);
-            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
-            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
+           
       
             let objUsu = 
             {
@@ -236,8 +223,29 @@ export class ModalAbmAlumnosPage {
               'email': this.email,
               'clave': this.clave
             };                
-            this.dataProvider.addItem('usuarios/' +  this.ultimoIDUsuarios, objUsu);
-    
+
+            if (this.accion=="Alta"){
+              this.dataProvider.addItem('entidades_persona/' +  this.ultimoIDEntidadesPersona, obj);
+              this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
+              this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
+              this.dataProvider.addItem('usuarios/' +  this.ultimoIDUsuarios, objUsu);  
+            }else{ //Modificacion
+              for (let i=0;i<this.items.length;i++){ 
+                if (this.items[i].legajo==this.legajo) {
+                  // this.dataProvider.deleteItem('entidades_persona/'+i);
+                  this.dataProvider.updateItem('entidades_persona/'+i,obj);
+                }
+              }
+          
+              for (let i=0;i<this.itemsUsuarios.length;i++){ 
+                if (this.itemsUsuarios[i].legajo==this.legajo) {
+                  // this.dataProvider.deleteItem('usuarios/'+i);
+                  this.dataProvider.updateItem('usuarios/'+i,objUsu);
+                }
+              }
+            }
+           
+            //limpio los input
             this.legajo="";
             this.nombre_apellido="";
             this.email="";
@@ -246,13 +254,29 @@ export class ModalAbmAlumnosPage {
             
             this.gFx.presentToast("Guardado correctamente");
     
-            this.navCtrl.push(AbmAlumnosPage);
+            //regreso al form padre
+            this.close();
+          
+
           } catch (error) {
-            
             this.gFx.presentToast(error);
             
           }      
         }
       }
 
-}
+      close(){
+        this.navCtrl.push(AbmAlumnosPage).then(() => {
+          // first we find the index of the current view controller:
+          const index = this.viewCtrl.index;
+          // then we remove it from the navigation stack
+          this.navCtrl.remove(index);
+        });
+     }//close()
+    
+     test(){
+       console.log("ok");
+     }
+
+
+}//class

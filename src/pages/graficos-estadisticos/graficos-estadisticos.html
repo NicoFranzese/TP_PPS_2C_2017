@@ -45,7 +45,7 @@
           </ion-item>
 
           <ion-item *ngIf="grafico == 'Asistencias'">
-            <ion-label class = "item item-input item-select item-positive">{{traduccionTipoAsistenciaDeseaGraficar?}}</ion-label>   
+            <ion-label class = "item item-input item-select item-positive">{{traduccionTipoAsistenciaDeseaGraficar}}</ion-label>   
               <ion-select [(ngModel)]="tipoGrafico" id="tipoGrafico" name="tipoGrafico" (ngModelChange)="CargaGraficos()">
                 <ion-option selected value="seleccioneTipo">{{traduccionSeleccioneTipoAsistencia}}</ion-option>
                 <ion-option value="P">{{traduccionPresente}}</ion-option>

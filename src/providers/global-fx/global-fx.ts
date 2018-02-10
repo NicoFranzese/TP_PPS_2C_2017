@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
@@ -18,8 +18,9 @@ export class GlobalFxProvider {
 
   constructor(public http: Http,
               private camera: Camera,
-              public toastCtrl: ToastController,
-              public loadingCtrl: LoadingController) {
+              private toastCtrl: ToastController,
+              private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController) {
   
   }
 
@@ -69,6 +70,9 @@ export class GlobalFxProvider {
 
 
 
+  public  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 

@@ -49,13 +49,14 @@ export class ControlAsistenciaPage {
 
   obsDB = new Subject();
 
-   constructor(public navCtrl: NavController,                  public navParams: NavParams,           public db: AngularFireDatabase,
-              public dataservice : DataProvider,              public loadingCtrl: LoadingController, public modalCtrl: ModalController,
-              public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,      private gFx: GlobalFxProvider,
-              private alertCtrl: AlertController,
-              public  platform: Platform,
-              public  localNoti: LocalNotifications,
-			  private almacenDatosProvider: AlmacenDatosProvider) {
+   constructor(public navCtrl: NavController,                  public navParams: NavParams,           
+               public db: AngularFireDatabase,                 public dataservice : DataProvider,       
+               public loadingCtrl: LoadingController,          public modalCtrl: ModalController,
+               public actionSheetCtrl: ActionSheetController,  private viewCtrl: ViewController,      
+               private gFx: GlobalFxProvider,                  private alertCtrl: AlertController,
+               public  platform: Platform,                     
+               public  localNoti: LocalNotifications,
+			         private almacenDatosProvider: AlmacenDatosProvider) {
 
       //Si aún no se presionó ningún lenguaje, se setea por defecto Español
       if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
@@ -71,9 +72,9 @@ export class ControlAsistenciaPage {
     
     if(this.comision!=null){this.initializeItems();}
 
-      this.obsDB.subscribe(
-        terminoOperacion =>  this.getListaAlumnos(this.comision)
-      );   
+    this.obsDB.subscribe(
+      terminoOperacion =>  this.getListaAlumnos(this.comision)
+    );   
 
   }
 
@@ -145,37 +146,38 @@ export class ControlAsistenciaPage {
     this.items = [];
     this.arrAusencias  = [];
 
-    //filtro los cursos de la comisión (x ej "4A")
-    auxCursos = this.tbCursos.filter((item)=> item.comision == com[0]);
-    // obtengo el curso para la materia especificada (x ej "PPS")
-    auxCursos2 =  auxCursos.find((item)=> item.sigla_materia == com[1]);
-    // obtengo la cursada de ese curso
-    auxCursada = this.tbCursada.find((item)=> item.id_curso == auxCursos2.id_curso);
-    localStorage.setItem("idCursada",auxCursada.id_cursada);
-    // filtro todos los alumnos de esa cursada
-    auxCursadasAlumno = this.tbCursadasAlumno.filter((item)=> item.id_cursada == auxCursada.id_cursada);
+      //filtro los cursos de la comisión (x ej "4A")
+      auxCursos = this.tbCursos.filter((item)=> item.comision == com[0]);
+      // obtengo el curso para la materia especificada (x ej "PPS")
+      auxCursos2 =  auxCursos.find((item)=> item.sigla_materia == com[1]);
+      // obtengo la cursada de ese curso
+      auxCursada = this.tbCursada.find((item)=> item.id_curso == auxCursos2.id_curso);
+      localStorage.setItem("idCursada",auxCursada.id_cursada);
+      // filtro todos los alumnos de esa cursada
+      auxCursadasAlumno = this.tbCursadasAlumno.filter((item)=> item.id_cursada == auxCursada.id_cursada);
 
-    console.info("auxCursadasAlumno:",auxCursadasAlumno);
+      console.info("auxCursadasAlumno:",auxCursadasAlumno);
 
-    // ya tengo los alumnos que cursan la comision recibida por param
-    auxCursadasAlumno.forEach(element => {
-      auxAlumno = this.tbEntidadesPersona.find((item)=> item.legajo == element.legajo_alumno);
-      this.items.push(auxAlumno);
-      this.initialItemsLength = 1;
+      // ya tengo los alumnos que cursan la comision recibida por param
+      auxCursadasAlumno.forEach(element => {
+        auxAlumno = this.tbEntidadesPersona.find((item)=> item.legajo == element.legajo_alumno);
+        this.items.push(auxAlumno);
+        this.initialItemsLength = 1;
 
-      // inicializo el array para toma de asistencia
-      this.lastId = this.lastId + 1;  
-      let obj = 
-        {
-          'id_asistencia': this.lastId ,
-          'id_cursada_alumno' : element.id_cursada_alumno,
-          'fecha': this.fechaActual,
-          'inasistencia' : 1
-        };
-          
-      this.arrAusencias.push(obj);  
-    }); //foreach
-   
+        // inicializo el array para toma de asistencia
+        this.lastId = this.lastId + 1;  
+        let obj = 
+          {
+            'id_asistencia': this.lastId ,
+            'id_cursada_alumno' : element.id_cursada_alumno,
+            'fecha': this.fechaActual,
+            'inasistencia' : 1
+          };
+            
+        this.arrAusencias.push(obj);  
+      }); //foreach
+
+    
   }//getListaAlumnos
 
 

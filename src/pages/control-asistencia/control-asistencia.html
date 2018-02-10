@@ -59,28 +59,30 @@
     <br>
   </ion-grid>
 
+
   <ion-fab bottom *ngIf="initialItemsLength != '0'">
-    <ion-grid>
-      <ion-row padding-left class="ml-5">
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn-fab" ion-fab mini (click)="presentActionSheet()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-        <button class="btn-fab" ion-fab mini (click)="accionesDescarga()">
-          <ion-icon name="cloud-download"></ion-icon>
-        </button>
-        <button class="btn-fab" ion-fab mini (click)="takePicture()" >
-          <ion-icon name="camera"></ion-icon>
-        </button>
-        <button class="btn-fab" ion-fab mini (click)="clear()">
-          <ion-icon name="trash"></ion-icon>
-        </button>
-        <button class="btn-fab" ion-fab mini (click)="sendList()">
-          <ion-icon name="send"></ion-icon>
-        </button>
-      </ion-row>
-    </ion-grid>
+        <button class="btn-fab" ion-fab mini ><ion-icon name="arrow-dropup"></ion-icon></button>
+        <ion-fab-list side="top">
+
+          <button class="btn-fab" ion-fab mini (click)="accionesDescarga()">
+            <ion-icon name="cloud-download"></ion-icon>
+          </button>
+          <button class="btn-fab" ion-fab mini (click)="takePicture()" >
+            <ion-icon name="camera"></ion-icon>
+          </button>
+          <button class="btn-fab" ion-fab mini (click)="clear()">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+          <button class="btn-fab" ion-fab mini (click)="presentActionSheet()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          <button class="btn-fab" ion-fab mini (click)="sendList()">
+            <ion-icon name="send"></ion-icon>
+          </button>
+
+      </ion-fab-list>
   </ion-fab>
+
 
   <ion-fab center bottom *ngIf="initialItemsLength == '0'">
     <button class="btn-fab" ion-fab mini (click)="presentActionSheet()">
