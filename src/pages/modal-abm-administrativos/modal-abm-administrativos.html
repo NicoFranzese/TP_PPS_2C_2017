@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ModalAbmAdministrativosPage page.
+  Generated template for the ModalAbmAlumnosPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -13,31 +13,32 @@
 </ion-header>
 
 <ion-content id="cuerpo" padding>
-  <div class="row  mb-5">
-    <div class="col-12">
-      <img src="./assets/img/anonimo.jpg" width="150" id="perfil" class="img-block">
+  <div class="list list-inset">
+
+    <div class="row  mb-5">
+      <div class="col-12">
+        <img src="./assets/img/anonimo.jpg" width="150" id="perfil" class="img-block">
+      </div>
     </div>
+
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionLegajo}}</ion-label>
+      <ion-input [(ngModel)]="legajo" id="legajo" name="legajo" *ngIf="accion == 'Alta'"></ion-input>
+      <ion-input [(ngModel)]="legajo" id="legajo" name="legajo" *ngIf="accion == 'Modificacion'" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionNomYApe}}</ion-label>
+      <ion-input [(ngModel)]="nombre_apellido" id="nombre_apellido" name="nombre_apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionEmail}}</ion-label>
+      <ion-input [(ngModel)]="email" id="email" name="email" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionClave}}</ion-label>
+      <ion-input [(ngModel)]="clave" id="clave" name="clave" type="password"></ion-input>
+    </ion-item>
   </div>
-    <div class="list list-inset">
-        <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionLegajo}}</ion-label>
-          <ion-input [(ngModel)]="legajo" id="legajo" name="legajo"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionNomYApe}}</ion-label>
-          <ion-input [(ngModel)]="nombre_apellido" id="nombre_apellido" name="nombre_apellido"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionEmail}}</ion-label>
-          <ion-input [(ngModel)]="email" id="email" name="email" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionClave}}</ion-label>
-          <ion-input [(ngModel)]="clave" id="clave" name="clave" type="password"></ion-input>
-        </ion-item>
+  <button class="btn btn-default mt-3" (click)="Aceptar()">{{traduccionAceptar}}</button>
 
-         <button class="btn btn-default mt-3" (click)="Aceptar()">{{traduccionAceptar}}</button>
-
-    
-    </div>
 </ion-content>

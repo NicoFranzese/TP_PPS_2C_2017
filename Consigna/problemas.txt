@@ -1,2 +1,0 @@
-* It is missing API.js. android not supported
-- ionic cordova platform add android --no-fetch

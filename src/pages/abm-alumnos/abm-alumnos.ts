@@ -191,7 +191,7 @@ export class AbmAlumnosPage {
         
             for (let i=0;i<this.itemsUsuarios.length;i++){ 
               if (this.itemsUsuarios[i].legajo==leg) {
-                this.dataProvider.deleteItem('usuarios/'+ this.items[i].id_usuario);
+                this.dataProvider.deleteItem('usuarios/'+ this.itemsUsuarios[i].id_usuario);
               }
             }
             

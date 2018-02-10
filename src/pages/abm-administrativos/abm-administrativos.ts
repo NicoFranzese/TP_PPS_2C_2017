@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,ModalController, ViewController, Pl
 import { LoadingController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
+import { AlertController } from 'ionic-angular';
 import { PrincipalPage } from '../principal/principal';
 import { ModalAbmAdministrativosPage } from '../modal-abm-administrativos/modal-abm-administrativos';
 
@@ -26,6 +27,8 @@ export class AbmAdministrativosPage {
   public email;
   public clave;
   public tipo_entidad = "administrativo";
+  public id_persona ;
+  public id_usuario;
 
   public ultimoIDEntidadesPersona;
   public arrEntidadesPersona;
@@ -46,16 +49,11 @@ export class AbmAdministrativosPage {
   public traduccionEliminar;
   public traduccionTitulo;
 
-  
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private dataProvider: DataProvider,
-    public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController,
-    private viewCtrl: ViewController,
-    public  platform: Platform,
-    public  localNoti: LocalNotifications,
-    private gFx: GlobalFxProvider) {
+  constructor(private navCtrl: NavController,         public navParams: NavParams,
+              private dataProvider: DataProvider,     public  loadingCtrl: LoadingController,
+              public  modalCtrl: ModalController,     private viewCtrl: ViewController,
+              public  platform: Platform,             public  localNoti: LocalNotifications,
+              private gFx: GlobalFxProvider,          private alertCtrl: AlertController) {
 
       //Si aún no se presionó ningún lenguaje, se setea por defecto Español
       if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
@@ -63,7 +61,7 @@ export class AbmAdministrativosPage {
       }
       //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
       this.traducir(localStorage.getItem("Lenguaje"));
-
+      
       this.obtenerAvisos();
       this.getItemsEntidadesPersonas();
       this.getItemsUsuarios();
@@ -73,33 +71,33 @@ export class AbmAdministrativosPage {
     // console.log('ionViewDidLoad AbmAdministrativosPage');
   }
 
-  //Método que traduce objetos de la pagina 
-  traducir(lenguaje){    
-    //Según lenguaje seleccionado se traducen los objetos.
-    if(lenguaje == 'Es'){
-      this.traduccionLegajo = "Legajo";
-      this.traduccionNomYApe = "Nombre y Apellido";
-      this.traduccionAccion = "Acción";
-      this.traduccionModificar = "Modificar";
-      this.traduccionEliminar = "Eliminar";
+    //Método que traduce objetos de la pagina 
+    traducir(lenguaje){    
+      //Según lenguaje seleccionado se traducen los objetos.
+      if(lenguaje == 'Es'){
+        this.traduccionLegajo = "Legajo";
+        this.traduccionNomYApe = "Nombre y Apellido";
+        this.traduccionAccion = "Acción";
+        this.traduccionModificar = "Modificar";
+        this.traduccionEliminar = "Eliminar";
       this.traduccionTitulo = "ABM Administrativos";
-    }else if(lenguaje == 'Usa'){
-      this.traduccionLegajo = "File";
-      this.traduccionNomYApe = "Name and surname";
-      this.traduccionAccion = "Action";
-      this.traduccionModificar = "Modify";
-      this.traduccionEliminar = "Remove";
+      }else if(lenguaje == 'Usa'){
+        this.traduccionLegajo = "File";
+        this.traduccionNomYApe = "Name and surname";
+        this.traduccionAccion = "Action";
+        this.traduccionModificar = "Modify";
+        this.traduccionEliminar = "Remove";
       this.traduccionTitulo = "ABM Administratives";
     }else if(lenguaje == 'Br'){
-      this.traduccionLegajo = "Arquivo";
-      this.traduccionNomYApe = "Nome e sobrenome";
-      this.traduccionAccion = "Ação";
-      this.traduccionModificar = "Modificar";
-      this.traduccionEliminar = "Excluir";
+        this.traduccionLegajo = "Arquivo";
+        this.traduccionNomYApe = "Nome e sobrenome";
+        this.traduccionAccion = "Ação";
+        this.traduccionModificar = "Modificar";
+        this.traduccionEliminar = "Excluir";
       this.traduccionTitulo = "ABM Administrativos";
     }
 
-  }
+    }
 
   getItemsEntidadesPersonas() {
     // configuro spinner para mientras se cargan los datos 
@@ -147,118 +145,151 @@ export class AbmAdministrativosPage {
 
 
   Baja(leg){
-    for (let i=0;i<this.items.length;i++){ 
-      if (this.items[i].legajo.toString()==leg.toString()) {
-        this.dataProvider.deleteItem('entidades_persona/'+i);
-      }
-    }
+    
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar',
+      message: '¿Desea eliminar al administrativo de legajo ' + leg + '?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            // Realizar la baja del item de las tablas correspondientes
+            for (let i=0;i<this.items.length;i++){ 
+              if (this.items[i].legajo==leg) {
+                this.dataProvider.deleteItem('entidades_persona/'+ this.items[i].id_persona);
+              }
+            }
+        
+            for (let i=0;i<this.itemsUsuarios.length;i++){ 
+              if (this.itemsUsuarios[i].legajo==leg) {
+                this.dataProvider.deleteItem('usuarios/'+ this.itemsUsuarios[i].id_usuario);
+              }
+            }
+            
+          }
+        }
+      ]
+    });
+    alert.present();
 
-    for (let j=0;j<this.itemsUsuarios.length;j++){ 
-      if (this.itemsUsuarios[j].legajo.toString()==leg.toString()) {
-        this.dataProvider.deleteItem('usuarios/'+j);
-      }
-    }
-
-    this.getItemsEntidadesPersonas();
-    this.getItemsUsuarios();
-  }
-
+  }//end Baja
 
   AbrirModal(accion, leg){
-    
-        if (accion == 'Modificacion'){
-          for (let i=0;i<this.items.length;i++){ 
-            if (this.items[i].legajo==leg) {
-              this.nombre_apellido = this.items[i].nombre_apellido;
-            }
-          }
-    
-          for (let j=0;j<this.itemsUsuarios.length;j++){ 
-            if (this.itemsUsuarios[j].legajo==leg) {
-              this.email = this.itemsUsuarios[j].email;
-              this.clave = this.itemsUsuarios[j].clave;        
-            }
-          }
+
+    if (accion == 'Modificacion'){
+      for (let i=0;i<this.items.length;i++){ 
+        if (this.items[i].legajo==leg) {
+          this.nombre_apellido = this.items[i].nombre_apellido;
+          this.id_persona = this.items[i].id_persona;
+          
+        }
+      }
+
+      for (let i=0;i<this.itemsUsuarios.length;i++){ 
+        if (this.itemsUsuarios[i].legajo==leg) {
+          this.email = this.itemsUsuarios[i].email;
+          this.clave = this.itemsUsuarios[i].clave;  
+          this.id_usuario = this.itemsUsuarios[i].id_usuario;      
+        }
+      }
     
     
           let optionModal = this.modalCtrl.create(ModalAbmAdministrativosPage,{accion: accion, 
-                                                                        legajo: leg.toString(),
-                                                                        nombre: this.nombre_apellido, 
-                                                                        email: this.email,
-                                                                        clave: this.clave});
-                                                                        optionModal.present()
-          .then(() => {
-            // first we find the index of the current view controller:
-            // const index = this.viewCtrl.index;
-            // then we remove it from the navigation stack
-            // this.navCtrl.remove(index);
-          });
-        }else{
+                                                                    legajo: leg,
+                                                                    nombre: this.nombre_apellido, 
+                                                                    email: this.email,
+                                                                    clave: this.clave,
+                                                                    id_persona:this.id_persona,
+                                                                    id_usuario:this.id_usuario});
+                                                                    optionModal.present()
+      .then(() => {
+        // first we find the index of the current view controller:
+        const index = this.viewCtrl.index;
+        // then we remove it from the navigation stack
+        this.navCtrl.remove(index);
+      });
+    }else{
           let optionModal = this.modalCtrl.create(ModalAbmAdministrativosPage,{accion: accion});
-          optionModal.present()
-          .then(() => {
-            // first we find the index of the current view controller:
-            // const index = this.viewCtrl.index;
-            // then we remove it from the navigation stack
-            // this.navCtrl.remove(index);
-          });
-        }
-       
-      }
-
-      private obtenerAvisos()
-      {
-        this.dataProvider.getItems('avisos_importancia').subscribe(
-          data => 
-          {
-            // this.arrPersonas = data;
-    
-            if(data == undefined)
-            {
-              // alert("No existen personas cargadas en la BD");
-            }
-            else
-            {
-              this.arrAvisos = data;
-    
-              for (let i=0;i<this.arrAvisos.length;i++){ 
-                let legajo = this.arrAvisos[i].legajo;
-                if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
-                    (legajo > localStorage.getItem("legajoLogueado").toString())){
-                    }else{
-                      this.platform.ready().then(() => {
-                        this.localNoti.schedule({
-                          title: 'Alerta de Gestión Académica!',
-                          text: this.arrAvisos[i].mensaje,
-                          at: new Date(new Date().getTime() + 3600),
-                          led: 'FF0000',
-                          icon:'', //ruta del icono
-                          sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
-                        });
-                      //Elimino aviso para que no vuelva a enviarlo.
-                        // this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
-                      });
-                    }
-              }
-    
-              for (let i=0;i<this.arrAvisos.length;i++){ 
-                let legajo = this.arrAvisos[i].legajo;
-                if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
-                    (legajo > localStorage.getItem("legajoLogueado").toString())){
-                      
-                    }else{
-                      this.platform.ready().then(() => {
-                      //Elimino aviso para que no vuelva a enviarlo.
-                        this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
-                      });
-                    }
-              }
-            }
-            // console.log(this.arrAvisos);
-          },
-          err => console.log(err)
-        );
-      }
+      optionModal.present()
+      .then(() => {
+        // first we find the index of the current view controller:
+        const index = this.viewCtrl.index;
+        // then we remove it from the navigation stack
+        this.navCtrl.remove(index);
+      });
+    }
    
+  }
+
+
+  private obtenerAvisos()
+  {
+    this.dataProvider.getItems('avisos_importancia').subscribe(
+      data => 
+      {
+        // this.arrPersonas = data;
+
+        if(data == undefined)
+        {
+          // alert("No existen personas cargadas en la BD");
+        }
+        else
+        {
+          this.arrAvisos = data;
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                }else{
+                  this.platform.ready().then(() => {
+                    this.localNoti.schedule({
+                      title: 'Alerta de Gestión Académica!',
+                      text: this.arrAvisos[i].mensaje,
+                      at: new Date(new Date().getTime() + 3600),
+                      led: 'FF0000',
+                      icon:'', //ruta del icono
+                      sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
+                    });
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    // this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                  
+                }else{
+                  this.platform.ready().then(() => {
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+        }
+        // console.log(this.arrAvisos);
+      },
+      err => console.log(err)
+    );
+  }
+   
+  close(){
+    this.navCtrl.push(PrincipalPage).then(() => {
+      // first we find the index of the current view controller:
+      const index = this.viewCtrl.index;
+      // then we remove it from the navigation stack
+      this.navCtrl.remove(index);
+    });
+ }//close()
 
 }

@@ -1,9 +1,3 @@
-<!--
-  Generated template for the AbmAdministrativosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -13,53 +7,44 @@
 </ion-header>
 
 
-
 <ion-content padding>
-    
-        <ion-grid>
-            
-          <ion-row class="row row-header">
-
-            <ion-col class="col col-3">{{traduccionLegajo}}</ion-col>
-            <ion-col class="col col-7">{{traduccionNomYApe}}</ion-col>
-            <ion-col class="col col-2" text-center>{{traduccionAccion}}</ion-col>
-          </ion-row>
-          <div *ngFor="let item of items" >
+  
+      <ion-grid>
+          
+        <ion-row class="row row-header">
+  
+          <ion-col class="col col-3">{{traduccionLegajo}}</ion-col>
+          <ion-col class="col col-7">{{traduccionNomYApe}}</ion-col>
+          <ion-col class="col col-2" text-center>{{traduccionAccion}}</ion-col>
+        </ion-row>
+        <div *ngFor="let item of items" >
           <ion-row *ngIf="item.tipo_entidad == 'administrativo'" align-items-center>
-
-            <ion-col class="col col-3">{{item.legajo}}</ion-col>
-            <ion-col class="col col-7 cortar">{{item.nombre_apellido}}</ion-col>
-            <ion-col class="col col-2 text-center">
-                <div class="btn-group" style="height:50;width:252;">
-                    <button class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <ion-icon name="more" ></ion-icon>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#" (click)="AbrirModal('Modificacion', item.legajo)">{{traduccionModificar}}</a>
-                      <a class="dropdown-item" href="#" (click)="Baja(item.legajo)">{{traduccionEliminar}}</a>
-                    </div>
+  
+          <ion-col class="col col-3">{{item.legajo}}</ion-col>
+          <ion-col class="col col-7 cortar">{{item.nombre_apellido}}</ion-col>
+          <ion-col class="col col-2 text-center">
+              <div class="btn-group" style="height:50;width:252;">
+                  <button class="toggle more" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <ion-icon name="more" ></ion-icon>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" (click)="AbrirModal('Modificacion', item.legajo)">{{traduccionModificar}}</a>
+                    <a class="dropdown-item" href="#" (click)="Baja(item.legajo)">{{traduccionEliminar}}</a>
                   </div>
-            </ion-col>   
-          </ion-row>
-        </div>
-      
-          <br><br><br>
-        </ion-grid>
+                </div>
+          </ion-col>   
+        </ion-row>
+      </div>
     
-    
-    
-    
-    
-        <ion-fab bottom>
-            <!-- <ion-grid>     -->
-              <!-- <ion-row padding-left class="ml-5"> -->
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn-fab" ion-fab (click)="AbrirModal('Alta', 0)">
-                  <ion-icon name="add"></ion-icon>
-                </button>
-              <!-- </ion-row> -->
-            <!-- </ion-grid> -->
-          </ion-fab>
-    
-    </ion-content>
+        <br><br><br>
+      </ion-grid>
+  
+  
+      <ion-fab bottom>
+              <button class="btn-fab" ion-fab mini (click)="AbrirModal('Alta', 0)">
+                <ion-icon name="add"></ion-icon>
+              </button>
+        </ion-fab>
+  
+  </ion-content>
     
