@@ -80,7 +80,7 @@ export class AbmProfesoresPage {
         this.traduccionAccion = "Acción";
         this.traduccionModificar = "Modificar";
         this.traduccionEliminar = "Eliminar";
-      this.traduccionTitulo = "ABM Alumnos";
+      this.traduccionTitulo = "ABM Profesores";
       }else if(lenguaje == 'Usa'){
         this.traduccionLegajo = "File";
         this.traduccionNomYApe = "Name and surname";

@@ -86,21 +86,21 @@ export class ModalAbmDocentesPage {
       this.traduccionEmail = "Email";
       this.traduccionClave = "Clave";
       this.traduccionAceptar = "Aceptar";
-      this.traduccionTitulo = "Alumno";
+      this.traduccionTitulo = "Profesor";
     }else if(lenguaje == 'Usa'){
       this.traduccionLegajo = "File";
       this.traduccionNomYApe = "Name and surname";
       this.traduccionEmail = "E-mail";
       this.traduccionClave = "Password";
       this.traduccionAceptar = "Accept";
-      this.traduccionTitulo = "Student";
+      this.traduccionTitulo = "Teacher";
     }else if(lenguaje == 'Br'){
       this.traduccionLegajo = "Arquivo";
       this.traduccionNomYApe = "Nome e sobrenome";
       this.traduccionEmail = "E-mail";
       this.traduccionClave = "senha";
       this.traduccionAceptar = "Aceitar";
-      this.traduccionTitulo = "Estudante";
+      this.traduccionTitulo = "Professor";
     }
 
     // console.log("Lenguaje= "+ lenguaje);
@@ -164,7 +164,19 @@ export class ModalAbmDocentesPage {
 
   // Alta o modificación
   Aceptar(){
-    
+    var tieneArroba = 0;
+    var tienePunto = 0;
+
+    for(var i=0; i<this.email.length; i++) {
+      if (this.email.charAt(i) == '@'){
+        tieneArroba = 1;
+      }
+      if (this.email.charAt(i) == '.'){
+        tienePunto = 1;
+      }
+    }
+
+    if((tieneArroba == 1) && (tienePunto == 1)){
 
         if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
           (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
@@ -233,7 +245,10 @@ export class ModalAbmDocentesPage {
             
           }      
         }
+      }else{
+        this.gFx.presentToast("El mail no tiene un formato correcto");
       }
+    }
 
       close(){
         this.navCtrl.push(AbmProfesoresPage).then(() => {

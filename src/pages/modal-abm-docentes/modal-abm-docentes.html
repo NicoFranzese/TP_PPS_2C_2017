@@ -23,7 +23,7 @@
 
     <ion-item>
       <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionLegajo}}</ion-label>
-      <ion-input [(ngModel)]="legajo" id="legajo" name="legajo" *ngIf="accion == 'Alta'"></ion-input>
+      <ion-input type="number" [(ngModel)]="legajo" id="legajo" name="legajo" *ngIf="accion == 'Alta'"></ion-input>
       <ion-input [(ngModel)]="legajo" id="legajo" name="legajo" *ngIf="accion == 'Modificacion'" disabled></ion-input>
     </ion-item>
     <ion-item>

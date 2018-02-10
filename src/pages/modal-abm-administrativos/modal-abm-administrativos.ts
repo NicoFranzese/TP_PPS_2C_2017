@@ -165,76 +165,90 @@ export class ModalAbmAdministrativosPage {
 
   // Alta o modificación
   Aceptar(){
-    
+    var tieneArroba = 0;
+    var tienePunto = 0;
 
-        if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
-          (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
-        (this.email == null) || (this.email == undefined) || (this.email == "") ||
-          (this.clave == null) || (this.clave == undefined) || (this.clave == "")){
-            this.gFx.presentToast("Hay campos incompletos.");
-        }else{
-          try {
+    for(var i=0; i<this.email.length; i++) {
+      if (this.email.charAt(i) == '@'){
+        tieneArroba = 1;
+      }
+      if (this.email.charAt(i) == '.'){
+        tienePunto = 1;
+      }
+    }
 
-            
-            let obj = 
-            {
-              // si es un alta genero id nuevo, sino utilizo el recibido por navParam
-              'id_persona' : this.accion=="Alta"?(Number(this.ultimoIDEntidadesPersona) + 1) : this.id_persona,
-              'legajo': this.legajo,
-              'nombre_apellido': this.nombre_apellido,
-              'tipo_entidad': this.tipo_entidad
-            };        
-            
-            let objUsu = 
-            {
-               // si es un alta genero id nuevo, sino utilizo el recibido por navParam
-              'id_usuario': this.accion == "Alta"? (Number(this.ultimoIDUsuarios)+1):this.id_usuario,
-              'legajo': this.legajo,
-              'email': this.email,
-              'clave': this.clave
-            };   
-            
-            if (this.accion=="Alta"){
-    
+    if((tieneArroba == 1) && (tienePunto == 1)){
+      if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
+      (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
+    (this.email == null) || (this.email == undefined) || (this.email == "") ||
+      (this.clave == null) || (this.clave == undefined) || (this.clave == "")){
+        this.gFx.presentToast("Hay campos incompletos.");
+      }else{
+        try {
 
-              this.dataProvider.addItem('entidades_persona/' +  (Number(this.ultimoIDEntidadesPersona) + 1), obj);
-              this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
-              this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
-              this.dataProvider.addItem('usuarios/' +  (Number(this.ultimoIDUsuarios)+1), objUsu);  
-            }else{ //Modificacion 
-
-              for (let i=0;i<this.items.length;i++){ 
-                if (this.items[i].legajo==this.legajo) {
-                  this.dataProvider.updateItem('entidades_persona/'+this.items[i].id_persona,obj);
-                }
-              }
           
-              for (let i=0;i<this.itemsUsuarios.length;i++){ 
-                if (this.itemsUsuarios[i].legajo==this.legajo) {
-                   this.dataProvider.updateItem('usuarios/'+this.itemsUsuarios[i].id_usuario,objUsu);
-                }
+          let obj = 
+          {
+            // si es un alta genero id nuevo, sino utilizo el recibido por navParam
+            'id_persona' : this.accion=="Alta"?(Number(this.ultimoIDEntidadesPersona) + 1) : this.id_persona,
+            'legajo': this.legajo,
+            'nombre_apellido': this.nombre_apellido,
+            'tipo_entidad': this.tipo_entidad
+          };        
+          
+          let objUsu = 
+          {
+            // si es un alta genero id nuevo, sino utilizo el recibido por navParam
+            'id_usuario': this.accion == "Alta"? (Number(this.ultimoIDUsuarios)+1):this.id_usuario,
+            'legajo': this.legajo,
+            'email': this.email,
+            'clave': this.clave
+          };   
+          
+          if (this.accion=="Alta"){
+
+
+            this.dataProvider.addItem('entidades_persona/' +  (Number(this.ultimoIDEntidadesPersona) + 1), obj);
+            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
+            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
+            this.dataProvider.addItem('usuarios/' +  (Number(this.ultimoIDUsuarios)+1), objUsu);  
+          }else{ //Modificacion 
+
+            for (let i=0;i<this.items.length;i++){ 
+              if (this.items[i].legajo==this.legajo) {
+                this.dataProvider.updateItem('entidades_persona/'+this.items[i].id_persona,obj);
               }
             }
-           
-            //limpio los input
-            this.legajo="";
-            this.nombre_apellido="";
-            this.email="";
-            this.clave="";
-    
-            
-            this.gFx.presentToast("Guardado correctamente");
-    
-            //regreso al form padre
-            this.close();
-          
+        
+            for (let i=0;i<this.itemsUsuarios.length;i++){ 
+              if (this.itemsUsuarios[i].legajo==this.legajo) {
+                this.dataProvider.updateItem('usuarios/'+this.itemsUsuarios[i].id_usuario,objUsu);
+              }
+            }
+          }
+        
+          //limpio los input
+          this.legajo="";
+          this.nombre_apellido="";
+          this.email="";
+          this.clave="";
 
-          } catch (error) {
-            this.gFx.presentToast(error);
-            
-          }      
-        }
+          
+          this.gFx.presentToast("Guardado correctamente");
+
+          //regreso al form padre
+          this.close();
+        
+
+        } catch (error) {
+          this.gFx.presentToast(error);
+          
+        }      
       }
+    }else{
+      this.gFx.presentToast("El mail no tiene un formato correcto");
+    }
+  }
 
       close(){
         this.navCtrl.push(AbmAdministrativosPage).then(() => {
