@@ -49,7 +49,7 @@ export class AbmCuestionariosPage {
         this.arrCuestionarios = data;
 
         //Si vengo de escanear un qr como profesor, edito el cuestionario
-        console.log(this.navParams.get('id'));
+        // console.log(this.navParams.get('id'));
         if(this.navParams.get('id'))
           this.vengoDeLeerQr();
 

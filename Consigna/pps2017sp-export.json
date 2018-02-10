@@ -557,38 +557,41 @@
     }
   },
   "usuarios" : { "1": {
-    "email" : "pablo86v@gmail.com",
     "id_usuario":"1",
-    "legajo" : 66384
+	"legajo" : "66384",
+	"email" : "pablo86v@gmail.com",
+	"clave" : "123"
   }, "2":{
-    "clave" : 123,
-    "email" : "franzesens@gmail.com",
-    "id_usuario":"2",
-    "legajo" : 66503
+	 "id_usuario":"2",
+	 "legajo" : "66503",
+	 "email" : "franzesens@gmail.com",
+     "clave" : "123"  
   }, "3":{
-    "clave" : 123,
-    "email" : "octavio@villegas",
     "id_usuario":"3",
-    "legajo" : 123456
+	"legajo" : "123456",
+    "email" : "octavio@villegas",
+	"clave" : "123"
   }, "4":{
-    "clave" : 123,
-    "email" : "maxi@neiner",
     "id_usuario":"4",
-    "legajo" : 7891011
+    "legajo" : "7891011",
+    "email" : "maxi@neiner",
+	"clave" : "123"
   }, "5":{
-    "clave" : 123,
-    "email" : "adminis@trador",
     "id_usuario":"5",
-    "legajo" : "010155"
+    "legajo" : "010155",
+	"email" : "adminis@trador",
+    "clave" : "123"
   }, "6": {
-    "clave" : "123",
+	"id_usuario":"6",
+    "legajo" : "67334",
     "email" : "mgw009@gmail.com",
-    "id_usuario":"6",
-    "legajo" : "67334"
+	"clave" : "123"
+    
   }, "7": {
-    "clave" : "123",
-    "email" : "adminis@trativo",
     "id_usuario":"7",
-    "legajo" : 112233
+    "legajo" : "112233",
+	"email" : "adminis@trativo",
+	"clave" : "123"
+    
   } }
 }

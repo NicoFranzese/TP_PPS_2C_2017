@@ -154,7 +154,7 @@ export class CargaArchivosPage {
 
   console.log("Materia: ", this.materia);
   console.log("Comision: ", this.comision);
-  console.log(this.arrAlumnosCSV);
+  // console.log(this.arrAlumnosCSV);
  
   }
 

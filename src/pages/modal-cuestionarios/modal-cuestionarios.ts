@@ -286,7 +286,7 @@ traducir(lenguaje){
     });
 
     this.pregunta = item.pregunta;
-    console.log(item);
+    // console.log(item);
     if(item.arrRespuestas)
       this.cantRespuestas = Number.parseInt(item.cantRespuestas);
     

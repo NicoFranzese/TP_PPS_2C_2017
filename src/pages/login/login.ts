@@ -161,7 +161,7 @@ export class LoginPage {
         }
         else
         {
-          console.log("entre");
+          // console.log("Login ok");
           email = this.email;
           foto = "./assets/img/anonimo.jpg";
         }
@@ -196,7 +196,7 @@ export class LoginPage {
 
   private guardarFotoPerfil(legajo)
   {
-    console.log(legajo);
+    // console.log(legajo);
     this.dataProvider.getItems('fotoPerfil/'+legajo+'/arrFotos').subscribe(
       data => 
       {

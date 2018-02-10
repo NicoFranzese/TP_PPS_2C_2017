@@ -107,7 +107,7 @@ export class ControlAsistenciaPage {
   getDate(){
     let d = new Date();
     this.fechaActual = d.getDate()+"/"+(Number(d.getMonth())+1)+"/"+d.getFullYear();
-    console.log(this.fechaActual);
+    // console.log(this.fechaActual);
   }
 
 
@@ -139,7 +139,7 @@ export class ControlAsistenciaPage {
 
 
   getListaAlumnos(comision){
-    console.log("getListaAlumnos:"+comision);
+    // console.log("getListaAlumnos:"+comision);
 
     let auxCursos,auxCursadasAlumno,auxCursada,auxCursos2,auxAlumno : any;
     let com = comision.toString().trim().split("-");

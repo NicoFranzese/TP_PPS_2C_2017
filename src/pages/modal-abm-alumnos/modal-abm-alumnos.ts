@@ -24,6 +24,8 @@ export class ModalAbmAlumnosPage {
   public email;
   public clave;
   public tipo_entidad = "alumno";
+  public id_persona ;
+  public id_usuario;
 
   public ultimoIDEntidadesPersona;
   public arrEntidadesPersona;
@@ -50,25 +52,25 @@ export class ModalAbmAlumnosPage {
       }
       //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
       this.traducir(localStorage.getItem("Lenguaje"));
+      this.accion =  this.navParams.get('accion');
 
-      this.obtenerUltimoIDEntidadesPersona();
-      this.obtenerUltimoIDUsuarios();
+      if (this.accion == 'Modificacion'){
+        this.legajo =  this.navParams.get('legajo');
+        this.nombre_apellido =  this.navParams.get('nombre');
+        this.email =  this.navParams.get('email');
+        this.clave =  this.navParams.get('clave');
+        this.id_persona = this.navParams.get('id_persona');
+        this.id_usuario = this.navParams.get('id_usuario');
+      }else{
+        this.legajo =  "";
+        this.nombre_apellido =  "";
+        this.email =  "";
+        this.clave =  "";
+      }
+
       this.getItemsEntidadesPersonas();
-      this.getItemsUsuarios();
+      this.getItemsUsuarios();  
 
-    this.accion =  this.navParams.get('accion');
-
-    if (this.accion == 'Modificacion'){
-      this.legajo =  this.navParams.get('legajo');
-      this.nombre_apellido =  this.navParams.get('nombre');
-      this.email =  this.navParams.get('email');
-      this.clave =  this.navParams.get('clave');
-    }else{
-      this.legajo =  "";
-      this.nombre_apellido =  "";
-      this.email =  "";
-      this.clave =  "";
-    }
 
   }
 
@@ -102,53 +104,10 @@ export class ModalAbmAlumnosPage {
       this.traduccionTitulo = "Estudante";
     }
 
-    console.log(lenguaje);
-    console.log(this.traduccionTitulo);
-    console.log(this.traduccionAceptar);
+    // console.log("Lenguaje= "+ lenguaje);
+
   }
   
-  private obtenerUltimoIDEntidadesPersona()
-  {
-    this.dataProvider.getItems('entidades_persona').subscribe(
-      data =>
-      {
-        this.arrEntidadesPersona = data;
-
-        if(data.length == 0)
-        {
-          this.ultimoIDEntidadesPersona = 1;
-        }
-        else
-        {
-          this.ultimoIDEntidadesPersona= data.length;
-        }
-        // console.log(data.length +1);
-      },
-      err => console.error(err)
-    );
-  }
-
-  private obtenerUltimoIDUsuarios()
-  {
-    this.dataProvider.getItems('usuarios').subscribe(
-      data =>
-      {
-        this.arrUsuarios = data;
-
-        if(data.length == 0)
-        {
-          this.ultimoIDUsuarios = 1;
-        }
-        else
-        {
-          this.ultimoIDUsuarios= data.length;
-        }
-        
-        // console.log(data.length +1);
-      },
-      err => console.error(err)
-    );
-  }
 
   getItemsEntidadesPersonas() {
     // configuro spinner para mientras se cargan los datos 
@@ -161,7 +120,12 @@ export class ModalAbmAlumnosPage {
     this.dataProvider.getItems("entidades_persona").subscribe(
       datos => {      
         this.items = datos;
-
+        // obtengo el último ID 
+        if(this.items.length == 0)        {
+          this.ultimoIDEntidadesPersona = 1;
+        }else{
+          this.ultimoIDEntidadesPersona= this.items[this.items.length-1].id_persona;
+        }
         setTimeout(() => {
           loading.dismiss();
         }, 3000);
@@ -183,7 +147,12 @@ export class ModalAbmAlumnosPage {
     this.dataProvider.getItems("usuarios").subscribe(
       datos => {      
         this.itemsUsuarios = datos;
-
+           // obtengo el último ID 
+        if(this.itemsUsuarios.length == 0){
+          this.ultimoIDUsuarios = 1;
+        }else{
+          this.ultimoIDUsuarios= this.itemsUsuarios[this.itemsUsuarios.length-1].id_usuario;
+        }
         setTimeout(() => {
           loading.dismiss();
         }, 3000);
@@ -197,9 +166,7 @@ export class ModalAbmAlumnosPage {
   // Alta o modificación
   Aceptar(){
     
-        // this.obtenerUltimoIDEntidadesPersona();
-        // this.obtenerUltimoIDUsuarios();
-    
+
         if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
           (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
         (this.email == null) || (this.email == undefined) || (this.email == "") ||
@@ -211,36 +178,40 @@ export class ModalAbmAlumnosPage {
             
             let obj = 
             {
+              // si es un alta genero id nuevo, sino utilizo el recibido por navParam
+              'id_persona' : this.accion=="Alta"?(Number(this.ultimoIDEntidadesPersona) + 1) : this.id_persona,
               'legajo': this.legajo,
               'nombre_apellido': this.nombre_apellido,
               'tipo_entidad': this.tipo_entidad
             };        
-           
-      
+            
             let objUsu = 
             {
+               // si es un alta genero id nuevo, sino utilizo el recibido por navParam
+              'id_usuario': this.accion == "Alta"? (Number(this.ultimoIDUsuarios)+1):this.id_usuario,
               'legajo': this.legajo,
               'email': this.email,
               'clave': this.clave
-            };                
-
+            };   
+            
             if (this.accion=="Alta"){
-              this.dataProvider.addItem('entidades_persona/' +  this.ultimoIDEntidadesPersona, obj);
+    
+
+              this.dataProvider.addItem('entidades_persona/' +  (Number(this.ultimoIDEntidadesPersona) + 1), obj);
               this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
               this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
-              this.dataProvider.addItem('usuarios/' +  this.ultimoIDUsuarios, objUsu);  
-            }else{ //Modificacion
+              this.dataProvider.addItem('usuarios/' +  (Number(this.ultimoIDUsuarios)+1), objUsu);  
+            }else{ //Modificacion 
+
               for (let i=0;i<this.items.length;i++){ 
                 if (this.items[i].legajo==this.legajo) {
-                  // this.dataProvider.deleteItem('entidades_persona/'+i);
-                  this.dataProvider.updateItem('entidades_persona/'+i,obj);
+                  this.dataProvider.updateItem('entidades_persona/'+this.items[i].id_persona,obj);
                 }
               }
           
               for (let i=0;i<this.itemsUsuarios.length;i++){ 
                 if (this.itemsUsuarios[i].legajo==this.legajo) {
-                  // this.dataProvider.deleteItem('usuarios/'+i);
-                  this.dataProvider.updateItem('usuarios/'+i,objUsu);
+                   this.dataProvider.updateItem('usuarios/'+this.itemsUsuarios[i].id_usuario,objUsu);
                 }
               }
             }

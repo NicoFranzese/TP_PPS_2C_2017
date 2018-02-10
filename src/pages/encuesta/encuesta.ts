@@ -169,7 +169,7 @@ export class EncuestaPage {
           text: 'Aceptar',
           handler: data => {
  
-            console.log(data);
+            // console.log(data);
            if(typeof(data) == 'string')
             this.GuardarRespuesta({'0' : data}, item);
            else

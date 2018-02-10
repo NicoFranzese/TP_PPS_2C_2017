@@ -42,10 +42,6 @@ export class DataProvider {
     this.db.database.ref(entityName).set(object);
   }//end addItem()
 
-  public addItemPromise(entityName, object)
-  {
-   return  this.db.database.ref(entityName).set(object);
-  }//end addItem()
 
   public pushItem(entityName,object){
     this.db.database.ref(entityName).push(object);
@@ -59,39 +55,6 @@ export class DataProvider {
   {
     this.db.database.ref(path).remove();
   }
-
-
-  //El entityName puede ser por ejemplo:
-  //'cuestionarios/'
-  //'cuestionarios/arrRespuestas'
-  public deleteItemByDocket(entityName, docket)
-  {
-
-    // recupero la tabla actual 
-    this.getItems(entityName).subscribe(
-      datos => {
-        
-            this.itemsAux =  datos;
-            // elimino el item en cuestion de mi array
-            this.itemsAux.splice(docket,1);
-            // borro la tabla entera
-            this.db.database.ref(entityName).remove();
-  
-            //subo mi array aux sin el item que queria eliminar
-            for (let i=0;i<this.itemsAux.length;i++){  
-                this.addItemPromise( entityName + "/" + i ,this.itemsAux[i]).then(
-                  ()=> this.waitItemAdded(entityName + "/" + i),
-                  () => console.error("error"),
-                );          
-            }
-  
-     
-        },
-      error => console.error(error),
-      () => console.log("ok")
-    );
-     
-  }//end deleteItem()
 
 
   public updateItem(path,item)

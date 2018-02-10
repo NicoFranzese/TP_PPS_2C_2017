@@ -167,8 +167,8 @@ export class QrAlumnosPage {
             if ((element.sigla_materia==materia) && (element.comision==comision)) {
               this.personas.forEach(per => {
                 if (element.legajo_docente==per.legajo) {
-                  console.log("legajo curso ;"+element.legajo_docente);
-                  console.log("legajo persona ;"+per.legajo);
+                  // console.log("legajo curso ;"+element.legajo_docente);
+                  // console.log("legajo persona ;"+per.legajo);
                   CodigoQROK = 1;
                   localStorage.setItem("profesorEscaneado", per.nombre_apellido);
                   localStorage.setItem("aulaEscaneada", element.aula);

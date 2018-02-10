@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams,ModalController, ViewController, Pl
 import { LoadingController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
-
+import { AlertController } from 'ionic-angular';
 import { PrincipalPage } from '../principal/principal';
 import { ModalAbmAlumnosPage}  from  '../modal-abm-alumnos/modal-abm-alumnos';
 import { LocalNotifications }                           from '@ionic-native/local-notifications';
@@ -25,6 +25,8 @@ export class AbmAlumnosPage {
   public email;
   public clave;
   public tipo_entidad = "alumno";
+  public id_persona ;
+  public id_usuario;
 
   public ultimoIDEntidadesPersona;
   public arrEntidadesPersona;
@@ -45,14 +47,11 @@ export class AbmAlumnosPage {
   public traduccionEliminar;
   public traduccionTitulo;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private dataProvider: DataProvider,
-    public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController,
-    private viewCtrl: ViewController,
-    public  platform: Platform,
-    public  localNoti: LocalNotifications,
-    private gFx: GlobalFxProvider) {
+  constructor(private navCtrl: NavController,         public navParams: NavParams,
+              private dataProvider: DataProvider,     public  loadingCtrl: LoadingController,
+              public  modalCtrl: ModalController,     private viewCtrl: ViewController,
+              public  platform: Platform,             public  localNoti: LocalNotifications,
+              private gFx: GlobalFxProvider,          private alertCtrl: AlertController) {
 
       //Si aún no se presionó ningún lenguaje, se setea por defecto Español
       if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
@@ -97,9 +96,8 @@ export class AbmAlumnosPage {
         this.traduccionEliminar = "Excluir";
         this.traduccionTitulo = "ABM Estudantes";
       }
-      console.log(lenguaje);
-      console.log(this.traduccionTitulo);
-      console.log(this.traduccionAccion);
+      console.log("Lenguaje= " + lenguaje);
+
     }
 
   getItemsEntidadesPersonas() {
@@ -170,24 +168,43 @@ export class AbmAlumnosPage {
 
   Baja(leg){
     
-      for (let i=0;i<this.items.length;i++){ 
-        if (this.items[i].legajo==leg) {
-          this.dataProvider.deleteItem('entidades_persona/'+ this.items[i].id_persona);
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar',
+      message: '¿Desea eliminar al alumno de legajo ' + leg + '?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            // Realizar la baja del item de las tablas correspondientes
+            for (let i=0;i<this.items.length;i++){ 
+              if (this.items[i].legajo==leg) {
+                this.dataProvider.deleteItem('entidades_persona/'+ this.items[i].id_persona);
+              }
+            }
+        
+            for (let i=0;i<this.itemsUsuarios.length;i++){ 
+              if (this.itemsUsuarios[i].legajo==leg) {
+                this.dataProvider.deleteItem('usuarios/'+ this.items[i].id_usuario);
+              }
+            }
+            
+            for (let i=0;i<this.itemsCursadasAlumnos.length;i++){ 
+              if (this.itemsCursadasAlumnos[i].legajo==leg) {
+                this.dataProvider.deleteItem('cursadas_alumnos/'+ this.itemsCursadasAlumnos[i].id_cursada_alumno);
+              }
+            }
+          }
         }
-      }
-  
-      for (let i=0;i<this.itemsUsuarios.length;i++){ 
-        if (this.itemsUsuarios[i].legajo==leg) {
-          this.dataProvider.deleteItem('usuarios/'+ this.items[i].id_usuario);
-        }
-      }
-      
-      for (let i=0;i<this.itemsCursadasAlumnos.length;i++){ 
-        if (this.itemsCursadasAlumnos[i].legajo==leg) {
-          this.dataProvider.deleteItem('cursadas_alumnos/'+ this.itemsCursadasAlumnos[i].id_cursada_alumno);
-        }
-      }
-    
+      ]
+    });
+    alert.present();
 
   }//end Baja
 
@@ -197,14 +214,16 @@ export class AbmAlumnosPage {
       for (let i=0;i<this.items.length;i++){ 
         if (this.items[i].legajo==leg) {
           this.nombre_apellido = this.items[i].nombre_apellido;
+          this.id_persona = this.items[i].id_persona;
+          
         }
       }
 
       for (let i=0;i<this.itemsUsuarios.length;i++){ 
         if (this.itemsUsuarios[i].legajo==leg) {
-          console.log(this.itemsUsuarios[i]);
           this.email = this.itemsUsuarios[i].email;
-          this.clave = this.itemsUsuarios[i].clave;        
+          this.clave = this.itemsUsuarios[i].clave;  
+          this.id_usuario = this.itemsUsuarios[i].id_usuario;      
         }
       }
 
@@ -213,22 +232,24 @@ export class AbmAlumnosPage {
                                                                     legajo: leg,
                                                                     nombre: this.nombre_apellido, 
                                                                     email: this.email,
-                                                                    clave: this.clave});
+                                                                    clave: this.clave,
+                                                                    id_persona:this.id_persona,
+                                                                    id_usuario:this.id_usuario});
                                                                     optionModal.present()
       .then(() => {
         // first we find the index of the current view controller:
-        // const index = this.viewCtrl.index;
+        const index = this.viewCtrl.index;
         // then we remove it from the navigation stack
-        // this.navCtrl.remove(index);
+        this.navCtrl.remove(index);
       });
     }else{
       let optionModal = this.modalCtrl.create(ModalAbmAlumnosPage,{accion: accion});
       optionModal.present()
       .then(() => {
         // first we find the index of the current view controller:
-        // const index = this.viewCtrl.index;
+        const index = this.viewCtrl.index;
         // then we remove it from the navigation stack
-        // this.navCtrl.remove(index);
+        this.navCtrl.remove(index);
       });
     }
    

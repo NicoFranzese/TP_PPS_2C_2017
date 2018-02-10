@@ -387,8 +387,8 @@ export class PrincipalPage {
 
   private evaluarMensajeDeInasistencias()
 {
-  console.log(this.almacenDatosProvider.usuarioLogueado.tipo_entidad);
-  console.log(this.almacenDatosProvider.usuarioLogueado.legajo);
+  console.log("Entidad logueada= " +this.almacenDatosProvider.usuarioLogueado.tipo_entidad);
+  console.log("Legajo logueado= "+this.almacenDatosProvider.usuarioLogueado.legajo);
   if(
     this.almacenDatosProvider.usuarioLogueado.tipo_entidad == "alumno" ||
     this.almacenDatosProvider.usuarioLogueado.tipo_entidad == "docente" ||
@@ -427,14 +427,14 @@ export class PrincipalPage {
 
 private asignarFotoPerfil()
 {
-  console.log(this.almacenDatosProvider.usuarioLogueado.legajo);
+  // console.log("Legajo logueado= "+this.almacenDatosProvider.usuarioLogueado.legajo);
   this.dataProvider.getItems('fotoPerfil/'+ this.almacenDatosProvider.usuarioLogueado.legajo).subscribe(
     tbFotoPerfil =>
     {
       let indice = tbFotoPerfil[1].posicion;
       this.almacenDatosProvider.usuarioLogueado.photoURL = tbFotoPerfil[0][indice];
-      console.log(tbFotoPerfil[0][indice]);
-      console.log(this.almacenDatosProvider.usuarioLogueado.photoURL);
+      // console.log(tbFotoPerfil[0][indice]);
+      // console.log(this.almacenDatosProvider.usuarioLogueado.photoURL);
     }
   )
 }

@@ -131,7 +131,7 @@ export class AvisoImportanciaPage {
         {
           this.arrPersonas = data;
         }
-        console.log(this.arrPersonas);
+        // console.log(this.arrPersonas);
       },
       err => console.log(err)
     );
