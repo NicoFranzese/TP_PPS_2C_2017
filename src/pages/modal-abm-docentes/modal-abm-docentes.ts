@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ViewController ,LoadingController} from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { AbmProfesoresPage } from '../abm-profesores/abm-profesores';
+import { GlobalFxProvider } from '../../providers/global-fx/global-fx';
 /**
  * Generated class for the ModalAbmDocentesPage page.
  *
@@ -22,6 +23,8 @@ export class ModalAbmDocentesPage {
   public email;
   public clave;
   public tipo_entidad = "docente";
+  public id_persona ;
+  public id_usuario;
 
   public ultimoIDEntidadesPersona;
   public arrEntidadesPersona;
@@ -41,32 +44,32 @@ export class ModalAbmDocentesPage {
   public traduccionAceptar;
   
   constructor(public navCtrl    : NavController,     private viewCtrl: ViewController,    public navParams: NavParams,
-    public loadingCtrl: LoadingController ,public dataProvider : DataProvider) {
+    public loadingCtrl: LoadingController ,public dataProvider : DataProvider, private gFx: GlobalFxProvider) {
       //Si aún no se presionó ningún lenguaje, se setea por defecto Español
       if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
         localStorage.setItem("Lenguaje", "Es");
       }
       //Le paso el lenguaje que se presionó en sesiones anteriores dentro de la APP
       this.traducir(localStorage.getItem("Lenguaje"));
+      this.accion =  this.navParams.get('accion');
 
-      this.obtenerUltimoIDEntidadesPersona();
-      this.obtenerUltimoIDUsuarios();
+      if (this.accion == 'Modificacion'){
+        this.legajo =  this.navParams.get('legajo');
+        this.nombre_apellido =  this.navParams.get('nombre');
+        this.email =  this.navParams.get('email');
+        this.clave =  this.navParams.get('clave');
+        this.id_persona = this.navParams.get('id_persona');
+        this.id_usuario = this.navParams.get('id_usuario');
+      }else{
+        this.legajo =  "";
+        this.nombre_apellido =  "";
+        this.email =  "";
+        this.clave =  "";
+      }
+
       this.getItemsEntidadesPersonas();
-      this.getItemsUsuarios();
+      this.getItemsUsuarios();  
 
-    this.accion =  this.navParams.get('accion');
-
-    if (this.accion == 'Modificacion'){
-      this.legajo =  this.navParams.get('legajo');
-      this.nombre_apellido =  this.navParams.get('nombre');
-      this.email =  this.navParams.get('email');
-      this.clave =  this.navParams.get('clave');
-    }else{
-      this.legajo =  "";
-      this.nombre_apellido =  "";
-      this.email =  "";
-      this.clave =  "";
-    }
 
   }
 
@@ -99,50 +102,11 @@ export class ModalAbmDocentesPage {
       this.traduccionAceptar = "Aceitar";
       this.traduccionTitulo = "Estudante";
     }
+
+    // console.log("Lenguaje= "+ lenguaje);
+
   }
   
-  private obtenerUltimoIDEntidadesPersona()
-  {
-    this.dataProvider.getItems('entidades_persona').subscribe(
-      data =>
-      {
-        this.arrEntidadesPersona = data;
-
-        if(data.length == 0)
-        {
-          this.ultimoIDEntidadesPersona = 1;
-        }
-        else
-        {
-          this.ultimoIDEntidadesPersona= data.length;
-        }
-        // console.log(data.length +1);
-      },
-      err => console.error(err)
-    );
-  }
-
-  private obtenerUltimoIDUsuarios()
-  {
-    this.dataProvider.getItems('usuarios').subscribe(
-      data =>
-      {
-        this.arrUsuarios = data;
-
-        if(data.length == 0)
-        {
-          this.ultimoIDUsuarios = 1;
-        }
-        else
-        {
-          this.ultimoIDUsuarios= data.length;
-        }
-        
-        // console.log(data.length +1);
-      },
-      err => console.error(err)
-    );
-  }
 
   getItemsEntidadesPersonas() {
     // configuro spinner para mientras se cargan los datos 
@@ -155,7 +119,12 @@ export class ModalAbmDocentesPage {
     this.dataProvider.getItems("entidades_persona").subscribe(
       datos => {      
         this.items = datos;
-
+        // obtengo el último ID 
+        if(this.items.length == 0)        {
+          this.ultimoIDEntidadesPersona = 1;
+        }else{
+          this.ultimoIDEntidadesPersona= this.items[this.items.length-1].id_persona;
+        }
         setTimeout(() => {
           loading.dismiss();
         }, 3000);
@@ -177,7 +146,12 @@ export class ModalAbmDocentesPage {
     this.dataProvider.getItems("usuarios").subscribe(
       datos => {      
         this.itemsUsuarios = datos;
-
+           // obtengo el último ID 
+        if(this.itemsUsuarios.length == 0){
+          this.ultimoIDUsuarios = 1;
+        }else{
+          this.ultimoIDUsuarios= this.itemsUsuarios[this.itemsUsuarios.length-1].id_usuario;
+        }
         setTimeout(() => {
           loading.dismiss();
         }, 3000);
@@ -188,62 +162,91 @@ export class ModalAbmDocentesPage {
     );
   }
 
+  // Alta o modificación
   Aceptar(){
     
-        // this.obtenerUltimoIDEntidadesPersona();
-        // this.obtenerUltimoIDUsuarios();
-    
+
         if((this.legajo == null) || (this.legajo == undefined) || (this.legajo == "") ||
           (this.nombre_apellido == null) || (this.nombre_apellido == undefined) || (this.nombre_apellido == "") ||
         (this.email == null) || (this.email == undefined) || (this.email == "") ||
           (this.clave == null) || (this.clave == undefined) || (this.clave == "")){
-            alert("Debe ingresar valores para los campos que visualiza en pantalla");
+            this.gFx.presentToast("Hay campos incompletos.");
         }else{
           try {
-
-            for (let i=0;i<this.items.length;i++){ 
-              if (this.items[i].legajo==this.legajo) {
-                this.dataProvider.deleteItem('entidades_persona/'+i);
-              }
-            }
-        
-            for (let i=0;i<this.itemsUsuarios.length;i++){ 
-              if (this.itemsUsuarios[i].legajo==this.legajo) {
-                this.dataProvider.deleteItem('usuarios/'+i);
-              }
-            }
 
             
             let obj = 
             {
+              // si es un alta genero id nuevo, sino utilizo el recibido por navParam
+              'id_persona' : this.accion=="Alta"?(Number(this.ultimoIDEntidadesPersona) + 1) : this.id_persona,
               'legajo': this.legajo,
               'nombre_apellido': this.nombre_apellido,
               'tipo_entidad': this.tipo_entidad
             };        
-            this.dataProvider.addItem('entidades_persona/' +  this.ultimoIDEntidadesPersona, obj);
-            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
-            this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
-      
+            
             let objUsu = 
             {
+               // si es un alta genero id nuevo, sino utilizo el recibido por navParam
+              'id_usuario': this.accion == "Alta"? (Number(this.ultimoIDUsuarios)+1):this.id_usuario,
               'legajo': this.legajo,
               'email': this.email,
               'clave': this.clave
-            };                
-            this.dataProvider.addItem('usuarios/' +  this.ultimoIDUsuarios, objUsu);
+            };   
+            
+            if (this.accion=="Alta"){
     
+
+              this.dataProvider.addItem('entidades_persona/' +  (Number(this.ultimoIDEntidadesPersona) + 1), obj);
+              this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/arrFotos/',{"0": "./assets/img/anonimo.jpg"});
+              this.dataProvider.addItem('fotoPerfil/'+ this.legajo+'/fotoLeida/',{"posicion": 0});
+              this.dataProvider.addItem('usuarios/' +  (Number(this.ultimoIDUsuarios)+1), objUsu);  
+            }else{ //Modificacion 
+
+              for (let i=0;i<this.items.length;i++){ 
+                if (this.items[i].legajo==this.legajo) {
+                  this.dataProvider.updateItem('entidades_persona/'+this.items[i].id_persona,obj);
+                }
+              }
+          
+              for (let i=0;i<this.itemsUsuarios.length;i++){ 
+                if (this.itemsUsuarios[i].legajo==this.legajo) {
+                   this.dataProvider.updateItem('usuarios/'+this.itemsUsuarios[i].id_usuario,objUsu);
+                }
+              }
+            }
+           
+            //limpio los input
             this.legajo="";
             this.nombre_apellido="";
             this.email="";
             this.clave="";
     
-            alert("Se ah guardado con éxito.");
+            
+            this.gFx.presentToast("Guardado correctamente");
     
-            this.navCtrl.push(AbmProfesoresPage);
+            //regreso al form padre
+            this.close();
+          
+
           } catch (error) {
-            alert("Algo ha fallado, verifique su conexión a internet.");
+            this.gFx.presentToast(error);
+            
           }      
         }
       }
 
-}
+      close(){
+        this.navCtrl.push(AbmProfesoresPage).then(() => {
+          // first we find the index of the current view controller:
+          const index = this.viewCtrl.index;
+          // then we remove it from the navigation stack
+          this.navCtrl.remove(index);
+        });
+     }//close()
+    
+     test(){
+       console.log("ok");
+     }
+
+
+}//class
