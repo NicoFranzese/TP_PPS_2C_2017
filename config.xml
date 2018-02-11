@@ -115,4 +115,5 @@
     </plugin>
     <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
     <plugin name="cordova-plugin-camera" spec="^3.0.0" />
+    <plugin name="cordova-plugin-zip" spec="^3.1.0" />
 </widget>

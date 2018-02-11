@@ -14,6 +14,9 @@ import { AlmacenDatosProvider } from '../../providers/almacen-datos/almacen-dato
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { LocalNotifications }                           from '@ionic-native/local-notifications';
 
+// import { Zip } from '@ionic-native/zip';
+import * as JSZip from 'jszip';
+
 @IonicPage()
 @Component({
   selector: 'page-control-asistencia',
@@ -56,7 +59,7 @@ export class ControlAsistenciaPage {
                private gFx: GlobalFxProvider,                  private alertCtrl: AlertController,
                public  platform: Platform,                     
                public  localNoti: LocalNotifications,
-			         private almacenDatosProvider: AlmacenDatosProvider) {
+               private almacenDatosProvider: AlmacenDatosProvider) {
 
       //Si aún no se presionó ningún lenguaje, se setea por defecto Español
       if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
@@ -457,6 +460,13 @@ export class ControlAsistenciaPage {
           }
         },
         {
+          text: 'Descargar ZIP',
+          icon: 'book',
+          handler: () => {
+            this.exportarAZIP();
+          }
+        },
+        {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
@@ -477,15 +487,41 @@ export class ControlAsistenciaPage {
       showTitle: false,
       useBom: true
     };
-
-    new Angular2Csv(this.items, 'Alumnos', options);
-  
+    new Angular2Csv(this.items, 'Alumnos', options);  
   }  
   
   exportarAPDF() {
     let optionModal = this.modalCtrl.create(ModalImprimirAlumnosPdfPage,{items: this.items});
     optionModal.present()
     .then(() => {
+    });
+   }
+
+   exportarAZIP() {
+
+    // var zip = new JSZip();
+    // var zip;
+    let zip: JSZip = new JSZip();
+    // Agregamos contenido en un archivo de texto de alto nivel.
+    // zip.file("Hola.txt", "Hola Mundo\n");
+    for (let i=0; this.items.length; i++){
+      console.log(this.items[i]);
+      try {
+        zip.file("Listado Alumnos.txt", this.items[i].legajo+", "+this.items[i].nombre_apellido + "\n");
+      } catch (error) {
+        break;
+      }
+    }    
+    // console.log(zip);
+    // Generamos un directorio dentro de la estructura del archivo .zip.
+    // var img = zip.folder("imagenes"); // "imagenes" será el nombre del directorio dentro de nuestro archivo .zip.
+
+    // Agregamos un archivo al directorio, en este caso una imagen.
+    // img.file("sonrisa.gif",this.items , {base64: true});
+
+    // Generar el archivo .zip de forma asíncrona. 
+    zip.generateAsync({type:"blob"}).then(function(contenido) {
+        saveAs(contenido, "Listado Alumnos.zip");
     });
    }
 

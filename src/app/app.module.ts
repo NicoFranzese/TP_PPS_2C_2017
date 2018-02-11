@@ -57,7 +57,7 @@ import { NotificationProvider }       from '../providers/notification/notificati
 import { QrEncuestasProvider }        from '../providers/qr-encuestas/qr-encuestas';
 import { GlobalFxProvider }           from '../providers/global-fx/global-fx';
 
-
+// import * as JSZip from 'jszip';
 
 
 @NgModule({
@@ -143,7 +143,7 @@ import { GlobalFxProvider }           from '../providers/global-fx/global-fx';
     NativeAudio,
     GlobalFxProvider,
     Camera
-,
+    // ,JSZip
   ]
 })
 export class AppModule {}
