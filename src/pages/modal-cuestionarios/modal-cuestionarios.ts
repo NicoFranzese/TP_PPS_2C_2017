@@ -166,13 +166,13 @@ traducir(lenguaje){
       inputs: [
         {
           type:'radio',
-          label:'Elegir solo una opciòn (radio)',
+          label:'Elegir solo una opción (radio)',
           value:'radio',
           checked: this.tipoRespuestas == 'radio'
         },
         {
           type:'radio',
-          label:'Elegir mùltiples opciones (check)',
+          label:'Elegir múltiples opciones (check)',
           value:'checkbox',
           checked: this.tipoRespuestas == 'check'
           
@@ -323,12 +323,12 @@ traducir(lenguaje){
 
     if(this.titulo == "" || this.fechaFin == undefined || this.fechaInicio == undefined)
     {
-      this.mostrarMsjToast("¡Atenciòn! Debe completar todos los campos");
+      this.mostrarMsjToast("¡Atención! Debe completar todos los campos");
     }
     else
     {
       this.dataProvider.addItem('cuestionarios/' + obj.id, obj);
-      this.mostrarMsjToast("¡Cuestionario agregado con èxito!");
+      this.mostrarMsjToast("¡Cuestionario agregado con éxito!");
       this.navCtrl.push(AbmCuestionariosPage);
     }
     

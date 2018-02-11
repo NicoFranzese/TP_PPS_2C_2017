@@ -211,7 +211,7 @@ export class EncuestaPage {
       this.mostrarToast("Debe completar todas las preguntas");
     else
     {
-      this.mostrarToast("Encuesta respondida con èxito");
+      this.mostrarToast("Encuesta respondida con éxito");
       this.navCtrl.push(PrincipalPage);
     }
 

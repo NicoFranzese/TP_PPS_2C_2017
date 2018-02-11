@@ -108,7 +108,7 @@ export class LoginPage {
     });
     if(!band)
     {
-      this.mostrarToast("Usuario y/o contraseña invàlidos");
+      this.mostrarToast("Usuario y/o contraseña inválidos");
       this.loader.dismiss();
     }
     
@@ -136,7 +136,7 @@ export class LoginPage {
         });
         if(!band)
         {
-          this.mostrarToast("Usuario invàlido");
+          this.mostrarToast("Usuario inválido");
           this.loader.dismiss();
         }
           

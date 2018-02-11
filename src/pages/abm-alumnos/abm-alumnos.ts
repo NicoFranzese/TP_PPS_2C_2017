@@ -196,7 +196,7 @@ export class AbmAlumnosPage {
             }
             
             for (let i=0;i<this.itemsCursadasAlumnos.length;i++){ 
-              if (this.itemsCursadasAlumnos[i].legajo==leg) {
+              if (this.itemsCursadasAlumnos[i].legajo_alumno==leg) {
                 this.dataProvider.deleteItem('cursadas_alumnos/'+ this.itemsCursadasAlumnos[i].id_cursada_alumno);
               }
             }
