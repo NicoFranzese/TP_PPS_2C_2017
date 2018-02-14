@@ -47,5 +47,17 @@ page-edicion-perfil {
         .btn{
             font-size: 17px;
         }
+
+        .button-small-md {
+            height: 2.8em !important;
+        }
+
+
+        .swiper-pagination-bullet-active {
+            // background: #007aff;
+            background: white !important;
+            opacity: 1;
+        }
+    
     }
     

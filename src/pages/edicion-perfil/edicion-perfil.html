@@ -10,17 +10,26 @@
 <ion-content id="cuerpo" padding>
   <div class="list list-inset">
 
-    <div class="row  mb-5"  >   
-        <ion-slides (ionSlideDidChange)="slideChanged()">
-          <ion-slide *ngFor="let imgItem of arrImages">
-            <img class="d-block img-fluid" [src]="imgItem">
-          </ion-slide>
-        </ion-slides>
-      </div>
-<!-- 
-      <button class="btn btn-default mt-3 mb-5" (click)="openCamera()" icon-only>
-        <ion-icon name="camera"></ion-icon>
-      </button> -->
+    <!-- <div  *ngFor="let imgItem of arrImages">   
+            <img [src]="arrImages[selectedImage]">     
+    </div> -->
+
+    <!-- <div align="center" class="mb-4">
+      <button class="btn-default mr-4" ion-button   small><i class="fa fa-arrow-left"></i></button>
+      <button class="btn-default" ion-button   small><i class="fa fa-arrow-right"></i></button>
+    </div> -->
+
+    <ion-slides (ionSlideDidChange)="slideChanged()" pager="true" >
+      <ion-slide *ngFor="let imgItem of arrImages">
+        <img width="358px" height="259px"  [src]="imgItem">
+      </ion-slide>
+    </ion-slides>
+
+    <div  align="center" >   
+      <button class="btn-default mb-4 mt-4" ion-button small (click)="openCamera()" >
+        <i class="fa fa-camera"></i>
+      </button>
+    </div>
       
     <ion-item>
       <ion-label style="font-family: 'Roboto', sans-serif">{{traduccionLegajo}}</ion-label>

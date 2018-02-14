@@ -1,6 +1,6 @@
 // ionic-angular
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform,ViewController } from 'ionic-angular';
 import { BarcodeScanner }                               from '@ionic-native/barcode-scanner';
 import { LocalNotifications }                           from '@ionic-native/local-notifications';
 
@@ -61,7 +61,8 @@ export class PrincipalPage {
               private dataProvider: DataProvider,
               public platform: Platform,
               public localNoti: LocalNotifications,
-              private qrEncuestasProvider: QrEncuestasProvider) {
+              private qrEncuestasProvider: QrEncuestasProvider,
+              private viewCtrl: ViewController) {
     //Si aún no se presionó ningún lenguaje, se setea por defecto Español
     if ((localStorage.getItem("Lenguaje") == "") || (localStorage.getItem("Lenguaje") == null) || (localStorage.getItem("Lenguaje") == undefined)){
       localStorage.setItem("Lenguaje", "Es");
@@ -73,6 +74,9 @@ export class PrincipalPage {
     userChanged = this.navParams.get("logout");
     if(userChanged!=null){this.logout();}
     this.obtenerAvisos();
+
+    // console.log(this.almacenDatosProvider.usuarioLogueado);
+
   }
 
   ionViewDidLoad() {
@@ -200,7 +204,12 @@ export class PrincipalPage {
     this.almacenDatosProvider.reproducirSonido('plop');
     this.loginProvider.logOut();
     this.almacenDatosProvider.reproducirSonido('intro');
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push(LoginPage).then(() => {
+      // first we find the index of the current view controller:
+      const index = this.viewCtrl.index;
+      // then we remove it from the navigation stack
+      this.navCtrl.remove(index);
+    });
   }
 
   //Según el tipo de usuario logueado muestro las opciones
@@ -381,7 +390,9 @@ export class PrincipalPage {
       {
         legajo:this.almacenDatosProvider.usuarioLogueado.legajo,
         nombre:this.almacenDatosProvider.usuarioLogueado.nombre,
-        tipo_entidad:this.almacenDatosProvider.usuarioLogueado.tipo_entidad
+        tipo_entidad:this.almacenDatosProvider.usuarioLogueado.tipo_entidad,
+        id_persona:this.almacenDatosProvider.usuarioLogueado.id_persona,
+        id_usuario:this.almacenDatosProvider.usuarioLogueado.id_usuario
       });
   }
 

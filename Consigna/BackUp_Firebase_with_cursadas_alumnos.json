@@ -1,0 +1,644 @@
+{
+  "cuestionarios" : [ null, {
+    "arrPreguntas" : [ {
+      "arrRespondidos" : {
+        "67334" : [ "2" ]
+      },
+      "arrRespuestas" : [ {
+        "respuesta" : "1"
+      }, {
+        "respuesta" : "2"
+      }, {
+        "respuesta" : "3"
+      } ],
+      "cantRespuestas" : "3",
+      "pregunta" : "¿Cuantos dedos tengo?",
+      "tipoRespuestas" : "radio"
+    } ],
+    "fechaFin" : "16/12/2017",
+    "fechaInicio" : "12/12/2017",
+    "horaFin" : "02:19",
+    "horaInicio" : "23:20",
+    "id" : 1,
+    "legajo_creador" : "7891011",
+    "titulo" : "Cuestionario UTN"
+  } ],
+  "cursadas" : [ null, {
+    "anio_lectivo" : "2017",
+    "cuatrimestre" : "2c",
+    "id_cursada" : "1",
+    "id_curso" : "1"
+  }, {
+    "anio_lectivo" : "2017",
+    "cuatrimestre" : "2c",
+    "id_cursada" : "2",
+    "id_curso" : "2"
+  }, {
+    "anio_lectivo" : "2017",
+    "cuatrimestre" : "2c",
+    "id_cursada" : "3",
+    "id_curso" : "3"
+  } ],
+  "cursadas_alumnos" : [ null, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 1,
+    "legajo_alumno" : "103295"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 2,
+    "legajo_alumno" : "104286"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 3,
+    "legajo_alumno" : "67223"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 4,
+    "legajo_alumno" : "104321"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 5,
+    "legajo_alumno" : "103903"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 6,
+    "legajo_alumno" : "105063"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 7,
+    "legajo_alumno" : "103924"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 8,
+    "legajo_alumno" : "66503"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 9,
+    "legajo_alumno" : "102473"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 10,
+    "legajo_alumno" : "104402"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 11,
+    "legajo_alumno" : "104326"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 12,
+    "legajo_alumno" : "103939"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 13,
+    "legajo_alumno" : "104300"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 14,
+    "legajo_alumno" : "104415"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 15,
+    "legajo_alumno" : "102976"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 16,
+    "legajo_alumno" : "103484"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 17,
+    "legajo_alumno" : "104302"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 18,
+    "legajo_alumno" : "910214"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 19,
+    "legajo_alumno" : "103944"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 20,
+    "legajo_alumno" : "102120"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 21,
+    "legajo_alumno" : "103329"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 22,
+    "legajo_alumno" : "100921"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 23,
+    "legajo_alumno" : "104305"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 24,
+    "legajo_alumno" : "104309"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 25,
+    "legajo_alumno" : "66384"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 26,
+    "legajo_alumno" : "103333"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 27,
+    "legajo_alumno" : "103292"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 28,
+    "legajo_alumno" : "67334"
+  }, {
+    "id_cursada" : "1",
+    "id_cursada_alumno" : 29,
+    "legajo_alumno" : "67337"
+  } ],
+  "cursos" : [ null, {
+    "aula" : "305",
+    "comision" : "4A",
+    "dia_horario" : "Sabado  8:30 12:30",
+    "id_curso" : "1",
+    "legajo_docente" : "7891011",
+    "sigla_materia" : "PPS"
+  }, {
+    "aula" : "306",
+    "comision" : "4B",
+    "dia_horario" : "Sabado  8:30 12:30",
+    "id_curso" : "2",
+    "legajo_docente" : "123456",
+    "sigla_materia" : "PPS"
+  }, {
+    "aula" : "314",
+    "comision" : "4A",
+    "dia_horario" : "Viernes 8:30 12:30",
+    "id_curso" : "3",
+    "legajo_docente" : "10983",
+    "sigla_materia" : "LEG"
+  }, {
+    "aula" : 301,
+    "comision" : "4B",
+    "dia_horario" : "Viernes 18:30 22:30",
+    "id_curso" : 4,
+    "legajo_docente" : 10983,
+    "sigla_materia" : "LEG"
+  } ],
+  "entidades_persona" : [ null, {
+    "id_persona" : "1",
+    "legajo" : "103295",
+    "nombre_apellido" : "ADILIBERTI Pablo",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "2",
+    "legajo" : "104286",
+    "nombre_apellido" : "ALVAREZ SINEIRO Agustin",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "3",
+    "legajo" : "67223",
+    "nombre_apellido" : "BOHORQUEZ Laura Cecilia",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "4",
+    "legajo" : "104321",
+    "nombre_apellido" : "CASARTELLI Franco Quimey",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "5",
+    "legajo" : "103903",
+    "nombre_apellido" : "DE LA CUADRA Marcos",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "6",
+    "legajo" : "105063",
+    "nombre_apellido" : "FIGUEROA Federico Jose",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "7",
+    "legajo" : "103924",
+    "nombre_apellido" : "FINK Guillermo Federico",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "8",
+    "legajo" : "66503",
+    "nombre_apellido" : "FRANZESE Nicolas Sebastian",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "9",
+    "legajo" : "102473",
+    "nombre_apellido" : "IBANEZ Matias Federico",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "10",
+    "legajo" : "104402",
+    "nombre_apellido" : "MANZANARES Claudio Manuel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "11",
+    "legajo" : "104326",
+    "nombre_apellido" : "MARTIRE Julian Matias",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "12",
+    "legajo" : "103939",
+    "nombre_apellido" : "MORI Carlos Agustin",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "13",
+    "legajo" : "104300",
+    "nombre_apellido" : "ORTIZ Santiago",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "14",
+    "legajo" : "104415",
+    "nombre_apellido" : "OTERO Nataniel Agustin",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "15",
+    "legajo" : "102976",
+    "nombre_apellido" : "PARDO Manuel Agustin",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "16",
+    "legajo" : "103484",
+    "nombre_apellido" : "PEREZ Joaquin Omar",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "17",
+    "legajo" : "104302",
+    "nombre_apellido" : "POLLIO Juan Martin",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "18",
+    "legajo" : "910214",
+    "nombre_apellido" : "PORTES RODRIGUEZ Yeison Manuel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "19",
+    "legajo" : "103944",
+    "nombre_apellido" : "RAMIREZ Jeremias Daniel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "20",
+    "legajo" : "102120",
+    "nombre_apellido" : "REINOSO Julian Esteban",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "21",
+    "legajo" : "103329",
+    "nombre_apellido" : "ROBERTS Brian",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "22",
+    "legajo" : "100921",
+    "nombre_apellido" : "ROMERO Jorge Ezequiel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "23",
+    "legajo" : "104305",
+    "nombre_apellido" : "ROTELA Gustavo Nicolas",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "24",
+    "legajo" : "104309",
+    "nombre_apellido" : "STELLISANO Nicolas Agustin",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "25",
+    "legajo" : "66384",
+    "nombre_apellido" : "VALENZUELA Pablo Sebastian",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "26",
+    "legajo" : "103333",
+    "nombre_apellido" : "VEGA Horacio Facundo",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "27",
+    "legajo" : "103292",
+    "nombre_apellido" : "VILCA Diego Victor",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "28",
+    "legajo" : "67334",
+    "nombre_apellido" : "WILSON Mariano Gabriel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "29",
+    "legajo" : "67337",
+    "nombre_apellido" : "ZAMPINI Mauro Ezequiel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "30",
+    "legajo" : "102064",
+    "nombre_apellido" : "AGUILERA, Jonathan Emmanuel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "31",
+    "legajo" : "103269",
+    "nombre_apellido" : "ARGANARAS, Sebastian Tomas",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "32",
+    "legajo" : "104314",
+    "nombre_apellido" : "ARNOSO, Leandro Maximiliano",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "33",
+    "legajo" : "104456",
+    "nombre_apellido" : "AURTENECHEA, Ignacio Hernan",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "34",
+    "legajo" : "104287",
+    "nombre_apellido" : "BALABASQUER, Rodrigo",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "35",
+    "legajo" : "102931",
+    "nombre_apellido" : "BILZ BORRE, Gustavo",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "36",
+    "legajo" : "103923",
+    "nombre_apellido" : "D' ALESIO, Emiliano Gabriel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "37",
+    "legajo" : "101671",
+    "nombre_apellido" : "FERRARI, Patricio Andres",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "38",
+    "legajo" : "102915",
+    "nombre_apellido" : "FOSSA, Manuel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "39",
+    "legajo" : "67176",
+    "nombre_apellido" : "FREIRE, Ezequiel Alejandro",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "40",
+    "legajo" : "105081",
+    "nombre_apellido" : "GUTIERREZ, Matias Emmanuel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "41",
+    "legajo" : "103311",
+    "nombre_apellido" : "IGLESIAS GUERRERO, Camila Belen",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "42",
+    "legajo" : "102920",
+    "nombre_apellido" : "ISLAS, Facundo Ezequiel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "43",
+    "legajo" : "102077",
+    "nombre_apellido" : "JIGENA, Ricardo Manuel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "44",
+    "legajo" : "103928",
+    "nombre_apellido" : "LETTERI, Juan Pablo",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "45",
+    "legajo" : "102917",
+    "nombre_apellido" : "MARTIN, Matias Leandro",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "46",
+    "legajo" : "104313",
+    "nombre_apellido" : "MIRANDA, Jose Ignacio",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "47",
+    "legajo" : "104343",
+    "nombre_apellido" : "MOLTONI, German Marcelo",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "48",
+    "legajo" : "103643",
+    "nombre_apellido" : "MONTECINOS CARRASCO, Vanesa Alicia",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "49",
+    "legajo" : "104344",
+    "nombre_apellido" : "MURCIA, Juan Ignacio",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "50",
+    "legajo" : "102945",
+    "nombre_apellido" : "NAVAS, Pablo Hernan",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "51",
+    "legajo" : "103320",
+    "nombre_apellido" : "NIERES, Noelia Macarena",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "52",
+    "legajo" : "102481",
+    "nombre_apellido" : "NODAR, Florencia",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "53",
+    "legajo" : "102117",
+    "nombre_apellido" : "OTERO, Matias Leandro",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "54",
+    "legajo" : "101970",
+    "nombre_apellido" : "PERALTA, Federico Germ n",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "55",
+    "legajo" : "104312",
+    "nombre_apellido" : "PEREIRA, Angel Daniel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "56",
+    "legajo" : "67147",
+    "nombre_apellido" : "PEREZ, Ezequiel Fernando",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "57",
+    "legajo" : "67374",
+    "nombre_apellido" : "PEREZ, Hernan Ram¢n",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "58",
+    "legajo" : "104439",
+    "nombre_apellido" : "PETRUZZI, Gustavo Facundo",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "59",
+    "legajo" : "101179",
+    "nombre_apellido" : "PIZZO, Walter",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "60",
+    "legajo" : "103943",
+    "nombre_apellido" : "QUEZADA, Vanina Gisela",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "61",
+    "legajo" : "67090",
+    "nombre_apellido" : "RODRIGUEZ, German Manuel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "62",
+    "legajo" : "101129",
+    "nombre_apellido" : "SAIBENE, Fernando Mart¡n",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "63",
+    "legajo" : "67321",
+    "nombre_apellido" : "SUPPAN, Mauro Agustin",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "64",
+    "legajo" : "102956",
+    "nombre_apellido" : "TERAN RAVELO, Cynthia Vanessa",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "65",
+    "legajo" : "67324",
+    "nombre_apellido" : "TORREALBA, Paola Andrea",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "66",
+    "legajo" : "67190",
+    "nombre_apellido" : "TORRES, Diego Daniel",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "67",
+    "legajo" : "103640",
+    "nombre_apellido" : "VIDAL, Leandro",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "68",
+    "legajo" : "66892",
+    "nombre_apellido" : "WITT, Cristian Carlos",
+    "tipo_entidad" : "alumno"
+  }, {
+    "id_persona" : "69",
+    "legajo" : "7891011",
+    "nombre_apellido" : "NEINER, Maximiliano",
+    "tipo_entidad" : "docente"
+  }, {
+    "id_persona" : "70",
+    "legajo" : "123456",
+    "nombre_apellido" : "VILLEGAS,Octavio",
+    "tipo_entidad" : "docente"
+  }, {
+    "id_persona" : "71",
+    "legajo" : "112233",
+    "nombre_apellido" : "Extension Universitaria",
+    "tipo_entidad" : "administrativo"
+  }, {
+    "id_persona" : "72",
+    "legajo" : "010155",
+    "nombre_apellido" : "Admin",
+    "tipo_entidad" : "administrador"
+  } ],
+  "fotoPerfil" : {
+    "123" : {
+      "arrFotos" : [ "./assets/img/anonimo.jpg" ],
+      "fotoLeida" : {
+        "posicion" : 0
+      }
+    },
+    "010155" : {
+      "arrFotos" : [ "./assets/img/anonimo.jpg" ],
+      "fotoElegida" : {
+        "posicion" : 0
+      }
+    },
+    "55555" : {
+      "arrFotos" : [ "./assets/img/anonimo.jpg", "https://scontent.faep8-1.fna.fbcdn.net/v/t1.0-9/12439551_10208482593932367_5353652703262465150_n.jpg?oh=49199024b32a472f1c933149e334c0ac&oe=5ACE5176" ],
+      "fotoLeida" : {
+        "posicion" : 1
+      }
+    },
+    "66384" : {
+      "arrFotos" : [ "https://robohash.org/6", "https://robohash.org/66384", "https://robohash.org/pps" ]
+    },
+    "67334" : {
+      "arrFotos" : [ "https://lh4.googleusercontent.com/-tm6ZmlPEykI/AAAAAAAAAAI/AAAAAAAABik/HBwGZ_5UPVs/photo.jpg", "./assets/img/anonimo.jpg" ],
+      "fotoElegida" : {
+        "posicion" : 0
+      }
+    },
+    "112233" : {
+      "arrFotos" : [ "https://robohash.org/8", "https://robohash.org/9" ],
+      "fotoElegida" : {
+        "posicion" : 0
+      }
+    },
+    "123331" : {
+      "arrFotos" : [ "./assets/img/anonimo.jpg" ],
+      "fotoElegida" : {
+        "posicion" : 0
+      }
+    },
+    "123456" : {
+      "arrFotos" : [ "http://www.alvarodiezinmobiliaria.com/Vista/Imagenes/sinfoto.jpg" ],
+      "fotoElegida" : {
+        "posicion" : 0
+      }
+    },
+    "4444444" : {
+      "arrFotos" : [ "./assets/img/anonimo.jpg", "https://pbs.twimg.com/profile_images/831993825635745796/HnVmB0-k_400x400.jpg" ],
+      "fotoLeida" : {
+        "posicion" : 0
+      }
+    },
+    "7891011" : {
+      "arrFotos" : [ "http://www.alvarodiezinmobiliaria.com/Vista/Imagenes/sinfoto.jpg" ],
+      "fotoElegida" : {
+        "posicion" : 0
+      }
+    }
+  },
+  "usuarios" : [ null, {
+    "clave" : "123",
+    "email" : "pablo86v@gmail.com",
+    "id_usuario" : "1",
+    "legajo" : "66384"
+  }, {
+    "clave" : "123",
+    "email" : "franzesens@gmail.com",
+    "id_usuario" : "2",
+    "legajo" : "66503"
+  }, {
+    "clave" : "123",
+    "email" : "octavio@villegas",
+    "id_usuario" : "3",
+    "legajo" : "123456"
+  }, {
+    "clave" : "123",
+    "email" : "maxi@neiner",
+    "id_usuario" : "4",
+    "legajo" : "7891011"
+  }, {
+    "clave" : "123",
+    "email" : "adminis@trador",
+    "id_usuario" : "5",
+    "legajo" : "010155"
+  }, {
+    "clave" : "123",
+    "email" : "mgw009@gmail.com",
+    "id_usuario" : "6",
+    "legajo" : "67334"
+  }, {
+    "clave" : "123",
+    "email" : "adminis@trativo",
+    "id_usuario" : "7",
+    "legajo" : "112233"
+  } ]
+}

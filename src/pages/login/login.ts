@@ -24,7 +24,9 @@ export class LoginPage {
   public traduccionEmail;
   public traduccionIngresar;
   public traduccionOIngresarCon;
-
+  public selectedImage;
+  public arrImages;
+  public  fotoPerfil;
   
 
   constructor(private navCtrl: NavController,
@@ -102,6 +104,7 @@ export class LoginPage {
       {
         band = true;
         localStorage.setItem("legajoLogueado", element.legajo);
+        this.getFotoPerfil(element.legajo);
         this.obtenerDatosUsuario(element.legajo);
       }
       
@@ -153,6 +156,7 @@ export class LoginPage {
       {
         let email;
         let foto;
+        let usuario;
 
         if(this.loginProvider.usuarioLogueado['email'] != undefined)
         {
@@ -163,7 +167,14 @@ export class LoginPage {
         {
           // console.log("Login ok");
           email = this.email;
-          foto = "./assets/img/anonimo.jpg";
+         
+        }
+        
+
+        for (let i=0;i<this.arrUsuarios.length;i++){ 
+          if (this.arrUsuarios[i].legajo==legajo) {
+              usuario = this.arrUsuarios[i].id_usuario;
+          }
         }
 
         this.almacenDatos.usuarioLogueado = {
@@ -171,7 +182,9 @@ export class LoginPage {
           'nombre': element.nombre_apellido,
           'tipo_entidad': element.tipo_entidad,
           'email': email,
-          'photoURL': foto
+          'id_persona' : element.id_persona,
+          'id_usuario' : usuario
+          
         }
       }
     });
@@ -196,6 +209,7 @@ export class LoginPage {
 
   private guardarFotoPerfil(legajo)
   {
+
     // console.log(legajo);
     this.dataProvider.getItems('fotoPerfil/'+legajo+'/arrFotos').subscribe(
       data => 
@@ -215,26 +229,30 @@ export class LoginPage {
     );
   }
 
-  // private test(legajo)
-  // {
-  //   console.log(legajo);
-  //   this.dataProvider.getItems('fotoPerfil/'+legajo+'/arrFotos').subscribe(
-  //     data => 
-  //     {
-  //       console.log(data);
-  //       if(data.length == 0)
-  //       {
-  //         let arr = [];
-  //         arr.push('http://www.alvarodiezinmobiliaria.com/Vista/Imagenes/sinfoto.jpg');
-  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/arrFotos/',arr);
-  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/fotoElegida/',{'posicion':0});
-  //       }
-  //       else
-  //       {
-  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/arrFotos/0','http://www.alvarodiezinmobiliaria.com/Vista/Imagenes/sinfoto.jpg');
-  //         this.dataProvider.addItem('fotoPerfil/'+legajo+'/fotoElegida/',{'posicion':0});
-  //       }
-  //     }
-  //   );
-  // }
+
+  getFotoPerfil(leg)  {
+ 
+   //recupero los datos, mientras muestra spinner
+   this.dataProvider.getItems("fotoPerfil/"+leg).subscribe(
+     datos => {  
+  
+       this.arrImages = datos[0];
+       this.selectedImage = datos[1];
+
+       if(datos.length == 1){
+        this.almacenDatos.usuarioLogueado.photoURL = this.arrImages[0];
+       }else if(this.arrImages == undefined){
+        this.almacenDatos.usuarioLogueado.photoURL = "./assets/img/anonimo.jpg";
+       }else{
+        this.almacenDatos.usuarioLogueado.photoURL = this.arrImages[this.selectedImage.posicion];
+       }
+       
+      },
+     error => console.error(error),
+     () => console.log("ok")
+   );
+
+ }//getFotos()
+
 }
+//end class

@@ -81,7 +81,6 @@ export class ControlAsistenciaPage {
 
   }
 
-
   ionViewDidLoad(){   
   }
 
@@ -113,7 +112,6 @@ export class ControlAsistenciaPage {
     // console.log(this.fechaActual);
   }
 
-
   // Carga inicial de datos.
    initializeItems(){
     // configuro spinner para mostrar mientras se consultan los datos
@@ -139,7 +137,6 @@ export class ControlAsistenciaPage {
 
       
   }//initializeItems()
-
 
   getListaAlumnos(comision){
     // console.log("getListaAlumnos:"+comision);
@@ -183,7 +180,6 @@ export class ControlAsistenciaPage {
     
   }//getListaAlumnos
 
-
   getDBData(entityName){
  
     this.dataservice.getItems(entityName).subscribe(
@@ -226,7 +222,6 @@ export class ControlAsistenciaPage {
 
   }//getDBData
 
-
   getStyle(parLegajo,styleType){
     let result : any;
     let auxAlumno : any;
@@ -244,7 +239,6 @@ export class ControlAsistenciaPage {
     });
     return result;
   }
-
 
   presentActionSheet() {
     let viewIndex = this.viewCtrl.index;
@@ -335,7 +329,6 @@ export class ControlAsistenciaPage {
     actionSheet.present();    
   }//presentActionSheet()
 
-
   addAbsence(parLegajo){
     let auxAlumno : any;
     auxAlumno = this.tbCursadasAlumno.find((item)=> item.legajo_alumno == parLegajo);
@@ -353,7 +346,6 @@ export class ControlAsistenciaPage {
     });
    
   }//addAbsence()
-
 
   clear(){
       
@@ -380,7 +372,6 @@ export class ControlAsistenciaPage {
     });
     alert.present();
   }
-
 
   sendList() {
 
@@ -416,7 +407,6 @@ export class ControlAsistenciaPage {
     alert.present();
 
   }//sendList
-
   
   takePicture(){
     //data es el base64 de la foto
@@ -437,7 +427,6 @@ export class ControlAsistenciaPage {
       }
     );
   }
-
 
   accionesDescarga() {
     let viewIndex = this.viewCtrl.index;
@@ -495,9 +484,9 @@ export class ControlAsistenciaPage {
     optionModal.present()
     .then(() => {
     });
-   }
+  }
 
-   exportarAZIP() {
+  exportarAZIP() {
 
     // var zip = new JSZip();
     // var zip;
@@ -521,62 +510,61 @@ export class ControlAsistenciaPage {
 
     // Generar el archivo .zip de forma asíncrona. 
     zip.generateAsync({type:"blob"}).then(function(contenido) {
-        saveAs(contenido, "Listado Alumnos.zip");
+        // saveAs(contenido, "Listado Alumnos.zip");
     });
-   }
+  }
 
-   private obtenerAvisos()
-   {
-     this.dataservice.getItems('avisos_importancia').subscribe(
-       data => 
-       {
-         // this.arrPersonas = data;
- 
-         if(data == undefined)
-         {
-           // alert("No existen personas cargadas en la BD");
-         }
-         else
-         {
-           this.arrAvisos = data;
- 
-           for (let i=0;i<this.arrAvisos.length;i++){ 
-             let legajo = this.arrAvisos[i].legajo;
-             if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
-                 (legajo > localStorage.getItem("legajoLogueado").toString())){
-                 }else{
-                   this.platform.ready().then(() => {
-                     this.localNoti.schedule({
-                       title: 'Alerta de Gestión Académica!',
-                       text: this.arrAvisos[i].mensaje,
-                       at: new Date(new Date().getTime() + 3600),
-                       led: 'FF0000',
-                       icon:'', //ruta del icono
-                       sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
-                     });
-                   //Elimino aviso para que no vuelva a enviarlo.
-                     // this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
-                   });
-                 }
-           }
- 
-           for (let i=0;i<this.arrAvisos.length;i++){ 
-             let legajo = this.arrAvisos[i].legajo;
-             if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
-                 (legajo > localStorage.getItem("legajoLogueado").toString())){
-                   
-                 }else{
-                   this.platform.ready().then(() => {
-                   //Elimino aviso para que no vuelva a enviarlo.
-                     this.dataservice.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
-                   });
-                 }
-           }
-         }
-         // console.log(this.arrAvisos);
-       },
-       err => console.log(err)
-     );
-   }
+  obtenerAvisos(){
+    this.dataservice.getItems('avisos_importancia').subscribe(
+      data => 
+      {
+        // this.arrPersonas = data;
+
+        if(data == undefined)
+        {
+          // alert("No existen personas cargadas en la BD");
+        }
+        else
+        {
+          this.arrAvisos = data;
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                }else{
+                  this.platform.ready().then(() => {
+                    this.localNoti.schedule({
+                      title: 'Alerta de Gestión Académica!',
+                      text: this.arrAvisos[i].mensaje,
+                      at: new Date(new Date().getTime() + 3600),
+                      led: 'FF0000',
+                      icon:'', //ruta del icono
+                      sound: 'assets/sonidos/notificacion.mp3' //Ruta del archivo de sonido
+                    });
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    // this.dataProvider.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+
+          for (let i=0;i<this.arrAvisos.length;i++){ 
+            let legajo = this.arrAvisos[i].legajo;
+            if ((legajo < localStorage.getItem("legajoLogueado").toString()) || 
+                (legajo > localStorage.getItem("legajoLogueado").toString())){
+                  
+                }else{
+                  this.platform.ready().then(() => {
+                  //Elimino aviso para que no vuelva a enviarlo.
+                    this.dataservice.deleteItem('avisos_importancia/'+this.arrAvisos[i].id);
+                  });
+                }
+          }
+        }
+        // console.log(this.arrAvisos);
+      },
+      err => console.log(err)
+    );
+  }
 
 }//class
